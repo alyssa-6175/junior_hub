@@ -71,8 +71,6 @@ final List<MajorGroup> majorGroups = [
         groupId: 'math',
       ),
       SubMajor(id: 'statistics', label: 'Statistics', groupId: 'math'),
-      SubMajor(id: 'comp_math', label: 'Computational Math', groupId: 'math'),
-      SubMajor(id: 'fin_math', label: 'Financial Mathematics', groupId: 'math'),
     ],
   ),
   MajorGroup(
@@ -82,9 +80,7 @@ final List<MajorGroup> majorGroups = [
     subcategories: [
       SubMajor(id: 'premed', label: 'Pre-Med', groupId: 'health'),
       SubMajor(id: 'bio_health', label: 'Biology', groupId: 'health'),
-      SubMajor(id: 'micro_health', label: 'Microbiology', groupId: 'health'),
       SubMajor(id: 'neuro_health', label: 'Neuroscience', groupId: 'health'),
-      SubMajor(id: 'nursing', label: 'Nursing', groupId: 'health'),
     ],
   ),
   MajorGroup(
@@ -101,7 +97,6 @@ final List<MajorGroup> majorGroups = [
     label: 'Social Sciences + Global',
     color: Color(0xFF7C3D9E),
     subcategories: [
-      SubMajor(id: 'econ_soc', label: 'Economics', groupId: 'social'),
       SubMajor(
         id: 'intl_rel',
         label: 'International Relations',
@@ -110,8 +105,6 @@ final List<MajorGroup> majorGroups = [
       SubMajor(id: 'polisci', label: 'Political Science', groupId: 'social'),
       SubMajor(id: 'pub_policy', label: 'Public Policy', groupId: 'social'),
       SubMajor(id: 'prelaw', label: 'Pre-Law', groupId: 'social'),
-      SubMajor(id: 'comm_soc', label: 'Communications', groupId: 'social'),
-      SubMajor(id: 'sociology', label: 'Sociology', groupId: 'social'),
     ],
   ),
   MajorGroup(

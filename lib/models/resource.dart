@@ -21,6 +21,7 @@ class Resource {
   final String? timeCommitment;
   final String? applicationInfo;
   final String? testSection;
+  final String? instructions;
 
   const Resource({
     required this.id,
@@ -42,6 +43,7 @@ class Resource {
     this.timeCommitment,
     this.applicationInfo,
     this.testSection,
+    this.instructions,
   });
 
   // ─── Convenience getters ──────────────────────────────────────────────────

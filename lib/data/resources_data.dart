@@ -1010,7 +1010,7 @@ final List<Resource> allResources = [
 
   // ── SAT / ACT ──────────────────────────────────────────────────────────────
 
-  // Add these to allResources:
+  // ── SAT / ACT ──────────────────────────────────────────────────────────────
   const Resource(
     id: 'knowt_sat',
     title: 'Knowt SAT Prep',
@@ -1018,6 +1018,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         'AI-powered SAT practice with flashcards, practice tests, and explanations. Good for vocabulary and reading sections.',
+    instructions:
+        '• Create a free account to access flashcards and practice sets.\n'
+        '• Use the flashcards specifically for vocabulary building and grammar rules.\n'
+        '• Take short, timed section quizzes to build your test-taking endurance on the go.',
     url: 'https://knowt.com/exams/SAT',
     deadline: null,
     urgency: 'later',
@@ -1032,6 +1036,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         'AI-powered ACT practice with section-specific flashcard sets and timed question practice.',
+    instructions:
+        '• Search for specific flashcard sets targeting ACT Science reasoning and English grammar rules.\n'
+        '• Use the spaced-repetition feature to memorize math formulas, since the ACT does not provide a formula sheet.\n'
+        '• Complete bite-sized practice questions when you only have a few minutes to spare.',
     url: 'https://knowt.com/exams/ACT',
     deadline: null,
     urgency: 'later',
@@ -1046,6 +1054,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         '5 full-length practice tests plus thousands of practice questions with detailed answer explanations.',
+    instructions:
+        '• Read through the test-taking strategy sections before diving into the actual practice tests.\n'
+        '• Use the practice question banks to drill specific concepts you struggle with.\n'
+        '• Always read the answer explanations, even for questions you guessed correctly!',
     deadline: null,
     urgency: 'later',
     icon: Icons.book,
@@ -1059,6 +1071,11 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         '8 full-length official SAT practice tests with complete scoring guides. The most realistic prep available — made by the same org that writes the real exam.',
+    instructions:
+        '• These are the most realistic paper/PDF tests available.\n'
+        '• Print them out and take them in a quiet room with a strict timer to simulate test day.\n'
+        '• Grade your test using the official scoring guide to establish your baseline score.\n'
+        '• Keep a spreadsheet of every question you miss and why you missed it.',
     deadline: null,
     urgency: 'later',
     icon: Icons.check_circle_outline,
@@ -1078,6 +1095,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         'Personalized SAT practice linked to your PSAT/NMSQT score. Identifies weak skills and targets them.',
+    instructions:
+        '• Link your College Board account so Khan Academy can import your past PSAT or SAT scores.\n'
+        '• Let the algorithm build a personalized practice schedule targeting your specific weaknesses.\n'
+        '• Complete at least 30 minutes of targeted skill practice a day to level up your subscores.',
     deadline: null,
     urgency: 'later',
     icon: Icons.smart_display,
@@ -1094,6 +1115,12 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         'Official College Board app for the digital SAT. Adaptive testing that mirrors the real exam interface exactly.',
+    instructions:
+        '• Download the Bluebook app from College Board — it\'s the only official digital SAT simulator.\n'
+        '• Take a full practice test first under timed, real conditions before studying anything.\n'
+        '• After the test, review every wrong answer and identify which units to target.\n'
+        '• Study those units, then take another full test to measure improvement.\n'
+        '• Repeat the cycle — test → review → study → test.',
     deadline: null,
     urgency: 'later',
     icon: Icons.laptop_mac,
@@ -1110,6 +1137,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         '2025 edition with advanced strategies for high scorers. 6 full practice tests with detailed answer explanations.',
+    instructions:
+        '• Take the diagnostic test at the beginning of the book to find your weak spots.\n'
+        '• Focus heavily on the test-taking strategies (like the process of elimination and pacing tactics).\n'
+        '• Work through the content review chapters specifically for areas where your score is lowest.',
     deadline: null,
     urgency: 'later',
     icon: Icons.book,
@@ -1121,10 +1152,14 @@ final List<Resource> allResources = [
   const Resource(
     id: 'act_official',
     title: 'ACT Official Practice',
-    category: 'act', // ← 'act' not 'sat'
+    category: 'act',
     field: 'all',
     description:
         'Official ACT practice tests from act.org. 5 free tests covering English, Math, Reading, and Science.',
+    instructions:
+        '• Download and print the official PDF practice tests.\n'
+        '• The ACT is incredibly fast-paced, so strict timing is crucial during your practice sessions.\n'
+        '• Review your mistakes to see if they were due to content gaps or simply running out of time.',
     deadline: null,
     urgency: 'later',
     icon: Icons.check_circle_outline,
@@ -1145,6 +1180,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         'ACT prep video lessons and practice questions covering all four test sections.',
+    instructions:
+        '• Watch the video lessons for specific math or grammar concepts you haven\'t learned in school yet.\n'
+        '• Drill practice questions by filtering for specific subjects (Math, Science, English, Reading).\n'
+        '• Review the step-by-step video solutions whenever you get stuck on a difficult problem.',
     deadline: null,
     urgency: 'later',
     icon: Icons.smart_display,
@@ -1159,6 +1198,10 @@ final List<Resource> allResources = [
     field: 'all',
     description:
         '2025 edition with 6 full-length practice tests and section-by-section strategy.',
+    instructions:
+        '• Review the pacing guidelines; the ACT is a sprint and requires aggressive time management.\n'
+        '• Focus on the science reasoning chapter to learn how to quickly interpret charts without reading the whole passage.\n'
+        '• Take the full-length practice tests on weekends to build stamina for the 3-hour exam.',
     deadline: null,
     urgency: 'later',
     icon: Icons.book,
@@ -1175,6 +1218,10 @@ final List<Resource> allResources = [
     testSection: 'math',
     description:
         'Targeted SAT Math practice covering algebra, problem solving, and advanced math. Adaptive to your weak areas.',
+    instructions:
+        '• Start by taking the unit tests to pinpoint exactly which math concepts you are missing.\n'
+        '• Watch the step-by-step video breakdowns for any algebra or geometry topics you forgot from previous years.\n'
+        '• Keep a notebook of the specific formulas and exponent rules you constantly need to look up.',
     urgency: 'later',
     icon: Icons.calculate,
     links: ['khanacademy.org/sat-math'],
@@ -1187,6 +1234,10 @@ final List<Resource> allResources = [
     testSection: 'reading_writing',
     description:
         'SAT Reading & Writing prep: vocabulary in context, command of evidence, and rhetoric analysis.',
+    instructions:
+        '• Focus heavily on the "Command of Evidence" and "Words in Context" question types.\n'
+        '• Practice reading the passages actively — write brief mental summaries of each paragraph as you go.\n'
+        '• Drill grammar rules until punctuation questions become automatic.',
     urgency: 'later',
     icon: Icons.edit,
     links: ['khanacademy.org/sat-reading-and-writing'],
@@ -1199,6 +1250,10 @@ final List<Resource> allResources = [
     testSection: 'english',
     description:
         'Covers punctuation, grammar, usage, and sentence structure. The ACT English section is 45 minutes, 75 questions.',
+    instructions:
+        '• Review the fundamental rules of punctuation (commas, dashes, semicolons).\n'
+        '• Memorize common grammar rules; the ACT tests the exact same handful of concepts repeatedly.\n'
+        '• Practice reading the sentences in your head to catch awkward phrasing and subject-verb disagreements.',
     urgency: 'later',
     icon: Icons.edit,
     links: [
@@ -1213,6 +1268,10 @@ final List<Resource> allResources = [
     testSection: 'science',
     description:
         'ACT Science is really about data interpretation and critical thinking — not memorized science facts.',
+    instructions:
+        '• Remember that you rarely need advanced science knowledge; it is mostly reading graphs and tables.\n'
+        '• Skim the intro text quickly and jump straight to the charts to save time.\n'
+        '• Practice tracking variables (e.g., as temperature goes up, what happens to pressure?).',
     urgency: 'later',
     icon: Icons.science,
     links: ['act.org/science', 'Kaplan ACT Science strategies'],
@@ -1225,6 +1284,10 @@ final List<Resource> allResources = [
     testSection: 'math',
     description:
         'ACT Math covers pre-algebra through trigonometry. Calculator allowed throughout. 60 questions, 60 minutes.',
+    instructions:
+        '• Memorize your basic formulas! Unlike the SAT, the ACT does not give you a formula sheet.\n'
+        '• Practice pacing yourself to spend less than a minute on the easier early questions, saving time for the difficult ones at the end.\n'
+        '• Use your calculator efficiently, but don\'t rely on it for simple mental arithmetic.',
     urgency: 'later',
     icon: Icons.calculate,
     links: ['khanacademy.org/act-math', 'Kaplan ACT Math'],

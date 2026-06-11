@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:junior_hub/data/resources_data.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
 import '../models/personal_deadline.dart';
+import '../data/resources_data.dart';
 
 /// Call this to open the full-screen detail card for a competition,
 /// research program, or internship.
@@ -211,6 +211,58 @@ class ResourceDetailModal extends StatelessWidget {
                           ],
                         ),
                       ),
+                    ],
+                    if (resource.instructions != null) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        'How to use',
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: kTextPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ...resource.instructions!
+                          .split('\n')
+                          .where((l) => l.trim().isNotEmpty)
+                          .map((line) {
+                            final isBullet =
+                                line.trimLeft().startsWith('•') ||
+                                line.trimLeft().startsWith('-');
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 6),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (isBullet)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 2,
+                                        right: 6,
+                                      ),
+                                      child: Icon(
+                                        Icons.circle,
+                                        size: 5,
+                                        color: kTextTertiary,
+                                      ),
+                                    ),
+                                  Expanded(
+                                    child: Text(
+                                      isBullet
+                                          ? line.trimLeft().substring(1).trim()
+                                          : line.trim(),
+                                      style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        color: kTextSecondary,
+                                        height: 1.55,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                     ],
                     // Application info
                     if (resource.applicationInfo != null) ...[

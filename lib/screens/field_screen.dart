@@ -167,13 +167,6 @@ class _FieldScreenState extends State<FieldScreen>
                       color: kTextPrimary,
                     ),
                   ),
-                  Text(
-                    'Resources relevant to this major path',
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      color: kTextSecondary,
-                    ),
-                  ),
                 ],
               ),
             ],

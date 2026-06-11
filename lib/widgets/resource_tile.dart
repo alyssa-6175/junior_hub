@@ -15,8 +15,13 @@ class ResourceTile extends StatelessWidget {
   final Resource resource;
   const ResourceTile({super.key, required this.resource});
 
-  bool _shouldOpenModal(String category) =>
-      ['competition', 'research', 'internship'].contains(category);
+  bool _shouldOpenModal(String category) => [
+    'competition',
+    'research',
+    'internship',
+    'sat',
+    'act',
+  ].contains(category);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,8 @@ class ResourceTile extends StatelessWidget {
           'competition',
           'research',
           'internship',
+          'sat',
+          'act',
         ].contains(resource.category)) {
           showResourceDetail(context, resource);
         }

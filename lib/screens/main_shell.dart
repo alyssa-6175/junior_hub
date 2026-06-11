@@ -41,7 +41,7 @@ class MainShell extends StatelessWidget {
               children: [
                 const _AppSidebar(),
                 Container(width: 1, color: kBorderLight),
-                const Expanded(child: _ContentAreaWithSearch()),
+                Expanded(child: _ContentAreaWithSearch()),
                 Container(width: 1, color: kBorderLight),
                 const DeadlinePanel(),
               ],
@@ -81,25 +81,24 @@ class _ContentArea extends StatelessWidget {
           orElse: () => allResources.first,
         );
         return ApDetailScreen(resource: res);
-      // Removed const modifiers below to prevent constructor errors
       case 'sat':
-        return TestDetailScreen(category: 'sat');
+        return const TestDetailScreen(category: 'sat');
       case 'act':
-        return TestDetailScreen(category: 'act');
+        return const TestDetailScreen(category: 'act');
       case 'competition':
-        return ResourceListScreen(
+        return const ResourceListScreen(
           category: 'competition',
           title: 'Competitions',
           icon: Icons.emoji_events,
         );
       case 'research':
-        return ResourceListScreen(
+        return const ResourceListScreen(
           category: 'research',
           title: 'Research',
           icon: Icons.science,
         );
       case 'internship':
-        return ResourceListScreen(
+        return const ResourceListScreen(
           category: 'internship',
           title: 'Internships',
           icon: Icons.work,
@@ -112,9 +111,7 @@ class _ContentArea extends StatelessWidget {
       case 'home':
         return const SavedScreen();
       case 'my_majors':
-        return MyMajorsScreen();
-      case 'board': // ← Restored missing Board case
-        return const BoardScreen();
+        return const MyMajorsScreen();
       default:
         return const SavedScreen();
     }
@@ -154,6 +151,7 @@ class _AppSidebar extends StatelessWidget {
                     view: 'my_majors',
                     current: provider.currentView,
                   ),
+
                   const _SectionLabel('By category'),
                   _NavItem(
                     icon: Icons.menu_book_outlined,
@@ -195,7 +193,7 @@ class _AppSidebar extends StatelessWidget {
                   ...majorGroups.map(
                     (group) => _ExpandableMajorGroup(
                       group: group,
-                      provider: provider,
+                      provider: provider, // ← Added provider injection
                       currentGroup: provider.currentMajorGroup,
                       currentSubMajor: provider.currentSubMajor,
                     ),
@@ -204,6 +202,7 @@ class _AppSidebar extends StatelessWidget {
               ),
             ),
           ),
+          // User info + logout at the bottom
           _SidebarFooter(provider: provider),
         ],
       ),
@@ -236,7 +235,7 @@ class _SidebarLogo extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            'JuniorHub',
+            'Junior Hub',
             style: GoogleFonts.inter(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -455,11 +454,11 @@ class _ExpandableMajorGroup extends StatefulWidget {
   final MajorGroup group;
   final String? currentGroup;
   final String? currentSubMajor;
-  final AppProvider provider;
+  final AppProvider provider; // ← Added parameter
 
   const _ExpandableMajorGroup({
     required this.group,
-    required this.provider,
+    required this.provider, // ← Added requirement
     this.currentGroup,
     this.currentSubMajor,
   });
@@ -476,23 +475,28 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
   @override
   void didUpdateWidget(_ExpandableMajorGroup old) {
     super.didUpdateWidget(old);
+    // Auto-expand when this group becomes active.
     if (isGroupActive && !_open) setState(() => _open = true);
   }
 
   @override
   Widget build(BuildContext context) {
+    // Simplify access to provider logic as requested
     final provider = widget.provider;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Group header row (tap to expand/collapse OR navigate to group)
         MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
               if (_open) {
+                // Already open → just collapse, don't navigate
                 setState(() => _open = false);
               } else {
+                // Closed → expand and navigate to the group
                 setState(() => _open = true);
                 context.read<AppProvider>().navigateToMajor(widget.group.id);
               }
@@ -535,6 +539,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                       ),
                     ),
                   ),
+                  // ← Added Checkbox right before the expand icon
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -562,6 +567,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
             ),
           ),
         ),
+        // Subcategory items (shown when expanded)
         if (_open)
           ...widget.group.subcategories.map((sub) {
             final isActive = widget.currentSubMajor == sub.id;
@@ -606,6 +612,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                           ),
                         ),
                       ),
+                      // ← Added Checkbox at the end of subcategory row
                       GestureDetector(
                         onTap: () => context
                             .read<AppProvider>()
