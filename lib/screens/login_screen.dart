@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 4,
             child: Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [kNavy, kGold]),
+                gradient: LinearGradient(colors: [kNavy, kNavy]),
               ),
             ),
           ),
