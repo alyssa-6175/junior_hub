@@ -130,8 +130,8 @@ class _LoginCard extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        width: 64,
-                        height: 64,
+                        width: 72,
+                        height: 72,
                         decoration: BoxDecoration(
                           color:
                               kNavy, // You can remove this line if your logo already has a background color
