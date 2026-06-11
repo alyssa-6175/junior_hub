@@ -1299,14 +1299,14 @@ final List<Resource> allResources = [
 // ─────────────────────────────────────────────────────────────────────────────
 class DeadlineItem {
   final String title;
-  final String dateIso;
+  final String date; // ← Changed back to 'date' for clean UI formatting
   final String urgency;
   final List<String> majorTags;
   final String? resourceId;
 
   const DeadlineItem({
     required this.title,
-    required this.dateIso,
+    required this.date,
     required this.urgency,
     this.majorTags = const [],
     this.resourceId,
@@ -1315,64 +1315,64 @@ class DeadlineItem {
 
 const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
+    title: 'SAT August test date',
+    date: 'Aug 22, 2026',
+    urgency: 'urgent', // Urgent because it's the next major academic event
+    resourceId: 'cb_sat',
+  ),
+  DeadlineItem(
+    title: 'AP exam registration',
+    date: 'Sep–Nov 2026',
+    urgency: 'soon',
+  ),
+  DeadlineItem(
+    title: 'Congressional App Challenge',
+    date: 'Nov 1, 2026',
+    urgency: 'soon',
+    resourceId: 'cac',
+    majorTags: ['cs'],
+  ),
+  DeadlineItem(
+    title: 'AMC 10/12 A & B',
+    date: 'Nov 2026',
+    urgency: 'soon',
+    resourceId: 'amc',
+    majorTags: ['applied_math', 'statistics'],
+  ),
+  DeadlineItem(
     title: 'RSI application deadline',
-    dateIso: '2025-12-15T23:59:00Z',
-    urgency: 'urgent',
+    date: 'Dec 15, 2026',
+    urgency: 'later',
     resourceId: 'rsi',
     majorTags: ['biology', 'cs', 'premed'],
   ),
   DeadlineItem(
     title: 'USACO December contest',
-    dateIso: '2025-12-16T23:59:00Z',
-    urgency: 'urgent',
+    date: 'Dec 15–18, 2026',
+    urgency: 'later',
     resourceId: 'usaco',
     majorTags: ['cs', 'data_sci', 'ai'],
   ),
   DeadlineItem(
-    title: 'Congressional App Challenge',
-    dateIso: '2025-12-21T23:59:00Z',
-    urgency: 'urgent',
-    resourceId: 'cac',
-    majorTags: ['cs'],
-  ),
-  DeadlineItem(
-    title: 'AMC 10/12 B',
-    dateIso: '2025-11-12T23:59:00Z',
-    urgency: 'urgent',
-    resourceId: 'amc',
-    majorTags: ['applied_math', 'statistics'],
-  ),
-  DeadlineItem(
     title: 'NIH internship application',
-    dateIso: '2026-01-15T23:59:00Z',
-    urgency: 'soon',
+    date: 'Jan 15, 2027',
+    urgency: 'later',
     resourceId: 'nih',
     majorTags: ['biology', 'premed', 'neuroscience'],
   ),
   DeadlineItem(
     title: 'USABO open exam',
-    dateIso: '2026-01-31T23:59:00Z',
-    urgency: 'soon',
+    date: 'Feb 2027',
+    urgency: 'later',
     resourceId: 'usabo',
     majorTags: ['biology', 'microbiology'],
   ),
   DeadlineItem(
-    title: 'SAT March test date',
-    dateIso: '2026-03-08T23:59:00Z',
-    urgency: 'later',
-    resourceId: 'cb_sat',
-  ),
-  DeadlineItem(
     title: 'Google CSSI opens',
-    dateIso: '2026-02-28T23:59:00Z',
+    date: 'Feb 2027',
     urgency: 'later',
     resourceId: 'cssi',
     majorTags: ['cs'],
-  ),
-  DeadlineItem(
-    title: 'AP exam registration',
-    dateIso: '2025-11-30T23:59:00Z',
-    urgency: 'later',
   ),
 ];
 
