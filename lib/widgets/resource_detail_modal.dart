@@ -357,8 +357,10 @@ class ResourceDetailModal extends StatelessWidget {
                             PersonalDeadline(
                               id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
                               title: resource.title,
-                              dateIso: resource
-                                  .deadline!, // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
+                              dateIso:
+                                  resource.deadlineIso ??
+                                  DateTime.now()
+                                      .toIso8601String(), // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
                               resourceId: resource
                                   .id, // optional, but good to include since it's in the new model
                             ),

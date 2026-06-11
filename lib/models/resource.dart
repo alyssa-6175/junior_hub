@@ -8,6 +8,7 @@ class Resource {
   final String field;
   final String description;
   final String? deadline;
+  final String? deadlineIso;
   final String urgency;
   final IconData icon;
   final List<String> links;
@@ -30,6 +31,7 @@ class Resource {
     required this.field,
     required this.description,
     this.deadline,
+    this.deadlineIso,
     required this.urgency,
     required this.icon,
     required this.links,

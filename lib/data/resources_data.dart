@@ -1297,9 +1297,14 @@ final List<Resource> allResources = [
 // ─────────────────────────────────────────────────────────────────────────────
 // DEADLINES  (shown in the right-side panel)
 // ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// DEADLINES  (shown in the right-side panel)
+// ─────────────────────────────────────────────────────────────────────────────
 class DeadlineItem {
   final String title;
-  final String date; // ← Changed back to 'date' for clean UI formatting
+  final String date; // What the user sees (e.g., "Aug 22, 2026")
+  final String
+  dateIso; // What the computer reads (e.g., "2026-08-22T23:59:00Z")
   final String urgency;
   final List<String> majorTags;
   final String? resourceId;
@@ -1307,6 +1312,7 @@ class DeadlineItem {
   const DeadlineItem({
     required this.title,
     required this.date,
+    required this.dateIso, // ← Added for the auto-delete logic
     required this.urgency,
     this.majorTags = const [],
     this.resourceId,
@@ -1317,17 +1323,20 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'SAT August test date',
     date: 'Aug 22, 2026',
-    urgency: 'urgent', // Urgent because it's the next major academic event
+    dateIso: '2026-08-22T23:59:00Z',
+    urgency: 'urgent',
     resourceId: 'cb_sat',
   ),
   DeadlineItem(
     title: 'AP exam registration',
     date: 'Sep–Nov 2026',
+    dateIso: '2026-11-30T23:59:00Z', // Set to end of November
     urgency: 'soon',
   ),
   DeadlineItem(
     title: 'Congressional App Challenge',
     date: 'Nov 1, 2026',
+    dateIso: '2026-11-01T23:59:00Z',
     urgency: 'soon',
     resourceId: 'cac',
     majorTags: ['cs'],
@@ -1335,6 +1344,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'AMC 10/12 A & B',
     date: 'Nov 2026',
+    dateIso: '2026-11-30T23:59:00Z', // Set to end of November
     urgency: 'soon',
     resourceId: 'amc',
     majorTags: ['applied_math', 'statistics'],
@@ -1342,6 +1352,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'RSI application deadline',
     date: 'Dec 15, 2026',
+    dateIso: '2026-12-15T23:59:00Z',
     urgency: 'later',
     resourceId: 'rsi',
     majorTags: ['biology', 'cs', 'premed'],
@@ -1349,6 +1360,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'USACO December contest',
     date: 'Dec 15–18, 2026',
+    dateIso: '2026-12-18T23:59:00Z', // Set to the end of the window
     urgency: 'later',
     resourceId: 'usaco',
     majorTags: ['cs', 'data_sci', 'ai'],
@@ -1356,6 +1368,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'NIH internship application',
     date: 'Jan 15, 2027',
+    dateIso: '2027-01-15T23:59:00Z',
     urgency: 'later',
     resourceId: 'nih',
     majorTags: ['biology', 'premed', 'neuroscience'],
@@ -1363,6 +1376,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'USABO open exam',
     date: 'Feb 2027',
+    dateIso: '2027-02-28T23:59:00Z', // Set to end of February
     urgency: 'later',
     resourceId: 'usabo',
     majorTags: ['biology', 'microbiology'],
@@ -1370,6 +1384,7 @@ const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'Google CSSI opens',
     date: 'Feb 2027',
+    dateIso: '2027-02-28T23:59:00Z', // Set to end of February
     urgency: 'later',
     resourceId: 'cssi',
     majorTags: ['cs'],
