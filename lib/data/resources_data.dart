@@ -1299,83 +1299,83 @@ final List<Resource> allResources = [
 // ─────────────────────────────────────────────────────────────────────────────
 class DeadlineItem {
   final String title;
-  final String date;
+  final String dateIso;
   final String urgency;
   final List<String> majorTags;
-  final String?
-  resourceId; // ← add: links to a Resource so tapping opens its card
+  final String? resourceId;
 
   const DeadlineItem({
     required this.title,
-    required this.date,
+    required this.dateIso,
     required this.urgency,
     this.majorTags = const [],
-    this.resourceId, // ← add
+    this.resourceId,
   });
 }
 
 const List<DeadlineItem> upcomingDeadlines = [
   DeadlineItem(
     title: 'RSI application deadline',
-    date: 'Dec 15, 2025',
+    dateIso: '2025-12-15T23:59:00Z',
     urgency: 'urgent',
     resourceId: 'rsi',
     majorTags: ['biology', 'cs', 'premed'],
   ),
   DeadlineItem(
     title: 'USACO December contest',
-    date: 'Dec 13–16, 2025',
+    dateIso: '2025-12-16T23:59:00Z',
     urgency: 'urgent',
     resourceId: 'usaco',
     majorTags: ['cs', 'data_sci', 'ai'],
   ),
   DeadlineItem(
     title: 'Congressional App Challenge',
-    date: 'Dec 21, 2025',
+    dateIso: '2025-12-21T23:59:00Z',
     urgency: 'urgent',
     resourceId: 'cac',
     majorTags: ['cs'],
   ),
   DeadlineItem(
     title: 'AMC 10/12 B',
-    date: 'Nov 12, 2025',
+    dateIso: '2025-11-12T23:59:00Z',
     urgency: 'urgent',
     resourceId: 'amc',
     majorTags: ['applied_math', 'statistics'],
   ),
   DeadlineItem(
     title: 'NIH internship application',
-    date: 'Jan 15, 2026',
+    dateIso: '2026-01-15T23:59:00Z',
     urgency: 'soon',
     resourceId: 'nih',
     majorTags: ['biology', 'premed', 'neuroscience'],
   ),
   DeadlineItem(
     title: 'USABO open exam',
-    date: 'Jan 2026',
+    dateIso: '2026-01-31T23:59:00Z',
     urgency: 'soon',
     resourceId: 'usabo',
     majorTags: ['biology', 'microbiology'],
   ),
   DeadlineItem(
     title: 'SAT March test date',
-    date: 'Mar 8, 2026',
+    dateIso: '2026-03-08T23:59:00Z',
     urgency: 'later',
     resourceId: 'cb_sat',
   ),
   DeadlineItem(
     title: 'Google CSSI opens',
-    date: 'Feb 2026',
+    dateIso: '2026-02-28T23:59:00Z',
     urgency: 'later',
     resourceId: 'cssi',
     majorTags: ['cs'],
   ),
   DeadlineItem(
     title: 'AP exam registration',
-    date: 'Sep–Nov ongoing',
+    dateIso: '2025-11-30T23:59:00Z',
     urgency: 'later',
   ),
 ];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // HELPER FUNCTIONS
 // ─────────────────────────────────────────────────────────────────────────────

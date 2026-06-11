@@ -356,7 +356,7 @@ class _DeadlineRow extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        item.date,
+                        item.dateIso,
                         style: GoogleFonts.inter(
                           fontSize: 10,
                           color: kTextSecondary,
