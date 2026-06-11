@@ -85,8 +85,9 @@ class _FieldScreenState extends State<FieldScreen>
       'social': 'history',
       'arts': 'english',
     };
-    if (widget.subMajorId != null)
+    if (widget.subMajorId != null) {
       return _subToField[widget.subMajorId] ?? 'all';
+    }
     return groupToField[widget.majorGroupId] ?? 'all';
   }
 
@@ -206,7 +207,7 @@ class _FieldScreenState extends State<FieldScreen>
                           vertical: 1,
                         ),
                         decoration: BoxDecoration(
-                          color: kGold.withOpacity(0.2),
+                          color: kGold.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(

@@ -173,7 +173,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                   decoration: BoxDecoration(
                     color: kGoldLight,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: kGold.withOpacity(0.35)),
+                    border: Border.all(color: kGold.withValues(alpha: 0.35)),
                   ),
                   child: Row(
                     children: [
@@ -380,7 +380,7 @@ class _LinkItem extends StatelessWidget {
               : kSurface,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isPinned ? kGold.withOpacity(0.45) : kBorderLight,
+            color: isPinned ? kGold.withValues(alpha: 0.45) : kBorderLight,
           ),
         ),
         child: Row(

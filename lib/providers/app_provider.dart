@@ -109,7 +109,6 @@ class AppProvider extends ChangeNotifier {
             preferEphemeralSession: false,
           ),
         );
-        if (result == null) return 'Sign-in cancelled.';
         final credential = GoogleAuthProvider.credential(
           idToken: result.idToken,
           accessToken: result.accessToken,
@@ -151,7 +150,6 @@ class AppProvider extends ChangeNotifier {
             preferEphemeralSession: false,
           ),
         );
-        if (result == null) return 'Sign-in cancelled.';
         final oauthCredential = OAuthProvider(
           'microsoft.com',
         ).credential(idToken: result.idToken, accessToken: result.accessToken);
@@ -279,10 +277,11 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> toggleSeen(String id) async {
     if (!isLoggedIn) return;
-    if (_seen.contains(id))
+    if (_seen.contains(id)) {
       _seen.remove(id);
-    else
+    } else {
       _seen.add(id);
+    }
 
     await _save('seen', _seen.toList());
     notifyListeners();
@@ -291,10 +290,11 @@ class AppProvider extends ChangeNotifier {
   Future<void> toggleLinkPinned(String resourceId, String label) async {
     if (!isLoggedIn) return;
     final key = '$resourceId:$label';
-    if (_linkPinned.contains(key))
+    if (_linkPinned.contains(key)) {
       _linkPinned.remove(key);
-    else
+    } else {
       _linkPinned.add(key);
+    }
 
     await _save('linkPinned', _linkPinned.toList());
     notifyListeners();
@@ -303,10 +303,11 @@ class AppProvider extends ChangeNotifier {
   Future<void> toggleLinkSeen(String resourceId, String label) async {
     if (!isLoggedIn) return;
     final key = '$resourceId:$label';
-    if (_linkSeen.contains(key))
+    if (_linkSeen.contains(key)) {
       _linkSeen.remove(key);
-    else
+    } else {
       _linkSeen.add(key);
+    }
 
     await _save('linkSeen', _linkSeen.toList());
     notifyListeners();
@@ -364,10 +365,14 @@ class AppProvider extends ChangeNotifier {
       );
       if (allSubsChecked) {
         _checkedMajors.remove(id);
-        for (final sub in group.subcategories) _checkedMajors.remove(sub.id);
+        for (final sub in group.subcategories) {
+          _checkedMajors.remove(sub.id);
+        }
       } else {
         _checkedMajors.add(id);
-        for (final sub in group.subcategories) _checkedMajors.add(sub.id);
+        for (final sub in group.subcategories) {
+          _checkedMajors.add(sub.id);
+        }
         wasAdded = true;
       }
     } else {
@@ -383,10 +388,11 @@ class AppProvider extends ChangeNotifier {
         final allChecked = parentGroup.subcategories.every(
           (s) => _checkedMajors.contains(s.id),
         );
-        if (allChecked)
+        if (allChecked) {
           _checkedMajors.add(parentGroup.id);
-        else
+        } else {
           _checkedMajors.remove(parentGroup.id);
+        }
       }
     }
 

@@ -108,7 +108,7 @@ class _LoginCard extends StatelessWidget {
         border: Border.all(color: kBorderLight),
         boxShadow: [
           BoxShadow(
-            color: kNavy.withOpacity(0.10),
+            color: kNavy.withValues(alpha: 0.10),
             blurRadius: 32,
             offset: const Offset(0, 12),
           ),
@@ -214,21 +214,17 @@ class _LoginCard extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // Divider
-                Row(
+                const Row(
                   children: [
-                    const Expanded(
-                      child: Divider(color: kBorderLight, thickness: 1),
-                    ),
+                    Expanded(child: Divider(color: kBorderLight, thickness: 1)),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      padding: EdgeInsets.symmetric(horizontal: 14),
                       child: Text(
                         'or',
                         style: TextStyle(fontSize: 12, color: kTextTertiary),
                       ),
                     ),
-                    const Expanded(
-                      child: Divider(color: kBorderLight, thickness: 1),
-                    ),
+                    Expanded(child: Divider(color: kBorderLight, thickness: 1)),
                   ],
                 ),
 

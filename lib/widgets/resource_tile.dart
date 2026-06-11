@@ -63,7 +63,7 @@ class ResourceTile extends StatelessWidget {
                 : kSurface,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: isPinned ? kGold.withOpacity(0.45) : kBorderLight,
+              color: isPinned ? kGold.withValues(alpha: 0.45) : kBorderLight,
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

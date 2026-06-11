@@ -220,7 +220,7 @@ class _MajorChip extends StatelessWidget {
           margin: const EdgeInsets.only(right: 6, bottom: 4),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: active ? color.withOpacity(0.12) : kSurface,
+            color: active ? color.withValues(alpha: 0.12) : kSurface,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: active ? color : kBorderLight),
           ),
@@ -295,8 +295,8 @@ class _InlineTab extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: active
-                        ? Colors.white.withOpacity(0.25)
-                        : kGold.withOpacity(0.2),
+                        ? Colors.white.withValues(alpha: 0.25)
+                        : kGold.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(

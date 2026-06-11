@@ -41,7 +41,7 @@ class MainShell extends StatelessWidget {
               children: [
                 const _AppSidebar(),
                 Container(width: 1, color: kBorderLight),
-                Expanded(child: _ContentAreaWithSearch()),
+                const Expanded(child: _ContentAreaWithSearch()),
                 Container(width: 1, color: kBorderLight),
                 const DeadlinePanel(),
               ],
@@ -219,7 +219,7 @@ class _SidebarLogo extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.white.withOpacity(0.08)),
+          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
         ),
       ),
       child: Row(
@@ -264,7 +264,7 @@ class _SectionLabel extends StatelessWidget {
           fontSize: 10,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.8,
-          color: kGold.withOpacity(0.65),
+          color: kGold.withValues(alpha: 0.65),
         ),
       ),
     );
@@ -298,7 +298,7 @@ class _NavItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         decoration: BoxDecoration(
-          color: isActive ? kGold.withOpacity(0.18) : Colors.transparent,
+          color: isActive ? kGold.withValues(alpha: 0.18) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: isActive
               ? const Border(left: BorderSide(color: kGold, width: 2))
@@ -309,7 +309,7 @@ class _NavItem extends StatelessWidget {
             Icon(
               icon,
               size: 16,
-              color: isActive ? kGold : Colors.white.withOpacity(0.6),
+              color: isActive ? kGold : Colors.white.withValues(alpha: 0.6),
             ),
             const SizedBox(width: 10),
             Text(
@@ -317,7 +317,7 @@ class _NavItem extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
-                color: isActive ? kGold : Colors.white.withOpacity(0.75),
+                color: isActive ? kGold : Colors.white.withValues(alpha: 0.75),
               ),
             ),
           ],
@@ -346,7 +346,7 @@ class _FieldNavItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         decoration: BoxDecoration(
-          color: isActive ? kGold.withOpacity(0.18) : Colors.transparent,
+          color: isActive ? kGold.withValues(alpha: 0.18) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: isActive
               ? const Border(left: BorderSide(color: kGold, width: 2))
@@ -368,7 +368,7 @@ class _FieldNavItem extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
-                color: isActive ? kGold : Colors.white.withOpacity(0.75),
+                color: isActive ? kGold : Colors.white.withValues(alpha: 0.75),
               ),
             ),
           ],
@@ -389,13 +389,15 @@ class _SidebarFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.08))),
+        border: Border(
+          top: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        ),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 14,
-            backgroundColor: kGold.withOpacity(0.2),
+            backgroundColor: kGold.withValues(alpha: 0.2),
             child: Text(
               provider.isGuest ? 'G' : provider.displayName[0].toUpperCase(),
               style: const TextStyle(
@@ -425,7 +427,7 @@ class _SidebarFooter extends StatelessWidget {
                     'Browsing only',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.white.withOpacity(0.45),
+                      color: Colors.white.withValues(alpha: 0.45),
                     ),
                   ),
               ],
@@ -437,7 +439,7 @@ class _SidebarFooter extends StatelessWidget {
             icon: Icon(
               Icons.logout,
               size: 16,
-              color: Colors.white.withOpacity(0.45),
+              color: Colors.white.withValues(alpha: 0.45),
             ),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
@@ -507,7 +509,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
               decoration: BoxDecoration(
                 color: isGroupActive && widget.currentSubMajor == null
-                    ? kGold.withOpacity(0.18)
+                    ? kGold.withValues(alpha: 0.18)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
                 border: isGroupActive && widget.currentSubMajor == null
@@ -535,7 +537,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                             : FontWeight.normal,
                         color: isGroupActive
                             ? kGold
-                            : Colors.white.withOpacity(0.75),
+                            : Colors.white.withValues(alpha: 0.75),
                       ),
                     ),
                   ),
@@ -553,14 +555,14 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                         size: 14,
                         color: provider.isMajorChecked(widget.group.id)
                             ? kGold
-                            : Colors.white.withOpacity(0.3),
+                            : Colors.white.withValues(alpha: 0.3),
                       ),
                     ),
                   ),
                   Icon(
                     _open ? Icons.expand_less : Icons.expand_more,
                     size: 14,
-                    color: Colors.white.withOpacity(0.4),
+                    color: Colors.white.withValues(alpha: 0.4),
                   ),
                 ],
               ),
@@ -592,7 +594,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                   ),
                   decoration: BoxDecoration(
                     color: isActive
-                        ? kGold.withOpacity(0.15)
+                        ? kGold.withValues(alpha: 0.15)
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(6),
                   ),
@@ -608,7 +610,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                                 : FontWeight.normal,
                             color: isActive
                                 ? kGold
-                                : Colors.white.withOpacity(0.55),
+                                : Colors.white.withValues(alpha: 0.55),
                           ),
                         ),
                       ),
@@ -624,7 +626,7 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                           size: 12,
                           color: provider.isMajorChecked(sub.id)
                               ? kGold
-                              : Colors.white.withOpacity(0.2),
+                              : Colors.white.withValues(alpha: 0.2),
                         ),
                       ),
                     ],

@@ -612,7 +612,7 @@ class _SmallChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
         decoration: BoxDecoration(
-          color: active ? kNavy.withOpacity(0.1) : kBackground,
+          color: active ? kNavy.withValues(alpha: 0.1) : kBackground,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: active ? kNavy : kBorderLight),
         ),
@@ -744,9 +744,9 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
             const SizedBox(height: 16),
 
             // Title field
-            Text(
+            const Text(
               'Title',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: kTextPrimary,
@@ -780,9 +780,9 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
             const SizedBox(height: 14),
 
             // Date picker
-            Text(
+            const Text(
               'Deadline date',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: kTextPrimary,

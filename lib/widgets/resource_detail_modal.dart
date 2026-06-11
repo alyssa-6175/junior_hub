@@ -41,7 +41,7 @@ class ResourceDetailModal extends StatelessWidget {
           border: Border.all(color: kBorderLight),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withValues(alpha: 0.15),
               blurRadius: 32,
               offset: const Offset(0, 12),
             ),
@@ -190,7 +190,9 @@ class ResourceDetailModal extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: kGoldLight,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: kGold.withOpacity(0.35)),
+                          border: Border.all(
+                            color: kGold.withValues(alpha: 0.35),
+                          ),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,8 +241,8 @@ class ResourceDetailModal extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   if (isBullet)
-                                    Padding(
-                                      padding: const EdgeInsets.only(
+                                    const Padding(
+                                      padding: EdgeInsets.only(
                                         top: 2,
                                         right: 6,
                                       ),
@@ -367,9 +369,9 @@ class ResourceDetailModal extends StatelessWidget {
                           );
                           Navigator.of(context).pop();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Added to personal deadlines'),
-                              duration: const Duration(seconds: 2),
+                              duration: Duration(seconds: 2),
                             ),
                           );
                         },

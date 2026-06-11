@@ -301,7 +301,7 @@ class _SectionChip extends StatelessWidget {
           margin: const EdgeInsets.only(right: 5, bottom: 8, top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
           decoration: BoxDecoration(
-            color: active ? kNavy.withOpacity(0.08) : Colors.transparent,
+            color: active ? kNavy.withValues(alpha: 0.08) : Colors.transparent,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: active ? kNavy : kBorderLight),
           ),
@@ -373,7 +373,7 @@ class _TabBtn extends StatelessWidget {
                     vertical: 1,
                   ),
                   decoration: BoxDecoration(
-                    color: kGold.withOpacity(0.2),
+                    color: kGold.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(

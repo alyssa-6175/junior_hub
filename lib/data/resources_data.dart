@@ -1235,9 +1235,9 @@ final List<Resource> allResources = [
     description:
         'SAT Reading & Writing prep: vocabulary in context, command of evidence, and rhetoric analysis.',
     instructions:
-        '• Focus heavily on the "Command of Evidence" and "Words in Context" question types.\n'
-        '• Practice reading the passages actively — write brief mental summaries of each paragraph as you go.\n'
-        '• Drill grammar rules until punctuation questions become automatic.',
+        '- Focus heavily on the "Command of Evidence" and "Words in Context" question types.\n'
+        '- Practice reading the passages actively — write brief mental summaries of each paragraph as you go.\n'
+        '- Drill grammar rules until punctuation questions become automatic.',
     urgency: 'later',
     icon: Icons.edit,
     links: ['khanacademy.org/sat-reading-and-writing'],
@@ -1269,7 +1269,7 @@ final List<Resource> allResources = [
     description:
         'ACT Science is really about data interpretation and critical thinking — not memorized science facts.',
     instructions:
-        '• Remember that you rarely need advanced science knowledge; it is mostly reading graphs and tables.\n'
+        '• Remember that you rarely need advanced science knowledge as it is mostly reading graphs and tables.\n'
         '• Skim the intro text quickly and jump straight to the charts to save time.\n'
         '• Practice tracking variables (e.g., as temperature goes up, what happens to pressure?).',
     urgency: 'later',

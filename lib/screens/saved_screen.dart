@@ -210,7 +210,7 @@ class _EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.bookmark_border, size: 40, color: kTextTertiary),
+          const Icon(Icons.bookmark_border, size: 40, color: kTextTertiary),
           const SizedBox(height: 12),
           Text(
             'Nothing saved yet',
@@ -239,7 +239,7 @@ class _GuestEmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.lock_outline, size: 40, color: kTextTertiary),
+          const Icon(Icons.lock_outline, size: 40, color: kTextTertiary),
           const SizedBox(height: 12),
           Text(
             'Browsing as guest',

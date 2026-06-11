@@ -158,7 +158,7 @@ class _LinkHitTile extends StatelessWidget {
           color: isPinned ? kGoldLight : kSurface,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isPinned ? kGold.withOpacity(0.45) : kBorderLight,
+            color: isPinned ? kGold.withValues(alpha: 0.45) : kBorderLight,
           ),
         ),
         child: Column(
@@ -223,7 +223,7 @@ class _LinkHitTile extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
                   child: Row(
                     children: [
-                      Icon(Icons.link, size: 13, color: kTextTertiary),
+                      const Icon(Icons.link, size: 13, color: kTextTertiary),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -239,10 +239,10 @@ class _LinkHitTile extends StatelessWidget {
                         ),
                       ),
                       if (url != null)
-                        Icon(
+                        const Icon(
                           Icons.open_in_new,
                           size: 13,
-                          color: const Color(0xFF1D9E75),
+                          color: Color(0xFF1D9E75),
                         ),
                     ],
                   ),
