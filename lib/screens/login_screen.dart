@@ -133,11 +133,17 @@ class _LoginCard extends StatelessWidget {
                         width: 64,
                         height: 64,
                         decoration: BoxDecoration(
-                          color: kNavy,
+                          color:
+                              kNavy, // You can remove this line if your logo already has a background color
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(Icons.school, color: kGold, size: 30),
-                        // Replace with: Image.asset('assets/logo.png', ...)
+                        clipBehavior: Clip
+                            .antiAlias, // This ensures your image respects the rounded corners
+                        child: Image.asset(
+                          'assets/logo.png',
+                          fit: BoxFit
+                              .cover, // Use BoxFit.contain if the logo gets cut off
+                        ),
                       ),
                       const SizedBox(height: 16),
                       Text(
