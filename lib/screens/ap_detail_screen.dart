@@ -270,6 +270,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               l.toLowerCase().contains('barron') ||
               l.toLowerCase().contains('amsco') ||
               l.toLowerCase().contains('medic') ||
+              l.toLowerCase().contains('khan') ||
               l.toLowerCase().contains('review'),
         )
         .toList();
@@ -280,8 +281,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .where(
           (l) =>
               l.toLowerCase().contains('video') ||
-              l.toLowerCase().contains('youtube') ||
-              l.toLowerCase().contains('khan'),
+              l.toLowerCase().contains('youtube'),
         )
         .toList();
   }
