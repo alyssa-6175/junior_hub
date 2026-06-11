@@ -119,7 +119,7 @@ class _LoginCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(height: 3, color: kGold),
+          Container(height: 3, color: kNavy),
           Padding(
             padding: const EdgeInsets.fromLTRB(36, 36, 36, 32),
             child: Column(
