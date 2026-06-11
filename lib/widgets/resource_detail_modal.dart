@@ -11,6 +11,9 @@ import '../data/resources_data.dart';
 /// Call this to open the full-screen detail card for a competition,
 /// research program, or internship.
 void showResourceDetail(BuildContext context, Resource resource) {
+  // Track the view before showing the modal
+  context.read<AppProvider>().trackResourceView(resource.id);
+
   showDialog(
     context: context,
     builder: (_) => ResourceDetailModal(resource: resource),
@@ -354,9 +357,10 @@ class ResourceDetailModal extends StatelessWidget {
                             PersonalDeadline(
                               id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
                               title: resource.title,
-                              date: resource.deadline!,
-                              urgency: resource.urgency,
-                              resourceId: resource.id,
+                              dateIso: resource
+                                  .deadline!, // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
+                              resourceId: resource
+                                  .id, // optional, but good to include since it's in the new model
                             ),
                           );
                           Navigator.of(context).pop();

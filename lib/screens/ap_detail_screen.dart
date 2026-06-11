@@ -22,10 +22,13 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(
-      length: 4,
-      vsync: this,
-    ); // Fixed length to 4 based on tabs below
+    _tabs = TabController(length: 4, vsync: this);
+    // Track this view (runs after the frame is built so context is valid)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<AppProvider>().trackResourceView(widget.resource.id);
+      }
+    });
   }
 
   @override

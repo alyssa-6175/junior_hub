@@ -41,6 +41,9 @@ class _DeadlinePanelState extends State<DeadlinePanel> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) context.read<AppProvider>().removeExpiredDeadlines();
+    });
     final provider = context.watch<AppProvider>();
 
     return Container(
@@ -494,7 +497,7 @@ class _PersonalDeadlineRow extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        deadline.date,
+                        deadline.dateIso,
                         style: GoogleFonts.inter(
                           fontSize: 10,
                           color: kTextSecondary,
@@ -636,14 +639,84 @@ class _AddDeadlineDialog extends StatefulWidget {
 
 class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
   final _titleCtrl = TextEditingController();
-  final _dateCtrl = TextEditingController();
-  String _urgency = 'soon';
+  DateTime? _selectedDate;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Clear out any deadlines that expired since last session
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) context.read<AppProvider>().removeExpiredDeadlines();
+    });
+  }
 
   @override
   void dispose() {
     _titleCtrl.dispose();
-    _dateCtrl.dispose();
     super.dispose();
+  }
+
+  String _formatDate(DateTime d) {
+    const m = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return '${m[d.month - 1]} ${d.day}, ${d.year}';
+  }
+
+  String _toIso(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  Future<void> _pickDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365 * 4)),
+      builder: (context, child) => Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: const ColorScheme.light(
+            primary: kNavy,
+            onPrimary: Colors.white,
+            onSurface: kTextPrimary,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(foregroundColor: kNavy),
+          ),
+        ),
+        child: child!,
+      ),
+    );
+    if (picked != null) setState(() => _selectedDate = picked);
+  }
+
+  void _save() async {
+    if (_titleCtrl.text.trim().isEmpty || _selectedDate == null) return;
+    setState(() => _saving = true);
+
+    // Compute the ISO date string for storage
+    final iso = _toIso(_selectedDate!);
+
+    // Urgency is NOT stored — it's calculated fresh every read from the date.
+    context.read<AppProvider>().addPersonalDeadline(
+      PersonalDeadline(
+        id: '${DateTime.now().millisecondsSinceEpoch}',
+        title: _titleCtrl.text.trim(),
+        dateIso: iso,
+      ),
+    );
+    if (mounted) Navigator.of(context).pop();
   }
 
   @override
@@ -654,7 +727,7 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: kSurface,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -669,60 +742,131 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
               ),
             ),
             const SizedBox(height: 16),
-            _dialogField('Title', _titleCtrl, 'e.g. USACO registration'),
-            const SizedBox(height: 10),
-            _dialogField('Date', _dateCtrl, 'e.g. Dec 15, 2025'),
-            const SizedBox(height: 10),
+
+            // Title field
             Text(
-              'Urgency',
+              'Title',
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: kTextPrimary,
               ),
             ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                for (final u in ['urgent', 'soon', 'later'])
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6),
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => setState(() => _urgency = u),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: _urgency == u
-                                ? UrgencyColors.bgFor(u)
-                                : kBackground,
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: _urgency == u
-                                  ? UrgencyColors.textFor(u)
-                                  : kBorderLight,
-                            ),
-                          ),
-                          child: Text(
-                            UrgencyColors.labelFor(u),
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: _urgency == u
-                                  ? UrgencyColors.textFor(u)
-                                  : kTextSecondary,
-                            ),
+            const SizedBox(height: 5),
+            TextField(
+              controller: _titleCtrl,
+              style: const TextStyle(fontSize: 13),
+              decoration: InputDecoration(
+                hintText: 'e.g. USACO registration',
+                hintStyle: const TextStyle(color: kTextTertiary, fontSize: 13),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 9,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: kBorderLight),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: kBorderLight),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: kNavy, width: 1.5),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+
+            // Date picker
+            Text(
+              'Deadline date',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: kTextPrimary,
+              ),
+            ),
+            const SizedBox(height: 5),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: _pickDate,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 11,
+                  ),
+                  decoration: BoxDecoration(
+                    color: kBackground,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _selectedDate != null ? kNavy : kBorderLight,
+                      width: _selectedDate != null ? 1.5 : 1.0,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today_outlined,
+                        size: 14,
+                        color: _selectedDate != null ? kNavy : kTextTertiary,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _selectedDate != null
+                              ? _formatDate(_selectedDate!)
+                              : 'Tap to pick a date',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: _selectedDate != null
+                                ? kTextPrimary
+                                : kTextTertiary,
                           ),
                         ),
                       ),
-                    ),
+                      if (_selectedDate != null)
+                        const Icon(Icons.check_circle, size: 14, color: kNavy),
+                    ],
                   ),
-              ],
+                ),
+              ),
             ),
+
+            // Show auto-calculated urgency preview once a date is chosen
+            if (_selectedDate != null) ...[
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.info_outline,
+                    size: 12,
+                    color: kTextTertiary,
+                  ),
+                  const SizedBox(width: 4),
+                  Builder(
+                    builder: (_) {
+                      final tmp = PersonalDeadline(
+                        id: '',
+                        title: '',
+                        dateIso: _toIso(_selectedDate!),
+                      );
+                      return Text(
+                        'Will be marked as: ${UrgencyColors.labelFor(tmp.urgency)}',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: UrgencyColors.textFor(tmp.urgency),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -733,19 +877,12 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
                 ),
                 const SizedBox(width: 8),
                 FilledButton(
-                  onPressed: () {
-                    if (_titleCtrl.text.isEmpty || _dateCtrl.text.isEmpty)
-                      return;
-                    context.read<AppProvider>().addPersonalDeadline(
-                      PersonalDeadline(
-                        id: DateTime.now().millisecondsSinceEpoch.toString(),
-                        title: _titleCtrl.text.trim(),
-                        date: _dateCtrl.text.trim(),
-                        urgency: _urgency,
-                      ),
-                    );
-                    Navigator.of(context).pop();
-                  },
+                  onPressed:
+                      (_saving ||
+                          _selectedDate == null ||
+                          _titleCtrl.text.trim().isEmpty)
+                      ? null
+                      : _save,
                   style: FilledButton.styleFrom(backgroundColor: kNavy),
                   child: const Text('Add'),
                 ),
@@ -756,45 +893,45 @@ class _AddDeadlineDialogState extends State<_AddDeadlineDialog> {
       ),
     );
   }
+}
 
-  Widget _dialogField(String label, TextEditingController ctrl, String hint) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: kTextPrimary,
+Widget _dialogField(String label, TextEditingController ctrl, String hint) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        label,
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: kTextPrimary,
+        ),
+      ),
+      const SizedBox(height: 5),
+      TextField(
+        controller: ctrl,
+        style: const TextStyle(fontSize: 13),
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(color: kTextTertiary, fontSize: 13),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 9,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: kBorderLight),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: kBorderLight),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: kNavy, width: 1.5),
           ),
         ),
-        const SizedBox(height: 5),
-        TextField(
-          controller: ctrl,
-          style: const TextStyle(fontSize: 13),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(color: kTextTertiary, fontSize: 13),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 9,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: kBorderLight),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: kBorderLight),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: kNavy, width: 1.5),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
 }

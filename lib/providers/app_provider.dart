@@ -112,7 +112,7 @@ class AppProvider extends ChangeNotifier {
         if (result == null) return 'Sign-in cancelled.';
         final credential = GoogleAuthProvider.credential(
           idToken: result.idToken,
-          accessToken: result.accessToken, // <-- Fixed this line!
+          accessToken: result.accessToken,
         );
         await _auth.signInWithCredential(credential);
       } else {
@@ -152,10 +152,9 @@ class AppProvider extends ChangeNotifier {
           ),
         );
         if (result == null) return 'Sign-in cancelled.';
-        final oauthCredential = OAuthProvider('microsoft.com').credential(
-          idToken: result.idToken,
-          accessToken: result.accessToken, // <-- Fixed this line!
-        );
+        final oauthCredential = OAuthProvider(
+          'microsoft.com',
+        ).credential(idToken: result.idToken, accessToken: result.accessToken);
         await _auth.signInWithCredential(oauthCredential);
       } else {
         // macOS / iOS: signInWithProvider works on Apple platforms
@@ -231,6 +230,9 @@ class AppProvider extends ChangeNotifier {
     _personalDeadlines.addAll(
       pdList.map((data) => PersonalDeadline.fromJson(data)),
     );
+
+    // NEW: Clean up expired deadlines after loading from Firestore
+    await removeExpiredDeadlines();
   }
 
   Future<void> _save(String field, dynamic value) async {
@@ -333,6 +335,24 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // NEW: Adjusted to use Firestore `_save()` instead of `_persistDeadlines()`
+  /// Removes any personal deadlines whose date has already passed.
+  /// Called on app init and whenever the deadline panel opens.
+  Future<void> removeExpiredDeadlines() async {
+    if (!isLoggedIn) return;
+    final before = _personalDeadlines.length;
+    _personalDeadlines.removeWhere((d) => d.isExpired);
+
+    if (_personalDeadlines.length != before) {
+      // Save the updated list to Firestore
+      await _save(
+        'personalDeadlines',
+        _personalDeadlines.map((d) => d.toJson()).toList(),
+      );
+      notifyListeners();
+    }
+  }
+
   Future<void> toggleCheckedMajor(String id) async {
     if (!isLoggedIn) return;
     final group = majorGroups.where((g) => g.id == id).firstOrNull;
@@ -381,10 +401,50 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Standalone Analytics Triggers ────────────────────────────────────────
+  // ── Analytics & Tracking ─────────────────────────────────────────────────
 
   Future<void> logFeedbackOpened() async {
     await _analytics.logEvent(name: 'feedback_opened');
+  }
+
+  // NEW: Resource view tracking logic
+  /// Tracks a resource view in Firestore.
+  /// Records total views + unique accounts. No UI — for analytics only.
+  Future<void> trackResourceView(String resourceId) async {
+    if (!isLoggedIn) return; // guests are not tracked
+    final uid = firebaseUser!.uid;
+    final docRef = _db.collection('resourceStats').doc(resourceId);
+
+    try {
+      await _db.runTransaction((tx) async {
+        final snap = await tx.get(docRef);
+        if (!snap.exists) {
+          tx.set(docRef, {
+            'totalViews': 1,
+            'uniqueViewerCount': 1,
+            'viewerUids': [uid],
+            'lastViewed': FieldValue.serverTimestamp(),
+          });
+        } else {
+          final data = snap.data()!;
+          final viewers = List<String>.from(data['viewerUids'] ?? []);
+          final isNew = !viewers.contains(uid);
+          final updates = <String, dynamic>{
+            'totalViews': FieldValue.increment(1),
+            'lastViewed': FieldValue.serverTimestamp(),
+          };
+          if (isNew) {
+            updates['uniqueViewerCount'] = FieldValue.increment(1);
+            updates['viewerUids'] = FieldValue.arrayUnion([uid]);
+          }
+          tx.update(docRef, updates);
+        }
+      });
+    } catch (e) {
+      debugPrint(
+        'trackResourceView error: $e',
+      ); // never crash the app for analytics
+    }
   }
 
   // ── Navigation & Search Actions ──────────────────────────────────────────

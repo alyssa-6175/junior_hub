@@ -192,9 +192,10 @@ class ResourceTile extends StatelessWidget {
       PersonalDeadline(
         id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
         title: resource.title,
-        date: resource.deadline ?? '',
-        urgency: resource.urgency,
-        resourceId: resource.id, // ← links back so tapping it opens the card
+        dateIso: resource
+            .deadline!, // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
+        resourceId: resource
+            .id, // optional, but good to include since it's in the new model
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(
