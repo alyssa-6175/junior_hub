@@ -46,6 +46,64 @@ class Resource {
     this.instructions,
   });
 
+  // ─── Urgency Calculation ──────────────────────────────────────────────────
+  /// Determines if a deadline is 'soon' (within 90 days), 'later', or 'none'.
+  String get urgency {
+    if (deadlineIso == null || deadlineIso!.isEmpty) return 'none';
+
+    try {
+      final deadlineDate = DateTime.parse(deadlineIso!);
+      final now = DateTime.now();
+      final difference = deadlineDate.difference(now).inDays;
+
+      if (difference < 0) {
+        return 'none'; // Deadline passed
+      } else if (difference <= 90) {
+        // Less than 3 months away
+        return 'soon';
+      } else {
+        return 'later';
+      }
+    } catch (e) {
+      // Fallback if parsing fails
+      return 'later';
+    }
+  }
+
+  // ─── Urgency Colors & Labels ──────────────────────────────────────────────
+  Color get urgencyTextColor {
+    switch (urgency) {
+      case 'soon':
+        return const Color(0xFFA52A2A); // Red/Brown text
+      case 'later':
+        return const Color(0xFFD4AF37); // Gold text
+      default:
+        return const Color(0xFF6B7280); // Gray text
+    }
+  }
+
+  Color get urgencyBgColor {
+    switch (urgency) {
+      case 'soon':
+        return const Color(0xFFFEE2E2); // Light red background
+      case 'later':
+        return const Color(0xFFFEF9C3); // Light yellow background
+      default:
+        return const Color(0xFFF3F4F6); // Light gray background
+    }
+  }
+
+  String get urgencyLabel {
+    switch (urgency) {
+      case 'soon':
+        return 'Soon';
+      case 'later':
+        return 'Later';
+      default:
+        return '';
+    }
+  }
+
   // ─── Convenience getters ──────────────────────────────────────────────────
   Color get categoryTextColor => CategoryColors.textFor(category);
   Color get categoryBgColor => CategoryColors.bgFor(category);

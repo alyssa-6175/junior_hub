@@ -155,12 +155,6 @@ class ResourceDetailModal extends StatelessWidget {
                             icon: Icons.schedule_outlined,
                             label: resource.timeCommitment!,
                           ),
-                        if (resource.urgency.isNotEmpty)
-                          _InfoChip(
-                            icon: Icons.bookmark_outlined,
-                            label: resource.urgencyLabel,
-                            color: resource.urgencyTextColor,
-                          ),
                       ],
                     ),
                     const SizedBox(height: 16),
