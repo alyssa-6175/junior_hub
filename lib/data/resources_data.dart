@@ -347,7 +347,6 @@ final List<Resource> allResources = [
     description:
         '4 divisions (Bronze to Platinum). Contest windows in December, January, February, and March. Register before each window opens.',
     deadline: 'Dec 13–16, 2025',
-    urgency: 'urgent',
     icon: Icons.emoji_events,
     url: 'http://www.usaco.org',
     links: ['usaco.org', 'USACO Guide (free)', 'Past problems & editorials'],
@@ -368,7 +367,6 @@ final List<Resource> allResources = [
     description:
         'American Mathematics Competitions. AMC 10/12 are the gateway to AIME, USAMO, and the US IMO team.',
     deadline: 'Nov 6, 2025',
-    urgency: 'urgent',
     icon: Icons.emoji_events,
     url: 'https://maa.org/math-competitions',
     links: [
@@ -391,7 +389,6 @@ final List<Resource> allResources = [
     description:
         'Annual app-building competition organized by Members of Congress. Any district can submit an app.',
     deadline: 'Dec 21, 2025',
-    urgency: 'urgent',
     icon: Icons.emoji_events,
     url: 'https://www.congressionalappchallenge.us',
     links: ['congressionalappchallenge.us', 'Submit your app'],
@@ -410,7 +407,6 @@ final List<Resource> allResources = [
     description:
         'USA Biology Olympiad. Open exam in January, semifinals in March. Top students represent the US at the IBO.',
     deadline: 'Jan 2026',
-    urgency: 'soon',
     icon: Icons.emoji_events,
     url: 'https://www.usabo-trc.org',
     links: ['vashti.net/nacbb', 'Open exam prep resources'],
@@ -429,7 +425,6 @@ final List<Resource> allResources = [
     description:
         'Team-based competition with 23 events spanning biology, chemistry, physics, earth science, and engineering.',
     deadline: 'Spring 2026',
-    urgency: 'later',
     icon: Icons.emoji_events,
     url: 'https://www.soinc.org',
     links: ['soinc.org', 'Event list & trial events'],
@@ -448,7 +443,6 @@ final List<Resource> allResources = [
     description:
         'National cybersecurity competition by the Air Force Association. Team-based with multiple qualifying rounds.',
     deadline: 'Oct 2025 (registration)',
-    urgency: 'urgent',
     icon: Icons.emoji_events,
     url: 'https://www.uscyberpatriot.org',
     links: ['uscyberpatriot.org'],
@@ -465,7 +459,6 @@ final List<Resource> allResources = [
     description:
         'Covers algorithms, the internet, data, and programming fundamentals. Accessible intro CS AP with a project component.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.laptop_mac,
     url:
         'https://apstudents.collegeboard.org/courses/ap-computer-science-principles',
@@ -491,7 +484,6 @@ final List<Resource> allResources = [
     description:
         'Object-oriented programming in Java: classes, inheritance, recursion, and the AP subset of Java.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.laptop_mac,
     url: 'https://apstudents.collegeboard.org/courses/ap-computer-science-a',
     links: [
@@ -515,7 +507,6 @@ final List<Resource> allResources = [
     description:
         'Limits, derivatives, and integrals. Equivalent to a first-semester college calculus course.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-ab',
     links: [
@@ -536,7 +527,6 @@ final List<Resource> allResources = [
     description:
         'Extends AB to include sequences, series, and parametric equations. Covers a full year of college calculus.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-bc',
     links: [
@@ -561,7 +551,6 @@ final List<Resource> allResources = [
     description:
         'Exploring data, sampling, probability, and statistical inference. Great for pre-med, social science, or data tracks.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.bar_chart,
     url: 'https://apstudents.collegeboard.org/courses/ap-statistics',
     links: [
@@ -588,7 +577,6 @@ final List<Resource> allResources = [
     description:
         'Covers evolution, cellular processes, genetics, and ecology. Lab-based with 8 required science practices.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-biology',
     links: [
@@ -615,7 +603,6 @@ final List<Resource> allResources = [
     description:
         'Atomic structure, bonding, thermodynamics, kinetics, and equilibrium. One of the most rigorous AP sciences.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
     links: [
@@ -640,7 +627,6 @@ final List<Resource> allResources = [
     field: 'science',
     description: 'lowk dont know yet smone please tell me',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
     links: [
@@ -666,7 +652,6 @@ final List<Resource> allResources = [
     description:
         'Algebra-based: mechanics, waves, and circuits. Inquiry-focused with heavily weighted FRQs.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.bolt,
     url:
         'https://apstudents.collegeboard.org/courses/ap-physics-1-algebra-based',
@@ -691,7 +676,6 @@ final List<Resource> allResources = [
     description:
         'Algebra-based: covering thermodynamics, fluids, electricity and magnetism, optics, and modern physics.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.bolt,
     url:
         'https://apstudents.collegeboard.org/courses/ap-physics-2-algebra-based',
@@ -713,7 +697,6 @@ final List<Resource> allResources = [
     description:
         'Calculus-based mechanics. Requires concurrent or prior calculus. Strong preparation for engineering programs.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.bolt,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-c-mechanics',
     links: [
@@ -739,7 +722,6 @@ final List<Resource> allResources = [
     description:
         'calculus-based, for students planning to specialize in the physical sciences or engineering',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.bolt,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-c-mechanics',
     links: [
@@ -760,7 +742,6 @@ final List<Resource> allResources = [
     description:
         'Rhetorical analysis, argumentation, and synthesis. 3 FRQ essays on the exam.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.edit,
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-language-and-composition',
@@ -779,7 +760,6 @@ final List<Resource> allResources = [
     description:
         'Close reading of poetry and prose. Literary analysis essays and a final open question on any novel.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.edit,
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-literature-and-composition',
@@ -794,7 +774,6 @@ final List<Resource> allResources = [
     description:
         'Survey of American history from 1491 to present. DBQ and long-essay questions are the exam focus.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.history_edu,
     url: 'https://apstudents.collegeboard.org/courses/ap-united-states-history',
     links: [
@@ -822,7 +801,6 @@ final List<Resource> allResources = [
     description:
         'Global history from 1200 CE to present. Cross-cultural comparisons and causation analysis.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.public,
     url: 'https://apstudents.collegeboard.org/courses/ap-world-history-modern',
     links: [
@@ -840,7 +818,6 @@ final List<Resource> allResources = [
     description:
         'Research methods, biological bases, sensation, learning, cognition, and social psychology.',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-psychology',
     links: ['Khan Academy AP Psych', "Barron's AP Psychology", 'AP Classroom'],
@@ -854,7 +831,6 @@ final List<Resource> allResources = [
     field: 'econ',
     description: 'How people/business respond and make choices',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-microeconomics',
     links: [
@@ -880,7 +856,6 @@ final List<Resource> allResources = [
     field: 'econ',
     description: 'How governments respond and make choices',
     deadline: 'May 2026 (exam)',
-    urgency: 'later',
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-macroeconomics',
     links: [
@@ -908,7 +883,6 @@ final List<Resource> allResources = [
     description:
         'MIT-hosted residential summer research program. 80 students selected nationally. Widely considered the most selective HS program in the US.',
     deadline: 'Dec 15, 2025 (apply)',
-    urgency: 'urgent',
     icon: Icons.school,
     url: 'https://www.cee.org/programs/research-science-institute',
     links: ['cee.org/rsi', 'Application portal', 'Past projects gallery'],
@@ -928,7 +902,6 @@ final List<Resource> allResources = [
     description:
         'Remote year-long math and CS research mentored by MIT graduate students. Separate tracks for math and CS.',
     deadline: 'Dec 2025 (opens)',
-    urgency: 'soon',
     icon: Icons.school,
     url: 'https://math.mit.edu/research/highschool/primes/usa',
     links: ['math.mit.edu/research/highschool/primes', 'Application info'],
@@ -946,7 +919,6 @@ final List<Resource> allResources = [
     description:
         'Paid summer research at NIH campuses. Work alongside scientists in real biomedical research labs.',
     deadline: 'Jan 15, 2026 (apply)',
-    urgency: 'soon',
     icon: Icons.science,
     url: 'https://www.training.nih.gov/programs/hs-sip',
     links: ['training.nih.gov/programs/hs-sip', 'Application portal'],
@@ -967,7 +939,6 @@ final List<Resource> allResources = [
     description:
         'Mentored research program in any subject. Work with a PhD mentor to produce a real research output — paper, project, or presentation.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.article,
     url: 'https://www.polygence.org',
     links: ['polygence.org', 'Browse mentors', 'Showcase past projects'],
@@ -988,7 +959,6 @@ final List<Resource> allResources = [
     description:
         'Computer Science Summer Institute. Free 3-week immersive program at Google offices. Food and housing included.',
     deadline: 'Feb 2026 (opens)',
-    urgency: 'later',
     icon: Icons.business,
     url:
         'https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute',
@@ -1009,7 +979,6 @@ final List<Resource> allResources = [
     description:
         'Paid summer research at NASA centers nationwide. Covers engineering, science, and technology tracks.',
     deadline: 'Mar 2026 (apply)',
-    urgency: 'later',
     icon: Icons.business,
     url: 'https://stemgateway.nasa.gov',
     links: ['nasa.gov/careers/students', 'OSSI portal'],
@@ -1028,7 +997,6 @@ final List<Resource> allResources = [
     description:
         'Work in your Representative or Senator\'s office during the school year or summer. Unpaid but highly valuable for policy/gov tracks.',
     deadline: 'Rolling',
-    urgency: 'later',
     icon: Icons.account_balance,
     url: 'https://www.house.gov/educators-and-students/internships',
     links: [
@@ -1036,8 +1004,6 @@ final List<Resource> allResources = [
       'senate.gov/internships',
     ],
   ),
-
-  // ── SAT / ACT ──────────────────────────────────────────────────────────────
 
   // ── SAT / ACT ──────────────────────────────────────────────────────────────
   const Resource(
@@ -1053,7 +1019,6 @@ final List<Resource> allResources = [
         '• Take short, timed section quizzes to build your test-taking endurance on the go.',
     url: 'https://knowt.com/exams/SAT',
     deadline: null,
-    urgency: 'later',
     icon: Icons.quiz,
     links: ['knowt.com/exams/SAT', 'Free account available'],
     testSection: null,
@@ -1071,7 +1036,6 @@ final List<Resource> allResources = [
         '• Complete bite-sized practice questions when you only have a few minutes to spare.',
     url: 'https://knowt.com/exams/ACT',
     deadline: null,
-    urgency: 'later',
     icon: Icons.quiz,
     links: ['knowt.com/exams/ACT'],
     testSection: null,
@@ -1088,7 +1052,6 @@ final List<Resource> allResources = [
         '• Use the practice question banks to drill specific concepts you struggle with.\n'
         '• Always read the answer explanations, even for questions you guessed correctly!',
     deadline: null,
-    urgency: 'later',
     icon: Icons.book,
     links: ['Find on Amazon', 'kaptest.com'],
     testSection: null,
@@ -1106,7 +1069,6 @@ final List<Resource> allResources = [
         '• Grade your test using the official scoring guide to establish your baseline score.\n'
         '• Keep a spreadsheet of every question you miss and why you missed it.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.check_circle_outline,
     url: 'https://satsuite.collegeboard.org/practice',
     links: [
@@ -1129,7 +1091,6 @@ final List<Resource> allResources = [
         '• Let the algorithm build a personalized practice schedule targeting your specific weaknesses.\n'
         '• Complete at least 30 minutes of targeted skill practice a day to level up your subscores.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.smart_display,
     url: 'https://www.khanacademy.org/sat',
     links: ['khanacademy.org/sat', 'Link your PSAT score'],
@@ -1151,7 +1112,6 @@ final List<Resource> allResources = [
         '• Study those units, then take another full test to measure improvement.\n'
         '• Repeat the cycle — test → review → study → test.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.laptop_mac,
     url: 'https://bluebook.app.collegeboard.org',
     links: ['bluebook.app.collegeboard.org'],
@@ -1171,7 +1131,6 @@ final List<Resource> allResources = [
         '• Focus heavily on the test-taking strategies (like the process of elimination and pacing tactics).\n'
         '• Work through the content review chapters specifically for areas where your score is lowest.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.book,
     url: 'https://www.princetonreview.com/college/sat-test-prep',
     links: ['Find on Amazon', 'Princeton Review site'],
@@ -1190,7 +1149,6 @@ final List<Resource> allResources = [
         '• The ACT is incredibly fast-paced, so strict timing is crucial during your practice sessions.\n'
         '• Review your mistakes to see if they were due to content gaps or simply running out of time.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.check_circle_outline,
     url:
         'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html',
@@ -1214,7 +1172,6 @@ final List<Resource> allResources = [
         '• Drill practice questions by filtering for specific subjects (Math, Science, English, Reading).\n'
         '• Review the step-by-step video solutions whenever you get stuck on a difficult problem.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.smart_display,
     url: 'https://www.khanacademy.org/test-prep/act',
     links: ['khanacademy.org/test-prep/act'],
@@ -1232,7 +1189,6 @@ final List<Resource> allResources = [
         '• Focus on the science reasoning chapter to learn how to quickly interpret charts without reading the whole passage.\n'
         '• Take the full-length practice tests on weekends to build stamina for the 3-hour exam.',
     deadline: null,
-    urgency: 'later',
     icon: Icons.book,
     url: 'https://www.princetonreview.com/college/act-test-prep',
     links: ['Find on Amazon', 'Princeton Review site'],
@@ -1251,7 +1207,7 @@ final List<Resource> allResources = [
         '• Start by taking the unit tests to pinpoint exactly which math concepts you are missing.\n'
         '• Watch the step-by-step video breakdowns for any algebra or geometry topics you forgot from previous years.\n'
         '• Keep a notebook of the specific formulas and exponent rules you constantly need to look up.',
-    urgency: 'later',
+
     icon: Icons.calculate,
     links: ['khanacademy.org/sat-math'],
   ),
@@ -1267,7 +1223,6 @@ final List<Resource> allResources = [
         '- Focus heavily on the "Command of Evidence" and "Words in Context" question types.\n'
         '- Practice reading the passages actively — write brief mental summaries of each paragraph as you go.\n'
         '- Drill grammar rules until punctuation questions become automatic.',
-    urgency: 'later',
     icon: Icons.edit,
     links: ['khanacademy.org/sat-reading-and-writing'],
   ),
@@ -1283,7 +1238,7 @@ final List<Resource> allResources = [
         '• Review the fundamental rules of punctuation (commas, dashes, semicolons).\n'
         '• Memorize common grammar rules; the ACT tests the exact same handful of concepts repeatedly.\n'
         '• Practice reading the sentences in your head to catch awkward phrasing and subject-verb disagreements.',
-    urgency: 'later',
+
     icon: Icons.edit,
     links: [
       'act.org/content/act/en/products-and-services/the-act/test-preparation/english-test-description.html',
@@ -1301,7 +1256,7 @@ final List<Resource> allResources = [
         '• Remember that you rarely need advanced science knowledge as it is mostly reading graphs and tables.\n'
         '• Skim the intro text quickly and jump straight to the charts to save time.\n'
         '• Practice tracking variables (e.g., as temperature goes up, what happens to pressure?).',
-    urgency: 'later',
+
     icon: Icons.science,
     links: ['act.org/science', 'Kaplan ACT Science strategies'],
   ),
@@ -1317,7 +1272,7 @@ final List<Resource> allResources = [
         '• Memorize your basic formulas! Unlike the SAT, the ACT does not give you a formula sheet.\n'
         '• Practice pacing yourself to spend less than a minute on the easier early questions, saving time for the difficult ones at the end.\n'
         '• Use your calculator efficiently, but don\'t rely on it for simple mental arithmetic.',
-    urgency: 'later',
+
     icon: Icons.calculate,
     links: ['khanacademy.org/act-math', 'Kaplan ACT Math'],
   ),

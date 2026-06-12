@@ -9,7 +9,6 @@ class Resource {
   final String description;
   final String? deadline;
   final String? deadlineIso;
-  final String urgency;
   final IconData icon;
   final List<String> links;
   final String? apSubCategory;
@@ -32,7 +31,6 @@ class Resource {
     required this.description,
     this.deadline,
     this.deadlineIso,
-    required this.urgency,
     required this.icon,
     required this.links,
     this.apSubCategory,
@@ -51,9 +49,7 @@ class Resource {
   // ─── Convenience getters ──────────────────────────────────────────────────
   Color get categoryTextColor => CategoryColors.textFor(category);
   Color get categoryBgColor => CategoryColors.bgFor(category);
-  Color get urgencyTextColor => UrgencyColors.textFor(urgency);
-  Color get urgencyBgColor => UrgencyColors.bgFor(urgency);
-  String get urgencyLabel => UrgencyColors.labelFor(urgency);
+
   String get fieldLabel => FieldColors.labelFor(field);
 
   String get categoryLabel {
