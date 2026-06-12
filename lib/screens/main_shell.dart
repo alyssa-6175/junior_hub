@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ import 'board_screen.dart';
 import 'my_majors_screen.dart';
 import 'search_results_screen.dart';
 import '../widgets/feedback_form.dart';
+import 'admin_dashboard_screen.dart';
 
 class MainShell extends StatelessWidget {
   const MainShell({super.key});
@@ -132,7 +134,7 @@ class _AppSidebar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _SidebarLogo(),
+          const _SidebarLogo(),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 8),
@@ -193,7 +195,7 @@ class _AppSidebar extends StatelessWidget {
                   ...majorGroups.map(
                     (group) => _ExpandableMajorGroup(
                       group: group,
-                      provider: provider, // ← Added provider injection
+                      provider: provider,
                       currentGroup: provider.currentMajorGroup,
                       currentSubMajor: provider.currentSubMajor,
                     ),
@@ -210,41 +212,76 @@ class _AppSidebar extends StatelessWidget {
   }
 }
 
-// ─── Sidebar: logo block ──────────────────────────────────────────────────────
+// ─── Sidebar: logo block (WITH HIDDEN ADMIN TIMER) ────────────────────────────
 
-class _SidebarLogo extends StatelessWidget {
+class _SidebarLogo extends StatefulWidget {
+  const _SidebarLogo();
+
+  @override
+  State<_SidebarLogo> createState() => _SidebarLogoState();
+}
+
+class _SidebarLogoState extends State<_SidebarLogo> {
+  Timer? _adminTimer;
+
+  void _cancelTimer() {
+    _adminTimer?.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+    return GestureDetector(
+      onTapDown: (_) {
+        _adminTimer = Timer(const Duration(seconds: 5), () {
+          if (context.read<AppProvider>().isAdmin) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminDashboardScreen(),
+              ),
+            );
+          }
+        });
+      },
+      onTapUp: (_) => _cancelTimer(),
+      onTapCancel: _cancelTimer,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+          ),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Image.asset(
+                'assets/logo.png',
+                width: 64,
+                height: 64,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              'Junior Hub',
+              style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: Image.asset(
-              'assets/logo.png',
-              width: 64,
-              height: 64,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            'Junior Hub',
-            style: GoogleFonts.inter(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _cancelTimer();
+    super.dispose();
   }
 }
 
@@ -456,11 +493,11 @@ class _ExpandableMajorGroup extends StatefulWidget {
   final MajorGroup group;
   final String? currentGroup;
   final String? currentSubMajor;
-  final AppProvider provider; // ← Added parameter
+  final AppProvider provider;
 
   const _ExpandableMajorGroup({
     required this.group,
-    required this.provider, // ← Added requirement
+    required this.provider,
     this.currentGroup,
     this.currentSubMajor,
   });
@@ -477,28 +514,23 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
   @override
   void didUpdateWidget(_ExpandableMajorGroup old) {
     super.didUpdateWidget(old);
-    // Auto-expand when this group becomes active.
     if (isGroupActive && !_open) setState(() => _open = true);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Simplify access to provider logic as requested
     final provider = widget.provider;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Group header row (tap to expand/collapse OR navigate to group)
         MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
               if (_open) {
-                // Already open → just collapse, don't navigate
                 setState(() => _open = false);
               } else {
-                // Closed → expand and navigate to the group
                 setState(() => _open = true);
                 context.read<AppProvider>().navigateToMajor(widget.group.id);
               }
@@ -541,7 +573,6 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                       ),
                     ),
                   ),
-                  // ← Added Checkbox right before the expand icon
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -569,7 +600,6 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
             ),
           ),
         ),
-        // Subcategory items (shown when expanded)
         if (_open)
           ...widget.group.subcategories.map((sub) {
             final isActive = widget.currentSubMajor == sub.id;
@@ -614,7 +644,6 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                           ),
                         ),
                       ),
-                      // ← Added Checkbox at the end of subcategory row
                       GestureDetector(
                         onTap: () => context
                             .read<AppProvider>()

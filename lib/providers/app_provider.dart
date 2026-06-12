@@ -23,6 +23,11 @@ class AppProvider extends ChangeNotifier {
   // ── Auth State ───────────────────────────────────────────────────────────
   bool _isGuest = false;
 
+  // admin priv
+  bool get isAdmin {
+    return userEmail == 'alyssa.pannn@gmail.com';
+  }
+
   User? get firebaseUser => _auth.currentUser;
   bool get isGuest => _isGuest;
   bool get isAuthenticated => firebaseUser != null || _isGuest;
@@ -419,6 +424,9 @@ class AppProvider extends ChangeNotifier {
   Future<void> trackResourceView(String resourceId) async {
     if (!isLoggedIn) return; // guests are not tracked
     final uid = firebaseUser!.uid;
+    final email =
+        firebaseUser!.email ?? 'unknown_email'; // <-- Added Email Retrieval
+
     final docRef = _db.collection('resourceStats').doc(resourceId);
 
     try {
@@ -429,20 +437,27 @@ class AppProvider extends ChangeNotifier {
             'totalViews': 1,
             'uniqueViewerCount': 1,
             'viewerUids': [uid],
+            'viewerEmails': [email], // <-- Added to Document
             'lastViewed': FieldValue.serverTimestamp(),
           });
         } else {
           final data = snap.data()!;
           final viewers = List<String>.from(data['viewerUids'] ?? []);
           final isNew = !viewers.contains(uid);
+
           final updates = <String, dynamic>{
             'totalViews': FieldValue.increment(1),
             'lastViewed': FieldValue.serverTimestamp(),
           };
+
           if (isNew) {
             updates['uniqueViewerCount'] = FieldValue.increment(1);
             updates['viewerUids'] = FieldValue.arrayUnion([uid]);
+            updates['viewerEmails'] = FieldValue.arrayUnion([
+              email,
+            ]); // <-- Added array union
           }
+
           tx.update(docRef, updates);
         }
       });

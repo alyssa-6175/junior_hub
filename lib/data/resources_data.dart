@@ -11,7 +11,10 @@ const Map<String, String> kLinkUrls = {
       'https://www.khanacademy.org/computing/ap-computer-science-principles',
   'Khan Academy AP CSA':
       'https://www.khanacademy.org/computing/ap-computer-science-a',
-  'Khan Academy Calculus': 'https://www.khanacademy.org/math/calculus-1',
+  'Khan Academy AP Calculus BC':
+      'https://www.khanacademy.org/math/ap-calculus-bc',
+  'Khan Academy AP Calculus AB':
+      'https://www.khanacademy.org/math/ap-calculus-ab',
   'Khan Academy AP Stats': 'https://www.khanacademy.org/math/ap-statistics',
   'Khan Academy AP Bio': 'https://www.khanacademy.org/science/ap-biology',
   'Khan Academy AP Chemistry':
@@ -516,7 +519,7 @@ final List<Resource> allResources = [
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-ab',
     links: [
-      'Khan Academy Calculus',
+      'Khan Academy AP Calculus AB',
       'Past AP FRQs (2001–2024)',
       'Calc Medic (free)',
       "Barron's AP Calc AB",
@@ -537,7 +540,7 @@ final List<Resource> allResources = [
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-bc',
     links: [
-      'Khan Academy Calculus',
+      'Khan Academy AP Calculus BC',
       'Past AP FRQs (2001–2024)',
       'Calc Medic',
       'Princeton Review BC',
@@ -629,6 +632,32 @@ final List<Resource> allResources = [
     ],
     apSubCategory: 'science',
   ),
+
+  const Resource(
+    id: 'ap_es',
+    title: 'AP Environmental Science',
+    category: 'ap',
+    field: 'science',
+    description: 'lowk dont know yet smone please tell me',
+    deadline: 'May 2026 (exam)',
+    urgency: 'later',
+    icon: Icons.science,
+    url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
+    links: [
+      'Khan Academy AP Chemistry',
+      "Chad's Chemistry (YouTube)",
+      'Princeton Review AP Chem',
+      'AP Chem Exam 2018',
+      'AP Chem Exam 2017',
+      'AP Chem Exam 2016',
+      'AP Chem Exam 2015',
+      'AP Chem Exam 2014',
+      'AP Chem Exam 2013',
+      'AP Chem Exam 2012',
+    ],
+    apSubCategory: 'science',
+  ),
+
   const Resource(
     id: 'ap_phys1',
     title: 'AP Physics 1',
