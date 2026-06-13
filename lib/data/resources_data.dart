@@ -9,8 +9,6 @@ const Map<String, String> kLinkUrls = {
   // Khan Academy
   'Khan Academy AP CSP (free)':
       'https://www.khanacademy.org/computing/ap-computer-science-principles',
-  'Khan Academy AP CSA':
-      'https://www.khanacademy.org/computing/ap-computer-science-a',
   'Khan Academy AP Calculus BC':
       'https://www.khanacademy.org/math/ap-calculus-bc',
   'Khan Academy AP Calculus AB':
@@ -23,22 +21,26 @@ const Map<String, String> kLinkUrls = {
       'https://www.khanacademy.org/science/ap-physics-1',
   'Khan Academy AP US History':
       'https://www.khanacademy.org/humanities/ap-us-history',
+  'Khan Academy AP US Government and Politics':
+      'https://www.khanacademy.org/humanities/ap-us-government-and-politics',
+  'Khan Academy AP Art History':
+      'https://www.khanacademy.org/humanities/ap-art-history',
   'Khan Academy AP World':
-      'https://www.khanacademy.org/humanities/world-history',
-  'Khan Academy AP Lang':
-      'https://www.khanacademy.org/ela/cc-9th-grade-reading-and-writing',
-  'Khan Academy AP Lit': 'https://www.khanacademy.org/ela/college-prep',
-  'Khan Academy AP Psych':
-      'https://www.khanacademy.org/social-science-finance-history/ap-college-psychology',
+      'https://www.khanacademy.org/humanities/world-history-project-ap',
   'Khan Academy SAT prep': 'https://www.khanacademy.org/test-prep/sat',
   'khanacademy.org/sat': 'https://www.khanacademy.org/test-prep/sat',
   'khanacademy.org/sat-math': 'https://www.khanacademy.org/test-prep/sat',
   'khanacademy.org/sat-reading-and-writing':
       'https://www.khanacademy.org/test-prep/sat',
-  'Link your PSAT score': 'https://www.khanacademy.org/test-prep/sat',
   'khanacademy.org/act-math': 'https://www.khanacademy.org/test-prep/act',
   'Khan Academy AP Physics 2':
       'https://www.khanacademy.org/science/ap-physics-2',
+  'Khan Academy AP Environmental Science':
+      'https://www.khanacademy.org/science/ap-college-environmental-science',
+  'Khan Academy AP Macroeconomics':
+      'https://www.khanacademy.org/economics-finance-domain/ap-macroeconomics',
+  'Khan Academy AP Microeconomics':
+      'https://www.khanacademy.org/economics-finance-domain/ap-microeconomics',
   // College Board / AP Classroom
   'AP Classroom (official)': 'https://myap.collegeboard.org/',
   'AP Classroom': 'https://myap.collegeboard.org/',
@@ -487,7 +489,6 @@ final List<Resource> allResources = [
     icon: Icons.laptop_mac,
     url: 'https://apstudents.collegeboard.org/courses/ap-computer-science-a',
     links: [
-      'Khan Academy AP CSA',
       'CodingBat Java practice',
       "Barron's AP CSA",
       'AP Classroom',
@@ -628,19 +629,8 @@ final List<Resource> allResources = [
     description: 'lowk dont know yet smone please tell me',
     deadline: 'May 2026 (exam)',
     icon: Icons.science,
-    url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
-    links: [
-      'Khan Academy AP Chemistry',
-      "Chad's Chemistry (YouTube)",
-      'Princeton Review AP Chem',
-      'AP Chem Exam 2018',
-      'AP Chem Exam 2017',
-      'AP Chem Exam 2016',
-      'AP Chem Exam 2015',
-      'AP Chem Exam 2014',
-      'AP Chem Exam 2013',
-      'AP Chem Exam 2012',
-    ],
+    url: 'https://apstudents.collegeboard.org/courses/ap-es',
+    links: ['Khan Academy AP Environmental Science'],
     apSubCategory: 'science',
   ),
 
@@ -716,7 +706,7 @@ final List<Resource> allResources = [
   ),
   const Resource(
     id: 'ap_physcem',
-    title: 'AP Physics C: Electricity and Magnetism',
+    title: 'AP Physics C: E & M',
     category: 'ap',
     field: 'physics',
     description:
@@ -745,11 +735,7 @@ final List<Resource> allResources = [
     icon: Icons.edit,
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-language-and-composition',
-    links: [
-      'Khan Academy AP Lang',
-      'AP Classroom',
-      'Princeton Review AP English Lang',
-    ],
+    links: ['AP Classroom', 'Princeton Review AP English Lang'],
     apSubCategory: 'lang',
   ),
   const Resource(
@@ -763,7 +749,7 @@ final List<Resource> allResources = [
     icon: Icons.edit,
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-literature-and-composition',
-    links: ['Khan Academy AP Lit', 'AP Classroom', 'Litcharts (free analysis)'],
+    links: ['AP Classroom', 'Litcharts (free analysis)'],
     apSubCategory: 'lang',
   ),
   const Resource(
@@ -793,6 +779,32 @@ final List<Resource> allResources = [
     ],
     apSubCategory: 'history',
   ),
+
+  const Resource(
+    id: 'ap_usg',
+    title: 'AP US Government and Politics',
+    category: 'ap',
+    field: 'history',
+    description: '?? what is gov pls tell me',
+    deadline: 'May 2026 (exam)',
+    icon: Icons.history_edu,
+    url: 'https://apstudents.collegeboard.org/courses/ap-united-states-gov',
+    links: ['Khan Academy AP US Government and Politics'],
+    apSubCategory: 'history',
+  ),
+  const Resource(
+    id: 'ap_arthistory',
+    title: 'AP Art History',
+    category: 'ap',
+    field: 'history',
+    //TODO:
+    description: 'still dont really know.. [alyssa pls replace this!!]',
+    deadline: 'May 2026 (exam)',
+    icon: Icons.history_edu,
+    url: 'https://apstudents.collegeboard.org/courses/ap-art-history',
+    links: ['Khan Academy AP Art History'],
+    apSubCategory: 'art',
+  ),
   const Resource(
     id: 'ap_world',
     title: 'AP World History',
@@ -820,7 +832,7 @@ final List<Resource> allResources = [
     deadline: 'May 2026 (exam)',
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-psychology',
-    links: ['Khan Academy AP Psych', "Barron's AP Psychology", 'AP Classroom'],
+    links: ["Barron's AP Psychology", 'AP Classroom'],
     apSubCategory: 'science',
   ),
 
@@ -834,6 +846,7 @@ final List<Resource> allResources = [
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-microeconomics',
     links: [
+      'Khan Academy AP Microeconomics',
       'AP Micro Exam 2019',
       'AP Micro Exam 2018',
       'AP Micro Exam 2017',
@@ -864,6 +877,7 @@ final List<Resource> allResources = [
       'AP Macro Exam 2019',
       'AP Macro Exam 2013',
       'AP Macro Exam 2012',
+      'Khan Academy AP Macroeconomics',
     ],
     apSubCategory: 'econ',
   ),
@@ -1093,7 +1107,7 @@ final List<Resource> allResources = [
     deadline: null,
     icon: Icons.smart_display,
     url: 'https://www.khanacademy.org/sat',
-    links: ['khanacademy.org/sat', 'Link your PSAT score'],
+    links: ['khanacademy.org/sat'],
     detailNote:
         'Completely free, in official partnership with College Board. Best free option for targeted prep.',
     testSection: null,
@@ -1278,9 +1292,6 @@ final List<Resource> allResources = [
   ),
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// DEADLINES  (shown in the right-side panel)
-// ─────────────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
 // DEADLINES  (shown in the right-side panel)
 // ─────────────────────────────────────────────────────────────────────────────
