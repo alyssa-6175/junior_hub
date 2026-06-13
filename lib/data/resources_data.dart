@@ -796,14 +796,14 @@ final List<Resource> allResources = [
     id: 'ap_arthistory',
     title: 'AP Art History',
     category: 'ap',
-    field: 'history',
+    field: 'art',
     //TODO:
     description: 'still dont really know.. [alyssa pls replace this!!]',
     deadline: 'May 2026 (exam)',
     icon: Icons.history_edu,
     url: 'https://apstudents.collegeboard.org/courses/ap-art-history',
     links: ['Khan Academy AP Art History'],
-    apSubCategory: 'art',
+    apSubCategory: 'history',
   ),
   const Resource(
     id: 'ap_world',

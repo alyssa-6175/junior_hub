@@ -106,13 +106,13 @@ class _LoginCard extends StatelessWidget {
         color: kSurface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: kBorderLight),
-        boxShadow: [
-          BoxShadow(
-            color: kNavy.withValues(alpha: 0.10),
-            blurRadius: 32,
-            offset: const Offset(0, 12),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: kNavy.withValues(alpha: 0.10),
+        //     blurRadius: 32,
+        //     offset: const Offset(0, 12),
+        //   ),
+        // ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
