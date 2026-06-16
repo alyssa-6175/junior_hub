@@ -15,8 +15,15 @@ class TestDetailScreen extends StatefulWidget {
 }
 
 class _TestDetailScreenState extends State<TestDetailScreen> {
-  int _tab = 0; // 0=Board 1=Official 2=Videos 3=Tests 4=Practice Qs
-  String? _section; // null = all sections
+  int _tab = 0; // 0=Board 1=Official 2=Videos 3=Books 4=Practice Qs
+  String? _section;
+  bool _guideExpanded = false;
+
+  // ── Progress tracking for test series ────────────────────────────
+  // Bluebook: tests 4–10 (7 tests)
+  final Set<int> _bluebookDone = {};
+  // Paper: tests 4–11 (8 tests)
+  final Set<int> _paperDone = {};
 
   bool get _isSat => widget.category == 'sat';
   String get _title => _isSat ? 'SAT Prep' : 'ACT Prep';
@@ -59,54 +66,52 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     final seen = provider.seen;
 
     final board = _all.where((r) => pinned.contains(r.id)).toList();
+
+    // Official tab: specific resource IDs
+    final officialIds = {
+      'bluebook_tests',
+      'paper_practice_tests',
+      'cb_question_bank',
+      'cb_practice_specific_questions',
+      'cb_official_study_guide',
+    };
     final official = _sort(
-      _applySection(
-        _all
-            .where(
-              (r) => r.links.any(
-                (l) =>
-                    l.toLowerCase().contains('official') ||
-                    l.toLowerCase().contains('college board') ||
-                    l.toLowerCase().contains('act.org'),
-              ),
-            )
-            .toList(),
-      ),
+      _applySection(_all.where((r) => officialIds.contains(r.id)).toList()),
       pinned,
       seen,
     );
+
     final videos = _sort(
       _applySection(_all.where((r) => r.icon == Icons.smart_display).toList()),
       pinned,
       seen,
     );
-    final tests = _sort(
-      _applySection(
-        _all
-            .where(
-              (r) => r.links.any(
-                (l) =>
-                    l.toLowerCase().contains('test') ||
-                    l.toLowerCase().contains('practice'),
-              ),
-            )
-            .toList(),
-      ),
+
+    // Books tab (renamed from Practice Tests): Princeton Review + Kaplan
+    final bookIds = {'princeton_review_sat', 'kaplan_sat'};
+    final books = _sort(
+      _applySection(_all.where((r) => bookIds.contains(r.id)).toList()),
       pinned,
       seen,
     );
+
+    // Practice Qs tab: Khan Academy + quiz-type resources
+    final practiceQIds = {'khan_academy_sat', 'knowt_sat'};
     final qs = _sort(
       _applySection(
         _all
             .where(
               (r) =>
-                  r.icon == Icons.quiz ||
-                  r.links.any(
-                    (l) =>
-                        l.toLowerCase().contains('knowt') ||
-                        l.toLowerCase().contains('question') ||
-                        l.toLowerCase().contains('mcq'),
-                  ),
+                  practiceQIds.contains(r.id) ||
+                  (!officialIds.contains(r.id) &&
+                      !bookIds.contains(r.id) &&
+                      (r.icon == Icons.quiz ||
+                          r.links.any(
+                            (l) =>
+                                l.toLowerCase().contains('knowt') ||
+                                l.toLowerCase().contains('question') ||
+                                l.toLowerCase().contains('mcq'),
+                          ))),
             )
             .toList(),
       ),
@@ -114,19 +119,13 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
-    final tabs = [
-      'Board',
-      'Official',
-      'Videos',
-      'Practice Tests',
-      'Practice Qs',
-    ];
-    final bodies = [board, official, videos, tests, qs];
+    final tabs = ['Board', 'Official', 'Videos', 'Books', 'Practice Qs'];
+    final bodies = [board, official, videos, books, qs];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── Compact header ──────────────────────────────────────────────────
+        // ── Compact header ──────────────────────────────────────────
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
           child: Row(
@@ -169,7 +168,18 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
           ),
         ),
         const SizedBox(height: 8),
-        // ── Single scrollable row: section chips | divider | tabs ────────────
+
+        // ── Study Guide Banner (SAT only) ───────────────────────────
+        if (_isSat)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 6),
+            child: _StudyGuideCard(
+              expanded: _guideExpanded,
+              onToggle: () => setState(() => _guideExpanded = !_guideExpanded),
+            ),
+          ),
+
+        // ── Tab row ─────────────────────────────────────────────────
         Container(
           decoration: const BoxDecoration(
             border: Border(bottom: BorderSide(color: kBorderLight)),
@@ -179,7 +189,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                // Section chips
                 _SectionChip(
                   label: 'All',
                   active: _section == null,
@@ -194,14 +203,12 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                     ),
                   ),
                 ),
-                // Vertical divider
                 Container(
                   width: 1,
                   height: 20,
                   color: kBorderLight,
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                 ),
-                // Tab buttons
                 ...List.generate(tabs.length, (i) {
                   final isBoard = i == 0;
                   final count = isBoard ? board.length : 0;
@@ -217,12 +224,15 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
             ),
           ),
         ),
-        // ── Content ───────────────────────────────────────────────────────────
+
+        // ── Content ──────────────────────────────────────────────────
         Expanded(
           child: IndexedStack(
             index: _tab,
-            children: bodies.map((items) {
-              if (_tab == 0 && items.isEmpty) {
+            children: List.generate(bodies.length, (tabIndex) {
+              final items = bodies[tabIndex];
+
+              if (tabIndex == 0 && items.isEmpty) {
                 return Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -253,6 +263,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                   ),
                 );
               }
+
               if (items.isEmpty) {
                 return Center(
                   child: Text(
@@ -264,13 +275,33 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                   ),
                 );
               }
+
+              // Official tab: inject tracker cards inline
+              if (tabIndex == 1 && _isSat) {
+                return _OfficialTabContent(
+                  items: items,
+                  bluebookDone: _bluebookDone,
+                  paperDone: _paperDone,
+                  onBluebookToggle: (n) => setState(
+                    () => _bluebookDone.contains(n)
+                        ? _bluebookDone.remove(n)
+                        : _bluebookDone.add(n),
+                  ),
+                  onPaperToggle: (n) => setState(
+                    () => _paperDone.contains(n)
+                        ? _paperDone.remove(n)
+                        : _paperDone.add(n),
+                  ),
+                );
+              }
+
               return ListView.separated(
                 padding: const EdgeInsets.all(14),
                 itemCount: items.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 6),
                 itemBuilder: (_, i) => ResourceTile(resource: items[i]),
               );
-            }).toList(),
+            }),
           ),
         ),
       ],
@@ -278,7 +309,343 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
   }
 }
 
-// ── Shared header widgets ──────────────────────────────────────────────────────
+// ── Study Guide Card ───────────────────────────────────────────────────────────
+
+class _StudyGuideCard extends StatelessWidget {
+  final bool expanded;
+  final VoidCallback onToggle;
+  const _StudyGuideCard({required this.expanded, required this.onToggle});
+
+  static const _steps = [
+    (
+      icon: Icons.assignment_outlined,
+      label: 'Baseline:',
+      detail:
+          'Take a full official practice SAT without studying to mark as your baseline',
+    ),
+    (
+      icon: Icons.search,
+      label: 'Review:',
+      detail:
+          'Review what questions you got right/wrong, from which sections, etc.',
+    ),
+    (
+      icon: Icons.track_changes_outlined,
+      label: 'Target:',
+      detail:
+          "Use whatever resources you have to practice specifically on the sections where you're weaker.",
+    ),
+    (
+      icon: Icons.repeat,
+      label: 'Repeat!',
+      detail:
+          'Once you feel comfortable on your weakest sections, take another test + compare with your first test, then repeat until you have that score you want',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+      decoration: BoxDecoration(
+        color: kNavy.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kNavy.withValues(alpha: 0.10)),
+      ),
+      child: Column(
+        children: [
+          // ── Header row ────────────────────────────────────────────
+          GestureDetector(
+            onTap: onToggle,
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.route_outlined,
+                    size: 14,
+                    color: kNavy.withValues(alpha: 0.7),
+                  ),
+                  const SizedBox(width: 7),
+                  Text(
+                    'How to study',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: kNavy.withValues(alpha: 0.85),
+                    ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    expanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: kNavy.withValues(alpha: 0.5),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // ── Expanded steps ────────────────────────────────────────
+          if (expanded) ...[
+            Divider(height: 1, color: kNavy.withValues(alpha: 0.08)),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+              child: Column(
+                children: _steps.map((step) {
+                  final isLast = step == _steps.last;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Left: icon + line
+                      Column(
+                        children: [
+                          Container(
+                            width: 26,
+                            height: 26,
+                            decoration: BoxDecoration(
+                              color: kNavy.withValues(alpha: 0.08),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              step.icon,
+                              size: 13,
+                              color: kNavy.withValues(alpha: 0.7),
+                            ),
+                          ),
+                          if (!isLast)
+                            Container(
+                              width: 1,
+                              height: 36,
+                              color: kNavy.withValues(alpha: 0.10),
+                              margin: const EdgeInsets.symmetric(vertical: 2),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(width: 10),
+                      // Right: label + detail
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 4,
+                            bottom: isLast ? 0 : 14,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                step.label,
+                                style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: kTextPrimary,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                step.detail,
+                                style: GoogleFonts.inter(
+                                  fontSize: 11,
+                                  color: kTextSecondary,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+// ── Official Tab with inline test trackers ─────────────────────────────────────
+
+class _OfficialTabContent extends StatelessWidget {
+  final List<Resource> items;
+  final Set<int> bluebookDone;
+  final Set<int> paperDone;
+  final void Function(int) onBluebookToggle;
+  final void Function(int) onPaperToggle;
+
+  const _OfficialTabContent({
+    required this.items,
+    required this.bluebookDone,
+    required this.paperDone,
+    required this.onBluebookToggle,
+    required this.onPaperToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(14),
+      itemCount: items.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 6),
+      itemBuilder: (_, i) {
+        final r = items[i];
+
+        // Inject tracker after the Bluebook tile
+        if (r.id == 'bluebook_tests') {
+          return Column(
+            children: [
+              ResourceTile(resource: r),
+              const SizedBox(height: 6),
+              _TestTrackerCard(
+                label: 'Bluebook Tests',
+                tests: List.generate(7, (n) => n + 4), // 4–10
+                done: bluebookDone,
+                onToggle: onBluebookToggle,
+                url: 'https://bluebook.collegeboard.org',
+              ),
+            ],
+          );
+        }
+
+        // Inject tracker after the Paper tests tile
+        if (r.id == 'paper_practice_tests') {
+          return Column(
+            children: [
+              ResourceTile(resource: r),
+              const SizedBox(height: 6),
+              _TestTrackerCard(
+                label: 'Paper Tests',
+                tests: List.generate(8, (n) => n + 4), // 4–11
+                done: paperDone,
+                onToggle: onPaperToggle,
+                url:
+                    'https://satsuite.collegeboard.org/practice/practice-tests/paper',
+              ),
+            ],
+          );
+        }
+
+        return ResourceTile(resource: r);
+      },
+    );
+  }
+}
+
+// ── Test Tracker Card ──────────────────────────────────────────────────────────
+
+class _TestTrackerCard extends StatelessWidget {
+  final String label;
+  final List<int> tests;
+  final Set<int> done;
+  final void Function(int) onToggle;
+  final String url;
+
+  const _TestTrackerCard({
+    required this.label,
+    required this.tests,
+    required this.done,
+    required this.onToggle,
+    required this.url,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final completedCount = tests.where((t) => done.contains(t)).length;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8F9FB),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kBorderLight),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Row(
+            children: [
+              Text(
+                label,
+                style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: kTextSecondary,
+                  letterSpacing: 0.2,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '$completedCount / ${tests.length} done',
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  color: completedCount == tests.length
+                      ? const Color(0xFF0F6E56)
+                      : kTextTertiary,
+                  fontWeight: completedCount == tests.length
+                      ? FontWeight.w600
+                      : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // Test number chips
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: tests.map((n) {
+              final isDone = done.contains(n);
+              return GestureDetector(
+                onTap: () => onToggle(n),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  width: 36,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: isDone
+                        ? kNavy.withValues(alpha: 0.10)
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(
+                      color: isDone
+                          ? kNavy.withValues(alpha: 0.25)
+                          : kBorderLight,
+                    ),
+                  ),
+                  child: Center(
+                    child: isDone
+                        ? Icon(
+                            Icons.check,
+                            size: 13,
+                            color: kNavy.withValues(alpha: 0.75),
+                          )
+                        : Text(
+                            '$n',
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: kTextSecondary,
+                            ),
+                          ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Shared tab bar widgets (unchanged) ────────────────────────────────────────
 
 class _SectionChip extends StatelessWidget {
   final String label;

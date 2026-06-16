@@ -222,6 +222,9 @@ const Map<String, String> kLinkUrls = {
   'AP Chem Exam 2012':
       'https://drive.google.com/file/d/1fzrq_Z6htMGYTzmhPl_1_wNPnaHDYOXZ/view',
 
+  'AP Environmental Science Exam 2016':
+      'https://drive.google.com/file/d/1ZS1xVQaLIfECzYLf64uwJ7_gFItV3zUy/view',
+
   'AP Physics 1 Exam 2018':
       'https://drive.google.com/file/d/154RD52gmBS2gBw_HJGkaVHgHDPJfmhoh/view',
   'AP Physics 1 Exam 2017':
@@ -294,6 +297,28 @@ const Map<String, String> kLinkUrls = {
       'https://drive.google.com/file/d/1vR_27dTrtTh6vGZLdvuChNaqnaINpDvW/view',
   'AP US History Exam 2008':
       'https://drive.google.com/file/d/1byxkMfaD9Nm-Jze6PiQ2SEg6MNjxfVBH/view',
+  'AP World History Exam 2018':
+      'https://drive.google.com/file/d/1syaNRBvsIm_zmD3k-co4Jg2Sf1u3F-Jt/view',
+  'AP World History Exam 2017':
+      'https://drive.google.com/file/d/1K8uhQ8yQW0Ph6yjaQyBRP-PqfEn-GwKq/view',
+  'AP World History Exam 2017 (2)':
+      'https://drive.google.com/file/d/1DT3uxO0wGDw1fwoWmzaohKvPDVWYta8X/view',
+  'AP World History Exam 2016':
+      'https://drive.google.com/file/d/1wo_TvA8oedudJKiDwG43xZcRqU0e-iV2/view',
+  'AP World History Exam 2016 (2)':
+      'https://drive.google.com/file/d/1BkmJRvonfm_K1cMEaD6929aGEIITxpYX/view',
+  'AP World History Exam 2015':
+      'https://drive.google.com/file/d/166mykY-QXx0_heBSXiDHNvb-tWtJA-lR/view',
+  'AP World History Exam 2014':
+      'https://drive.google.com/file/d/1XHRkFFyDLdMlfcYdmr2uYUUyWQXg1IlX/view',
+  'AP World History Exam 2013':
+      'https://drive.google.com/file/d/1ZCD3Qnd9VrYz9xeQBP4Q1PMrE0uatPGT/view',
+  'AP World History Exam 2011':
+      'https://drive.google.com/file/d/1TuPq4gezJi9sITPfVYsiUvcK7sVyBmjw/view',
+  'AP World History Exam 2008':
+      'https://drive.google.com/file/d/1opitptknJO2DJE3yUVMgKMwPjfg4fELS/view',
+  'AP World History Exam 2007':
+      'https://drive.google.com/file/d/1vJaiFCcwvLBTfbKPmb5M9Md87HHupOCe/view',
 
   'AP Micro Exam 2019':
       'https://drive.google.com/file/d/1jDj8myqX_DvKHa7tW3Ab4_As8mvK7cGi/view',
@@ -345,15 +370,16 @@ final List<Resource> allResources = [
     locationNote: 'Online (from home)',
     timeCommitment: '4-hour contest window',
     majorTags: ['cs', 'data_sci', 'ai'],
-    applicationInfo: 'Register at usaco.org before the contest window. Free.',
+    applicationInfo:
+        'Register at usaco.org before the contest window, completely free!',
     description:
-        '4 divisions (Bronze to Platinum). Contest windows in December, January, February, and March. Register before each window opens.',
+        '4 divisions, bronze to platinum. The contest window stretches from December to March, register before each window opens',
     deadline: 'Dec 13–16, 2025',
     icon: Icons.emoji_events,
     url: 'http://www.usaco.org',
     links: ['usaco.org', 'USACO Guide (free)', 'Past problems & editorials'],
     detailNote:
-        'Start with Bronze. The USACO Guide at usaco.guide is the single best free resource — work through it in order.',
+        "Start at the level you're most comfortable with, the USACO Guide at usaco.guide is good for practice, work through it in order and make sure you understand each concept",
   ),
   const Resource(
     id: 'amc',
@@ -362,12 +388,12 @@ final List<Resource> allResources = [
     field: 'math',
     scope: 'national',
     locationNote: 'In-person at registered schools/centers',
-    timeCommitment: '40 mins (AMC 8) or 75 mins (AMC 10/12)',
+    timeCommitment: '75 mins (AMC 10/12)',
     majorTags: ['math', 'problem_solving', 'logic'],
     applicationInfo:
-        'Register through school or local testing center. Small fee applies.',
+        'Register through school or local testing center with registration fee',
     description:
-        'American Mathematics Competitions. AMC 10/12 are the gateway to AIME, USAMO, and the US IMO team.',
+        'The American Mathematics Competitions (AMC) is the gateway to AIME, USAMO, and the US IMO team',
     deadline: 'Nov 6, 2025',
     icon: Icons.emoji_events,
     url: 'https://maa.org/math-competitions',
@@ -387,9 +413,9 @@ final List<Resource> allResources = [
     timeCommitment: 'Flexible (self-paced app development)',
     majorTags: ['cs', 'app_dev', 'civics'],
     applicationInfo:
-        'Register online at official portal. Submit video/code. Free.',
+        'Register online at official portal, submit video/code, free!',
     description:
-        'Annual app-building competition organized by Members of Congress. Any district can submit an app.',
+        'Annual app-building competition organized by members of congress, web apps allowed',
     deadline: 'Dec 21, 2025',
     icon: Icons.emoji_events,
     url: 'https://www.congressionalappchallenge.us',
@@ -402,48 +428,30 @@ final List<Resource> allResources = [
     field: 'biology',
     scope: 'national',
     locationNote: 'In-person at registered schools/centers',
-    timeCommitment: '50-min Open Exam, 120-min Semifinal',
+    timeCommitment: '50-min open exam, 120-min semifinal',
     majorTags: ['biology', 'genetics', 'anatomy'],
-    applicationInfo:
-        'School must register as testing center. Free or small fee.',
+    applicationInfo: 'The school must register as testing center',
     description:
-        'USA Biology Olympiad. Open exam in January, semifinals in March. Top students represent the US at the IBO.',
+        'USA Biology Olympiad (USABO), open exam in January, semifinals in March, opt students represent the US at the IBO',
     deadline: 'Jan 2026',
     icon: Icons.emoji_events,
     url: 'https://www.usabo-trc.org',
     links: ['vashti.net/nacbb', 'Open exam prep resources'],
   ),
-  const Resource(
-    id: 'scioly',
-    title: 'Science Olympiad',
-    category: 'competition',
-    field: 'all',
-    scope: 'national',
-    locationNote: 'In-person at regional/state host sites',
-    timeCommitment: 'Academic year prep + full-day tournaments',
-    majorTags: ['science', 'engineering', 'teamwork'],
-    applicationInfo:
-        'Join or start a school team. Registration handled by coach.',
-    description:
-        'Team-based competition with 23 events spanning biology, chemistry, physics, earth science, and engineering.',
-    deadline: 'Spring 2026',
-    icon: Icons.emoji_events,
-    url: 'https://www.soinc.org',
-    links: ['soinc.org', 'Event list & trial events'],
-  ),
+
   const Resource(
     id: 'cyberpatriot',
     title: 'CyberPatriot',
     category: 'competition',
     field: 'cs',
     scope: 'national',
-    locationNote: 'Online from school/home, Nationals in-person',
+    locationNote: 'Online from school/home, nationals in-person',
     timeCommitment: 'Multiple 6-hour weekend rounds',
     majorTags: ['cs', 'cybersecurity', 'networking', 'linux'],
     applicationInfo:
-        'Register a team with a coach online. Fee applies (waivers available).',
+        'Register a team with a coach online, fee applies (waivers available)',
     description:
-        'National cybersecurity competition by the Air Force Association. Team-based with multiple qualifying rounds.',
+        'A national cybersecurity competition by the Air Force Association, team-based with multiple qualifying rounds',
     deadline: 'Oct 2025 (registration)',
     icon: Icons.emoji_events,
     url: 'https://www.uscyberpatriot.org',
@@ -458,8 +466,7 @@ final List<Resource> allResources = [
     title: 'AP CS: Principles',
     category: 'ap',
     field: 'cs',
-    description:
-        'Covers algorithms, the internet, data, and programming fundamentals. Accessible intro CS AP with a project component.',
+    description: 'Programming fundamentals, very basic introduction to CS',
     deadline: 'May 2026 (exam)',
     icon: Icons.laptop_mac,
     url:
@@ -474,7 +481,7 @@ final List<Resource> allResources = [
     ],
     apSubCategory: 'cs',
     detailNote:
-        'Khan Academy + Code.org cover all content for free. Princeton Review has 5 full practice tests if you want more.',
+        'Difference between AP CSP and AP CSA: AP CSP is broader, more beginner friendly as an overview of how computing impacts society, AP CSA is more coding oriented, focused entirely on object-oriented programming and problem-solving using Java programming language',
   ),
 
   // AP COMPUTER SCIENCE A
@@ -484,7 +491,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'cs',
     description:
-        'Object-oriented programming in Java: classes, inheritance, recursion, and the AP subset of Java.',
+        "Object-oriented programming in Java: classes, recursion, Arrays/ArrayLists (hopefully you know what these are if you're taking AP CSA)",
     deadline: 'May 2026 (exam)',
     icon: Icons.laptop_mac,
     url: 'https://apstudents.collegeboard.org/courses/ap-computer-science-a',
@@ -505,8 +512,7 @@ final List<Resource> allResources = [
     title: 'AP Calculus AB',
     category: 'ap',
     field: 'math',
-    description:
-        'Limits, derivatives, and integrals. Equivalent to a first-semester college calculus course.',
+    description: 'Limits, derivatives, and integrals',
     deadline: 'May 2026 (exam)',
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-ab',
@@ -526,7 +532,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'math',
     description:
-        'Extends AB to include sequences, series, and parametric equations. Covers a full year of college calculus.',
+        'Extends AB to include sequences, series, and parametric equations',
     deadline: 'May 2026 (exam)',
     icon: Icons.menu_book,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-bc',
@@ -550,7 +556,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'math',
     description:
-        'Exploring data, sampling, probability, and statistical inference. Great for pre-med, social science, or data tracks.',
+        'Z-tests, T-tests, Chi-square, binomcdf, geometpdf, methodology (know these)',
     deadline: 'May 2026 (exam)',
     icon: Icons.bar_chart,
     url: 'https://apstudents.collegeboard.org/courses/ap-statistics',
@@ -568,15 +574,14 @@ final List<Resource> allResources = [
     ],
     apSubCategory: 'math',
     detailNote:
-        'Know how to use a graphing calculator VERY WELL! TI-84 recommended.',
+        'Know how to use a graphing calculator VERY WELL! TI-84 recommended',
   ),
   const Resource(
     id: 'ap_bio',
     title: 'AP Biology',
     category: 'ap',
     field: 'biology',
-    description:
-        'Covers evolution, cellular processes, genetics, and ecology. Lab-based with 8 required science practices.',
+    description: 'evolution, cellular processes, genetics, and ecology',
     deadline: 'May 2026 (exam)',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-biology',
@@ -602,7 +607,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'biology',
     description:
-        'Atomic structure, bonding, thermodynamics, kinetics, and equilibrium. One of the most rigorous AP sciences.',
+        'Atomic structure, bonding, thermodynamics, kinetics, and equilibrium',
     deadline: 'May 2026 (exam)',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
@@ -626,11 +631,14 @@ final List<Resource> allResources = [
     title: 'AP Environmental Science',
     category: 'ap',
     field: 'science',
-    description: 'lowk dont know yet smone please tell me',
+    description: 'Ecosystems, biodiversity, energy resources + consumption',
     deadline: 'May 2026 (exam)',
     icon: Icons.science,
     url: 'https://apstudents.collegeboard.org/courses/ap-es',
-    links: ['Khan Academy AP Environmental Science'],
+    links: [
+      'Khan Academy AP Environmental Science',
+      'AP Environmental Science Exam 2016',
+    ],
     apSubCategory: 'science',
   ),
 
@@ -640,7 +648,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'physics',
     description:
-        'Algebra-based: mechanics, waves, and circuits. Inquiry-focused with heavily weighted FRQs.',
+        'Algebra-based: mechanics, waves, and circuits, heavily weighted frqs',
     deadline: 'May 2026 (exam)',
     icon: Icons.bolt,
     url:
@@ -664,7 +672,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'physics',
     description:
-        'Algebra-based: covering thermodynamics, fluids, electricity and magnetism, optics, and modern physics.',
+        'Algebra-based: covering thermodynamics, fluids, electricity and magnetism, optics, and modern physics',
     deadline: 'May 2026 (exam)',
     icon: Icons.bolt,
     url:
@@ -685,7 +693,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'physics',
     description:
-        'Calculus-based mechanics. Requires concurrent or prior calculus. Strong preparation for engineering programs.',
+        'Calculus-based mechanics, requires concurrent or prior calculus',
     deadline: 'May 2026 (exam)',
     icon: Icons.bolt,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-c-mechanics',
@@ -730,7 +738,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'english',
     description:
-        'Rhetorical analysis, argumentation, and synthesis. 3 FRQ essays on the exam.',
+        'Rhetorical analysis, argumentation, and synthesis, 3 FRQ essays on the exam',
     deadline: 'May 2026 (exam)',
     icon: Icons.edit,
     url:
@@ -743,8 +751,7 @@ final List<Resource> allResources = [
     title: 'AP English Literature',
     category: 'ap',
     field: 'english',
-    description:
-        'Close reading of poetry and prose. Literary analysis essays and a final open question on any novel.',
+    description: 'Literary analysis essays and relevant questions',
     deadline: 'May 2026 (exam)',
     icon: Icons.edit,
     url:
@@ -758,7 +765,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'history',
     description:
-        'Survey of American history from 1491 to present. DBQ and long-essay questions are the exam focus.',
+        'Survey of American history from 1491 to present, Document Based Questions and long-essay questions',
     deadline: 'May 2026 (exam)',
     icon: Icons.history_edu,
     url: 'https://apstudents.collegeboard.org/courses/ap-united-states-history',
@@ -785,7 +792,7 @@ final List<Resource> allResources = [
     title: 'AP US Government and Politics',
     category: 'ap',
     field: 'history',
-    description: '?? what is gov pls tell me',
+    description: 'Study of the United States Government and its Politics ',
     deadline: 'May 2026 (exam)',
     icon: Icons.history_edu,
     url: 'https://apstudents.collegeboard.org/courses/ap-united-states-gov',
@@ -798,7 +805,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'art',
     //TODO:
-    description: 'still dont really know.. [alyssa pls replace this!!]',
+    description: 'Art history and analysis',
     deadline: 'May 2026 (exam)',
     icon: Icons.history_edu,
     url: 'https://apstudents.collegeboard.org/courses/ap-art-history',
@@ -811,7 +818,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'history',
     description:
-        'Global history from 1200 CE to present. Cross-cultural comparisons and causation analysis.',
+        'Global history from 1200 CE to present, cross-cultural comparisons and causation analysis',
     deadline: 'May 2026 (exam)',
     icon: Icons.public,
     url: 'https://apstudents.collegeboard.org/courses/ap-world-history-modern',
@@ -819,6 +826,17 @@ final List<Resource> allResources = [
       'Khan Academy AP World',
       'Tom Richey (YouTube)',
       "Barron's AP World",
+      'AP World History Exam 2018',
+      'AP World History Exam 2017',
+      'AP World History Exam 2017 (2)',
+      'AP World History Exam 2016',
+      'AP World History Exam 2016 (2)',
+      'AP World History Exam 2015',
+      'AP World History Exam 2014',
+      'AP World History Exam 2013',
+      'AP World History Exam 2011',
+      'AP World History Exam 2008',
+      'AP World History Exam 2007',
     ],
     apSubCategory: 'history',
   ),
@@ -828,7 +846,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'science',
     description:
-        'Research methods, biological bases, sensation, learning, cognition, and social psychology.',
+        'Research methods, biological bases, sensation, learning, cognition, and social psychology',
     deadline: 'May 2026 (exam)',
     icon: Icons.psychology,
     url: 'https://apstudents.collegeboard.org/courses/ap-psychology',
@@ -889,19 +907,18 @@ final List<Resource> allResources = [
     category: 'research',
     field: 'all',
     scope: 'international',
-    locationNote: 'In-person at MIT (Cambridge, MA)',
+    locationNote: 'In-person at MIT',
     timeCommitment: '6 weeks full-time in summer',
     majorTags: ['research', 'stem', 'academia'],
     applicationInfo:
-        'Extensive application (essays, recs, scores). Free to attend.',
+        'Extensive application (essays, recs, scores), free to attend',
     description:
-        'MIT-hosted residential summer research program. 80 students selected nationally. Widely considered the most selective HS program in the US.',
+        'MIT-hosted residential summer research program, 80 students selected nationally, widely considered the most selective HS program in the US',
     deadline: 'Dec 15, 2025 (apply)',
     icon: Icons.school,
     url: 'https://www.cee.org/programs/research-science-institute',
     links: ['cee.org/rsi', 'Application portal', 'Past projects gallery'],
-    detailNote:
-        'Extremely selective (~1% acceptance). Apply regardless — the application process itself teaches you to articulate your interests.',
+    detailNote: 'extremely selective (~1% acceptance), but apply anyway!',
   ),
   const Resource(
     id: 'primes',
@@ -912,9 +929,9 @@ final List<Resource> allResources = [
     locationNote: 'Online / Remote',
     timeCommitment: '10 hours/week for a full year',
     majorTags: ['math', 'cs', 'computational_biology'],
-    applicationInfo: 'Rigorous application with entrance problem set. Free.',
+    applicationInfo: 'Rigorous application with entrance problem set',
     description:
-        'Remote year-long math and CS research mentored by MIT graduate students. Separate tracks for math and CS.',
+        'Remote year-long math and CS research mentored by MIT graduate students with separate tracks for math and CS',
     deadline: 'Dec 2025 (opens)',
     icon: Icons.school,
     url: 'https://math.mit.edu/research/highschool/primes/usa',
@@ -929,15 +946,13 @@ final List<Resource> allResources = [
     locationNote: 'In-person at NIH campuses',
     timeCommitment: '8 weeks full-time in summer',
     majorTags: ['biology', 'medicine', 'research'],
-    applicationInfo: 'Online application with resume/coursework. Paid stipend.',
+    applicationInfo: 'Online application with resume/coursework, paid stipend',
     description:
-        'Paid summer research at NIH campuses. Work alongside scientists in real biomedical research labs.',
+        'Paid summer research at NIH campuses where you work alongside scientists in real biomedical research labs',
     deadline: 'Jan 15, 2026 (apply)',
     icon: Icons.science,
     url: 'https://www.training.nih.gov/programs/hs-sip',
     links: ['training.nih.gov/programs/hs-sip', 'Application portal'],
-    detailNote:
-        'Must be 16+ by June. Strong bio/chem background recommended. Very competitive — apply early.',
   ),
   const Resource(
     id: 'polygence',
@@ -948,10 +963,9 @@ final List<Resource> allResources = [
     locationNote: 'Online (remote)',
     timeCommitment: '10-15 sessions over 3-6 months',
     majorTags: ['research', 'mentorship', 'all_subjects'],
-    applicationInfo:
-        'Apply online with project interests. Tuition fee applies.',
+    applicationInfo: 'Apply online with project interests',
     description:
-        'Mentored research program in any subject. Work with a PhD mentor to produce a real research output — paper, project, or presentation.',
+        'Mentored research program in any subject, work with a PhD mentor to produce a paper, project, or presentation',
     deadline: null,
     icon: Icons.article,
     url: 'https://www.polygence.org',
@@ -960,83 +974,161 @@ final List<Resource> allResources = [
 
   // ── Internships ────────────────────────────────────────────────────────────
   const Resource(
-    id: 'cssi',
-    title: 'Google CSSI',
-    category: 'internship',
-    field: 'cs',
-    scope: 'national',
-    locationNote: 'Online or select Google offices',
-    timeCommitment: '3-4 weeks full-time in summer',
-    majorTags: ['cs', 'programming', 'diversity'],
-    applicationInfo:
-        'Online application (transcript, essays). Free (stipend/swag).',
-    description:
-        'Computer Science Summer Institute. Free 3-week immersive program at Google offices. Food and housing included.',
-    deadline: 'Feb 2026 (opens)',
-    icon: Icons.business,
-    url:
-        'https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute',
-    links: ['buildyourfuture.withgoogle.com/programs/cssi', 'Apply now'],
-    detailNote:
-        'Open to rising college freshmen from underrepresented backgrounds in CS. Competitive but very worth applying.',
-  ),
-  const Resource(
     id: 'nasa',
     title: 'NASA STEM Enhancement',
     category: 'internship',
     field: 'physics',
     scope: 'national',
-    locationNote: 'In-person at NASA centers or Remote',
+    locationNote: 'In-person at NASA centers or remote',
     timeCommitment: '8-10 weeks full-time in summer',
     majorTags: ['physics', 'engineering', 'space'],
-    applicationInfo: 'Apply via NASA STEM Gateway. Requires essays/recs. Paid.',
+    applicationInfo: 'Apply via NASA STEM Gateway, requires essays/recs, paid',
     description:
-        'Paid summer research at NASA centers nationwide. Covers engineering, science, and technology tracks.',
+        'Paid summer research at NASA centers nationwide, covers engineering, science, and technology tracks',
     deadline: 'Mar 2026 (apply)',
     icon: Icons.business,
     url: 'https://stemgateway.nasa.gov',
     links: ['nasa.gov/careers/students', 'OSSI portal'],
   ),
-  const Resource(
-    id: 'congressional_intern',
-    title: 'Congressional Internship',
-    category: 'internship',
-    field: 'history',
-    scope: 'national',
-    locationNote: 'District Office or Washington D.C.',
-    timeCommitment: 'Part-time (school year) or full-time (summer)',
-    majorTags: ['history', 'policy', 'government'],
-    applicationInfo:
-        'Apply directly via representative\'s website. Requirements vary.',
-    description:
-        'Work in your Representative or Senator\'s office during the school year or summer. Unpaid but highly valuable for policy/gov tracks.',
-    deadline: 'Rolling',
-    icon: Icons.account_balance,
-    url: 'https://www.house.gov/educators-and-students/internships',
-    links: [
-      'house.gov/educators-and-students/internships',
-      'senate.gov/internships',
-    ],
-  ),
 
   // ── SAT / ACT ──────────────────────────────────────────────────────────────
   const Resource(
-    id: 'knowt_sat',
-    title: 'Knowt SAT Prep',
+    id: 'bluebook_tests',
+    title: 'Bluebook Digital Practice Tests',
     category: 'sat',
     field: 'all',
     description:
-        'AI-powered SAT practice with flashcards, practice tests, and explanations. Good for vocabulary and reading sections.',
+        'The official College Board digital practice tests (Tests 4–10), taken inside the Bluebook app, same as the real SAT',
     instructions:
-        '• Create a free account to access flashcards and practice sets.\n'
-        '• Use the flashcards specifically for vocabulary building and grammar rules.\n'
-        '• Take short, timed section quizzes to build your test-taking endurance on the go.',
-    url: 'https://knowt.com/exams/SAT',
+        '• Download the free Bluebook app\n'
+        '• Take tests in full-length\n'
+        '• After finishing, use "Review My Answers" inside Bluebook to see explanations.\n'
+        '• Track which tests you\'ve completed using the checkboxes below.',
+    url: 'https://bluebook.collegeboard.org',
     deadline: null,
-    icon: Icons.quiz,
-    links: ['knowt.com/exams/SAT', 'Free account available'],
+    icon: Icons.computer,
+    links: ['bluebook.collegeboard.org', 'Free download'],
     testSection: null,
   ),
+
+  const Resource(
+    id: 'paper_practice_tests',
+    title: 'Full-Length Paper Practice Tests',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Official College Board paper/PDF practice tests (Tests 4–11), different tests from bluebook but no adaptive scoring',
+    instructions:
+        '• Download and print the test, or work through the PDF\n'
+        '• Use the official answer sheet\n'
+        '• Score your test with the provided answer key and use the score conversion table.\n'
+        '• Track which tests you\'ve completed using the checkboxes below.',
+    url: 'https://satsuite.collegeboard.org/practice/practice-tests/paper',
+    deadline: null,
+    icon: Icons.article_outlined,
+    links: [
+      'satsuite.collegeboard.org/practice/practice-tests/paper',
+      'Free PDF download',
+    ],
+    testSection: null,
+  ),
+
+  const Resource(
+    id: 'cb_question_bank',
+    title: 'Student Question Bank',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Official College Board question bank, thousands of real SAT questions organized by section and skill',
+    instructions:
+        '• Select your test (SAT), then choose a section (Math or Reading & Writing)\n'
+        '• Filter by specific skill or difficulty to focus on your weak areas (pick a harder difficulty!)\n',
+    url:
+        'https://satsuite.collegeboard.org/sat/practice-preparation/practice-questions',
+    deadline: null,
+    icon: Icons.quiz_outlined,
+    links: [
+      'satsuite.collegeboard.org/sat/practice-preparation/practice-questions',
+      'Free with CB account',
+    ],
+    testSection: null,
+  ),
+
+  const Resource(
+    id: 'cb_practice_specific_questions',
+    title: 'Practice Specific Questions (Post-Test)',
+    category: 'sat',
+    field: 'all',
+    description:
+        'After completing a Bluebook test, College Board lets you practice the exact question types and skills you missed most',
+    instructions: '• i\'ll fill this out later',
+    url: 'https://bluebook.collegeboard.org',
+    deadline: null,
+    icon: Icons.track_changes_outlined,
+    links: ['bluebook.collegeboard.org', 'Available after completing a test'],
+    testSection: null,
+  ),
+
+  const Resource(
+    id: 'cb_official_study_guide',
+    title: 'Official SAT Study Guide',
+    category: 'sat',
+    field: 'all',
+    description:
+        'recommended! The College Board\'s official study guide includes full-length practice tests, detailed answer explanations, and test-taking strategies',
+    url:
+        'https://store.collegeboard.org/sto/productdetail.do?Itemkey=000194984',
+    deadline: null,
+    icon: Icons.menu_book_outlined,
+    links: ['collegeboard.org', 'Available in print or PDF'],
+    testSection: null,
+  ),
+
+  // ── PRACTICE QUESTIONS TAB ──────────────────────────────────────────
+  const Resource(
+    id: 'khan_academy_sat',
+    title: 'Khan Academy SAT Practice',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Official SAT practice on Khan Academy, built in partnership with College Board. Personalized practice, full tests, and video lessons all free! However, it might go over content you already know so make sure not to waste your time.',
+
+    url: 'https://www.khanacademy.org/sat',
+    deadline: null,
+    icon: Icons.school_outlined,
+    links: ['khanacademy.org/sat', 'Free, official CB partnership'],
+    testSection: null,
+  ),
+
+  // ── BOOKS TAB ─────────────────────────
+  const Resource(
+    id: 'princeton_review_sat',
+    title: 'The Princeton Review – SAT Prep',
+    category: 'sat',
+    field: 'all',
+    description:
+        'One of the most popular third-party SAT prep books, highly recommended',
+    url: 'https://www.amazon.com/s?k=princeton+review+sat',
+    deadline: null,
+    icon: Icons.menu_book,
+    links: ['amazon.com', 'Available in print'],
+    testSection: null,
+  ),
+
+  const Resource(
+    id: 'kaplan_sat',
+    title: 'Kaplan SAT Prep',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Kaplan\'s SAT prep book offers method-based strategies, targeted skill practice, and full-length tests with detailed scoring',
+    url: 'https://www.amazon.com/s?k=kaplan+sat+prep',
+    deadline: null,
+    icon: Icons.menu_book,
+    links: ['amazon.com', 'Available in print and digital'],
+    testSection: null,
+  ),
+
   const Resource(
     id: 'knowt_act',
     title: 'Knowt ACT Prep',
@@ -1054,103 +1146,6 @@ final List<Resource> allResources = [
     links: ['knowt.com/exams/ACT'],
     testSection: null,
   ),
-  const Resource(
-    id: 'sat_prep_plus',
-    title: 'SAT Prep Plus (Kaplan)',
-    category: 'sat',
-    field: 'all',
-    description:
-        '5 full-length practice tests plus thousands of practice questions with detailed answer explanations.',
-    instructions:
-        '• Read through the test-taking strategy sections before diving into the actual practice tests.\n'
-        '• Use the practice question banks to drill specific concepts you struggle with.\n'
-        '• Always read the answer explanations, even for questions you guessed correctly!',
-    deadline: null,
-    icon: Icons.book,
-    links: ['Find on Amazon', 'kaptest.com'],
-    testSection: null,
-  ),
-  const Resource(
-    id: 'cb_sat',
-    title: 'College Board Official Tests',
-    category: 'sat',
-    field: 'all',
-    description:
-        '8 full-length official SAT practice tests with complete scoring guides. The most realistic prep available — made by the same org that writes the real exam.',
-    instructions:
-        '• These are the most realistic paper/PDF tests available.\n'
-        '• Print them out and take them in a quiet room with a strict timer to simulate test day.\n'
-        '• Grade your test using the official scoring guide to establish your baseline score.\n'
-        '• Keep a spreadsheet of every question you miss and why you missed it.',
-    deadline: null,
-    icon: Icons.check_circle_outline,
-    url: 'https://satsuite.collegeboard.org/practice',
-    links: [
-      'satsuite.collegeboard.org/practice',
-      'Download all 8 tests (free)',
-    ],
-    detailNote:
-        'Start here. Do one full timed test, score it, then study your weak areas before doing the next one.',
-    testSection: null,
-  ),
-  const Resource(
-    id: 'khan_sat',
-    title: 'Khan Academy SAT Prep',
-    category: 'sat',
-    field: 'all',
-    description:
-        'Personalized SAT practice linked to your PSAT/NMSQT score. Identifies weak skills and targets them.',
-    instructions:
-        '• Link your College Board account so Khan Academy can import your past PSAT or SAT scores.\n'
-        '• Let the algorithm build a personalized practice schedule targeting your specific weaknesses.\n'
-        '• Complete at least 30 minutes of targeted skill practice a day to level up your subscores.',
-    deadline: null,
-    icon: Icons.smart_display,
-    url: 'https://www.khanacademy.org/sat',
-    links: ['khanacademy.org/sat'],
-    detailNote:
-        'Completely free, in official partnership with College Board. Best free option for targeted prep.',
-    testSection: null,
-  ),
-  const Resource(
-    id: 'bluebook',
-    title: 'Bluebook — Digital SAT App',
-    category: 'sat',
-    field: 'all',
-    description:
-        'Official College Board app for the digital SAT. Adaptive testing that mirrors the real exam interface exactly.',
-    instructions:
-        '• Download the Bluebook app from College Board — it\'s the only official digital SAT simulator.\n'
-        '• Take a full practice test first under timed, real conditions before studying anything.\n'
-        '• After the test, review every wrong answer and identify which units to target.\n'
-        '• Study those units, then take another full test to measure improvement.\n'
-        '• Repeat the cycle — test → review → study → test.',
-    deadline: null,
-    icon: Icons.laptop_mac,
-    url: 'https://bluebook.app.collegeboard.org',
-    links: ['bluebook.app.collegeboard.org'],
-    detailNote:
-        'Download and practice in this app if you\'re taking the digital SAT. Same interface as the real test.',
-    testSection: null,
-  ),
-  const Resource(
-    id: 'pr_sat',
-    title: 'Princeton Review 1550+ SAT',
-    category: 'sat',
-    field: 'all',
-    description:
-        '2025 edition with advanced strategies for high scorers. 6 full practice tests with detailed answer explanations.',
-    instructions:
-        '• Take the diagnostic test at the beginning of the book to find your weak spots.\n'
-        '• Focus heavily on the test-taking strategies (like the process of elimination and pacing tactics).\n'
-        '• Work through the content review chapters specifically for areas where your score is lowest.',
-    deadline: null,
-    icon: Icons.book,
-    url: 'https://www.princetonreview.com/college/sat-test-prep',
-    links: ['Find on Amazon', 'Princeton Review site'],
-    testSection: null,
-  ),
-
   const Resource(
     id: 'act_official',
     title: 'ACT Official Practice',
@@ -1209,37 +1204,6 @@ final List<Resource> allResources = [
     testSection: null,
   ),
 
-  const Resource(
-    id: 'sat_math_khan',
-    title: 'Khan Academy — SAT Math',
-    category: 'sat',
-    field: 'all',
-    testSection: 'math',
-    description:
-        'Targeted SAT Math practice covering algebra, problem solving, and advanced math. Adaptive to your weak areas.',
-    instructions:
-        '• Start by taking the unit tests to pinpoint exactly which math concepts you are missing.\n'
-        '• Watch the step-by-step video breakdowns for any algebra or geometry topics you forgot from previous years.\n'
-        '• Keep a notebook of the specific formulas and exponent rules you constantly need to look up.',
-
-    icon: Icons.calculate,
-    links: ['khanacademy.org/sat-math'],
-  ),
-  const Resource(
-    id: 'sat_rw_khan',
-    title: 'Khan Academy — SAT Reading & Writing',
-    category: 'sat',
-    field: 'all',
-    testSection: 'reading_writing',
-    description:
-        'SAT Reading & Writing prep: vocabulary in context, command of evidence, and rhetoric analysis.',
-    instructions:
-        '- Focus heavily on the "Command of Evidence" and "Words in Context" question types.\n'
-        '- Practice reading the passages actively — write brief mental summaries of each paragraph as you go.\n'
-        '- Drill grammar rules until punctuation questions become automatic.',
-    icon: Icons.edit,
-    links: ['khanacademy.org/sat-reading-and-writing'],
-  ),
   const Resource(
     id: 'act_english_res',
     title: 'ACT English — Grammar & Usage',

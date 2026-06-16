@@ -104,6 +104,31 @@ class Resource {
     }
   }
 
+  // ─── Deadline Date Styling ────────────────────────────────────────────────
+  /// Returns the color for the deadline date text based on urgency
+  Color get deadlineTextColor {
+    switch (urgency) {
+      case 'soon':
+        return const Color(0xFFA52A2A); // Red/Brown for urgent
+      case 'later':
+        return const Color(0xFFD4AF37); // Gold for coming soon
+      default:
+        return const Color(0xFF6B7280); // Gray for no deadline
+    }
+  }
+
+  /// Returns the urgency badge label for the date icon
+  String get urgencyBadgeLabel {
+    switch (urgency) {
+      case 'soon':
+        return 'Urgent';
+      case 'later':
+        return 'Coming Soon';
+      default:
+        return '';
+    }
+  }
+
   // ─── Convenience getters ──────────────────────────────────────────────────
   Color get categoryTextColor => CategoryColors.textFor(category);
   Color get categoryBgColor => CategoryColors.bgFor(category);
