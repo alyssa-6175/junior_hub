@@ -1043,14 +1043,10 @@ final List<Resource> allResources = [
     instructions:
         '• Select your test (SAT), then choose a section (Math or Reading & Writing)\n'
         '• Filter by specific skill or difficulty to focus on your weak areas (pick a harder difficulty!)\n',
-    url:
-        'https://satsuite.collegeboard.org/sat/practice-preparation/practice-questions',
+    url: 'https://mypractice.collegeboard.org/questionbank/search',
     deadline: null,
     icon: Icons.quiz_outlined,
-    links: [
-      'satsuite.collegeboard.org/sat/practice-preparation/practice-questions',
-      'Free with CB account',
-    ],
+    links: ['https://mypractice.collegeboard.org/questionbank/search'],
     testSection: null,
   ),
 
