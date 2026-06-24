@@ -42,6 +42,11 @@ final List<MajorGroup> majorGroups = [
       SubMajor(id: 'game_design', label: 'Game Design', groupId: 'cs_eng'),
       SubMajor(id: 'data_sci', label: 'Data Science', groupId: 'cs_eng'),
       SubMajor(id: 'ai', label: 'Artificial Intelligence', groupId: 'cs_eng'),
+      SubMajor(
+        id: 'aerospace',
+        label: 'Aerospace Engineering',
+        groupId: 'cs_eng',
+      ),
     ],
   ),
   MajorGroup(
@@ -104,7 +109,8 @@ final List<MajorGroup> majorGroups = [
       ),
       SubMajor(id: 'polisci', label: 'Political Science', groupId: 'social'),
       SubMajor(id: 'pub_policy', label: 'Public Policy', groupId: 'social'),
-      SubMajor(id: 'prelaw', label: 'Pre-Law', groupId: 'social'),
+      SubMajor(id: 'journalism', label: 'Journalism', groupId: 'social'),
+      SubMajor(id: 'sociology', label: 'Sociology', groupId: 'social'),
     ],
   ),
   MajorGroup(
@@ -121,6 +127,114 @@ final List<MajorGroup> majorGroups = [
       SubMajor(id: 'fine_arts', label: 'Art / Fine Arts', groupId: 'arts'),
       SubMajor(id: 'english', label: 'English', groupId: 'arts'),
       SubMajor(id: 'music', label: 'Musical Arts', groupId: 'arts'),
+      SubMajor(id: 'film', label: 'Film & Media Production', groupId: 'arts'),
+      SubMajor(
+        id: 'creative_writing',
+        label: 'Creative Writing',
+        groupId: 'arts',
+      ),
+      SubMajor(id: 'poetry', label: 'Poetry', groupId: 'arts'),
+    ],
+  ),
+  MajorGroup(
+    id: 'law',
+    label: 'Law + Policy',
+    color: Color(0xFF8B3A3A),
+    subcategories: [
+      SubMajor(id: 'prelaw', label: 'Pre-Law', groupId: 'law'),
+      SubMajor(id: 'law_general', label: 'Law (General)', groupId: 'law'),
+      SubMajor(
+        id: 'constitutional_law',
+        label: 'Constitutional Law',
+        groupId: 'law',
+      ),
+      SubMajor(id: 'intl_law', label: 'International Law', groupId: 'law'),
+      SubMajor(id: 'pub_policy_law', label: 'Public Policy', groupId: 'law'),
+      SubMajor(
+        id: 'civil_rights',
+        label: 'Civil Rights & Equity',
+        groupId: 'law',
+      ),
+    ],
+  ),
+  MajorGroup(
+    id: 'media',
+    label: 'Media, Film + Journalism',
+    color: Color(0xFFB85C1A),
+    subcategories: [
+      SubMajor(id: 'journalism_media', label: 'Journalism', groupId: 'media'),
+      SubMajor(id: 'film_prod', label: 'Film Production', groupId: 'media'),
+      SubMajor(id: 'documentary', label: 'Documentary', groupId: 'media'),
+      SubMajor(id: 'broadcast', label: 'Broadcast Media', groupId: 'media'),
+      SubMajor(id: 'digital_media', label: 'Digital Media', groupId: 'media'),
+    ],
+  ),
+  MajorGroup(
+    id: 'environment',
+    label: 'Environmental Science',
+    color: Color(0xFF2D7A3A),
+    subcategories: [
+      SubMajor(
+        id: 'env_sci',
+        label: 'Environmental Science',
+        groupId: 'environment',
+      ),
+      SubMajor(id: 'ecology', label: 'Ecology', groupId: 'environment'),
+      SubMajor(
+        id: 'climate',
+        label: 'Climate & Sustainability',
+        groupId: 'environment',
+      ),
+      SubMajor(
+        id: 'nature_writing',
+        label: 'Nature Writing',
+        groupId: 'environment',
+      ),
+    ],
+  ),
+  MajorGroup(
+    id: 'psychology',
+    label: 'Psychology + Cognitive Science',
+    color: Color(0xFF5A4AB7),
+    subcategories: [
+      SubMajor(id: 'psych', label: 'Psychology', groupId: 'psychology'),
+      SubMajor(
+        id: 'cog_sci',
+        label: 'Cognitive Science',
+        groupId: 'psychology',
+      ),
+      SubMajor(
+        id: 'behavioral',
+        label: 'Behavioral Science',
+        groupId: 'psychology',
+      ),
+    ],
+  ),
+  MajorGroup(
+    id: 'leadership',
+    label: 'Entrepreneurship + Leadership',
+    color: Color(0xFF0B6E4F),
+    subcategories: [
+      SubMajor(
+        id: 'entrepreneurship',
+        label: 'Entrepreneurship',
+        groupId: 'leadership',
+      ),
+      SubMajor(
+        id: 'social_impact',
+        label: 'Social Impact',
+        groupId: 'leadership',
+      ),
+      SubMajor(
+        id: 'innovation',
+        label: 'Innovation & Design',
+        groupId: 'leadership',
+      ),
+      SubMajor(
+        id: 'nonprofit',
+        label: 'Nonprofit & Advocacy',
+        groupId: 'leadership',
+      ),
     ],
   ),
 ];

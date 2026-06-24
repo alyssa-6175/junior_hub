@@ -325,38 +325,25 @@ class _OfficialTabContent extends StatelessWidget {
       itemBuilder: (_, i) {
         final r = items[i];
 
-        // Inject tracker after the Bluebook tile
         if (r.id == 'bluebook_tests') {
-          return Column(
-            children: [
-              ResourceTile(resource: r),
-              const SizedBox(height: 6),
-              _TestTrackerCard(
-                label: 'Bluebook Tests',
-                tests: List.generate(7, (n) => n + 4), // 4–10
-                done: bluebookDone,
-                onToggle: onBluebookToggle,
-                url: 'https://bluebook.collegeboard.org',
-              ),
-            ],
+          return _ResourceTileWithTracker(
+            resource: r,
+            trackerLabel: 'Track your progress',
+            tests: List.generate(7, (n) => n + 4), // Tests 4–10
+            done: bluebookDone,
+            onToggle: onBluebookToggle,
+            testPrefix: 'Test',
           );
         }
 
-        // Inject tracker after the Paper tests tile
         if (r.id == 'paper_practice_tests') {
-          return Column(
-            children: [
-              ResourceTile(resource: r),
-              const SizedBox(height: 6),
-              _TestTrackerCard(
-                label: 'Paper Tests',
-                tests: List.generate(8, (n) => n + 4), // 4–11
-                done: paperDone,
-                onToggle: onPaperToggle,
-                url:
-                    'https://satsuite.collegeboard.org/practice/practice-tests/paper',
-              ),
-            ],
+          return _ResourceTileWithTracker(
+            resource: r,
+            trackerLabel: 'Track your progress',
+            tests: List.generate(8, (n) => n + 4), // Tests 4–11
+            done: paperDone,
+            onToggle: onPaperToggle,
+            testPrefix: 'Test',
           );
         }
 
@@ -366,115 +353,244 @@ class _OfficialTabContent extends StatelessWidget {
   }
 }
 
-// ── Test Tracker Card ──────────────────────────────────────────────────────────
+// ── New: ResourceTile wrapper that appends the tracker inside the card ─────
 
-class _TestTrackerCard extends StatelessWidget {
+class _ResourceTileWithTracker extends StatelessWidget {
+  final Resource resource;
+  final String trackerLabel;
+  final List<int> tests;
+  final Set<int> done;
+  final void Function(int) onToggle;
+  final String testPrefix;
+
+  const _ResourceTileWithTracker({
+    required this.resource,
+    required this.trackerLabel,
+    required this.tests,
+    required this.done,
+    required this.onToggle,
+    required this.testPrefix,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Your existing tile (keeps all existing expand/pin/seen logic)
+        ResourceTile(resource: resource),
+        // Tracker stitched below with matching card styling
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+            border: const Border(
+              left: BorderSide(color: kBorderLight),
+              right: BorderSide(color: kBorderLight),
+              bottom: BorderSide(color: kBorderLight),
+            ),
+          ),
+          padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
+          child: _EmbeddedTracker(
+            label: trackerLabel,
+            tests: tests,
+            done: done,
+            onToggle: onToggle,
+            testPrefix: testPrefix,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Embedded tracker (the actual content inside the card extension) ─────────
+
+class _EmbeddedTracker extends StatelessWidget {
   final String label;
   final List<int> tests;
   final Set<int> done;
   final void Function(int) onToggle;
-  final String url;
+  final String testPrefix;
 
-  const _TestTrackerCard({
+  const _EmbeddedTracker({
     required this.label,
     required this.tests,
     required this.done,
     required this.onToggle,
-    required this.url,
+    required this.testPrefix,
   });
 
   @override
   Widget build(BuildContext context) {
     final completedCount = tests.where((t) => done.contains(t)).length;
+    final allDone = completedCount == tests.length;
+    final noneYet = completedCount == 0;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8F9FB),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: kBorderLight),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Row(
-            children: [
-              Text(
-                label,
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: kTextSecondary,
-                  letterSpacing: 0.2,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ── Divider ──────────────────────────────────────────────────────
+        Container(
+          height: 1,
+          color: kBorderLight,
+          margin: const EdgeInsets.only(bottom: 10),
+        ),
+
+        // ── Header row ───────────────────────────────────────────────────
+        Row(
+          children: [
+            Icon(
+              allDone ? Icons.check_circle : Icons.check_circle_outline,
+              size: 13,
+              color: allDone
+                  ? const Color(0xFF0F6E56)
+                  : kNavy.withValues(alpha: 0.45),
+            ),
+            const SizedBox(width: 5),
+            Text(
+              label,
+              style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: kTextSecondary,
               ),
-              const Spacer(),
-              Text(
-                '$completedCount / ${tests.length} done',
+            ),
+            const Spacer(),
+            // Progress counter
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: Text(
+                allDone
+                    ? 'All done! ✓'
+                    : '$completedCount / ${tests.length} completed',
+                key: ValueKey(completedCount),
                 style: GoogleFonts.inter(
                   fontSize: 10,
-                  color: completedCount == tests.length
-                      ? const Color(0xFF0F6E56)
-                      : kTextTertiary,
-                  fontWeight: completedCount == tests.length
-                      ? FontWeight.w600
-                      : FontWeight.normal,
+                  fontWeight: allDone ? FontWeight.w600 : FontWeight.normal,
+                  color: allDone ? const Color(0xFF0F6E56) : kTextTertiary,
                 ),
               ),
-            ],
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 8),
+
+        // ── Progress bar ─────────────────────────────────────────────────
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: completedCount / tests.length,
+            minHeight: 3,
+            backgroundColor: kBorderLight,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              allDone ? const Color(0xFF0F6E56) : kNavy.withValues(alpha: 0.5),
+            ),
           ),
-          const SizedBox(height: 8),
-          // Test number chips
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children: tests.map((n) {
-              final isDone = done.contains(n);
-              return GestureDetector(
+        ),
+
+        const SizedBox(height: 10),
+
+        // ── "Tap to mark" hint (disappears after first tap) ──────────────
+        if (noneYet)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.touch_app_outlined,
+                  size: 11,
+                  color: kTextTertiary,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  'Tap a test to mark it as completed',
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    color: kTextTertiary,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        // ── Test chips ───────────────────────────────────────────────────
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: tests.map((n) {
+            final isDone = done.contains(n);
+            return MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
                 onTap: () => onToggle(n),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 150),
-                  width: 36,
-                  height: 30,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: isDone
-                        ? kNavy.withValues(alpha: 0.10)
+                        ? kNavy.withValues(alpha: 0.09)
                         : Colors.white,
-                    borderRadius: BorderRadius.circular(7),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: isDone
-                          ? kNavy.withValues(alpha: 0.25)
+                          ? kNavy.withValues(alpha: 0.30)
                           : kBorderLight,
+                      width: isDone ? 1.5 : 1,
                     ),
                   ),
-                  child: Center(
-                    child: isDone
-                        ? Icon(
-                            Icons.check,
-                            size: 13,
-                            color: kNavy.withValues(alpha: 0.75),
-                          )
-                        : Text(
-                            '$n',
-                            style: GoogleFonts.inter(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: kTextSecondary,
-                            ),
-                          ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 150),
+                        child: isDone
+                            ? Icon(
+                                Icons.check,
+                                key: const ValueKey('check'),
+                                size: 11,
+                                color: kNavy.withValues(alpha: 0.75),
+                              )
+                            : const SizedBox.shrink(key: ValueKey('empty')),
+                      ),
+                      if (isDone) const SizedBox(width: 4),
+                      Text(
+                        '$testPrefix $n',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: isDone
+                              ? FontWeight.w600
+                              : FontWeight.w400,
+                          color: isDone
+                              ? kNavy.withValues(alpha: 0.80)
+                              : kTextSecondary,
+                          decoration: isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          decorationColor: kNavy.withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }
 
-// ── Shared tab bar widgets (unchanged) ────────────────────────────────────────
+// ── Shared tab bar widgets ────────────────────────────────────────────────────
 
 class _SectionChip extends StatelessWidget {
   final String label;
