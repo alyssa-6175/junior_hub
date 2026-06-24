@@ -19,12 +19,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
   String? _section;
   bool _guideExpanded = false;
 
-  // ── Progress tracking for test series ────────────────────────────
-  // Bluebook: tests 4–10 (7 tests)
-  final Set<int> _bluebookDone = {};
-  // Paper: tests 4–11 (8 tests)
-  final Set<int> _paperDone = {};
-
   bool get _isSat => widget.category == 'sat';
   String get _title => _isSat ? 'SAT Prep' : 'ACT Prep';
 
@@ -67,7 +61,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
 
     final board = _all.where((r) => pinned.contains(r.id)).toList();
 
-    // Official tab: specific resource IDs
     final officialIds = {
       'bluebook_tests',
       'paper_practice_tests',
@@ -87,7 +80,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
-    // Books tab (renamed from Practice Tests): Princeton Review + Kaplan
     final bookIds = {'princeton_review_sat', 'kaplan_sat'};
     final books = _sort(
       _applySection(_all.where((r) => bookIds.contains(r.id)).toList()),
@@ -95,7 +87,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
-    // Practice Qs tab: Khan Academy + quiz-type resources
     final practiceQIds = {'khan_academy_sat', 'knowt_sat'};
     final qs = _sort(
       _applySection(
@@ -125,7 +116,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── Compact header ──────────────────────────────────────────
+        // ── Compact header ──────────────────────────────────────────────
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
           child: Row(
@@ -169,7 +160,17 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
         ),
         const SizedBox(height: 8),
 
-        // ── Tab row ─────────────────────────────────────────────────
+        // ── Study guide banner (SAT only) ───────────────────────────────
+        if (_isSat)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 6),
+            child: _StudyGuideCard(
+              expanded: _guideExpanded,
+              onToggle: () => setState(() => _guideExpanded = !_guideExpanded),
+            ),
+          ),
+
+        // ── Tab row ─────────────────────────────────────────────────────
         Container(
           decoration: const BoxDecoration(
             border: Border(bottom: BorderSide(color: kBorderLight)),
@@ -215,7 +216,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
           ),
         ),
 
-        // ── Content ──────────────────────────────────────────────────
+        // ── Content — all tabs are now identical plain ListViews ─────────
         Expanded(
           child: IndexedStack(
             index: _tab,
@@ -266,25 +267,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                 );
               }
 
-              // Official tab: inject tracker cards inline
-              if (tabIndex == 1 && _isSat) {
-                return _OfficialTabContent(
-                  items: items,
-                  bluebookDone: _bluebookDone,
-                  paperDone: _paperDone,
-                  onBluebookToggle: (n) => setState(
-                    () => _bluebookDone.contains(n)
-                        ? _bluebookDone.remove(n)
-                        : _bluebookDone.add(n),
-                  ),
-                  onPaperToggle: (n) => setState(
-                    () => _paperDone.contains(n)
-                        ? _paperDone.remove(n)
-                        : _paperDone.add(n),
-                  ),
-                );
-              }
-
+              // ── All tabs: plain ListView, tracker lives in the modal ──
               return ListView.separated(
                 padding: const EdgeInsets.all(14),
                 itemCount: items.length,
@@ -299,293 +282,164 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
   }
 }
 
-// ── Official Tab with inline test trackers ─────────────────────────────────────
+// ── Study guide card (unchanged from before) ──────────────────────────────────
 
-class _OfficialTabContent extends StatelessWidget {
-  final List<Resource> items;
-  final Set<int> bluebookDone;
-  final Set<int> paperDone;
-  final void Function(int) onBluebookToggle;
-  final void Function(int) onPaperToggle;
+class _StudyGuideCard extends StatelessWidget {
+  final bool expanded;
+  final VoidCallback onToggle;
+  const _StudyGuideCard({required this.expanded, required this.onToggle});
 
-  const _OfficialTabContent({
-    required this.items,
-    required this.bluebookDone,
-    required this.paperDone,
-    required this.onBluebookToggle,
-    required this.onPaperToggle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(14),
-      itemCount: items.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 6),
-      itemBuilder: (_, i) {
-        final r = items[i];
-
-        if (r.id == 'bluebook_tests') {
-          return _ResourceTileWithTracker(
-            resource: r,
-            trackerLabel: 'Track your progress',
-            tests: List.generate(7, (n) => n + 4), // Tests 4–10
-            done: bluebookDone,
-            onToggle: onBluebookToggle,
-            testPrefix: 'Test',
-          );
-        }
-
-        if (r.id == 'paper_practice_tests') {
-          return _ResourceTileWithTracker(
-            resource: r,
-            trackerLabel: 'Track your progress',
-            tests: List.generate(8, (n) => n + 4), // Tests 4–11
-            done: paperDone,
-            onToggle: onPaperToggle,
-            testPrefix: 'Test',
-          );
-        }
-
-        return ResourceTile(resource: r);
-      },
-    );
-  }
-}
-
-// ── New: ResourceTile wrapper that appends the tracker inside the card ─────
-
-class _ResourceTileWithTracker extends StatelessWidget {
-  final Resource resource;
-  final String trackerLabel;
-  final List<int> tests;
-  final Set<int> done;
-  final void Function(int) onToggle;
-  final String testPrefix;
-
-  const _ResourceTileWithTracker({
-    required this.resource,
-    required this.trackerLabel,
-    required this.tests,
-    required this.done,
-    required this.onToggle,
-    required this.testPrefix,
-  });
+  static const _steps = [
+    (
+      icon: Icons.assignment_outlined,
+      label: '1. Baseline test',
+      detail:
+          'Take a full Bluebook or paper test cold. Don\'t study first — you need an honest baseline score.',
+    ),
+    (
+      icon: Icons.search,
+      label: '2. Diagnose',
+      detail:
+          'Review your score report. Which skill categories cost you the most points? Write them down — those are your targets.',
+    ),
+    (
+      icon: Icons.track_changes_outlined,
+      label: '3. Targeted practice',
+      detail:
+          'Use the Question Bank and Khan Academy to drill your weak skills. Don\'t practice what you already know.',
+    ),
+    (
+      icon: Icons.repeat,
+      label: '4. Test again',
+      detail:
+          'Take another full-length test. Compare score reports — are your weak areas improving? Repeat steps 2–4.',
+    ),
+    (
+      icon: Icons.done_all,
+      label: '5. Final polish',
+      detail:
+          '2–3 weeks out: focus on timing, pacing, and test-day routines. Stop learning new material and consolidate.',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Your existing tile (keeps all existing expand/pin/seen logic)
-        ResourceTile(resource: resource),
-        // Tracker stitched below with matching card styling
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(12),
-              bottomRight: Radius.circular(12),
-            ),
-            border: const Border(
-              left: BorderSide(color: kBorderLight),
-              right: BorderSide(color: kBorderLight),
-              bottom: BorderSide(color: kBorderLight),
-            ),
-          ),
-          padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
-          child: _EmbeddedTracker(
-            label: trackerLabel,
-            tests: tests,
-            done: done,
-            onToggle: onToggle,
-            testPrefix: testPrefix,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ── Embedded tracker (the actual content inside the card extension) ─────────
-
-class _EmbeddedTracker extends StatelessWidget {
-  final String label;
-  final List<int> tests;
-  final Set<int> done;
-  final void Function(int) onToggle;
-  final String testPrefix;
-
-  const _EmbeddedTracker({
-    required this.label,
-    required this.tests,
-    required this.done,
-    required this.onToggle,
-    required this.testPrefix,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final completedCount = tests.where((t) => done.contains(t)).length;
-    final allDone = completedCount == tests.length;
-    final noneYet = completedCount == 0;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // ── Divider ──────────────────────────────────────────────────────
-        Container(
-          height: 1,
-          color: kBorderLight,
-          margin: const EdgeInsets.only(bottom: 10),
-        ),
-
-        // ── Header row ───────────────────────────────────────────────────
-        Row(
-          children: [
-            Icon(
-              allDone ? Icons.check_circle : Icons.check_circle_outline,
-              size: 13,
-              color: allDone
-                  ? const Color(0xFF0F6E56)
-                  : kNavy.withValues(alpha: 0.45),
-            ),
-            const SizedBox(width: 5),
-            Text(
-              label,
-              style: GoogleFonts.inter(
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                color: kTextSecondary,
-              ),
-            ),
-            const Spacer(),
-            // Progress counter
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: Text(
-                allDone
-                    ? 'All done! ✓'
-                    : '$completedCount / ${tests.length} completed',
-                key: ValueKey(completedCount),
-                style: GoogleFonts.inter(
-                  fontSize: 10,
-                  fontWeight: allDone ? FontWeight.w600 : FontWeight.normal,
-                  color: allDone ? const Color(0xFF0F6E56) : kTextTertiary,
-                ),
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 8),
-
-        // ── Progress bar ─────────────────────────────────────────────────
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: completedCount / tests.length,
-            minHeight: 3,
-            backgroundColor: kBorderLight,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              allDone ? const Color(0xFF0F6E56) : kNavy.withValues(alpha: 0.5),
-            ),
-          ),
-        ),
-
-        const SizedBox(height: 10),
-
-        // ── "Tap to mark" hint (disappears after first tap) ──────────────
-        if (noneYet)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.touch_app_outlined,
-                  size: 11,
-                  color: kTextTertiary,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'Tap a test to mark it as completed',
-                  style: GoogleFonts.inter(
-                    fontSize: 10,
-                    color: kTextTertiary,
-                    fontStyle: FontStyle.italic,
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+      decoration: BoxDecoration(
+        color: kNavy.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kNavy.withValues(alpha: 0.10)),
+      ),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: onToggle,
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.route_outlined,
+                    size: 14,
+                    color: kNavy.withValues(alpha: 0.7),
                   ),
-                ),
-              ],
-            ),
-          ),
-
-        // ── Test chips ───────────────────────────────────────────────────
-        Wrap(
-          spacing: 6,
-          runSpacing: 6,
-          children: tests.map((n) {
-            final isDone = done.contains(n);
-            return MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => onToggle(n),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 150),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isDone
-                        ? kNavy.withValues(alpha: 0.09)
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: isDone
-                          ? kNavy.withValues(alpha: 0.30)
-                          : kBorderLight,
-                      width: isDone ? 1.5 : 1,
+                  const SizedBox(width: 7),
+                  Text(
+                    'How to study for the SAT',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: kNavy.withValues(alpha: 0.85),
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  const Spacer(),
+                  Icon(
+                    expanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: kNavy.withValues(alpha: 0.5),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (expanded) ...[
+            Divider(height: 1, color: kNavy.withValues(alpha: 0.08)),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+              child: Column(
+                children: _steps.map((step) {
+                  final isLast = step == _steps.last;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 150),
-                        child: isDone
-                            ? Icon(
-                                Icons.check,
-                                key: const ValueKey('check'),
-                                size: 11,
-                                color: kNavy.withValues(alpha: 0.75),
-                              )
-                            : const SizedBox.shrink(key: ValueKey('empty')),
+                      Column(
+                        children: [
+                          Container(
+                            width: 26,
+                            height: 26,
+                            decoration: BoxDecoration(
+                              color: kNavy.withValues(alpha: 0.08),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              step.icon,
+                              size: 13,
+                              color: kNavy.withValues(alpha: 0.7),
+                            ),
+                          ),
+                          if (!isLast)
+                            Container(
+                              width: 1,
+                              height: 36,
+                              color: kNavy.withValues(alpha: 0.10),
+                              margin: const EdgeInsets.symmetric(vertical: 2),
+                            ),
+                        ],
                       ),
-                      if (isDone) const SizedBox(width: 4),
-                      Text(
-                        '$testPrefix $n',
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          fontWeight: isDone
-                              ? FontWeight.w600
-                              : FontWeight.w400,
-                          color: isDone
-                              ? kNavy.withValues(alpha: 0.80)
-                              : kTextSecondary,
-                          decoration: isDone
-                              ? TextDecoration.lineThrough
-                              : TextDecoration.none,
-                          decorationColor: kNavy.withValues(alpha: 0.4),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 4,
+                            bottom: isLast ? 0 : 14,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                step.label,
+                                style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: kTextPrimary,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                step.detail,
+                                style: GoogleFonts.inter(
+                                  fontSize: 11,
+                                  color: kTextSecondary,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
-                  ),
-                ),
+                  );
+                }).toList(),
               ),
-            );
-          }).toList(),
-        ),
-      ],
+            ),
+          ],
+        ],
+      ),
     );
   }
 }
@@ -652,7 +506,6 @@ class _TabBtn extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          margin: const EdgeInsets.only(bottom: 0, top: 0),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           decoration: BoxDecoration(
             border: Border(

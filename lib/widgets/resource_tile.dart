@@ -29,7 +29,6 @@ class ResourceTile extends StatelessWidget {
     final isPinned = provider.isPinned(resource.id);
     final isLoggedIn = provider.isLoggedIn;
 
-    // Wrap the existing Container with Tappable:
     return Tappable(
       onTap: () {
         if (resource.category == 'ap') {
@@ -37,13 +36,7 @@ class ResourceTile extends StatelessWidget {
             'ap_detail',
             detailId: resource.id,
           );
-        } else if ([
-          'competition',
-          'research',
-          'internship',
-          'sat',
-          'act',
-        ].contains(resource.category)) {
+        } else if (_shouldOpenModal(resource.category)) {
           showResourceDetail(context, resource);
         }
       },
@@ -68,7 +61,6 @@ class ResourceTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Add before the category icon box:
               if (isPinned) ...[
                 Container(
                   width: 3,
@@ -80,7 +72,6 @@ class ResourceTile extends StatelessWidget {
                 ),
                 const SizedBox(width: 7),
               ],
-              // Category-colored icon box
               Container(
                 width: 32,
                 height: 32,
@@ -95,7 +86,6 @@ class ResourceTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              // Title + subtitle
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +115,6 @@ class ResourceTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              // Category badge
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                 decoration: BoxDecoration(
@@ -141,10 +130,8 @@ class ResourceTile extends StatelessWidget {
                   ),
                 ),
               ),
-              // Action buttons (only shown when logged in)
               if (isLoggedIn) ...[
                 const SizedBox(width: 6),
-                // Mark as seen
                 _ActionButton(
                   icon: isSeen ? Icons.visibility : Icons.visibility_outlined,
                   color: isSeen ? kNavy : kTextTertiary,
@@ -152,7 +139,6 @@ class ResourceTile extends StatelessWidget {
                   onTap: () =>
                       context.read<AppProvider>().toggleSeen(resource.id),
                 ),
-                // Save = save to home screen
                 _ActionButton(
                   icon: isSaved ? Icons.bookmark : Icons.bookmark_outlined,
                   color: isSaved ? const Color(0xFFD4537E) : kTextTertiary,
@@ -160,7 +146,6 @@ class ResourceTile extends StatelessWidget {
                   onTap: () =>
                       context.read<AppProvider>().toggleSaved(resource.id),
                 ),
-                // Pin = save to Board
                 _ActionButton(
                   icon: isPinned ? Icons.push_pin : Icons.push_pin_outlined,
                   color: isPinned ? kGold : kTextTertiary,
@@ -168,7 +153,6 @@ class ResourceTile extends StatelessWidget {
                   onTap: () =>
                       context.read<AppProvider>().togglePinned(resource.id),
                 ),
-                // Add to personal deadlines (only for resources with a deadline)
                 if (resource.deadline != null)
                   _ActionButton(
                     icon: Icons.alarm_add_outlined,
@@ -185,19 +169,6 @@ class ResourceTile extends StatelessWidget {
   }
 
   void _addToPersonalDeadlines(BuildContext context) {
-    // Determine the urgency logic exactly as your models do
-    String urgencyLabel = 'Later';
-    if (resource.deadlineIso != null && resource.deadlineIso!.isNotEmpty) {
-      try {
-        final date = DateTime.parse(resource.deadlineIso!);
-        final diff = date.difference(DateTime.now()).inDays;
-        if (diff <= 30)
-          urgencyLabel = 'Urgent';
-        else if (diff <= 90)
-          urgencyLabel = 'Soon';
-      } catch (_) {}
-    }
-
     context.read<AppProvider>().addPersonalDeadline(
       PersonalDeadline(
         id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
@@ -288,33 +259,28 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// EMBEDDED TEST TRACKER (For Modals/Expanded Views)
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── Public test tracker widget — used by resource_detail_modal.dart ──────────
+//
+// This is PUBLIC (no underscore) so it can be imported and called from
+// resource_detail_modal.dart inside the modal's expanded content section.
 
-/// Renders inside the expanded ResourceTile detail section (or modal) for resources
-/// that have an associated test tracker (Bluebook, Paper tests).
-///
-/// Call it like:
-///   if (_InTileTestTracker.configFor(resource) != null)
-///     _InTileTestTracker(resource: resource)
-class _InTileTestTracker extends StatelessWidget {
+class ResourceTestTracker extends StatelessWidget {
   final Resource resource;
-  const _InTileTestTracker({required this.resource});
+  const ResourceTestTracker({super.key, required this.resource});
 
   /// Returns null if this resource has no tracker.
-  static _TrackerConfig? configFor(Resource resource) {
+  static TrackerConfig? configFor(Resource resource) {
     switch (resource.id) {
       case 'bluebook_tests':
-        return _TrackerConfig(
-          tests: List.generate(7, (n) => n + 4), // 4–10
-          label: 'Mark tests as completed',
+        return TrackerConfig(
+          tests: List.generate(7, (n) => n + 4), // Tests 4–10
+          label: 'Track your progress',
           testPrefix: 'Test',
         );
       case 'paper_practice_tests':
-        return _TrackerConfig(
-          tests: List.generate(8, (n) => n + 4), // 4–11
-          label: 'Mark tests as completed',
+        return TrackerConfig(
+          tests: List.generate(8, (n) => n + 4), // Tests 4–11
+          label: 'Track your progress',
           testPrefix: 'Test',
         );
       default:
@@ -336,14 +302,14 @@ class _InTileTestTracker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── Divider ────────────────────────────────────────────────────
+        // ── Section divider ────────────────────────────────────────────
         Container(
           height: 1,
           color: kBorderLight,
-          margin: const EdgeInsets.only(top: 12, bottom: 10),
+          margin: const EdgeInsets.symmetric(vertical: 14),
         ),
 
-        // ── Header ─────────────────────────────────────────────────────
+        // ── Header row ─────────────────────────────────────────────────
         Row(
           children: [
             Icon(
@@ -382,7 +348,7 @@ class _InTileTestTracker extends StatelessWidget {
 
         const SizedBox(height: 8),
 
-        // ── Progress bar ────────────────────────────────────────────────
+        // ── Progress bar ───────────────────────────────────────────────
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: LinearProgressIndicator(
@@ -397,7 +363,7 @@ class _InTileTestTracker extends StatelessWidget {
 
         const SizedBox(height: 10),
 
-        // ── Hint (disappears after first tap) ──────────────────────────
+        // ── First-time hint ────────────────────────────────────────────
         if (noneYet)
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
@@ -421,7 +387,7 @@ class _InTileTestTracker extends StatelessWidget {
             ),
           ),
 
-        // ── Test chips ──────────────────────────────────────────────────
+        // ── Test chips ─────────────────────────────────────────────────
         Wrap(
           spacing: 6,
           runSpacing: 6,
@@ -493,12 +459,11 @@ class _InTileTestTracker extends StatelessWidget {
   }
 }
 
-/// Config data for a test tracker embedded in a resource tile.
-class _TrackerConfig {
+class TrackerConfig {
   final List<int> tests;
   final String label;
   final String testPrefix;
-  const _TrackerConfig({
+  const TrackerConfig({
     required this.tests,
     required this.label,
     required this.testPrefix,

@@ -7,6 +7,7 @@ import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
 import '../models/personal_deadline.dart';
 import '../data/resources_data.dart';
+import '../widgets/resource_tile.dart';
 
 /// Call this to open the full-screen detail card for a competition,
 /// research program, or internship.
@@ -305,6 +306,8 @@ class ResourceDetailModal extends StatelessWidget {
                 ),
               ),
             ),
+            if (ResourceTestTracker.configFor(resource) != null)
+              ResourceTestTracker(resource: resource),
             // Footer: action buttons
             if (provider.isLoggedIn) ...[
               const Divider(height: 1, color: kBorderLight),
