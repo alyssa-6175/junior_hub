@@ -9,8 +9,6 @@ import '../utils/url_helper.dart';
 import 'tappable.dart';
 import '../models/personal_deadline.dart';
 
-// import '../widgets/resource_detail_modal.dart';
-
 class ResourceTile extends StatelessWidget {
   final Resource resource;
   const ResourceTile({super.key, required this.resource});
@@ -144,7 +142,6 @@ class ResourceTile extends StatelessWidget {
                 ),
               ),
               // Action buttons (only shown when logged in)
-              // Find the section that has the old bookmark/star/seen buttons and replace:
               if (isLoggedIn) ...[
                 const SizedBox(width: 6),
                 // Mark as seen
@@ -188,14 +185,25 @@ class ResourceTile extends StatelessWidget {
   }
 
   void _addToPersonalDeadlines(BuildContext context) {
+    // Determine the urgency logic exactly as your models do
+    String urgencyLabel = 'Later';
+    if (resource.deadlineIso != null && resource.deadlineIso!.isNotEmpty) {
+      try {
+        final date = DateTime.parse(resource.deadlineIso!);
+        final diff = date.difference(DateTime.now()).inDays;
+        if (diff <= 30)
+          urgencyLabel = 'Urgent';
+        else if (diff <= 90)
+          urgencyLabel = 'Soon';
+      } catch (_) {}
+    }
+
     context.read<AppProvider>().addPersonalDeadline(
       PersonalDeadline(
         id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
         title: resource.title,
-        dateIso: resource
-            .deadline!, // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
-        resourceId: resource
-            .id, // optional, but good to include since it's in the new model
+        dateIso: resource.deadlineIso ?? '',
+        resourceId: resource.id,
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(
@@ -278,4 +286,221 @@ class _ActionButton extends StatelessWidget {
       ),
     );
   }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EMBEDDED TEST TRACKER (For Modals/Expanded Views)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Renders inside the expanded ResourceTile detail section (or modal) for resources
+/// that have an associated test tracker (Bluebook, Paper tests).
+///
+/// Call it like:
+///   if (_InTileTestTracker.configFor(resource) != null)
+///     _InTileTestTracker(resource: resource)
+class _InTileTestTracker extends StatelessWidget {
+  final Resource resource;
+  const _InTileTestTracker({required this.resource});
+
+  /// Returns null if this resource has no tracker.
+  static _TrackerConfig? configFor(Resource resource) {
+    switch (resource.id) {
+      case 'bluebook_tests':
+        return _TrackerConfig(
+          tests: List.generate(7, (n) => n + 4), // 4–10
+          label: 'Mark tests as completed',
+          testPrefix: 'Test',
+        );
+      case 'paper_practice_tests':
+        return _TrackerConfig(
+          tests: List.generate(8, (n) => n + 4), // 4–11
+          label: 'Mark tests as completed',
+          testPrefix: 'Test',
+        );
+      default:
+        return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final config = configFor(resource);
+    if (config == null) return const SizedBox.shrink();
+
+    final provider = context.watch<AppProvider>();
+    final done = provider.completedTestsFor(resource.id);
+    final completedCount = config.tests.where((t) => done.contains(t)).length;
+    final allDone = completedCount == config.tests.length;
+    final noneYet = completedCount == 0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ── Divider ────────────────────────────────────────────────────
+        Container(
+          height: 1,
+          color: kBorderLight,
+          margin: const EdgeInsets.only(top: 12, bottom: 10),
+        ),
+
+        // ── Header ─────────────────────────────────────────────────────
+        Row(
+          children: [
+            Icon(
+              allDone ? Icons.check_circle : Icons.check_circle_outline,
+              size: 13,
+              color: allDone
+                  ? const Color(0xFF0F6E56)
+                  : kNavy.withValues(alpha: 0.45),
+            ),
+            const SizedBox(width: 5),
+            Text(
+              config.label,
+              style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: kTextSecondary,
+              ),
+            ),
+            const Spacer(),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: Text(
+                allDone
+                    ? 'All done ✓'
+                    : '$completedCount / ${config.tests.length} completed',
+                key: ValueKey(completedCount),
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: allDone ? FontWeight.w600 : FontWeight.normal,
+                  color: allDone ? const Color(0xFF0F6E56) : kTextTertiary,
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 8),
+
+        // ── Progress bar ────────────────────────────────────────────────
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: completedCount / config.tests.length,
+            minHeight: 3,
+            backgroundColor: kBorderLight,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              allDone ? const Color(0xFF0F6E56) : kNavy.withValues(alpha: 0.5),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 10),
+
+        // ── Hint (disappears after first tap) ──────────────────────────
+        if (noneYet)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.touch_app_outlined,
+                  size: 11,
+                  color: kTextTertiary,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  'Tap a test to mark it as completed',
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    color: kTextTertiary,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        // ── Test chips ──────────────────────────────────────────────────
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: config.tests.map((n) {
+            final isDone = done.contains(n);
+            return MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () =>
+                    context.read<AppProvider>().toggleTest(resource.id, n),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isDone
+                        ? kNavy.withValues(alpha: 0.09)
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: isDone
+                          ? kNavy.withValues(alpha: 0.30)
+                          : kBorderLight,
+                      width: isDone ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 150),
+                        child: isDone
+                            ? Icon(
+                                Icons.check,
+                                key: const ValueKey('check'),
+                                size: 11,
+                                color: kNavy.withValues(alpha: 0.75),
+                              )
+                            : const SizedBox.shrink(key: ValueKey('empty')),
+                      ),
+                      if (isDone) const SizedBox(width: 4),
+                      Text(
+                        '${config.testPrefix} $n',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: isDone
+                              ? FontWeight.w600
+                              : FontWeight.w400,
+                          color: isDone
+                              ? kNavy.withValues(alpha: 0.80)
+                              : kTextSecondary,
+                          decoration: isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          decorationColor: kNavy.withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+/// Config data for a test tracker embedded in a resource tile.
+class _TrackerConfig {
+  final List<int> tests;
+  final String label;
+  final String testPrefix;
+  const _TrackerConfig({
+    required this.tests,
+    required this.label,
+    required this.testPrefix,
+  });
 }

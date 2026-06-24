@@ -82,6 +82,8 @@ class AppProvider extends ChangeNotifier {
 
   final Set<String> _linkSeen = {};
 
+  final Map<String, Set<int>> _completedTests = {}; // NEW: Tracker state
+
   Set<String> get saved => Set.unmodifiable(_saved);
 
   Set<String> get pinned => Set.unmodifiable(_pinned);
@@ -99,6 +101,9 @@ class AppProvider extends ChangeNotifier {
 
   bool isLinkSeen(String resourceId, String label) =>
       _linkSeen.contains('$resourceId:$label');
+
+  Set<int> completedTestsFor(String trackerId) =>
+      Set.unmodifiable(_completedTests[trackerId] ?? {}); // NEW
 
   // ── Personal Deadlines & Majors ──────────────────────────────────────────
 
@@ -292,6 +297,8 @@ class AppProvider extends ChangeNotifier {
 
     _linkSeen.clear();
 
+    _completedTests.clear(); // NEW: Clear test trackers on logout
+
     _checkedMajors.clear();
 
     _personalDeadlines.clear();
@@ -328,6 +335,13 @@ class AppProvider extends ChangeNotifier {
 
     _checkedMajors.addAll(List<String>.from(data['checkedMajors'] ?? []));
 
+    // NEW: Load completed tests map from Firestore
+    final ctData = data['completedTests'] as Map<String, dynamic>? ?? {};
+    _completedTests.clear();
+    ctData.forEach((k, v) {
+      _completedTests[k] = Set<int>.from((v as List).cast<int>());
+    });
+
     final pdList = List<Map<String, dynamic>>.from(
       data['personalDeadlines'] ?? [],
     );
@@ -336,7 +350,7 @@ class AppProvider extends ChangeNotifier {
       pdList.map((data) => PersonalDeadline.fromJson(data)),
     );
 
-    // NEW: Clean up expired deadlines after loading from Firestore
+    // Clean up expired deadlines after loading from Firestore
 
     await removeExpiredDeadlines();
   }
@@ -352,6 +366,28 @@ class AppProvider extends ChangeNotifier {
   }
 
   // ── Toggles & State Updates (Persisted to Firestore) ─────────────────────
+
+  // NEW: Test Tracker Toggle
+  Future<void> toggleTest(String trackerId, int testNumber) async {
+    if (!isLoggedIn) return;
+
+    final current = Set<int>.from(_completedTests[trackerId] ?? {});
+    if (current.contains(testNumber)) {
+      current.remove(testNumber);
+    } else {
+      current.add(testNumber);
+    }
+    _completedTests[trackerId] = current;
+
+    notifyListeners();
+    await _saveCompletedTests();
+  }
+
+  // NEW: Save Test Tracker State
+  Future<void> _saveCompletedTests() async {
+    final map = _completedTests.map((k, v) => MapEntry(k, v.toList()));
+    await _save('completedTests', map);
+  }
 
   Future<void> toggleSaved(String id) async {
     if (!isLoggedIn) return;
@@ -469,8 +505,6 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // NEW: Adjusted to use Firestore `_save()` instead of `_persistDeadlines()`
-
   /// Removes any personal deadlines whose date has already passed.
 
   /// Called on app init and whenever the deadline panel opens.
@@ -564,8 +598,6 @@ class AppProvider extends ChangeNotifier {
   Future<void> logFeedbackOpened() async {
     await _analytics.logEvent(name: 'feedback_opened');
   }
-
-  // NEW: Resource view tracking logic
 
   /// Tracks a resource view in Firestore.
 

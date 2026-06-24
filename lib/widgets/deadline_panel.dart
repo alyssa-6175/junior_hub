@@ -21,7 +21,11 @@ class _DeadlinePanelState extends State<DeadlinePanel> {
   String? _majorFilter;
 
   List<DeadlineItem> get _allFiltered {
-    var items = List<DeadlineItem>.from(upcomingDeadlines);
+    // Filter out past deadlines first — they should never show.
+    var items = upcomingDeadlines
+        .where((d) => !d.isExpired) // ← this is the only new line
+        .toList();
+
     if (_timeFilter != null) {
       items = items.where((d) {
         switch (_timeFilter) {
@@ -41,9 +45,6 @@ class _DeadlinePanelState extends State<DeadlinePanel> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) context.read<AppProvider>().removeExpiredDeadlines();
-    });
     final provider = context.watch<AppProvider>();
 
     return Container(
