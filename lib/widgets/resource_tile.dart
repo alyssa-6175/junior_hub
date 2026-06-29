@@ -5,7 +5,6 @@ import '../app_colors.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import 'resource_detail_modal.dart';
-import '../utils/url_helper.dart';
 import 'tappable.dart';
 import '../models/personal_deadline.dart';
 

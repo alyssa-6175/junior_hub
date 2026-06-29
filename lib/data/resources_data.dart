@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/resource.dart';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// URL LINKS
-// Global map of link label → actual URL.
-// Used by all link rendering widgets so each label opens the right site.
-// ─────────────────────────────────────────────────────────────────────────────
+// mapping url links
 const Map<String, String> kLinkUrls = {
   // AP Classroom / College Board
   'AP Classroom (official)': 'https://myap.collegeboard.org/',
@@ -89,7 +85,7 @@ const Map<String, String> kLinkUrls = {
   "Barron's AP World": 'https://www.barronbooks.com/category/test-prep/ap/',
   "Barron's AP Physics": 'https://www.barronbooks.com/category/test-prep/ap/',
 
-  // Other Prep & Educational Tools
+  // Other
   'Code.org curriculum (free)': 'https://code.org/educate/csp',
   'Code.org AP CSP curriculum': 'https://code.org/educate/csp',
   'CodingBat Java practice': 'https://codingbat.com/java/AP-1',
@@ -355,6 +351,7 @@ const Map<String, String> kLinkUrls = {
 final List<Resource> allResources = [
   // === GENERAL COMPETITIONS ===
   const Resource(
+    //UPDATE DEADLINE LATER, DON'T KNOW YET
     id: 'usaco',
     title: 'USACO',
     category: 'competition',
@@ -367,7 +364,7 @@ final List<Resource> allResources = [
         'Register at usaco.org before the contest window, completely free!',
     description:
         '4 divisions, bronze to platinum. The contest window stretches from December to March, register before each window opens',
-    deadline: 'Dec 13–16, 2025',
+    deadline: 'UPDATE LATER',
     icon: Icons.emoji_events,
     url: 'http://www.usaco.org',
     links: ['usaco.org', 'USACO Guide (free)', 'Past problems & editorials'],
@@ -375,8 +372,9 @@ final List<Resource> allResources = [
         "Start at the level you're most comfortable with, the USACO Guide at usaco.guide is good for practice, work through it in order and make sure you understand each concept",
   ),
   const Resource(
+    //MULTIPLE DEADLINES, FIX
     id: 'amc',
-    title: 'AMC 8 / 10 / 12',
+    title: 'AMC 10 / 12',
     category: 'competition',
     field: 'math',
     scope: 'national',
@@ -387,7 +385,7 @@ final List<Resource> allResources = [
         'Register through school or local testing center with registration fee',
     description:
         'The American Mathematics Competitions (AMC) is the gateway to AIME, USAMO, and the US IMO team',
-    deadline: 'Nov 6, 2025',
+    deadline: 'September 30, 2026 (Early Bird)',
     icon: Icons.emoji_events,
     url: 'https://maa.org/math-competitions',
     links: [
@@ -409,12 +407,13 @@ final List<Resource> allResources = [
         'Register online at official portal, submit video/code, free!',
     description:
         'Annual app-building competition organized by members of congress, web apps allowed',
-    deadline: 'Dec 21, 2025',
+    deadline: 'October 26, 2026',
     icon: Icons.emoji_events,
     url: 'https://www.congressionalappchallenge.us',
     links: ['congressionalappchallenge.us', 'Submit your app'],
   ),
   const Resource(
+    //NOTHING YET ON WHEN REGISTRATION ENDS
     id: 'usabo',
     title: 'USABO',
     category: 'competition',
@@ -426,12 +425,13 @@ final List<Resource> allResources = [
     applicationInfo: 'The school must register as testing center',
     description:
         'USA Biology Olympiad (USABO), open exam in January, semifinals in March, opt students represent the US at the IBO',
-    deadline: 'Jan 2026',
+    deadline: 'August 1, 2026 (Registration Opens)',
     icon: Icons.emoji_events,
     url: 'https://www.usabo-trc.org',
     links: ['vashti.net/nacbb', 'Open exam prep resources'],
   ),
   const Resource(
+    //NOTHING ON WHEN REGISTRATION ENDS
     id: 'cyberpatriot_afa',
     title: 'AFA CyberPatriot XIX — National Youth Cyber Defense Competition',
     category: 'competition',
@@ -445,7 +445,7 @@ final List<Resource> allResources = [
         'Register at uscyberpatriot.org. Teams of 2–6 students with a coach. Registration fee may apply.',
     description:
         'The largest national youth cyber defense competition in the US, run by the Air Force Association. Teams secure virtual operating systems against simulated cyber attacks.',
-    deadline: 'Oct 2025 (reg. closes)',
+    deadline: 'May 1, 2026 (Registration Opens)',
     deadlineIso: '2025-10-31T23:59:00Z',
     icon: Icons.emoji_events,
     url: 'https://www.uscyberpatriot.org',
@@ -454,6 +454,7 @@ final List<Resource> allResources = [
 
   // === BUSINESS / FINANCE / ECONOMICS ===
   const Resource(
+    //NEED TO BE MORE SPECIFIC LATER
     id: 'wharton_investment',
     title: 'Wharton Global High School Investment Competition',
     category: 'competition',
@@ -467,7 +468,7 @@ final List<Resource> allResources = [
         'Teams of 4–7 students with a teacher advisor. Register at globalyouth.wharton.upenn.edu. Free to enter.',
     description:
         'A free global investment challenge where teams of 4–7 high schoolers manage a simulated \$100k portfolio over 10 weeks.',
-    deadline: 'Sep 2026 (opens ~Jun)',
+    deadline: 'August 2026 (Registration Opens)',
     deadlineIso: '2026-09-12T23:59:00Z',
     icon: Icons.emoji_events,
     url:
@@ -478,6 +479,7 @@ final List<Resource> allResources = [
     ],
   ),
   const Resource(
+    //NOT DECIDED YET
     id: 'national_econ_challenge',
     title: 'National Economics Challenge',
     category: 'competition',
@@ -491,7 +493,7 @@ final List<Resource> allResources = [
         'Register through your state Council for Economic Education affiliate. Team and individual divisions.',
     description:
         'Run by the Council for Economic Education, this is the premier high school economics quiz competition in the US.',
-    deadline: 'Mar 2026 (state reg. varies)',
+    deadline: 'TBD (Most likely Jan-April 2027)',
     deadlineIso: '2026-03-31T23:59:00Z',
     icon: Icons.emoji_events,
     url: 'https://councilforeconed.org/national-economics-challenge/',
@@ -501,6 +503,7 @@ final List<Resource> allResources = [
     ],
   ),
   const Resource(
+    //DONT KNOW YET
     id: 'fed_challenge',
     title: 'High School Fed Challenge',
     category: 'competition',
@@ -514,7 +517,7 @@ final List<Resource> allResources = [
         'Teams of 3–6 students present a monetary policy analysis. Register through your regional Fed branch.',
     description:
         'Teams research and present on US monetary policy to Federal Reserve economists, fielding tough Q&A.',
-    deadline: 'Oct 2026 (regional; dates vary)',
+    deadline: 'TBD (Most likely February 2027)',
     deadlineIso: '2026-10-31T23:59:00Z',
     icon: Icons.emoji_events,
     url:
@@ -534,7 +537,7 @@ final List<Resource> allResources = [
     applicationInfo: 'TODO — fill in application details',
     description:
         'An entrepreneurship pitch competition for high school students.',
-    deadline: 'TODO',
+    deadline: 'June 30, 2026',
     deadlineIso: '',
     icon: Icons.emoji_events,
     url:
@@ -554,13 +557,14 @@ final List<Resource> allResources = [
     applicationInfo: 'TODO — fill in application details',
     description:
         'A high school case competition testing real-world business problems.',
-    deadline: 'TODO',
+    deadline: 'July 5, 2026',
     deadlineIso: '',
     icon: Icons.emoji_events,
     url: 'https://www.casecatalyst.org',
     links: ['casecatalyst.org'],
   ),
   const Resource(
+    //DONT KNOW YET
     id: 'intl_econ_essay',
     title: 'International Economics Essay Competition',
     category: 'competition',
@@ -572,13 +576,14 @@ final List<Resource> allResources = [
     majorTags: ['economics', 'intl_rel', 'pub_policy'],
     applicationInfo: 'TODO — fill in application details',
     description: 'An essay competition on topics in international economics.',
-    deadline: 'TODO',
+    deadline: 'TBD (Around September 2026)',
     deadlineIso: '',
     icon: Icons.emoji_events,
     url: 'TODO',
     links: ['TODO'],
   ),
   const Resource(
+    //DONT KNOW YET
     id: 'global_impact_competition',
     title: 'Global Impact Competition',
     category: 'competition',
@@ -591,7 +596,7 @@ final List<Resource> allResources = [
     applicationInfo: 'TODO — fill in application details',
     description:
         'A competition developing solutions with measurable global impact.',
-    deadline: 'TODO',
+    deadline: 'TBD (Around June 2027)',
     deadlineIso: '',
     icon: Icons.emoji_events,
     url: 'TODO',
@@ -600,6 +605,7 @@ final List<Resource> allResources = [
 
   // === SCIENCE / STEM / RESEARCH ===
   const Resource(
+    //tbd later
     id: 'conrad_challenge',
     title: 'Conrad Challenge',
     category: 'competition',
@@ -633,7 +639,7 @@ final List<Resource> allResources = [
         'Submit a 3-minute video explaining a complex science or math concept creatively.',
     description:
         'Students create a short video explaining a challenging concept. Winner receives \$250,000 scholarship.',
-    deadline: 'Jun 2026 (approx.)',
+    deadline: 'September 15th, 2026',
     deadlineIso: '2026-06-30T23:59:00Z',
     icon: Icons.emoji_events,
     url: 'https://breakthroughjuniorchallenge.org',

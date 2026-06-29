@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
-import '../data/majors_data.dart';
 import '../data/resources_data.dart';
 import '../models/personal_deadline.dart';
 import '../providers/app_provider.dart';
