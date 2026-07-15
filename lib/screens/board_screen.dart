@@ -61,7 +61,7 @@ class _BoardScreenState extends State<BoardScreen> {
               ),
               const SizedBox(height: 2),
               Text(
-                'Your pinned resources — things you\'re actively working on.',
+                'Pinned resources to your board for easy access',
                 style: GoogleFonts.inter(fontSize: 12, color: kTextSecondary),
               ),
               const SizedBox(height: 14),
