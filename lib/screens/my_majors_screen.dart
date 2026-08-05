@@ -31,69 +31,20 @@ class _MyMajorsScreenState extends State<MyMajorsScreen>
     super.dispose();
   }
 
-  /// Maps a sub-major or group id to the old 'field' string.
-  static const _subToField = {
-    'cs': 'cs',
-    'cybersecurity': 'cs',
-    'data_sci': 'cs',
-    'ai': 'cs',
-    'game_design': 'cs',
-    'mech_eng': 'physics',
-    'biology': 'biology',
-    'microbiology': 'biology',
-    'neuroscience': 'biology',
-    'bio_health': 'biology',
-    'micro_health': 'biology',
-    'neuro_health': 'biology',
-    'chemistry': 'biology',
-    'chem_eng': 'physics',
-    'physics': 'physics',
-    'applied_math': 'math',
-    'statistics': 'math',
-    'comp_math': 'math',
-    'fin_math': 'math',
-    'premed': 'biology',
-    'nursing': 'biology',
-    'economics': 'history',
-    'econ_soc': 'history',
-    'business': 'history',
-    'marketing': 'history',
-    'finance': 'history',
-    'accounting': 'history',
-    'comm_biz': 'history',
-    'comm_soc': 'history',
-    'intl_rel': 'history',
-    'polisci': 'history',
-    'pub_policy': 'history',
-    'prelaw': 'history',
-    'sociology': 'history',
-    'english': 'english',
-    'humanities': 'english',
-    'music': 'english',
-    'fine_arts': 'english',
-    'game_des_art': 'cs',
-  };
-
   /// Collect all resources for the checked majors, filtered by category, deduplicated.
   List<Resource> _resourcesForCategory(
     Set<String> checkedMajors,
     String category,
     Set<String> seen,
   ) {
-    final fieldKeys = <String>{};
-    for (final id in checkedMajors) {
-      final field = _subToField[id];
-      if (field != null) fieldKeys.add(field);
-    }
-    if (fieldKeys.isEmpty) return [];
-
-    final result = <String, Resource>{};
-    for (final field in fieldKeys) {
-      for (final r in resourcesByFieldAndCategory(field, category)) {
-        result[r.id] = r;
-      }
-    }
-    return sortBySeen(result.values.toList(), seen);
+    final items = resourcesByCategory(category)
+        .where(
+          (resource) => checkedMajors.any(
+            (major) => resourceMatchesMajor(resource, major),
+          ),
+        )
+        .toList();
+    return sortBySeen(items, seen);
   }
 
   @override

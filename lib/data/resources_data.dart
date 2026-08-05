@@ -676,7 +676,8 @@ final List<Resource> allResources = [
     timeCommitment: 'Four-hour contest',
     majorTags: ['cs', 'algorithms', 'problem_solving'],
     applicationInfo: 'Free account registration on the official USACO site.',
-    description: 'Programming contests with Bronze through Platinum divisions.',
+    description:
+        'Solve algorithmic programming problems at your own level, then move from Bronze through Platinum as your speed and technique improve',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.emoji_events,
@@ -698,7 +699,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Students register through an approved school or competition manager.',
     description:
-        'MAA mathematics competitions that lead to the AIME and USA(J)MO.',
+        'Take on 25 inventive math problems in 75 minutes, with strong scores opening the path to AIME and the USA mathematical olympiads',
     deadline: 'September 30, 2026 (early registration)',
     deadlineIso: '2026-09-30T23:59:00-04:00',
     icon: Icons.emoji_events,
@@ -720,7 +721,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Students register through an approved school or competition manager.',
     description:
-        'MAA mathematics competition for students in grade 8 and below.',
+        'A fast, approachable 25-question contest that rewards creative problem solving for students in grade 8 and below',
     deadline: 'October 28, 2026 (early registration)',
     deadlineIso: '2026-10-28T23:59:00-04:00',
     icon: Icons.emoji_events,
@@ -741,7 +742,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Eligibility and deadlines are district-specific; use the official district finder.',
     description:
-        'Students build and submit an original app to their participating congressional district.',
+        'Create an original app, explain the problem it solves, and submit it to the competition run by your congressional district',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.emoji_events,
@@ -762,7 +763,7 @@ final List<Resource> allResources = [
     majorTags: ['cybersecurity', 'cs', 'networking', 'linux'],
     applicationInfo: 'Teams of 2–6 students register through an adult coach.',
     description:
-        'National youth cyber-defense competition focused on securing virtual systems and networks.',
+        'Work with a team to find vulnerabilities, harden virtual systems, and keep services running during timed cyber defense rounds',
     deadline: 'October 1, 2026 (team registration)',
     deadlineIso: '2026-10-01T23:59:00-04:00',
     icon: Icons.security,
@@ -784,7 +785,7 @@ final List<Resource> allResources = [
     majorTags: ['business', 'economics', 'finance', 'statistics'],
     applicationInfo: 'Free teams of 4–6 students with a teacher advisor.',
     description:
-        'Teams develop a long-term investment strategy for a real-world client.',
+        'Build a thoughtful investment strategy for a real client, track a simulated portfolio, and defend your decisions in a final report',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.trending_up,
@@ -807,7 +808,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Open to eligible students ages 13–18; see official rules.',
     description:
-        'Explain a challenging scientific or mathematical idea in a short original video.',
+        'Turn a difficult idea in science or math into a clear, creative two-minute video that a curious student could actually understand',
     deadline: 'September 15, 2026 at 11:59 PM PDT',
     deadlineIso: '2026-09-15T23:59:00-07:00',
     icon: Icons.science,
@@ -827,7 +828,7 @@ final List<Resource> allResources = [
     majorTags: ['aerospace', 'physics', 'engineering', 'applied_math'],
     applicationInfo: 'Teams of 2–6 students with an adult team director.',
     description:
-        'Teams solve orbit-planning, satellite-design, and launch-operations scenarios.',
+        'Use aerospace software and teamwork to solve realistic orbit planning, satellite design, and launch operations scenarios',
     deadline: 'October 14, 2026 (team registration)',
     deadlineIso: '2026-10-14T23:59:00-04:00',
     icon: Icons.rocket_launch,
@@ -848,7 +849,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Open to U.S. students in grades 6–12, individually or in teams of up to 3.',
     description:
-        'Create a documentary addressing the annual civic theme using C-SPAN footage.',
+        'Tell a focused civic story in a short documentary that combines your own reporting with relevant C-SPAN footage',
     deadline: 'January 20, 2027',
     deadlineIso: '2027-01-20T23:59:00-05:00',
     icon: Icons.videocam,
@@ -868,7 +869,7 @@ final List<Resource> allResources = [
     majorTags: ['science', 'engineering', 'biology', 'chemistry', 'physics'],
     applicationInfo: 'Join or form a registered school team.',
     description:
-        'Team-based STEM tournaments spanning laboratory, build, and knowledge events.',
+        'Prepare with a school team for a mix of lab work, engineering builds, and rapid-fire knowledge events across the sciences',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.science,
@@ -890,7 +891,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'A school and its students must register through the official portal.',
     description:
-        'National biology competition selecting the U.S. team for the International Biology Olympiad.',
+        'Test your depth in biology through a national exam series that ultimately selects the U.S. team for the International Biology Olympiad',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.biotech,
@@ -912,7 +913,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Register through the applicable state Council for Economic Education affiliate.',
     description:
-        'Team competition in microeconomics, macroeconomics, current events, and analysis.',
+        'Combine economic theory with current events as your team works through microeconomics, macroeconomics, and a case analysis',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.account_balance,
@@ -935,7 +936,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Check eligibility through the relevant Federal Reserve Bank.',
     description:
-        'Students research economics and monetary policy and present their analysis.',
+        'Research a real economic question, make sense of monetary policy, and present your conclusions to economists in your Federal Reserve district',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.account_balance,
@@ -986,7 +987,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Teams register for an eligible regional event through the official Department of Energy directory.',
     description:
-        'Department of Energy quiz-bowl competition covering science, mathematics, and energy.',
+        'Race another team to answer questions in biology, chemistry, physics, math, Earth science, and energy',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.science,
@@ -1010,7 +1011,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Student registration is free through the official NACLO site.',
     description:
-        'Students solve language and computational-linguistics puzzles without needing prior linguistics knowledge.',
+        'Crack unfamiliar language patterns using logic and careful observation, with no prior linguistics or second-language experience required',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.translate,
@@ -1032,7 +1033,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'Contact the applicable ACS local-section USNCO coordinator for 2027 participation.',
     description:
-        'American Chemical Society competition that selects the U.S. International Chemistry Olympiad team.',
+        'Move from a local chemistry exam to national rounds and, for the top students, a chance to join the U.S. International Chemistry Olympiad team',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.science,
@@ -1054,7 +1055,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'A teacher or approved proctor registers students through AAPT.',
     description:
-        'The F=ma mechanics exam is the qualifying pathway to the U.S. Physics Olympiad.',
+        'Solve a demanding set of mechanics problems under time pressure, with top scorers advancing to the U.S. Physics Olympiad exam',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.calculate,
@@ -1062,6 +1063,92 @@ final List<Resource> allResources = [
     links: ['AAPT U.S. Physics Team'],
     detailNote:
         'The 2026 cycle has passed, and the next registration deadline is not yet published.',
+  ),
+
+  const Resource(
+    id: 'first_robotics',
+    title: 'FIRST Robotics Competition',
+    category: 'competition',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Local teams compete at regional and district events',
+    timeCommitment: 'Full build season plus competitions',
+    majorTags: ['engineering', 'robotics', 'cs', 'business'],
+    applicationInfo:
+        'Join an existing team or start one with adult mentors through FIRST',
+    description:
+        'Design, program, and build a full-size competition robot with a team, then test it in fast-paced alliance matches',
+    deadline: 'November 17, 2026 (event registration)',
+    deadlineIso: '2026-11-17T12:00:00-05:00',
+    icon: Icons.precision_manufacturing,
+    url: 'https://www.firstinspires.org/programs/frc/',
+    links: ['FIRST Robotics Competition', '2027 season materials'],
+    detailNote:
+        'The 2027 game launches January 9, 2027, and individual team signup timing may vary',
+  ),
+  const Resource(
+    id: 'national_history_day',
+    title: 'National History Day',
+    category: 'competition',
+    field: 'humanities',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Local and affiliate contests lead to the national contest',
+    timeCommitment: 'Long-term research project plus contest presentations',
+    majorTags: ['history', 'research', 'english', 'digital_media'],
+    applicationInfo:
+        'Start through your school or local affiliate and follow its registration calendar',
+    description:
+        'Choose a historical question you care about, research original sources, and present your argument as a paper, exhibit, performance, documentary, or website',
+    icon: Icons.history_edu,
+    url: 'https://nhd.org/en/contest/',
+    links: ['National History Day contest', 'Find a local affiliate'],
+    detailNote:
+        'Local deadlines vary because students advance through affiliate contests before nationals',
+  ),
+  const Resource(
+    id: 'regeneron_isef',
+    title: 'Regeneron International Science and Engineering Fair',
+    category: 'competition',
+    field: 'science',
+    scope: 'international',
+    format: 'in_person',
+    locationNote:
+        'Qualify through an affiliated local, regional, or state fair',
+    timeCommitment: 'Independent research project plus qualifying fairs',
+    majorTags: ['science', 'engineering', 'research', 'cs', 'math'],
+    applicationInfo:
+        'Students in grades 9 through 12 must first qualify through a Society-affiliated fair',
+    description:
+        'Turn an original research or engineering project into a competition entry and advance through an affiliated fair to reach ISEF',
+    icon: Icons.biotech,
+    url: 'https://www.societyforscience.org/isef/',
+    links: ['Regeneron ISEF', 'Find an affiliated fair', 'ISEF rules'],
+    detailNote:
+        'Affiliated-fair calendars differ, so begin with the fair serving your school or region',
+  ),
+  const Resource(
+    id: 'regeneron_sts',
+    title: 'Regeneron Science Talent Search 2027',
+    category: 'competition',
+    field: 'science',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online application with finals in Washington, DC',
+    timeCommitment: 'Independent research paper and a detailed application',
+    majorTags: ['science', 'research', 'engineering', 'cs', 'math'],
+    applicationInfo:
+        'Open to eligible students in their final year of secondary school with individual research',
+    description:
+        'Present a substantial independent research project through a paper, essays, recommendations, and a holistic application',
+    deadline: 'November 5, 2026 at 8:00 PM ET',
+    deadlineIso: '2026-11-05T20:00:00-05:00',
+    icon: Icons.science,
+    url: 'https://www.societyforscience.org/regeneron-sts/',
+    links: ['Regeneron STS', '2027 application requirements'],
+    detailNote:
+        'The technical support deadline is November 4, so the program recommends submitting before the final day',
   ),
 
   // ORIGINAL COMMENTED-OUT SUMMER AND SEASONAL COMPETITIONS
@@ -1490,7 +1577,8 @@ final List<Resource> allResources = [
     title: 'AP English Language and Composition',
     category: 'ap',
     field: 'english',
-    description: 'Rhetorical reading and evidence-based writing.',
+    description:
+        'Learn how nonfiction writers persuade, then build your own evidence-based arguments across essays, speeches, and articles',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -1513,7 +1601,8 @@ final List<Resource> allResources = [
     title: 'AP English Literature and Composition',
     category: 'ap',
     field: 'english',
-    description: 'Literary analysis across genres and periods.',
+    description:
+        'Read fiction, poetry, and drama closely, with more focus on literary interpretation than the nonfiction emphasis in AP English Language',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -1799,7 +1888,8 @@ final List<Resource> allResources = [
     title: 'AP Calculus AB',
     category: 'ap',
     field: 'math',
-    description: 'Differential and integral calculus.',
+    description:
+        'A first college calculus course covering limits, derivatives, integrals, and differential equations at a steadier pace than Calculus BC',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -1823,7 +1913,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'math',
     description:
-        'Calculus AB topics plus additional integration, parametric, polar, and series topics.',
+        'Covers all Calculus AB material plus parametric and polar functions, advanced integration, and infinite sequences and series',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -1853,7 +1943,8 @@ final List<Resource> allResources = [
     title: 'AP Computer Science A',
     category: 'ap',
     field: 'cs',
-    description: 'Object-oriented programming and algorithms in Java.',
+    description:
+        'A Java programming course focused on writing code, object-oriented design, data structures, and algorithms',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -1881,7 +1972,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'cs',
     description:
-        'Computing systems, networks, data, algorithms, programming, and societal impact.',
+        'A broad introduction to computing, data, networks, and technology impacts, with less emphasis on advanced coding than Computer Science A',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2048,7 +2139,8 @@ final List<Resource> allResources = [
     title: 'AP Physics 1: Algebra-Based',
     category: 'ap',
     field: 'physics',
-    description: 'Algebra-based mechanics and related foundational physics.',
+    description:
+        'An algebra-based introduction to motion, forces, energy, momentum, rotation, and oscillations',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2077,7 +2169,7 @@ final List<Resource> allResources = [
     category: 'ap',
     field: 'physics',
     description:
-        'Algebra-based thermodynamics, electromagnetism, optics, and modern physics.',
+        'Continues the algebra-based sequence with fluids, thermodynamics, electricity, magnetism, optics, and modern physics',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2105,7 +2197,8 @@ final List<Resource> allResources = [
     title: 'AP Physics C: Electricity and Magnetism',
     category: 'ap',
     field: 'physics',
-    description: 'Calculus-based electricity and magnetism.',
+    description:
+        'A calculus-based course on electric fields, circuits, magnetic fields, and electromagnetism for students comfortable with calculus',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2134,7 +2227,8 @@ final List<Resource> allResources = [
     title: 'AP Physics C: Mechanics',
     category: 'ap',
     field: 'physics',
-    description: 'Calculus-based classical mechanics.',
+    description:
+        'A calculus-based mechanics course that studies motion, forces, energy, momentum, rotation, and oscillations in greater mathematical depth',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2341,7 +2435,8 @@ final List<Resource> allResources = [
     title: 'AP 2-D Art and Design',
     category: 'ap',
     field: 'art_history',
-    description: 'Portfolio-based study in two-dimensional visual art and design.',
+    description:
+        'Portfolio-based study in two-dimensional visual art and design.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2354,7 +2449,8 @@ final List<Resource> allResources = [
     title: 'AP 3-D Art and Design',
     category: 'ap',
     field: 'art_history',
-    description: 'Portfolio-based study in three-dimensional visual art and design.',
+    description:
+        'Portfolio-based study in three-dimensional visual art and design.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2367,7 +2463,8 @@ final List<Resource> allResources = [
     title: 'AP Drawing',
     category: 'ap',
     field: 'art_history',
-    description: 'Portfolio-based study in drawing, mark-making, and visual expression.',
+    description:
+        'Portfolio-based study in drawing, mark-making, and visual expression.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2380,7 +2477,8 @@ final List<Resource> allResources = [
     title: 'AP Research',
     category: 'ap',
     field: 'english',
-    description: 'Yearlong independent research, academic writing, and presentation.',
+    description:
+        'Yearlong independent research, academic writing, and presentation.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2393,7 +2491,8 @@ final List<Resource> allResources = [
     title: 'AP Seminar',
     category: 'ap',
     field: 'english',
-    description: 'Interdisciplinary inquiry, source analysis, argument, and collaboration.',
+    description:
+        'Interdisciplinary inquiry, source analysis, argument, and collaboration.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
@@ -2711,18 +2810,21 @@ final List<Resource> allResources = [
     category: 'research',
     field: 'all',
     scope: 'international',
+    format: 'in_person',
     locationNote: 'In-person at MIT',
     timeCommitment: '6 weeks full-time in summer',
     majorTags: ['research', 'stem', 'academia'],
     applicationInfo:
-        'Extensive application (essays, recs, scores), free to attend',
+        'Apply with essays, recommendations, coursework, and test scores if available; the program is free to attend',
     description:
-        'MIT-hosted residential summer research program, widely considered the most selective HS program in the US',
+        'Spend a summer at MIT moving from advanced STEM classes into an original research project and final conference presentation',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
     url: 'https://www.cee.org/programs/research-science-institute',
     links: ['cee.org/rsi', 'Application portal'],
+    detailNote:
+        'The 2027 application calendar is not posted yet, so confirm dates on the official page before preparing materials',
   ),
   const Resource(
     id: 'primes',
@@ -2730,17 +2832,21 @@ final List<Resource> allResources = [
     category: 'research',
     field: 'cs',
     scope: 'national',
+    format: 'virtual',
     locationNote: 'Online / Remote',
     timeCommitment: '10 hours/week for a full year',
     majorTags: ['math', 'cs', 'computational_biology'],
-    applicationInfo: 'Rigorous application with entrance problem set',
+    applicationInfo:
+        'Apply with school records, recommendations, and a challenging entrance problem set',
     description:
-        'Remote year-long math and CS research mentored by MIT graduate students',
+        'Work remotely for a full academic year on an original math, computer science, or computational biology problem with an MIT mentor',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
     url: 'https://math.mit.edu/research/highschool/primes/usa',
     links: ['math.mit.edu/research/highschool/primes', 'Application info'],
+    detailNote:
+        'The 2027 application link is expected in September 2026 for eligible U.S. sophomores and juniors',
   ),
   const Resource(
     id: 'nih',
@@ -2748,17 +2854,21 @@ final List<Resource> allResources = [
     category: 'research',
     field: 'biology',
     scope: 'national',
+    format: 'in_person',
     locationNote: 'In-person at NIH campuses',
     timeCommitment: '8 weeks full-time in summer',
     majorTags: ['biology', 'medicine', 'research'],
-    applicationInfo: 'Online application with resume/coursework, paid stipend',
+    applicationInfo:
+        'The Summer 2027 application opens in mid-November 2026 and requires references, coursework, and research interests',
     description:
-        'Paid summer research at NIH campuses where you work alongside scientists in real biomedical research labs',
+        'Join an NIH research group for a paid summer experience in biomedical, behavioral, or related health research',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.science,
-    url: 'https://www.training.nih.gov/programs/hs-sip',
-    links: ['training.nih.gov/programs/hs-sip', 'Application portal'],
+    url: 'https://www.training.nih.gov/research-training/pb/sip/',
+    links: ['NIH Summer Internship Program', 'NIH application guidance'],
+    detailNote:
+        'For 2027, eligible high school applicants must be seniors and meet the program age and citizenship or residency requirements',
   ),
   const Resource(
     id: 'polygence',
@@ -2766,38 +2876,108 @@ final List<Resource> allResources = [
     category: 'research',
     field: 'all',
     scope: 'international',
+    format: 'virtual',
     locationNote: 'Online (remote)',
     timeCommitment: '10-15 sessions over 3-6 months',
     majorTags: ['research', 'mentorship', 'all_subjects'],
     applicationInfo: 'Apply online with project interests',
     description:
-        'Mentored research program in any subject, work with a PhD mentor to produce a paper.',
+        'Build an independent project in a subject you choose through one-on-one online meetings with a research mentor',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.article,
     url: 'https://www.polygence.org',
     links: ['polygence.org', 'Browse mentors', 'Showcase past projects'],
+    detailNote:
+        'This is a paid mentorship service rather than a funded university research placement, so compare cost and mentor fit carefully',
+  ),
+  const Resource(
+    id: 'bu_rise',
+    title: 'Boston University RISE',
+    category: 'research',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Boston University in Boston, Massachusetts',
+    timeCommitment: '6 weeks full-time in summer',
+    majorTags: ['science', 'engineering', 'research', 'biology', 'cs'],
+    applicationInfo:
+        'Designed for domestic students who are current high school juniors; check back for the 2027 application calendar',
+    description:
+        'Choose a faculty-mentored lab internship or a structured practicum, then share your work at a final research symposium',
+    icon: Icons.science,
+    url:
+        'https://www.bu.edu/summer/high-school-programs/rise-internship-practicum/',
+    links: ['Boston University RISE', 'RISE program details'],
   ),
 
   // ===========================================================================
   // INTERNSHIPS
   // ===========================================================================
   const Resource(
-    id: 'nasa',
-    title: 'NASA STEM Enhancement',
+    id: 'nasa_sees',
+    title: 'NASA SEES High School Internship',
     category: 'internship',
     field: 'physics',
     scope: 'national',
-    locationNote: 'In-person at NASA centers or remote',
-    timeCommitment: '8-10 weeks full-time in summer',
-    majorTags: ['physics', 'engineering', 'space'],
-    applicationInfo: 'Apply via NASA STEM Gateway, requires essays/recs, paid',
-    description: 'Paid summer research at NASA centers nationwide',
+    format: 'hybrid',
+    locationNote:
+        'Remote projects with an optional on-site experience at UT Austin',
+    timeCommitment: 'Summer research with virtual preparation and project work',
+    majorTags: ['physics', 'engineering', 'space', 'earth_science', 'cs'],
+    applicationInfo:
+        'Nationally competitive program for current high school students; the 2027 application has not been posted yet',
+    description:
+        'Use NASA mission data with scientists and engineers on projects in Earth science, astronomy, remote sensing, and aerospace',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.business,
-    url: 'https://stemgateway.nasa.gov',
-    links: ['nasa.gov/careers/students', 'OSSI portal'],
+    url:
+        'https://csr.utexas.edu/education-outreach/high-school-internships/sees/',
+    links: ['NASA SEES internship', 'NASA learner opportunities'],
+    detailNote:
+        'The 2026 cycle accepted students in grades 10 and 11, and future participation depends on continued program funding',
+  ),
+  const Resource(
+    id: 'gmu_assip',
+    title: 'George Mason ASSIP',
+    category: 'internship',
+    field: 'science',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'George Mason University sites or remote, depending on mentor',
+    timeCommitment: '8 weeks full-time in summer',
+    majorTags: ['science', 'engineering', 'research', 'cs', 'psychology'],
+    applicationInfo:
+        'Applicants select prospective mentors; accepted students earn three college credits and may request need-based fee support',
+    description:
+        'Work one-on-one with a faculty mentor on an original project across fields ranging from wet-lab science to cybersecurity and social research',
+    icon: Icons.science,
+    url: 'https://science.gmu.edu/assip',
+    links: ['George Mason ASSIP', 'ASSIP tuition and fees'],
+    detailNote:
+        'The 2027 calendar is not posted yet; the 2026 program required students to be at least 15, or 16 for wet-lab placements',
+  ),
+  const Resource(
+    id: 'stanford_simr',
+    title: 'Stanford Institutes of Medicine Summer Research Program',
+    category: 'internship',
+    field: 'biology',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Stanford School of Medicine in Stanford, California',
+    timeCommitment: '8 weeks full-time in summer',
+    majorTags: ['biology', 'medicine', 'neuroscience', 'bioengineering'],
+    applicationInfo:
+        'Open to eligible current high school juniors and seniors; check the program page for 2027 requirements',
+    description:
+        'Conduct hands-on medical research with a Stanford mentor in areas such as cancer biology, genetics, neuroscience, immunology, or bioengineering',
+    icon: Icons.biotech,
+    url: 'https://simr.stanford.edu/',
+    links: ['Stanford SIMR', 'SIMR program information'],
+    detailNote:
+        'The program is highly selective and age, grade, location, and work-authorization rules can change by cycle',
   ),
 ];
 

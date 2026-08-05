@@ -107,6 +107,10 @@ class Resource {
   /// Placeholder dates are internal data markers, never user-facing deadlines.
   bool get hasDeadline => deadline != null && deadline != 'TODO';
 
+  String get displayDescription => description.endsWith('.')
+      ? description.substring(0, description.length - 1)
+      : description;
+
   // ─── Deadline Date Styling ────────────────────────────────────────────────
   /// Returns the color for the deadline date text based on urgency
   Color get deadlineTextColor {

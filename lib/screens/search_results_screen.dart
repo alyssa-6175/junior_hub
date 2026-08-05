@@ -6,7 +6,6 @@ import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../widgets/resource_tile.dart';
-import '../widgets/resource_detail_modal.dart';
 import '../utils/url_helper.dart';
 
 // ── Search hit model ─────────────────────────────────────────────────────────
@@ -24,9 +23,6 @@ class SearchHit {
 List<SearchHit> buildSearchHits(String query) {
   final q = query.toLowerCase().trim();
   final hits = <SearchHit>[];
-  final seen =
-      <String>{}; // prevent the same resource appearing twice at top level
-
   for (final r in allResources) {
     final titleMatch =
         r.title.toLowerCase().contains(q) ||
@@ -35,7 +31,6 @@ List<SearchHit> buildSearchHits(String query) {
 
     if (titleMatch) {
       hits.add(SearchHit(resource: r));
-      seen.add(r.id);
       continue;
     }
 
@@ -59,7 +54,6 @@ class SearchResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final seen = context.watch<AppProvider>().seen;
     final hits = buildSearchHits(query);
 
     return Column(

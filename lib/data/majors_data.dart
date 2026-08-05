@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import '../models/resource.dart';
 
 class SubMajor {
   final String id;
@@ -166,4 +167,108 @@ MajorGroup? groupForSubMajor(String subMajorId) {
     if (g.subcategories.any((s) => s.id == subMajorId)) return g;
   }
   return null;
+}
+
+const Map<String, Set<String>> _majorFields = {
+  'computer_science': {'cs'},
+  'engineering': {'engineering', 'physics'},
+  'mathematics': {'math'},
+  'statistics': {'statistics', 'math'},
+  'biology': {'biology'},
+  'chemistry': {'chemistry'},
+  'physics': {'physics'},
+  'environmental_science': {'env_sci', 'science'},
+  'pre_med': {'biology', 'chemistry'},
+  'nursing': {'biology'},
+  'public_health': {'biology'},
+  'psychology': {'psychology'},
+  'neuroscience': {'biology', 'psychology'},
+  'business': {'business'},
+  'economics': {'economics', 'business'},
+  'finance': {'business'},
+  'entrepreneurship': {'business', 'engineering'},
+  'political_science': {'polisci', 'history'},
+  'international_relations': {'polisci', 'history'},
+  'public_policy': {'polisci', 'history'},
+  'sociology': {'history'},
+  'anthropology': {'history'},
+  'pre_law': {'polisci', 'history'},
+  'english': {'english'},
+  'history': {'history'},
+  'philosophy': {'english', 'history'},
+  'creative_writing': {'english'},
+  'languages': {'languages'},
+  'art_design': {'art_history'},
+  'music': {'music'},
+  'film_media': {'humanities', 'english'},
+  'journalism': {'humanities', 'english'},
+  'education': {'english', 'history'},
+  'social_work': {'history', 'psychology'},
+  'nonprofit': {'history', 'business'},
+};
+
+const Map<String, Set<String>> _majorTagAliases = {
+  'computer_science': {'cs', 'algorithms', 'app_dev', 'cybersecurity', 'nlp'},
+  'engineering': {'engineering', 'aerospace', 'innovation'},
+  'mathematics': {'math', 'applied_math', 'problem_solving', 'logic'},
+  'statistics': {'statistics', 'data_sci'},
+  'biology': {'biology', 'genetics', 'anatomy', 'ecology'},
+  'chemistry': {'chemistry', 'lab_science'},
+  'physics': {'physics', 'mechanics', 'space'},
+  'environmental_science': {'env_sci', 'earth_science'},
+  'pre_med': {'medicine', 'biology', 'chemistry'},
+  'nursing': {'nursing', 'medicine', 'biology'},
+  'public_health': {'public_health', 'medicine', 'biology'},
+  'psychology': {'psychology', 'behavioral', 'cog_sci'},
+  'neuroscience': {'neuroscience', 'biology', 'psychology'},
+  'business': {'business'},
+  'economics': {'economics'},
+  'finance': {'finance', 'investment'},
+  'entrepreneurship': {'entrepreneurship', 'innovation'},
+  'political_science': {'polisci', 'civics'},
+  'international_relations': {'intl_rel'},
+  'public_policy': {'public_policy', 'civics'},
+  'sociology': {'sociology', 'social_impact'},
+  'anthropology': {'anthropology'},
+  'pre_law': {'prelaw', 'law_general', 'constitutional_law'},
+  'english': {'english'},
+  'history': {'history'},
+  'philosophy': {'philosophy', 'logic'},
+  'creative_writing': {'creative_writing', 'poetry'},
+  'languages': {'languages', 'linguistics'},
+  'art_design': {'fine_arts', 'art_design'},
+  'music': {'music'},
+  'film_media': {'film_prod', 'documentary', 'digital_media'},
+  'journalism': {'journalism_media'},
+  'education': {'education'},
+  'social_work': {'social_work', 'social_impact'},
+  'nonprofit': {'nonprofit', 'advocacy', 'social_impact'},
+};
+
+/// Uses the same taxonomy for sidebar pages, category filters, and My Majors
+bool resourceMatchesMajor(Resource resource, String majorOrGroupId) {
+  if (resource.majorTags.contains('all_subjects')) return true;
+
+  final group = majorGroups
+      .where((item) => item.id == majorOrGroupId)
+      .firstOrNull;
+  if (group != null) {
+    if (resource.majorTags.contains(group.id)) return true;
+    return group.subcategories.any(
+      (major) => resourceMatchesMajor(resource, major.id),
+    );
+  }
+
+  final parentGroup = groupForSubMajor(majorOrGroupId);
+  if (resource.field == 'all' &&
+      parentGroup != null &&
+      resource.majorTags.contains(parentGroup.id)) {
+    return true;
+  }
+
+  final fields = _majorFields[majorOrGroupId] ?? const <String>{};
+  final aliases = _majorTagAliases[majorOrGroupId] ?? const <String>{};
+  return fields.contains(resource.field) ||
+      resource.majorTags.contains(majorOrGroupId) ||
+      resource.majorTags.any(aliases.contains);
 }

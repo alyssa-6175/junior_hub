@@ -106,6 +106,17 @@ class ResourceTile extends StatelessWidget {
                         color: kTextSecondary,
                       ),
                     ),
+                    const SizedBox(height: 3),
+                    Text(
+                      resource.displayDescription,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: 10.5,
+                        height: 1.3,
+                        color: kTextSecondary,
+                      ),
+                    ),
                     if (resource.hasDeadline) ...[
                       const SizedBox(height: 4),
                       _DeadlineBadge(resource: resource),

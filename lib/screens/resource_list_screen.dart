@@ -43,8 +43,12 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       case 'math':
         return resource.field == 'math';
       case 'science':
-        return const {'science', 'biology', 'chemistry', 'physics'}
-            .contains(resource.field);
+        return const {
+          'science',
+          'biology',
+          'chemistry',
+          'physics',
+        }.contains(resource.field);
       case 'business':
         return resource.field == 'business';
       case 'humanities':
@@ -82,11 +86,7 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
           .toList();
     } else if (_majorFilter != null) {
       items = items
-          .where(
-            (r) =>
-                r.majorTags.contains(_majorFilter) ||
-                r.majorTags.any((t) => groupForSubMajor(t)?.id == _majorFilter),
-          )
+          .where((r) => resourceMatchesMajor(r, _majorFilter!))
           .toList();
     }
     final allSorted = _sorted(items, pinned, seen);
@@ -175,16 +175,17 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
                               )
                             : majorGroups)
                         .map(
-                      (g) => _MajorChip(
-                        label: g.label,
-                        active: _majorFilter == g.id,
-                        color: g.color,
-                        onTap: () => setState(
-                          () =>
-                              _majorFilter = _majorFilter == g.id ? null : g.id,
+                          (g) => _MajorChip(
+                            label: g.label,
+                            active: _majorFilter == g.id,
+                            color: g.color,
+                            onTap: () => setState(
+                              () => _majorFilter = _majorFilter == g.id
+                                  ? null
+                                  : g.id,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                   ],
                 ),
               ),

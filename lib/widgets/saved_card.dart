@@ -160,7 +160,7 @@ class SavedCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
                 child: Text(
-                  resource.description,
+                  resource.displayDescription,
                   style: GoogleFonts.inter(
                     fontSize: 11,
                     color: kTextSecondary,

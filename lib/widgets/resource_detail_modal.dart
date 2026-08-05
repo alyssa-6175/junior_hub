@@ -170,7 +170,7 @@ class ResourceDetailModal extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      resource.description,
+                      resource.displayDescription,
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         color: kTextSecondary,
@@ -414,18 +414,19 @@ class _Badge extends StatelessWidget {
 class _InfoChip extends StatelessWidget {
   final IconData icon;
   final String label;
-  final Color? color;
-  const _InfoChip({required this.icon, required this.label, this.color});
+  const _InfoChip({required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
-    final c = color ?? kTextSecondary;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 13, color: c),
+        Icon(icon, size: 13, color: kTextSecondary),
         const SizedBox(width: 4),
-        Text(label, style: TextStyle(fontSize: 12, color: c)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 12, color: kTextSecondary),
+        ),
       ],
     );
   }

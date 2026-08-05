@@ -294,13 +294,13 @@ class _StudyGuideCard extends StatelessWidget {
       icon: Icons.assignment_outlined,
       label: '1. Baseline test',
       detail:
-          'Take a full Bluebook or paper test cold. Don\'t study first — you need an honest baseline score.',
+          'Take a full Bluebook or paper test cold. Don\'t study first because you need an honest baseline score',
     ),
     (
       icon: Icons.search,
       label: '2. Diagnose',
       detail:
-          'Review your score report. Which skill categories cost you the most points? Write them down — those are your targets.',
+          'Review your score report. Which skill categories cost you the most points? Write them down because those are your targets',
     ),
     (
       icon: Icons.track_changes_outlined,
@@ -312,7 +312,7 @@ class _StudyGuideCard extends StatelessWidget {
       icon: Icons.repeat,
       label: '4. Test again',
       detail:
-          'Take another full-length test. Compare score reports — are your weak areas improving? Repeat steps 2–4.',
+          'Take another full-length test. Compare score reports and ask whether your weak areas are improving. Repeat steps 2–4',
     ),
     (
       icon: Icons.done_all,

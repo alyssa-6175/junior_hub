@@ -76,12 +76,14 @@ class _ApScreenState extends State<ApScreen> {
                       current: _filter,
                       onTap: (v) => setState(() => _filter = v),
                     ),
-                    ..._sections.map((section) => _ApFilter(
-                      label: section.$2,
-                      value: section.$1,
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    )),
+                    ..._sections.map(
+                      (section) => _ApFilter(
+                        label: section.$2,
+                        value: section.$1,
+                        current: _filter,
+                        onTap: (v) => setState(() => _filter = v),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -94,41 +96,46 @@ class _ApScreenState extends State<ApScreen> {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             children: [
               for (final section in visibleSections) ...[
-                Builder(builder: (context) {
-                  final items = allItems
-                      .where((item) => item.apSubCategory == section.$1)
-                      .toList();
-                  if (items.isEmpty) return const SizedBox.shrink();
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 12, bottom: 8),
-                    child: Text(
-                      section.$2,
-                      style: GoogleFonts.inter(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: kTextPrimary,
+                Builder(
+                  builder: (context) {
+                    final items = allItems
+                        .where((item) => item.apSubCategory == section.$1)
+                        .toList();
+                    if (items.isEmpty) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 8),
+                      child: Text(
+                        section.$2,
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: kTextPrimary,
+                        ),
                       ),
-                    ),
-                  );
-                }),
-                Builder(builder: (context) {
-                  final items = allItems
-                      .where((item) => item.apSubCategory == section.$1)
-                      .toList();
-                  if (items.isEmpty) return const SizedBox.shrink();
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 160,
-                      mainAxisExtent: 110,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
-                    itemCount: items.length,
-                    itemBuilder: (_, i) => _ApCard(resource: items[i]),
-                  );
-                }),
+                    );
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    final items = allItems
+                        .where((item) => item.apSubCategory == section.$1)
+                        .toList();
+                    if (items.isEmpty) return const SizedBox.shrink();
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 160,
+                            mainAxisExtent: 158,
+                            crossAxisSpacing: 8,
+                            mainAxisSpacing: 8,
+                          ),
+                      itemCount: items.length,
+                      itemBuilder: (_, i) => _ApCard(resource: items[i]),
+                    );
+                  },
+                ),
               ],
             ],
           ),
@@ -167,6 +174,17 @@ class _ApCard extends StatelessWidget {
                 color: kTextPrimary,
               ),
               maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              resource.displayDescription,
+              style: GoogleFonts.inter(
+                fontSize: 10.5,
+                height: 1.35,
+                color: kTextSecondary,
+              ),
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),

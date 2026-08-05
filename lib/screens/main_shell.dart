@@ -28,8 +28,6 @@ import '../data/majors_data.dart';
 
 import 'test_detail_screen.dart';
 
-import 'board_screen.dart';
-
 import 'my_majors_screen.dart';
 
 import 'search_results_screen.dart';
@@ -459,6 +457,7 @@ class _NavItem extends StatelessWidget {
 
 // ─── Sidebar: field nav item (colored dot + label) ───────────────────────────
 
+// ignore: unused_element
 class _FieldNavItem extends StatelessWidget {
   final String field;
 

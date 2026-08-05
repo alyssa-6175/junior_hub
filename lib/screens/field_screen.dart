@@ -33,70 +33,16 @@ class _FieldScreenState extends State<FieldScreen>
     super.dispose();
   }
 
-  static const _subToField = {
-    'cs': 'cs',
-    'cybersecurity': 'cs',
-    'data_sci': 'cs',
-    'ai': 'cs',
-    'game_design': 'cs',
-    'mech_eng': 'physics',
-    'biology': 'biology',
-    'microbiology': 'biology',
-    'neuroscience': 'biology',
-    'bio_health': 'biology',
-    'micro_health': 'biology',
-    'neuro_health': 'biology',
-    'chemistry': 'biology',
-    'chem_eng': 'physics',
-    'physics': 'physics',
-    'applied_math': 'math',
-    'statistics': 'math',
-    'comp_math': 'math',
-    'fin_math': 'math',
-    'premed': 'biology',
-    'nursing': 'biology',
-    'economics': 'history',
-    'econ_soc': 'history',
-    'business': 'history',
-    'marketing': 'history',
-    'finance': 'history',
-    'accounting': 'history',
-    'comm_biz': 'history',
-    'comm_soc': 'history',
-    'intl_rel': 'history',
-    'polisci': 'history',
-    'pub_policy': 'history',
-    'prelaw': 'history',
-    'sociology': 'history',
-    'english': 'english',
-    'humanities': 'english',
-    'music': 'english',
-    'fine_arts': 'english',
-    'game_des_art': 'cs',
-  };
+  String get _majorKey => widget.subMajorId ?? widget.majorGroupId;
 
-  String get _fieldKey {
-    const groupToField = {
-      'cs_eng': 'cs',
-      'sciences': 'biology',
-      'math': 'math',
-      'health': 'biology',
-      'business': 'history',
-      'social': 'history',
-      'arts': 'english',
-    };
-    if (widget.subMajorId != null) {
-      return _subToField[widget.subMajorId] ?? 'all';
-    }
-    return groupToField[widget.majorGroupId] ?? 'all';
-  }
+  List<Resource> _forCategory(String category) => resourcesByCategory(
+    category,
+  ).where((resource) => resourceMatchesMajor(resource, _majorKey)).toList();
 
-  List<Resource> _aps() => resourcesByFieldAndCategory(_fieldKey, 'ap');
+  List<Resource> _aps() => _forCategory('ap');
   List<Resource> _opps() =>
-      resourcesByFieldAndCategory(_fieldKey, 'research') +
-      resourcesByFieldAndCategory(_fieldKey, 'internship');
-  List<Resource> _comps() =>
-      resourcesByFieldAndCategory(_fieldKey, 'competition');
+      _forCategory('research') + _forCategory('internship');
+  List<Resource> _comps() => _forCategory('competition');
 
   List<Resource> _allForScreen() {
     final all = {..._aps(), ..._opps(), ..._comps()};
