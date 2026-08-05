@@ -5,6 +5,415 @@ import '../models/resource.dart';
 const Map<String, String> kLinkUrls = {
   'Knowt AP Hub': 'https://knowt.com/ap',
   'CrackAP practice questions': 'https://www.crackap.com/index.html',
+  // Course-specific AP resources
+  'AP Art History Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-art-history',
+  'AP Art History AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Art History Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-art-history/exam',
+  'AP Art History Khan Academy':
+      'https://www.khanacademy.org/humanities/ap-art-history',
+  'AP Art History Fiveable Study Guides': 'https://fiveable.me/ap-art-history',
+  'AP Art History Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Art-History',
+  'AP Art History CrackAP Practice Questions':
+      'https://www.crackap.com/ap/art-history/',
+  'AP Music Theory Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-music-theory',
+  'AP Music Theory AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Music Theory Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-music-theory/exam',
+  'AP Music Theory Fiveable Study Guides':
+      'https://fiveable.me/ap-music-theory',
+  'AP Music Theory Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Music-Theory',
+  'AP English Language and Composition Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-english-language-and-composition',
+  'AP English Language and Composition AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP English Language and Composition Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-english-language-and-composition/exam',
+  'AP English Language and Composition Fiveable Study Guides':
+      'https://fiveable.me/ap-lang',
+  'AP English Language and Composition Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-English-Language-and-Composition',
+  'AP English Language and Composition CrackAP Practice Questions':
+      'https://www.crackap.com/ap/english-language-and-composition/',
+  'AP English Literature and Composition Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-english-literature-and-composition',
+  'AP English Literature and Composition AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP English Literature and Composition Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-english-literature-and-composition/exam',
+  'AP English Literature and Composition Fiveable Study Guides':
+      'https://fiveable.me/ap-lit',
+  'AP English Literature and Composition Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-English-Literature-and-Composition',
+  'AP English Literature and Composition CrackAP Practice Questions':
+      'https://www.crackap.com/ap/english-literature-and-composition/',
+  'AP African American Studies Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-african-american-studies',
+  'AP African American Studies AP Classroom': 'https://myap.collegeboard.org/',
+  'AP African American Studies Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-african-american-studies/exam',
+  'AP African American Studies Fiveable Study Guides':
+      'https://fiveable.me/ap-african-american-studies',
+  'AP African American Studies Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-African-American-Studies',
+  'AP Comparative Government and Politics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-comparative-government-and-politics',
+  'AP Comparative Government and Politics AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Comparative Government and Politics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-comparative-government-and-politics/exam',
+  'AP Comparative Government and Politics Fiveable Study Guides':
+      'https://fiveable.me/ap-comp-gov',
+  'AP Comparative Government and Politics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Comparative-Government-and-Politics',
+  'AP Comparative Government and Politics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/comparative-government-and-politics/',
+  'AP European History Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-european-history',
+  'AP European History AP Classroom': 'https://myap.collegeboard.org/',
+  'AP European History Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-european-history/exam',
+  'AP European History Fiveable Study Guides': 'https://fiveable.me/ap-euro',
+  'AP European History Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-European-History',
+  'AP European History CrackAP Practice Questions':
+      'https://www.crackap.com/ap/european-history/',
+  'AP Human Geography Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-human-geography',
+  'AP Human Geography AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Human Geography Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-human-geography/exam',
+  'AP Human Geography Fiveable Study Guides': 'https://fiveable.me/ap-hug',
+  'AP Human Geography Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Human-Geography',
+  'AP Human Geography CrackAP Practice Questions':
+      'https://www.crackap.com/ap/human-geography/',
+  'AP Macroeconomics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-macroeconomics',
+  'AP Macroeconomics AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Macroeconomics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-macroeconomics/exam',
+  'AP Macroeconomics Khan Academy':
+      'https://www.khanacademy.org/economics-finance-domain/ap-macroeconomics',
+  'AP Macroeconomics Fiveable Study Guides': 'https://fiveable.me/ap-macro',
+  'AP Macroeconomics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Macroeconomics',
+  'AP Macroeconomics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/macroeconomics/',
+  'AP Microeconomics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-microeconomics',
+  'AP Microeconomics AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Microeconomics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-microeconomics/exam',
+  'AP Microeconomics Khan Academy':
+      'https://www.khanacademy.org/economics-finance-domain/ap-microeconomics',
+  'AP Microeconomics Fiveable Study Guides': 'https://fiveable.me/ap-micro',
+  'AP Microeconomics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Microeconomics',
+  'AP Microeconomics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/microeconomics/',
+  'AP Psychology Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-psychology',
+  'AP Psychology AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Psychology Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-psychology/exam',
+  'AP Psychology Fiveable Study Guides': 'https://fiveable.me/ap-psych-revised',
+  'AP Psychology Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Psychology',
+  'AP Psychology CrackAP Practice Questions':
+      'https://www.crackap.com/ap/psychology/',
+  'AP United States Government and Politics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-united-states-government-and-politics',
+  'AP United States Government and Politics AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP United States Government and Politics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-united-states-government-and-politics/exam',
+  'AP United States Government and Politics Khan Academy':
+      'https://www.khanacademy.org/humanities/ap-us-government-and-politics',
+  'AP United States Government and Politics Fiveable Study Guides':
+      'https://fiveable.me/ap-gov',
+  'AP United States Government and Politics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-United-States-Government-and-Politics',
+  'AP United States Government and Politics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/us-government-and-politics/',
+  'AP United States History Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-united-states-history',
+  'AP United States History AP Classroom': 'https://myap.collegeboard.org/',
+  'AP United States History Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-united-states-history/exam',
+  'AP United States History Khan Academy':
+      'https://www.khanacademy.org/humanities/ap-us-history',
+  'AP United States History Fiveable Study Guides': 'https://fiveable.me/apush',
+  'AP United States History Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-United-States-History',
+  'AP United States History CrackAP Practice Questions':
+      'https://www.crackap.com/ap/us-history/',
+  'AP World History: Modern Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-world-history-modern',
+  'AP World History: Modern AP Classroom': 'https://myap.collegeboard.org/',
+  'AP World History: Modern Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-world-history-modern/exam',
+  'AP World History: Modern Khan Academy':
+      'https://www.khanacademy.org/humanities/world-history-project-ap',
+  'AP World History: Modern Fiveable Study Guides':
+      'https://fiveable.me/ap-world',
+  'AP World History: Modern Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-World-History_Modern',
+  'AP World History: Modern CrackAP Practice Questions':
+      'https://www.crackap.com/ap/world-history/',
+  'AP Calculus AB Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-calculus-ab',
+  'AP Calculus AB AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Calculus AB Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-calculus-ab/exam',
+  'AP Calculus AB Khan Academy':
+      'https://www.khanacademy.org/math/ap-calculus-ab',
+  'AP Calculus AB Fiveable Study Guides': 'https://fiveable.me/ap-calc',
+  'AP Calculus AB Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Calculus-AB',
+  'AP Calculus AB CrackAP Practice Questions':
+      'https://www.crackap.com/ap/calculus-ab/',
+  'AP Calculus BC Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-calculus-bc',
+  'AP Calculus BC AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Calculus BC Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam',
+  'AP Calculus BC Khan Academy':
+      'https://www.khanacademy.org/math/ap-calculus-bc',
+  'AP Calculus BC Fiveable Study Guides': 'https://fiveable.me/ap-calc',
+  'AP Calculus BC Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Calculus-BC',
+  'AP Calculus BC CrackAP Practice Questions':
+      'https://www.crackap.com/ap/calculus-bc/',
+  'AP Computer Science A Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-computer-science-a',
+  'AP Computer Science A AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Computer Science A Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-computer-science-a/exam',
+  'AP Computer Science A Fiveable Study Guides':
+      'https://fiveable.me/ap-comp-sci-a',
+  'AP Computer Science A Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Computer-Science-A',
+  'AP Computer Science A CrackAP Practice Questions':
+      'https://www.crackap.com/ap/computer-science-a/',
+  'AP Computer Science A AP CS Exam Prep: Test and Course Content':
+      'https://www.apcsexamprep.com/',
+  'AP Computer Science A CodingBat Java Practice': 'https://codingbat.com/java',
+  'AP Computer Science Principles Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-computer-science-principles',
+  'AP Computer Science Principles AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Computer Science Principles Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-computer-science-principles/exam',
+  'AP Computer Science Principles Khan Academy':
+      'https://www.khanacademy.org/computing/ap-computer-science-principles',
+  'AP Computer Science Principles Fiveable Study Guides':
+      'https://fiveable.me/ap-comp-sci-p',
+  'AP Computer Science Principles Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Computer-Science-Principles',
+  'AP Computer Science Principles CrackAP Practice Questions':
+      'https://www.crackap.com/ap/computer-science-principles/',
+  'AP Computer Science Principles AP CS Exam Prep: Test and Course Content':
+      'https://www.apcsexamprep.com/',
+  'AP Computer Science Principles Code.org Curriculum':
+      'https://code.org/en-US/curriculum/computer-science-principles',
+  'AP Precalculus Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-precalculus',
+  'AP Precalculus AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Precalculus Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-precalculus/exam',
+  'AP Precalculus Fiveable Study Guides': 'https://fiveable.me/ap-pre-calc',
+  'AP Precalculus Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Precalculus',
+  'AP Statistics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-statistics',
+  'AP Statistics AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Statistics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-statistics/exam',
+  'AP Statistics Khan Academy':
+      'https://www.khanacademy.org/math/ap-statistics',
+  'AP Statistics Fiveable Study Guides': 'https://fiveable.me/ap-stats',
+  'AP Statistics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Statistics',
+  'AP Statistics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/statistics/',
+  'AP Biology Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-biology',
+  'AP Biology AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Biology Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-biology/exam',
+  'AP Biology Khan Academy': 'https://www.khanacademy.org/science/ap-biology',
+  'AP Biology Fiveable Study Guides': 'https://fiveable.me/ap-bio',
+  'AP Biology Knowt Study Guides': 'https://knowt.com/exams/AP/AP-Biology',
+  'AP Biology CrackAP Practice Questions':
+      'https://www.crackap.com/ap/biology/',
+  'AP Chemistry Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-chemistry',
+  'AP Chemistry AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Chemistry Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-chemistry/exam',
+  'AP Chemistry Khan Academy':
+      'https://www.khanacademy.org/science/ap-chemistry-beta',
+  'AP Chemistry Fiveable Study Guides': 'https://fiveable.me/ap-chem',
+  'AP Chemistry Knowt Study Guides': 'https://knowt.com/exams/AP/AP-Chemistry',
+  'AP Chemistry CrackAP Practice Questions':
+      'https://www.crackap.com/ap/chemistry/',
+  'AP Environmental Science Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-environmental-science',
+  'AP Environmental Science AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Environmental Science Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-environmental-science/exam',
+  'AP Environmental Science Khan Academy':
+      'https://www.khanacademy.org/science/ap-college-environmental-science',
+  'AP Environmental Science Fiveable Study Guides':
+      'https://fiveable.me/ap-enviro',
+  'AP Environmental Science Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Environmental-Science',
+  'AP Environmental Science CrackAP Practice Questions':
+      'https://www.crackap.com/ap/environmental-science/',
+  'AP Physics 1: Algebra-Based Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-physics-1',
+  'AP Physics 1: Algebra-Based AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Physics 1: Algebra-Based Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-physics-1/exam',
+  'AP Physics 1: Algebra-Based Khan Academy':
+      'https://www.khanacademy.org/science/ap-physics-1',
+  'AP Physics 1: Algebra-Based Fiveable Study Guides':
+      'https://fiveable.me/ap-physics-1-revised',
+  'AP Physics 1: Algebra-Based Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Physics-1_Algebra.Based',
+  'AP Physics 1: Algebra-Based CrackAP Practice Questions':
+      'https://www.crackap.com/ap/physics-1/',
+  'AP Physics 2: Algebra-Based Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-physics-2',
+  'AP Physics 2: Algebra-Based AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Physics 2: Algebra-Based Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-physics-2/exam',
+  'AP Physics 2: Algebra-Based Khan Academy':
+      'https://www.khanacademy.org/science/ap-physics-2',
+  'AP Physics 2: Algebra-Based Fiveable Study Guides':
+      'https://fiveable.me/ap-physics-2-revised',
+  'AP Physics 2: Algebra-Based Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Physics-2_Algebra.Based',
+  'AP Physics 2: Algebra-Based CrackAP Practice Questions':
+      'https://www.crackap.com/ap/physics-2/',
+  'AP Physics C: Electricity and Magnetism Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-physics-c-electricity-and-magnetism',
+  'AP Physics C: Electricity and Magnetism AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Physics C: Electricity and Magnetism Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-physics-c-electricity-and-magnetism/exam',
+  'AP Physics C: Electricity and Magnetism Fiveable Study Guides':
+      'https://fiveable.me/ap-physics-c-e-m',
+  'AP Physics C: Electricity and Magnetism Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Physics-C_Electricity-and-Magnetism',
+  'AP Physics C: Electricity and Magnetism CrackAP Practice Questions':
+      'https://www.crackap.com/ap/physics-c-electricity-and-magnetism/',
+  'AP Physics C: Mechanics Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-physics-c-mechanics',
+  'AP Physics C: Mechanics AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Physics C: Mechanics Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-physics-c-mechanics/exam',
+  'AP Physics C: Mechanics Fiveable Study Guides':
+      'https://fiveable.me/ap-physics-c-mechanics',
+  'AP Physics C: Mechanics Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Physics-C_Mechanics',
+  'AP Physics C: Mechanics CrackAP Practice Questions':
+      'https://www.crackap.com/ap/physics-c-mechanics/',
+  'AP Chinese Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-chinese-language-and-culture',
+  'AP Chinese Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Chinese Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-chinese-language-and-culture/exam',
+  'AP Chinese Language and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-chinese',
+  'AP Chinese Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Chinese-Language-and-Culture',
+  'AP French Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-french-language-and-culture',
+  'AP French Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP French Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-french-language-and-culture/exam',
+  'AP French Language and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-french',
+  'AP French Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-French-Language-and-Culture',
+  'AP German Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-german-language-and-culture',
+  'AP German Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP German Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-german-language-and-culture/exam',
+  'AP German Language and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-german',
+  'AP German Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-German-Language-and-Culture',
+  'AP Italian Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-italian-language-and-culture',
+  'AP Italian Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Italian Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-italian-language-and-culture/exam',
+  'AP Italian Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Italian-Language-and-Culture',
+  'AP Japanese Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-japanese-language-and-culture',
+  'AP Japanese Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Japanese Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-japanese-language-and-culture/exam',
+  'AP Japanese Language and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-japanese',
+  'AP Japanese Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Japanese-Language-and-Culture',
+  'AP Latin Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-latin',
+  'AP Latin AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Latin Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-latin/exam',
+  'AP Latin Fiveable Study Guides': 'https://fiveable.me/ap-latin',
+  'AP Latin Knowt Study Guides': 'https://knowt.com/exams/AP/AP-Latin',
+  'AP Spanish Language and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-spanish-language-and-culture',
+  'AP Spanish Language and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Spanish Language and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-spanish-language-and-culture/exam',
+  'AP Spanish Language and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-spanish-lang',
+  'AP Spanish Language and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Spanish-Language-and-Culture',
+  'AP Spanish Language and Culture CrackAP Practice Questions':
+      'https://www.crackap.com/ap/spanish-language-culture/',
+  'AP Spanish Literature and Culture Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-spanish-literature-and-culture',
+  'AP Spanish Literature and Culture AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Spanish Literature and Culture Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-spanish-literature-and-culture/exam',
+  'AP Spanish Literature and Culture Fiveable Study Guides':
+      'https://fiveable.me/ap-spanish-lit',
+  'AP Spanish Literature and Culture Knowt Study Guides':
+      'https://knowt.com/exams/AP/AP-Spanish-Literature-and-Culture',
+  'AP Business with Personal Finance Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-business-with-personal-finance',
+  'AP Business with Personal Finance AP Classroom':
+      'https://myap.collegeboard.org/',
+  'AP Business with Personal Finance Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-business-personal-finance/exam',
+  'AP Cybersecurity Official Course Page':
+      'https://apstudents.collegeboard.org/courses/ap-cybersecurity',
+  'AP Cybersecurity AP Classroom': 'https://myap.collegeboard.org/',
+  'AP Cybersecurity Official Exam Page':
+      'https://apcentral.collegeboard.org/courses/ap-cybersecurity/exam',
+  'AP Cybersecurity AP CS Exam Prep: Test and Course Content':
+      'https://www.apcsexamprep.com/',
   'Schoolhouse SAT Bootcamps': 'https://schoolhouse.world/sat-bootcamp',
   'Desmos SAT calculator practice':
       'https://www.desmos.com/testing/collegeboard/graphing',
@@ -20,14 +429,10 @@ const Map<String, String> kLinkUrls = {
   'AAPT U.S. Physics Team': 'https://www.aapt.org/physicsteam/',
   'AP Classroom': 'https://myap.collegeboard.org/',
   'Official AP course list': 'https://apstudents.collegeboard.org/courses',
-  'Official AP exam questions':
-      'https://apcentral.collegeboard.org/courses/past-exam-questions',
   'AP CS Exam Prep : Test & Course Content': 'https://www.apcsexamprep.com/',
   'Khan Academy': 'https://www.khanacademy.org/',
-  'Albert AP practice': 'https://www.albert.io/ap',
+  'Albert AP practice': 'https://www.albert.io/subjects/high-school/ap',
   'Fiveable AP study guides': 'https://fiveable.me/',
-  'Code.org AP CSP':
-      'https://code.org/en-US/curriculum/computer-science-principles',
   'CodingBat Java': 'https://codingbat.com/java',
   'USACO': 'https://usaco.org/',
   'USACO Guide': 'https://usaco.guide/',
@@ -659,81 +1064,383 @@ final List<Resource> allResources = [
         'The 2026 cycle has passed, and the next registration deadline is not yet published.',
   ),
 
+  // ORIGINAL COMMENTED-OUT SUMMER AND SEASONAL COMPETITIONS
+  // Kept for future date verification and reactivation.
+  // const Resource(
+  // SUMMER ONLY, CHECK BACK LATER FOR 2027
+  //   id: 'citadel_terminal',
+  //   title: 'Citadel High School Terminal Competition',
+  //   category: 'competition',
+  //   field: 'cs',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online',
+  //   timeCommitment: '1 competition day (7 hrs)',
+  //   majorTags: ['cs', 'data_sci', 'ai', 'applied_math', 'statistics'],
+  //   applicationInfo:
+  //       'Apply at citadel.com. Teams of 1-4. Algorithmic coding in Python.',
+  //   description:
+  //       'Citadel\'s Terminal competition challenges students to build an algorithmic trading strategy in Python.',
+  //   deadline: 'Rolling (multiple per year)',
+  //   deadlineIso: '2026-12-31T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://terminal.c1games.com',
+  //   links: ['terminal.c1games.com', 'Python algorithmic strategy'],
+  // ),
+  // const Resource(
+  // ALSO SUMMER
+  //   id: 'nyas_junior_academy',
+  //   title: 'NYAS The Junior Academy',
+  //   category: 'competition',
+  //   field: 'science',
+  //   scope: 'international',
+  //   format: 'virtual',
+  //   locationNote: 'Online collaboration + virtual presentations',
+  //   timeCommitment: '~6 months (Nov-May)',
+  //   majorTags: ['biology', 'cs', 'innovation', 'env_sci', 'neuroscience'],
+  //   applicationInfo: 'Apply at juniorsacademy.org. Free for accepted students.',
+  //   description:
+  //       'The New York Academy of Sciences\' selective global STEM program.',
+  //   deadline: 'Nov 2025 (application)',
+  //   deadlineIso: '2025-11-30T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.juniorsacademy.org',
+  //   links: ['juniorsacademy.org'],
+  // ),
+  // const Resource(
+  //   //TODO LATER
+  //   id: 'aspiring_scholars',
+  //   title: 'Aspiring Scholars Directed Research Program',
+  //   category: 'competition',
+  //   field: 'science',
+  //   scope: 'regional',
+  //   format: 'in_person',
+  //   locationNote: 'California (Bay Area)',
+  //   timeCommitment: 'TODO: multi-week research program',
+  //   majorTags: ['biology', 'cs', 'neuroscience', 'chemistry', 'data_sci'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description:
+  //       'Directed research program providing hands-on mentored research experience.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.aspiringscholars.org',
+  //   links: ['aspiringscholars.org'],
+  // ),
+  // const Resource(
+  // TODO: SUMMER DEADLINE
+  //   id: 'intl_psych_olympiad',
+  //   title: 'International Psychology Olympiad',
+  //   category: 'competition',
+  //   field: 'science',
+  //   scope: 'international',
+  //   format: 'in_person',
+  //   locationNote: 'TODO: host country varies annually',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['psych', 'behavioral', 'cog_sci', 'neuroscience'],
+  //   applicationInfo: 'TODO: typically selected through national olympiad',
+  //   description:
+  //       'An international competition testing high school students\' knowledge of psychology.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://psycholympics.com',
+  //   links: ['psycholympics.com'],
+  // ),
+  // const Resource(
+  //   //application closes in september, maybe next year
+  //   id: 'verge_challenge',
+  //   title: 'Verge Challenge',
+  //   category: 'competition',
+  //   field: 'science',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'TODO',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['innovation', 'entrepreneurship', 'env_sci', 'social_impact'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description:
+  //       'A challenge to develop innovative solutions to pressing problems.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'TODO',
+  //   links: ['TODO'],
+  // ),
+  // const Resource(
+  //   id: 'leb_art_equity',
+  //   title: 'LegalEagleBee | 1st Art for Equity Competition',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: '1-2 weeks (artwork creation)',
+  //   majorTags: ['civil_rights', 'fine_arts', 'humanities', 'law_general'],
+  //   applicationInfo: 'Check legaleaglebee.com for current cycle dates.',
+  //   description:
+  //       'Art competition exploring themes of equity, justice, and civil rights.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.legaleaglebee.com',
+  //   links: ['legaleaglebee.com'],
+  // ),
+  // const Resource(
+  //   id: 'leb_policy_brief',
+  //   title: 'LegalEagleBee | 2nd Policy Brief Competition',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: '1-3 weeks (research + writing)',
+  //   majorTags: [
+  //     'pub_policy_law',
+  //     'pub_policy',
+  //     'polisci',
+  //     'law_general',
+  //     'civil_rights',
+  //   ],
+  //   applicationInfo:
+  //       'Check legaleaglebee.com for the current prompt and deadline.',
+  //   description: 'Students write a policy brief on a designated legal topic.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.legaleaglebee.com',
+  //   links: ['legaleaglebee.com'],
+  // ),
+  // const Resource(
+  //   id: 'leb_policy_video',
+  //   title: 'LegalEagleBee | 3rd Policy Video Competition',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: '1-3 weeks (filming + editing)',
+  //   majorTags: ['pub_policy_law', 'film_prod', 'digital_media', 'civil_rights'],
+  //   applicationInfo:
+  //       'Check legaleaglebee.com for the current prompt and deadline.',
+  //   description:
+  //       'Students produce a short advocacy video on a legal or policy topic.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.legaleaglebee.com',
+  //   links: ['legaleaglebee.com'],
+  // ),
+  // const Resource(
+  //   id: 'leb_court_case',
+  //   title: 'LegalEagleBee | 9th Court Case Competition',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online rounds',
+  //   timeCommitment: '2-4 weeks (research + oral argument prep)',
+  //   majorTags: ['law_general', 'prelaw', 'constitutional_law', 'polisci'],
+  //   applicationInfo: 'Check legaleaglebee.com for the current case prompt.',
+  //   description:
+  //       'Students research and argue both the petitioner and respondent sides of a legal case.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.legaleaglebee.com',
+  //   links: ['legaleaglebee.com'],
+  // ),
+  // const Resource(
+  //   id: 'columbia_law_review_essay',
+  //   title: 'Columbia Law Review Essay Competition',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['law_general', 'prelaw', 'constitutional_law', 'intl_law'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description: 'An essay competition exploring issues in law.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.columbialawreview.org',
+  //   links: ['columbialawreview.org'],
+  // ),
+  // const Resource(
+  //   id: 'columbia_polireview_essay',
+  //   title: 'Columbia Political Review High School Essay Contest',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['polisci', 'pub_policy', 'intl_rel', 'journalism_media'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description: 'An essay contest on political science and policy topics.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.columbiapoliticalreview.com',
+  //   links: ['columbiapoliticalreview.com'],
+  // ),
+  // const Resource(
+  //   id: 'culr_essay',
+  //   title: 'CULR High School Essay Contest',
+  //   category: 'competition',
+  //   field: 'social',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['law_general', 'polisci', 'pub_policy_law'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description: 'The Columbia Undergraduate Law Review\'s essay contest.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'TODO',
+  //   links: ['TODO'],
+  // ),
+  // const Resource(
+  //   id: 'platt_family_essay',
+  //   title: 'Platt Family Scholarship Prize Essay Contest',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: '1-3 weeks (research + essay)',
+  //   majorTags: ['humanities', 'polisci', 'intl_rel', 'english'],
+  //   applicationInfo: 'Submit at lincolnforum.org.',
+  //   description:
+  //       'Essay contest on Abraham Lincoln\'s relevance to contemporary democracy.',
+  //   deadline: 'Mar 2026 (approx.)',
+  //   deadlineIso: '2026-03-31T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url:
+  //       'https://www.thelincolnforum.org/platt-family-scholarship-prize-essay-contest/',
+  //   links: ['thelincolnforum.org'],
+  // ),
+  // const Resource(
+  //   id: 'foyle_young_poets',
+  //   title: '2026 Foyle Young Poets of the Year Award',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'international',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'Submit up to 3 poems',
+  //   majorTags: ['poetry', 'creative_writing', 'english'],
+  //   applicationInfo: 'Submit at foyleyoungpoets.org.',
+  //   description:
+  //       'One of the world\'s most prestigious poetry competitions for young writers.',
+  //   deadline: 'Jul 31, 2026',
+  //   deadlineIso: '2026-07-31T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url:
+  //       'https://poetrysociety.org.uk/competitions/foyle-young-poets-of-the-year-award/',
+  //   links: ['poetrysociety.org.uk'],
+  // ),
+  // const Resource(
+  //   id: 'red_wheelbarrow_poetry',
+  //   title: 'Red Wheelbarrow Poetry Prize 2026',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'TODO',
+  //   majorTags: ['poetry', 'creative_writing', 'english'],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description:
+  //       'A poetry prize for high school students celebrating creative verse.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'TODO',
+  //   links: ['TODO'],
+  // ),
+  // const Resource(
+  //   id: 'nyt_summer_reading',
+  //   title: 'NYT 17th Annual Summer Reading Contest',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online: NYT Learning Network',
+  //   timeCommitment: 'Weekly submissions throughout summer',
+  //   majorTags: [
+  //     'english',
+  //     'journalism_media',
+  //     'humanities',
+  //     'creative_writing',
+  //   ],
+  //   applicationInfo: 'Submit written responses to weekly NYT article prompts.',
+  //   description:
+  //       'The New York Times\' annual summer reading and writing contest.',
+  //   deadline: 'Aug 2026 (weekly through summer)',
+  //   deadlineIso: '2026-08-31T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.nytimes.com/section/learning',
+  //   links: ['nytimes.com/section/learning'],
+  // ),
+  // const Resource(
+  //new 2026 deadline
+  //   id: 'studentcam',
+  //   title: 'C-SPAN StudentCam Documentary Contest',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: '6-10 weeks (filming + editing)',
+  //   majorTags: [
+  //     'film_prod',
+  //     'documentary',
+  //     'polisci',
+  //     'pub_policy',
+  //     'journalism_media',
+  //   ],
+  //   applicationInfo:
+  //       'Create a 5-6 minute documentary on a federal policy issue.',
+  //   description:
+  //       'C-SPAN\'s national documentary competition with over \$100,000 in total prizes.',
+  //   deadline: 'Jan 2026 (approx.)',
+  //   deadlineIso: '2026-01-20T23:59:00Z',
+  //   icon: Icons.emoji_events,
+  //   url: 'https://www.studentcam.org',
+  //   links: ['studentcam.org'],
+  // ),
+  // const Resource(
+  //   id: 'young_filmmakers',
+  //   title: 'Young Filmmakers Competition',
+  //   category: 'competition',
+  //   field: 'humanities',
+  //   scope: 'national',
+  //   format: 'virtual',
+  //   locationNote: 'Online submission',
+  //   timeCommitment: 'TODO',
+  //   majorTags: [
+  //     'film_prod',
+  //     'documentary',
+  //     'digital_media',
+  //     'creative_writing',
+  //   ],
+  //   applicationInfo: 'TODO: fill in application details',
+  //   description: 'A film competition for high school student filmmakers.',
+  //   deadline: 'TODO',
+  //   deadlineIso: '',
+  //   icon: Icons.emoji_events,
+  //   url: 'TODO',
+  //   links: ['TODO'],
+  // ),
+
   // ===========================================================================
   // AP COURSES AND EXAM RESOURCES
   // ===========================================================================
-  const Resource(
-    id: 'ap_2d_art',
-    title: 'AP 2-D Art and Design',
-    category: 'ap',
-    field: 'art',
-    description: 'Portfolio-based AP assessment.',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.school,
-    url: 'https://apstudents.collegeboard.org/courses/ap-2-d-art-and-design',
-    links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
-    ],
-    apSubCategory: 'arts',
-    detailNote:
-        'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
-  ),
-  const Resource(
-    id: 'ap_3d_art',
-    title: 'AP 3-D Art and Design',
-    category: 'ap',
-    field: 'art',
-    description: 'Portfolio-based AP assessment.',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.school,
-    url: 'https://apstudents.collegeboard.org/courses/ap-3-d-art-and-design',
-    links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
-    ],
-    apSubCategory: 'arts',
-    detailNote:
-        'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
-  ),
-  const Resource(
-    id: 'ap_drawing',
-    title: 'AP Drawing',
-    category: 'ap',
-    field: 'art',
-    description: 'Portfolio-based AP assessment.',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.school,
-    url: 'https://apstudents.collegeboard.org/courses/ap-drawing',
-    links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
-    ],
-    apSubCategory: 'arts',
-    detailNote:
-        'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
-  ),
   const Resource(
     id: 'ap_art_history',
     title: 'AP Art History',
@@ -745,14 +1452,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-art-history',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Art History Official Course Page',
+      'AP Art History AP Classroom',
+      'AP Art History Official Exam Page',
+      'AP Art History Khan Academy',
+      'AP Art History Fiveable Study Guides',
+      'AP Art History Knowt Study Guides',
+      'AP Art History CrackAP Practice Questions',
     ],
     apSubCategory: 'arts',
     detailNote:
@@ -769,14 +1475,11 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-music-theory',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Music Theory Official Course Page',
+      'AP Music Theory AP Classroom',
+      'AP Music Theory Official Exam Page',
+      'AP Music Theory Fiveable Study Guides',
+      'AP Music Theory Knowt Study Guides',
     ],
     apSubCategory: 'arts',
     detailNote:
@@ -794,14 +1497,12 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-language-and-composition',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP English Language and Composition Official Course Page',
+      'AP English Language and Composition AP Classroom',
+      'AP English Language and Composition Official Exam Page',
+      'AP English Language and Composition Fiveable Study Guides',
+      'AP English Language and Composition Knowt Study Guides',
+      'AP English Language and Composition CrackAP Practice Questions',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -819,14 +1520,12 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-english-literature-and-composition',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP English Literature and Composition Official Course Page',
+      'AP English Literature and Composition AP Classroom',
+      'AP English Literature and Composition Official Exam Page',
+      'AP English Literature and Composition Fiveable Study Guides',
+      'AP English Literature and Composition Knowt Study Guides',
+      'AP English Literature and Composition CrackAP Practice Questions',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -844,14 +1543,11 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-african-american-studies',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP African American Studies Official Course Page',
+      'AP African American Studies AP Classroom',
+      'AP African American Studies Official Exam Page',
+      'AP African American Studies Fiveable Study Guides',
+      'AP African American Studies Knowt Study Guides',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -869,14 +1565,12 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-comparative-government-and-politics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Comparative Government and Politics Official Course Page',
+      'AP Comparative Government and Politics AP Classroom',
+      'AP Comparative Government and Politics Official Exam Page',
+      'AP Comparative Government and Politics Fiveable Study Guides',
+      'AP Comparative Government and Politics Knowt Study Guides',
+      'AP Comparative Government and Politics CrackAP Practice Questions',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -893,14 +1587,12 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-european-history',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP European History Official Course Page',
+      'AP European History AP Classroom',
+      'AP European History Official Exam Page',
+      'AP European History Fiveable Study Guides',
+      'AP European History Knowt Study Guides',
+      'AP European History CrackAP Practice Questions',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -918,14 +1610,12 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-human-geography',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Human Geography Official Course Page',
+      'AP Human Geography AP Classroom',
+      'AP Human Geography Official Exam Page',
+      'AP Human Geography Fiveable Study Guides',
+      'AP Human Geography Knowt Study Guides',
+      'AP Human Geography CrackAP Practice Questions',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -943,21 +1633,19 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-macroeconomics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Macroeconomics Official Course Page',
+      'AP Macroeconomics AP Classroom',
+      'AP Macroeconomics Official Exam Page',
+      'AP Macroeconomics Khan Academy',
+      'AP Macroeconomics Fiveable Study Guides',
+      'AP Macroeconomics Knowt Study Guides',
+      'AP Macroeconomics CrackAP Practice Questions',
       'AP Macro Exam 2022',
-      'AP Macro Exam 2022 (2)',
       'AP Macro Exam 2019',
       'AP Macro Exam 2013',
       'AP Macro Exam 2012',
     ],
-    apSubCategory: 'econ',
+    apSubCategory: 'history',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
@@ -972,14 +1660,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-microeconomics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Microeconomics Official Course Page',
+      'AP Microeconomics AP Classroom',
+      'AP Microeconomics Official Exam Page',
+      'AP Microeconomics Khan Academy',
+      'AP Microeconomics Fiveable Study Guides',
+      'AP Microeconomics Knowt Study Guides',
+      'AP Microeconomics CrackAP Practice Questions',
       'AP Micro Exam 2019',
       'AP Micro Exam 2018',
       'AP Mico Exam 2017',
@@ -990,9 +1677,8 @@ final List<Resource> allResources = [
       'AP Micro Exam 2012',
       'AP Micro Exam 2008',
       'AP Micro Exam 2005',
-      'AP Micro Exam 2000 (MCQ)',
     ],
-    apSubCategory: 'econ',
+    apSubCategory: 'history',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
@@ -1007,14 +1693,12 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-psychology',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Psychology Official Course Page',
+      'AP Psychology AP Classroom',
+      'AP Psychology Official Exam Page',
+      'AP Psychology Fiveable Study Guides',
+      'AP Psychology Knowt Study Guides',
+      'AP Psychology CrackAP Practice Questions',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -1033,14 +1717,13 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-united-states-government-and-politics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP United States Government and Politics Official Course Page',
+      'AP United States Government and Politics AP Classroom',
+      'AP United States Government and Politics Official Exam Page',
+      'AP United States Government and Politics Khan Academy',
+      'AP United States Government and Politics Fiveable Study Guides',
+      'AP United States Government and Politics Knowt Study Guides',
+      'AP United States Government and Politics CrackAP Practice Questions',
     ],
     apSubCategory: 'history',
     detailNote:
@@ -1057,20 +1740,18 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-united-states-history',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP United States History Official Course Page',
+      'AP United States History AP Classroom',
+      'AP United States History Official Exam Page',
+      'AP United States History Khan Academy',
+      'AP United States History Fiveable Study Guides',
+      'AP United States History Knowt Study Guides',
+      'AP United States History CrackAP Practice Questions',
       'AP US History Exam 2019',
       'AP US History Exam 2018',
       'AP US History Exam 2017',
       'AP US History Exam 2016',
       'AP US History Exam 2015',
-      'AP US History Exam 2015 (2)',
       'AP US History Exam 2014',
       'AP US History Exam 2013',
       'AP US History Exam 2012',
@@ -1092,19 +1773,16 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-world-history-modern',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP World History: Modern Official Course Page',
+      'AP World History: Modern AP Classroom',
+      'AP World History: Modern Official Exam Page',
+      'AP World History: Modern Khan Academy',
+      'AP World History: Modern Fiveable Study Guides',
+      'AP World History: Modern Knowt Study Guides',
+      'AP World History: Modern CrackAP Practice Questions',
       'AP World History Exam 2018',
       'AP World History Exam 2017',
-      'AP World History Exam 2017 (2)',
       'AP World History Exam 2016',
-      'AP World History Exam 2016 (2)',
       'AP World History Exam 2015',
       'AP World History Exam 2014',
       'AP World History Exam 2013',
@@ -1127,14 +1805,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-ab',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Calculus AB Official Course Page',
+      'AP Calculus AB AP Classroom',
+      'AP Calculus AB Official Exam Page',
+      'AP Calculus AB Khan Academy',
+      'AP Calculus AB Fiveable Study Guides',
+      'AP Calculus AB Knowt Study Guides',
+      'AP Calculus AB CrackAP Practice Questions',
     ],
     apSubCategory: 'math',
     detailNote:
@@ -1152,14 +1829,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-calculus-bc',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Calculus BC Official Course Page',
+      'AP Calculus BC AP Classroom',
+      'AP Calculus BC Official Exam Page',
+      'AP Calculus BC Khan Academy',
+      'AP Calculus BC Fiveable Study Guides',
+      'AP Calculus BC Knowt Study Guides',
+      'AP Calculus BC CrackAP Practice Questions',
       'AP Calc BC Exam 2018',
       'AP Calc BC Exam 2017',
       'AP Calc BC Exam 2016',
@@ -1183,16 +1859,14 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-computer-science-a',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'AP CS Exam Prep : Test & Course Content',
-      'CodingBat Java',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Computer Science A Official Course Page',
+      'AP Computer Science A AP Classroom',
+      'AP Computer Science A Official Exam Page',
+      'AP Computer Science A Fiveable Study Guides',
+      'AP Computer Science A Knowt Study Guides',
+      'AP Computer Science A CrackAP Practice Questions',
+      'AP Computer Science A AP CS Exam Prep: Test and Course Content',
+      'AP Computer Science A CodingBat Java Practice',
       'AP CSA Exam 2015',
       'AP CSA Exam 2014',
       'AP CSA Exam 2008',
@@ -1214,16 +1888,15 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-computer-science-principles',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'AP CS Exam Prep : Test & Course Content',
-      'Code.org AP CSP',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Computer Science Principles Official Course Page',
+      'AP Computer Science Principles AP Classroom',
+      'AP Computer Science Principles Official Exam Page',
+      'AP Computer Science Principles Khan Academy',
+      'AP Computer Science Principles Fiveable Study Guides',
+      'AP Computer Science Principles Knowt Study Guides',
+      'AP Computer Science Principles CrackAP Practice Questions',
+      'AP Computer Science Principles AP CS Exam Prep: Test and Course Content',
+      'AP Computer Science Principles Code.org Curriculum',
       'AP CSP Exam 2018',
       'AP CSP Exam 2016',
     ],
@@ -1242,14 +1915,11 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-precalculus',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Precalculus Official Course Page',
+      'AP Precalculus AP Classroom',
+      'AP Precalculus Official Exam Page',
+      'AP Precalculus Fiveable Study Guides',
+      'AP Precalculus Knowt Study Guides',
     ],
     apSubCategory: 'math',
     detailNote:
@@ -1267,14 +1937,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-statistics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Statistics Official Course Page',
+      'AP Statistics AP Classroom',
+      'AP Statistics Official Exam Page',
+      'AP Statistics Khan Academy',
+      'AP Statistics Fiveable Study Guides',
+      'AP Statistics Knowt Study Guides',
+      'AP Statistics CrackAP Practice Questions',
       'AP Statistics Exam 2018',
       'AP Statistics Exam 2017',
       'AP Statistics Exam 2016',
@@ -1299,14 +1968,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-biology',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Biology Official Course Page',
+      'AP Biology AP Classroom',
+      'AP Biology Official Exam Page',
+      'AP Biology Khan Academy',
+      'AP Biology Fiveable Study Guides',
+      'AP Biology Knowt Study Guides',
+      'AP Biology CrackAP Practice Questions',
       'AP Bio Exam 2018',
       'AP Bio Exam 2017',
       'AP Bio Exam 2016',
@@ -1332,14 +2000,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-chemistry',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Chemistry Official Course Page',
+      'AP Chemistry AP Classroom',
+      'AP Chemistry Official Exam Page',
+      'AP Chemistry Khan Academy',
+      'AP Chemistry Fiveable Study Guides',
+      'AP Chemistry Knowt Study Guides',
+      'AP Chemistry CrackAP Practice Questions',
       'AP Chem Exam 2018',
       'AP Chem Exam 2017',
       'AP Chem Exam 2016',
@@ -1363,14 +2030,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-environmental-science',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Environmental Science Official Course Page',
+      'AP Environmental Science AP Classroom',
+      'AP Environmental Science Official Exam Page',
+      'AP Environmental Science Khan Academy',
+      'AP Environmental Science Fiveable Study Guides',
+      'AP Environmental Science Knowt Study Guides',
+      'AP Environmental Science CrackAP Practice Questions',
       'AP Environmental Science Exam 2016',
     ],
     apSubCategory: 'science',
@@ -1388,14 +2054,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-1',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Physics 1: Algebra-Based Official Course Page',
+      'AP Physics 1: Algebra-Based AP Classroom',
+      'AP Physics 1: Algebra-Based Official Exam Page',
+      'AP Physics 1: Algebra-Based Khan Academy',
+      'AP Physics 1: Algebra-Based Fiveable Study Guides',
+      'AP Physics 1: Algebra-Based Knowt Study Guides',
+      'AP Physics 1: Algebra-Based CrackAP Practice Questions',
       'AP Physics 1 Exam 2018',
       'AP Physics 1 Exam 2017',
       'AP Physics 1 Exam 2016',
@@ -1418,14 +2083,13 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-2',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Physics 2: Algebra-Based Official Course Page',
+      'AP Physics 2: Algebra-Based AP Classroom',
+      'AP Physics 2: Algebra-Based Official Exam Page',
+      'AP Physics 2: Algebra-Based Khan Academy',
+      'AP Physics 2: Algebra-Based Fiveable Study Guides',
+      'AP Physics 2: Algebra-Based Knowt Study Guides',
+      'AP Physics 2: Algebra-Based CrackAP Practice Questions',
       'AP Physics 2 Exam 2018',
       'AP Physics 2 Exam 2017',
       'AP Physics 2 Exam 2016',
@@ -1448,14 +2112,12 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-physics-c-electricity-and-magnetism',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Physics C: Electricity and Magnetism Official Course Page',
+      'AP Physics C: Electricity and Magnetism AP Classroom',
+      'AP Physics C: Electricity and Magnetism Official Exam Page',
+      'AP Physics C: Electricity and Magnetism Fiveable Study Guides',
+      'AP Physics C: Electricity and Magnetism Knowt Study Guides',
+      'AP Physics C: Electricity and Magnetism CrackAP Practice Questions',
       'AP Physics C E&M Exam 2018',
       'AP Physics C E&M Exam 2017',
       'AP Physics C E&M Exam 2016',
@@ -1478,14 +2140,12 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-physics-c-mechanics',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Physics C: Mechanics Official Course Page',
+      'AP Physics C: Mechanics AP Classroom',
+      'AP Physics C: Mechanics Official Exam Page',
+      'AP Physics C: Mechanics Fiveable Study Guides',
+      'AP Physics C: Mechanics Knowt Study Guides',
+      'AP Physics C: Mechanics CrackAP Practice Questions',
       'AP Physics C Mechanics Exam 2019',
       'AP Physics C Mechanics Exam 2018',
       'AP Physics C Mechanics Exam 2017',
@@ -1511,14 +2171,11 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-chinese-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Chinese Language and Culture Official Course Page',
+      'AP Chinese Language and Culture AP Classroom',
+      'AP Chinese Language and Culture Official Exam Page',
+      'AP Chinese Language and Culture Fiveable Study Guides',
+      'AP Chinese Language and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1536,14 +2193,11 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-french-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP French Language and Culture Official Course Page',
+      'AP French Language and Culture AP Classroom',
+      'AP French Language and Culture Official Exam Page',
+      'AP French Language and Culture Fiveable Study Guides',
+      'AP French Language and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1561,14 +2215,11 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-german-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP German Language and Culture Official Course Page',
+      'AP German Language and Culture AP Classroom',
+      'AP German Language and Culture Official Exam Page',
+      'AP German Language and Culture Fiveable Study Guides',
+      'AP German Language and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1586,14 +2237,10 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-italian-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Italian Language and Culture Official Course Page',
+      'AP Italian Language and Culture AP Classroom',
+      'AP Italian Language and Culture Official Exam Page',
+      'AP Italian Language and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1611,14 +2258,11 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-japanese-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Japanese Language and Culture Official Course Page',
+      'AP Japanese Language and Culture AP Classroom',
+      'AP Japanese Language and Culture Official Exam Page',
+      'AP Japanese Language and Culture Fiveable Study Guides',
+      'AP Japanese Language and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1636,14 +2280,11 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-latin',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Latin Official Course Page',
+      'AP Latin AP Classroom',
+      'AP Latin Official Exam Page',
+      'AP Latin Fiveable Study Guides',
+      'AP Latin Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1661,14 +2302,12 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-spanish-language-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Spanish Language and Culture Official Course Page',
+      'AP Spanish Language and Culture AP Classroom',
+      'AP Spanish Language and Culture Official Exam Page',
+      'AP Spanish Language and Culture Fiveable Study Guides',
+      'AP Spanish Language and Culture Knowt Study Guides',
+      'AP Spanish Language and Culture CrackAP Practice Questions',
     ],
     apSubCategory: 'lang',
     detailNote:
@@ -1686,68 +2325,81 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-spanish-literature-and-culture',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Spanish Literature and Culture Official Course Page',
+      'AP Spanish Literature and Culture AP Classroom',
+      'AP Spanish Literature and Culture Official Exam Page',
+      'AP Spanish Literature and Culture Fiveable Study Guides',
+      'AP Spanish Literature and Culture Knowt Study Guides',
     ],
     apSubCategory: 'lang',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
+
+  const Resource(
+    id: 'ap_2d_art_design',
+    title: 'AP 2-D Art and Design',
+    category: 'ap',
+    field: 'art_history',
+    description: 'Portfolio-based study in two-dimensional visual art and design.',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-2-d-art-and-design',
+    links: ['Official AP 2-D Art and Design course page'],
+    apSubCategory: 'arts',
+  ),
+  const Resource(
+    id: 'ap_3d_art_design',
+    title: 'AP 3-D Art and Design',
+    category: 'ap',
+    field: 'art_history',
+    description: 'Portfolio-based study in three-dimensional visual art and design.',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-3-d-art-and-design',
+    links: ['Official AP 3-D Art and Design course page'],
+    apSubCategory: 'arts',
+  ),
+  const Resource(
+    id: 'ap_drawing',
+    title: 'AP Drawing',
+    category: 'ap',
+    field: 'art_history',
+    description: 'Portfolio-based study in drawing, mark-making, and visual expression.',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-drawing',
+    links: ['Official AP Drawing course page'],
+    apSubCategory: 'arts',
+  ),
   const Resource(
     id: 'ap_research',
     title: 'AP Research',
     category: 'ap',
-    field: 'research',
-    description:
-        'Yearlong independent research, academic paper, and presentation.',
+    field: 'english',
+    description: 'Yearlong independent research, academic writing, and presentation.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-research',
-    links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
-    ],
+    links: ['Official AP Research course page'],
     apSubCategory: 'capstone',
-    detailNote:
-        'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
   const Resource(
     id: 'ap_seminar',
     title: 'AP Seminar',
     category: 'ap',
-    field: 'research',
-    description:
-        'Evidence evaluation, collaborative inquiry, presentations, and end-of-course exam.',
+    field: 'english',
+    description: 'Interdisciplinary inquiry, source analysis, argument, and collaboration.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-seminar',
-    links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
-    ],
+    links: ['Official AP Seminar course page'],
     apSubCategory: 'capstone',
-    detailNote:
-        'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
   const Resource(
     id: 'ap_business_finance',
@@ -1762,14 +2414,9 @@ final List<Resource> allResources = [
     url:
         'https://apstudents.collegeboard.org/courses/ap-business-with-personal-finance',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Business with Personal Finance Official Course Page',
+      'AP Business with Personal Finance AP Classroom',
+      'AP Business with Personal Finance Official Exam Page',
     ],
     apSubCategory: 'career',
     detailNote:
@@ -1787,15 +2434,10 @@ final List<Resource> allResources = [
     icon: Icons.school,
     url: 'https://apstudents.collegeboard.org/courses/ap-cybersecurity',
     links: [
-      'Official course page',
-      'AP Classroom',
-      'Official AP exam questions',
-      'Khan Academy',
-      'Albert AP practice',
-      'Fiveable AP study guides',
-      'AP CS Exam Prep : Test & Course Content',
-      'Knowt AP Hub',
-      'CrackAP practice questions',
+      'AP Cybersecurity Official Course Page',
+      'AP Cybersecurity AP Classroom',
+      'AP Cybersecurity Official Exam Page',
+      'AP Cybersecurity AP CS Exam Prep: Test and Course Content',
     ],
     apSubCategory: 'career',
     detailNote:
@@ -2760,7 +3402,8 @@ const List<DeadlineItem> upcomingDeadlines = [
 
 /// All resources matching a category string.
 List<Resource> resourcesByCategory(String category) =>
-    allResources.where((r) => r.category == category).toList();
+    allResources.where((r) => r.category == category).toList()
+      ..sort((a, b) => a.title.compareTo(b.title));
 
 /// All resources relevant to a field (exact match + 'all' field resources).
 List<Resource> resourcesByField(String field) =>
@@ -2778,8 +3421,10 @@ List<Resource> resourcesByFieldAndCategory(String field, String category) =>
 /// All AP resources, optionally filtered by sub-category.
 List<Resource> apResources({String? subCategory}) {
   final aps = allResources.where((r) => r.category == 'ap').toList();
-  if (subCategory == null || subCategory == 'all') return aps;
-  return aps.where((r) => r.apSubCategory == subCategory).toList();
+  final filtered = subCategory == null || subCategory == 'all'
+      ? aps
+      : aps.where((r) => r.apSubCategory == subCategory).toList();
+  return filtered..sort((a, b) => a.title.compareTo(b.title));
 }
 
 /// Sort a list so seen items sink to the bottom.

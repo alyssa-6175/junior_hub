@@ -106,7 +106,7 @@ class ResourceTile extends StatelessWidget {
                         color: kTextSecondary,
                       ),
                     ),
-                    if (resource.deadline != null) ...[
+                    if (resource.hasDeadline) ...[
                       const SizedBox(height: 4),
                       _DeadlineBadge(resource: resource),
                     ],
@@ -152,7 +152,7 @@ class ResourceTile extends StatelessWidget {
                   onTap: () =>
                       context.read<AppProvider>().togglePinned(resource.id),
                 ),
-                if (resource.deadline != null)
+                if (resource.hasDeadline)
                   _ActionButton(
                     icon: Icons.alarm_add_outlined,
                     color: kTextTertiary,

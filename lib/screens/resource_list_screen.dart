@@ -28,6 +28,32 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   int _tab = 1; // Default to 'All'
   String? _majorFilter;
 
+  static const _competitionSubjects = [
+    ('cs_eng', 'Computer Science & Engineering'),
+    ('math', 'Mathematics'),
+    ('science', 'Science'),
+    ('business', 'Business & Economics'),
+    ('humanities', 'Humanities & Social Sciences'),
+  ];
+
+  bool _matchesCompetitionSubject(Resource resource, String subject) {
+    switch (subject) {
+      case 'cs_eng':
+        return resource.field == 'cs' || resource.field == 'engineering';
+      case 'math':
+        return resource.field == 'math';
+      case 'science':
+        return const {'science', 'biology', 'chemistry', 'physics'}
+            .contains(resource.field);
+      case 'business':
+        return resource.field == 'business';
+      case 'humanities':
+        return resource.field == 'humanities';
+      default:
+        return false;
+    }
+  }
+
   List<Resource> _sorted(
     List<Resource> items,
     Set<String> pinned,
@@ -50,7 +76,11 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     final seen = provider.seen;
 
     var items = resourcesByCategory(widget.category);
-    if (_majorFilter != null) {
+    if (_majorFilter != null && widget.category == 'competition') {
+      items = items
+          .where((r) => _matchesCompetitionSubject(r, _majorFilter!))
+          .toList();
+    } else if (_majorFilter != null) {
       items = items
           .where(
             (r) =>
@@ -118,7 +148,8 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              // Major filter chips (unchanged)
+              // Subject filters are intentionally separate from profile majors:
+              // every competition belongs to one clear, visible subject.
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -129,7 +160,21 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
                       color: kNavy,
                       onTap: () => setState(() => _majorFilter = null),
                     ),
-                    ...majorGroups.map(
+                    ...(widget.category == 'competition'
+                            ? _competitionSubjects.map(
+                                (subject) => MajorGroup(
+                                  id: subject.$1,
+                                  label: subject.$2,
+                                  color: subject.$1 == 'science'
+                                      ? const Color(0xFF1D9E75)
+                                      : subject.$1 == 'cs_eng'
+                                      ? const Color(0xFF534AB7)
+                                      : kNavy,
+                                  subcategories: const [],
+                                ),
+                              )
+                            : majorGroups)
+                        .map(
                       (g) => _MajorChip(
                         label: g.label,
                         active: _majorFilter == g.id,

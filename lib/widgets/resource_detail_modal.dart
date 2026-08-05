@@ -141,7 +141,7 @@ class ResourceDetailModal extends StatelessWidget {
                       spacing: 16,
                       runSpacing: 8,
                       children: [
-                        if (resource.deadline != null)
+                        if (resource.hasDeadline)
                           _InfoChip(
                             icon: Icons.calendar_today_outlined,
                             label: resource.deadline!,
@@ -345,7 +345,7 @@ class ResourceDetailModal extends StatelessWidget {
                       onTap: () =>
                           context.read<AppProvider>().toggleSeen(resource.id),
                     ),
-                    if (resource.deadline != null) ...[
+                    if (resource.hasDeadline) ...[
                       const SizedBox(width: 8),
                       _FooterAction(
                         icon: Icons.alarm_add_outlined,

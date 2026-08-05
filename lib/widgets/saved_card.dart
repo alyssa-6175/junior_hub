@@ -171,7 +171,7 @@ class SavedCard extends StatelessWidget {
               ),
             ),
             // Deadline row (only if there is one)
-            if (resource.deadline != null)
+            if (resource.hasDeadline)
               Padding(
                 padding: const EdgeInsets.fromLTRB(12, 6, 12, 0),
                 child: Row(

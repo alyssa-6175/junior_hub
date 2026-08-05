@@ -15,11 +15,25 @@ class ApScreen extends StatefulWidget {
 }
 
 class _ApScreenState extends State<ApScreen> {
-  String _filter = 'all'; // 'all' | 'stem' | 'hum' | 'soc' | 'art'
+  String _filter = 'all';
+
+  static const _sections = [
+    ('arts', 'Arts'),
+    ('lang', 'English, World Languages & Literature'),
+    ('history', 'History & Social Sciences'),
+    ('math', 'Mathematics'),
+    ('cs', 'Computer Science'),
+    ('science', 'Sciences'),
+    ('capstone', 'AP Capstone'),
+    ('career', 'AP Career Kickstart'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final items = apResources(subCategory: _filter == 'all' ? null : _filter);
+    final allItems = apResources();
+    final visibleSections = _filter == 'all'
+        ? _sections
+        : _sections.where((section) => section.$1 == _filter).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,42 +76,12 @@ class _ApScreenState extends State<ApScreen> {
                       current: _filter,
                       onTap: (v) => setState(() => _filter = v),
                     ),
-                    _ApFilter(
-                      label: 'Math',
-                      value: 'math',
+                    ..._sections.map((section) => _ApFilter(
+                      label: section.$2,
+                      value: section.$1,
                       current: _filter,
                       onTap: (v) => setState(() => _filter = v),
-                    ),
-                    _ApFilter(
-                      label: 'Computer Science',
-                      value: 'cs',
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    ),
-                    _ApFilter(
-                      label: 'Economics',
-                      value: 'econ',
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    ),
-                    _ApFilter(
-                      label: 'Science',
-                      value: 'science',
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    ),
-                    _ApFilter(
-                      label: 'History + Social Sci.',
-                      value: 'history',
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    ),
-                    _ApFilter(
-                      label: 'Language + Lit',
-                      value: 'lang',
-                      current: _filter,
-                      onTap: (v) => setState(() => _filter = v),
-                    ),
+                    )),
                   ],
                 ),
               ),
@@ -106,16 +90,47 @@ class _ApScreenState extends State<ApScreen> {
         ),
         const SizedBox(height: 14),
         Expanded(
-          child: GridView.builder(
+          child: ListView(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 160,
-              mainAxisExtent: 110,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-            ),
-            itemCount: items.length,
-            itemBuilder: (_, i) => _ApCard(resource: items[i]),
+            children: [
+              for (final section in visibleSections) ...[
+                Builder(builder: (context) {
+                  final items = allItems
+                      .where((item) => item.apSubCategory == section.$1)
+                      .toList();
+                  if (items.isEmpty) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 8),
+                    child: Text(
+                      section.$2,
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: kTextPrimary,
+                      ),
+                    ),
+                  );
+                }),
+                Builder(builder: (context) {
+                  final items = allItems
+                      .where((item) => item.apSubCategory == section.$1)
+                      .toList();
+                  if (items.isEmpty) return const SizedBox.shrink();
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 160,
+                      mainAxisExtent: 110,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemCount: items.length,
+                    itemBuilder: (_, i) => _ApCard(resource: items[i]),
+                  );
+                }),
+              ],
+            ],
           ),
         ),
       ],

@@ -104,6 +104,9 @@ class Resource {
     }
   }
 
+  /// Placeholder dates are internal data markers, never user-facing deadlines.
+  bool get hasDeadline => deadline != null && deadline != 'TODO';
+
   // ─── Deadline Date Styling ────────────────────────────────────────────────
   /// Returns the color for the deadline date text based on urgency
   Color get deadlineTextColor {
@@ -155,6 +158,9 @@ class Resource {
       'science': 'Science',
       'history': 'History + Social Science',
       'lang': 'Language + Lit',
+      'arts': 'Arts',
+      'capstone': 'AP Capstone',
+      'career': 'Career Kickstart',
     };
     return labels[apSubCategory ?? ''] ?? '';
   }
