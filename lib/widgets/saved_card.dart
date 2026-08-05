@@ -155,21 +155,7 @@ class SavedCard extends StatelessWidget {
                 ],
               ),
             ),
-            // Description
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-                child: Text(
-                  resource.displayDescription,
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    color: kTextSecondary,
-                    height: 1.45,
-                  ),
-                  overflow: TextOverflow.fade,
-                ),
-              ),
-            ),
+            const Spacer(),
             // Deadline row (only if there is one)
             if (resource.hasDeadline)
               Padding(
@@ -218,7 +204,7 @@ class SavedCard extends StatelessWidget {
               child: Wrap(
                 spacing: 5,
                 runSpacing: 4,
-                children: resource.links
+                children: linksForResource(resource)
                     .take(2)
                     .map((l) => _LinkChip(label: l, resource: resource))
                     .toList(),

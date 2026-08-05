@@ -3577,6 +3577,215 @@ const List<DeadlineItem> upcomingDeadlines = [
 // ===========================================================================
 // HELPER FUNCTIONS
 // ===========================================================================
+const Map<String, String> _commonApLinks = {
+  'Video · AP Daily in AP Classroom':
+      'https://apstudents.collegeboard.org/ap-daily-archived',
+  'Practice questions · Albert AP question bank (paid)':
+      'https://www.albert.io/subjects/high-school/ap',
+  'Course material · Fiveable AP study hub': 'https://fiveable.me/ap',
+  'Course material · Knowt AP study hub': 'https://knowt.com/ap',
+};
+
+const Map<String, Map<String, String>> _supplementalApLinks = {
+  'ap_art_history': {
+    'Course material · Smarthistory AP Art History guide':
+        'https://smarthistory.org/guide-type/syllabus/',
+  },
+  'ap_music_theory': {
+    'Course material · MusicTheory.net lessons':
+        'https://www.musictheory.net/lessons',
+    'Practice questions · MusicTheory.net exercises':
+        'https://www.musictheory.net/exercises',
+  },
+  'ap_english_lang': {
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · Purdue OWL writing and rhetoric':
+        'https://owl.purdue.edu/owl/general_writing/academic_writing/index.html',
+  },
+  'ap_english_lit': {
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · Purdue OWL writing and literature':
+        'https://owl.purdue.edu/owl/subject_specific_writing/writing_in_literature/index.html',
+  },
+  'ap_euro': {
+    'Video · Heimler’s History AP European History':
+        'https://www.youtube.com/@heimlershistory',
+    'Course material · Heimler review guide (paid)':
+        'https://resources.heimlershistory.com/store',
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_human_geo': {
+    'Video · Heimler’s History AP Human Geography':
+        'https://www.youtube.com/@heimlershistory',
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_macro': {
+    'Video · Heimler’s History AP Macroeconomics':
+        'https://www.youtube.com/@heimlershistory',
+  },
+  'ap_psych': {
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_us_gov': {
+    'Video · Heimler’s History AP Government':
+        'https://www.youtube.com/@heimlershistory',
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_us_history': {
+    'Video · Heimler’s History AP United States History':
+        'https://www.youtube.com/@heimlershistory',
+    'Course material · Heimler review guide (paid)':
+        'https://resources.heimlershistory.com/store',
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_world': {
+    'Video · Heimler’s History AP World History':
+        'https://www.youtube.com/@heimlershistory',
+    'Course material · Heimler review guide (paid)':
+        'https://resources.heimlershistory.com/store',
+    'Course material · Marco Learning free study guides':
+        'https://marcolearning.com/students/ap-study-guides/',
+  },
+  'ap_calc_ab': {
+    'Course material · Math Medic AP Calculus lessons':
+        'https://mathmedic.com/',
+    'Video · Math Medic exam review course (paid)':
+        'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+  },
+  'ap_calc_bc': {
+    'Course material · Math Medic AP Calculus lessons':
+        'https://mathmedic.com/',
+    'Video · Math Medic exam review course (paid)':
+        'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+  },
+  'ap_precalc': {
+    'Course material · Math Medic AP Precalculus lessons':
+        'https://mathmedic.com/',
+    'Video · Math Medic exam review course (paid)':
+        'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+  },
+  'ap_stats': {
+    'Course material · Math Medic AP Statistics lessons':
+        'https://mathmedic.com/',
+    'Video · Math Medic exam review course (paid)':
+        'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+  },
+  'ap_csa': {
+    'Course material · CSAwesome interactive Java course':
+        'https://runestone.academy/runestone/books/published/csawesome2/index.html',
+  },
+  'ap_csp': {
+    'Course material · Code.org AP CSP curriculum':
+        'https://code.org/cs/curriculum/computer-science-principles',
+  },
+  'ap_bio': {
+    'Course material · AP Bio Penguins review library':
+        'https://apbiopenguins.weebly.com/',
+    'Video · Bozeman Science AP Biology':
+        'https://www.bozemanscience.com/ap-biology',
+  },
+  'ap_chem': {
+    'Video · Jeremy Krug complete AP Chemistry course':
+        'https://jeremykrug.com/',
+    'Course material · Jeremy Krug review packet (paid)':
+        'https://jeremykrug.com/',
+    'Video · Bozeman Science AP Chemistry':
+        'https://www.bozemanscience.com/ap-chemistry',
+  },
+  'ap_env_sci': {
+    'Video · Bozeman Science AP Environmental Science':
+        'https://www.bozemanscience.com/ap-environmental-science',
+  },
+  'ap_physics_1': {
+    'Video · Flipping Physics AP Physics 1 playlists':
+        'https://www.flippingphysics.com/playlists.html',
+    'Video · Bozeman Science AP Physics 1':
+        'https://www.bozemanscience.com/ap-physics-1',
+  },
+  'ap_physics_2': {
+    'Video · Flipping Physics AP Physics 2 library':
+        'https://www.flippingphysics.com/physics-videos.html',
+    'Video · Bozeman Science AP Physics 2':
+        'https://www.bozemanscience.com/ap-physics-2',
+  },
+  'ap_physics_c_em': {
+    'Video · Flipping Physics E&M playlist and review':
+        'https://www.flippingphysics.com/ap-physics-c-review.html',
+  },
+  'ap_physics_c_mech': {
+    'Video · Flipping Physics Mechanics playlist and review':
+        'https://www.flippingphysics.com/ap-physics-c-review.html',
+  },
+  'ap_french': {
+    'Practice questions · Conjuguemos French drills':
+        'https://conjuguemos.com/activities/french/verb/1',
+  },
+  'ap_german': {
+    'Practice questions · Conjuguemos German drills':
+        'https://conjuguemos.com/activities/german/verb/1',
+  },
+  'ap_italian': {
+    'Practice questions · Conjuguemos Italian drills':
+        'https://conjuguemos.com/activities/italian/verb/1',
+  },
+  'ap_latin': {
+    'Course material · Dickinson Latin commentaries':
+        'https://dcc.dickinson.edu/',
+    'Practice questions · Conjuguemos Latin drills':
+        'https://conjuguemos.com/activities/latin/verb/1',
+  },
+  'ap_spanish_lang': {
+    'Practice questions · Conjuguemos Spanish drills':
+        'https://conjuguemos.com/activities/spanish/verb/1',
+  },
+  'ap_spanish_lit': {
+    'Practice questions · Conjuguemos Spanish drills':
+        'https://conjuguemos.com/activities/spanish/verb/1',
+  },
+  'ap_research': {
+    'Course material · Purdue OWL research guidance':
+        'https://owl.purdue.edu/owl/research_and_citation/index.html',
+    'Course material · Zotero citation and source organizer':
+        'https://www.zotero.org/',
+  },
+  'ap_seminar': {
+    'Course material · Purdue OWL research guidance':
+        'https://owl.purdue.edu/owl/research_and_citation/index.html',
+    'Course material · Zotero citation and source organizer':
+        'https://www.zotero.org/',
+  },
+  'ap_cybersecurity': {
+    'Course material · Cisco Introduction to Cybersecurity':
+        'https://www.cisco.com/site/us/en/learn/training-certifications/training/netacad/index.html',
+  },
+  'ap_business_finance': {
+    'Video · AP Business course introduction by Jacob Clifford':
+        'https://www.youtube.com/watch?v=ZgVAN6jCQow',
+    'Course material · Khan Academy financial literacy':
+        'https://www.khanacademy.org/college-careers-more/financial-literacy',
+  },
+};
+
+/// Every link displayed for a resource, including verified AP supplements.
+List<String> linksForResource(Resource resource) {
+  if (resource.category != 'ap') return resource.links;
+  final commonLinks = resource.apSubCategory == 'career'
+      ? const <String>[]
+      : _commonApLinks.keys;
+  return <String>{
+    ...resource.links,
+    ...commonLinks,
+    ...?_supplementalApLinks[resource.id]?.keys,
+  }.toList();
+}
+
 // ===========================================================================
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -3617,5 +3826,8 @@ List<Resource> sortBySeen(List<Resource> resources, Set<String> seen) {
 /// Returns the best URL for a given link label + resource.
 /// Checks kLinkUrls first, falls back to resource.url.
 String? resolveUrl(String linkLabel, Resource resource) {
-  return kLinkUrls[linkLabel] ?? resource.url;
+  return kLinkUrls[linkLabel] ??
+      _commonApLinks[linkLabel] ??
+      _supplementalApLinks[resource.id]?[linkLabel] ??
+      resource.url;
 }

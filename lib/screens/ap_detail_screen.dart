@@ -133,9 +133,22 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                           ),
                         ),
                         Text(
-                          '${res.deadline ?? "No exam date set"} · ${res.apSubCategoryLabel}',
+                          res.hasDeadline
+                              ? '${res.deadline} · ${res.apSubCategoryLabel}'
+                              : res.apSubCategoryLabel,
                           style: GoogleFonts.inter(
                             fontSize: 12,
+                            color: kTextSecondary,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          res.displayDescription,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.inter(
+                            fontSize: 11,
+                            height: 1.35,
                             color: kTextSecondary,
                           ),
                         ),
@@ -263,23 +276,28 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   // ── Smart string filtering to sort your links ─────
 
   List<String> _courseMaterial(Resource r) {
-    return r.links
+    return linksForResource(r)
         .where(
           (l) =>
+              l.toLowerCase().startsWith('course material ·') ||
               l.toLowerCase().contains('book') ||
               l.toLowerCase().contains('barron') ||
               l.toLowerCase().contains('amsco') ||
               l.toLowerCase().contains('medic') ||
               l.toLowerCase().contains('khan') ||
-              l.toLowerCase().contains('review'),
+              l.toLowerCase().contains('review') ||
+              l.toLowerCase().contains('course page') ||
+              l.toLowerCase().contains('classroom') ||
+              l.toLowerCase().contains('study guide'),
         )
         .toList();
   }
 
   List<String> _videos(Resource r) {
-    return r.links
+    return linksForResource(r)
         .where(
           (l) =>
+              l.toLowerCase().startsWith('video ·') ||
               l.toLowerCase().contains('video') ||
               l.toLowerCase().contains('youtube'),
         )
@@ -287,9 +305,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   }
 
   List<String> _practiceTests(Resource r) {
-    return r.links
+    return linksForResource(r)
         .where(
           (l) =>
+              l.toLowerCase().startsWith('practice test ·') ||
               l.toLowerCase().contains('test') ||
               l.toLowerCase().contains('frq') ||
               l.toLowerCase().contains('exam'),
@@ -304,7 +323,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       ..._videos(r),
       ..._practiceTests(r),
     ];
-    return r.links.where((l) => !matched.contains(l)).toList();
+    return linksForResource(r).where((l) => !matched.contains(l)).toList();
   }
 }
 
@@ -364,6 +383,9 @@ class _LinkItem extends StatelessWidget {
     final isPinned = provider.isLinkPinned(resource.id, label);
     final isSeen = provider.isLinkSeen(resource.id, label);
     final url = resolveUrl(label, resource);
+    final displayLabel = label.contains(' · ')
+        ? label.substring(label.indexOf(' · ') + 3)
+        : label;
 
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 200),
@@ -405,7 +427,7 @@ class _LinkItem extends StatelessWidget {
                         const SizedBox(width: 9),
                         Expanded(
                           child: Text(
-                            label,
+                            displayLabel,
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

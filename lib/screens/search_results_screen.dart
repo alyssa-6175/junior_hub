@@ -35,7 +35,7 @@ List<SearchHit> buildSearchHits(String query) {
     }
 
     // Check each individual link label
-    for (final link in r.links) {
+    for (final link in linksForResource(r)) {
       if (link.toLowerCase().contains(q)) {
         hits.add(SearchHit(resource: r, matchedLink: link));
         // Don't add `seen` — same resource can appear multiple times for diff links
