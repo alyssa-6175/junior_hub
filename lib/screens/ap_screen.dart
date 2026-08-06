@@ -25,7 +25,6 @@ class _ApScreenState extends State<ApScreen> {
     ('cs', 'Computer Science'),
     ('science', 'Sciences'),
     ('capstone', 'AP Capstone'),
-    ('career', 'AP Career Kickstart'),
   ];
 
   @override

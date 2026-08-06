@@ -55,6 +55,13 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     final provider = context.watch<AppProvider>();
     final isSaved = provider.isSaved(widget.resource.id);
     final res = widget.resource;
+    final officialCourseLabel = res.links.cast<String?>().firstWhere(
+      (label) => label!.toLowerCase().contains('official course page'),
+      orElse: () => null,
+    );
+    final officialCourseUrl = officialCourseLabel == null
+        ? res.url
+        : resolveUrl(officialCourseLabel, res);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,6 +159,34 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                             color: kTextSecondary,
                           ),
                         ),
+                        if (officialCourseUrl != null) ...[
+                          const SizedBox(height: 5),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => openUrl(context, officialCourseUrl),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.open_in_new,
+                                    size: 12,
+                                    color: Color(0xFF1D9E75),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    'Official course page',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF1D9E75),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
@@ -179,7 +214,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                 ],
               ),
               // Tip box
-              if (res.detailNote != null) ...[
+              if (res.detailNote != null &&
+                  !res.detailNote!.contains('not published when checked')) ...[
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -283,6 +319,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _courseMaterial(Resource r) {
     return linksForResource(r)
+        .where((l) => !l.toLowerCase().contains('official course page'))
         .where(
           (l) =>
               !l.toLowerCase().startsWith('notes ·') &&

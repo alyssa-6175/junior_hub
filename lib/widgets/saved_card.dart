@@ -155,6 +155,19 @@ class SavedCard extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 9, 12, 0),
+              child: Text(
+                resource.displayDescription,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.inter(
+                  fontSize: 10.5,
+                  height: 1.35,
+                  color: kTextSecondary,
+                ),
+              ),
+            ),
             const Spacer(),
             // Deadline row (only if there is one)
             if (resource.hasDeadline)

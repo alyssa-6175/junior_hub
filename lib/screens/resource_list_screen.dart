@@ -63,14 +63,38 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     Set<String> pinned,
     Set<String> seen,
   ) {
-    final pins = items
-        .where((r) => pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final normal = items
-        .where((r) => !pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final seenL = items.where((r) => seen.contains(r.id)).toList();
+    int compareResources(Resource a, Resource b) {
+      if (widget.category == 'internship') {
+        final aSeattle = _isSeattleArea(a);
+        final bSeattle = _isSeattleArea(b);
+        if (aSeattle != bSeattle) return aSeattle ? -1 : 1;
+      }
+      return a.title.compareTo(b.title);
+    }
+
+    final pins =
+        items
+            .where((r) => pinned.contains(r.id) && !seen.contains(r.id))
+            .toList()
+          ..sort(compareResources);
+    final normal =
+        items
+            .where((r) => !pinned.contains(r.id) && !seen.contains(r.id))
+            .toList()
+          ..sort(compareResources);
+    final seenL = items.where((r) => seen.contains(r.id)).toList()
+      ..sort(compareResources);
     return [...pins, ...normal, ...seenL];
+  }
+
+  bool _isSeattleArea(Resource resource) {
+    if (resource.scope != 'local') return false;
+    final location = (resource.locationNote ?? '').toLowerCase();
+    return location.contains('seattle') ||
+        location.contains('kirkland') ||
+        location.contains('king county') ||
+        location.contains('redmond') ||
+        location.contains('puget sound');
   }
 
   @override
