@@ -22,7 +22,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: 4, vsync: this);
+    _tabs = TabController(length: 5, vsync: this);
     // Track this view (runs after the frame is built so context is valid)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -234,6 +234,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
             isScrollable: true,
             tabs: const [
               Tab(text: 'Course Material'),
+              Tab(text: 'Notes'),
               Tab(text: 'Videos'),
               Tab(text: 'Practice Tests'),
               Tab(text: 'Practice Questions'),
@@ -250,6 +251,11 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                 // Wrap the filtered items in the sorter
                 items: _sortedLinks(_courseMaterial(res), provider),
                 emptyText: 'No course material added yet.',
+              ),
+              _ApTab(
+                icon: Icons.description_outlined,
+                items: _sortedLinks(_notes(res), provider),
+                emptyText: 'No notes added yet.',
               ),
               _ApTab(
                 icon: Icons.smart_display_outlined,
@@ -279,16 +285,17 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     return linksForResource(r)
         .where(
           (l) =>
-              l.toLowerCase().startsWith('course material ·') ||
-              l.toLowerCase().contains('book') ||
-              l.toLowerCase().contains('barron') ||
-              l.toLowerCase().contains('amsco') ||
-              l.toLowerCase().contains('medic') ||
-              l.toLowerCase().contains('khan') ||
-              l.toLowerCase().contains('review') ||
-              l.toLowerCase().contains('course page') ||
-              l.toLowerCase().contains('classroom') ||
-              l.toLowerCase().contains('study guide'),
+              !l.toLowerCase().startsWith('notes ·') &&
+              (l.toLowerCase().startsWith('course material ·') ||
+                  l.toLowerCase().contains('book') ||
+                  l.toLowerCase().contains('barron') ||
+                  l.toLowerCase().contains('amsco') ||
+                  l.toLowerCase().contains('medic') ||
+                  l.toLowerCase().contains('khan') ||
+                  l.toLowerCase().contains('review') ||
+                  l.toLowerCase().contains('course page') ||
+                  l.toLowerCase().contains('classroom') ||
+                  l.toLowerCase().contains('study guide')),
         )
         .toList();
   }
@@ -302,6 +309,12 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               l.toLowerCase().contains('youtube'),
         )
         .toList();
+  }
+
+  List<String> _notes(Resource r) {
+    return linksForResource(
+      r,
+    ).where((l) => l.toLowerCase().startsWith('notes ·')).toList();
   }
 
   List<String> _practiceTests(Resource r) {
@@ -320,6 +333,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     // Anything that didn't get caught by the filters above goes here
     final matched = [
       ..._courseMaterial(r),
+      ..._notes(r),
       ..._videos(r),
       ..._practiceTests(r),
     ];

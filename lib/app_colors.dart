@@ -67,6 +67,7 @@ class FieldColors {
     'math': Color(0xFFBA7517),
     'english': Color(0xFFD4537E),
     'history': Color(0xFFD85A30),
+    'education': Color(0xFF0B6E4F),
     'physics': Color(0xFF378ADD),
     'all': Color(0xFF6B7280),
   };
@@ -92,6 +93,7 @@ class FieldColors {
     'polisci': 'Political Science',
     'geography': 'Human Geography',
     'humanities': 'Humanities & Social Sciences',
+    'education': 'Education & Social Impact',
     'physics': 'Physics / Eng.',
     'all': 'All Fields',
   };

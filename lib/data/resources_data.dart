@@ -3,6 +3,7 @@ import '../models/resource.dart';
 
 // mapping url links
 const Map<String, String> kLinkUrls = {
+  'Email info@kirklandchamber.org': 'mailto:info@kirklandchamber.org',
   'Knowt AP Hub': 'https://knowt.com/ap',
   'CrackAP practice questions': 'https://www.crackap.com/index.html',
   // Course-specific AP resources
@@ -2979,6 +2980,423 @@ final List<Resource> allResources = [
     detailNote:
         'The program is highly selective and age, grade, location, and work-authorization rules can change by cycle',
   ),
+  const Resource(
+    id: 'simons_summer_research',
+    title: 'Simons Summer Research Program',
+    category: 'research',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Stony Brook University in Stony Brook, New York',
+    timeCommitment: 'Summer faculty-mentored research program',
+    majorTags: ['science', 'engineering', 'math', 'research'],
+    applicationInfo:
+        'For academically strong high school students; schools may have nomination requirements, so review the next cycle carefully',
+    description:
+        'Join a Stony Brook research group and complete a hands-on project in science, mathematics, or engineering',
+    icon: Icons.science,
+    url: 'https://www.stonybrook.edu/commcms/simons/index.php',
+    links: ['Simons program overview', 'Simons application information'],
+  ),
+  const Resource(
+    id: 'summer_science_program',
+    title: 'Summer Science Program',
+    category: 'research',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Residential programs hosted at partner college campuses',
+    timeCommitment: 'About 5 to 6 weeks of full-time collaborative research',
+    majorTags: ['science', 'biology', 'chemistry', 'physics', 'research'],
+    applicationInfo:
+        'Usually open to current high school juniors, including international applicants; substantial need-based aid is available',
+    description:
+        'Complete an intensive team research project in astrophysics, biochemistry, genomics, or synthetic chemistry',
+    icon: Icons.science,
+    url: 'https://summerscience.org/',
+    links: ['Summer Science Program', 'SSP admissions and financial aid'],
+  ),
+  const Resource(
+    id: 'clark_scholars',
+    title: 'Anson L. Clark Scholars Program',
+    category: 'research',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Texas Tech University in Lubbock, Texas',
+    timeCommitment: '7 weeks full-time in summer',
+    majorTags: ['science', 'engineering', 'humanities', 'research'],
+    applicationInfo:
+        'A very small cohort for rising seniors and recent graduates; review the next application cycle for project areas',
+    description:
+        'Conduct intensive university research with a faculty mentor in a field matched to your interests',
+    icon: Icons.science,
+    url: 'https://www.depts.ttu.edu/clarkscholars/index.php',
+    links: ['Clark Scholars overview', 'Clark Scholars application details'],
+    detailNote:
+        'The program typically selects only twelve students, so students should apply alongside several other opportunities',
+  ),
+  const Resource(
+    id: 'rockefeller_ssrp',
+    title: 'Rockefeller Summer Science Research Program',
+    category: 'research',
+    field: 'biology',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'The Rockefeller University in New York City',
+    timeCommitment: '7 weeks at about 35 hours per week',
+    majorTags: ['biology', 'medicine', 'chemistry', 'research'],
+    applicationInfo:
+        'For current high school juniors and seniors who will be at least 16 by the program start',
+    description:
+        'Investigate a student-driven scientific question through team-based laboratory research and mentorship',
+    icon: Icons.biotech,
+    url: 'https://www.rockefeller.edu/outreach/ssrp/',
+    links: ['Rockefeller SSRP', 'SSRP eligibility and application'],
+  ),
+  const Resource(
+    id: 'ucsc_sip',
+    title: 'UC Santa Cruz Science Internship Program',
+    category: 'research',
+    field: 'science',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Online opening week followed by research at UC Santa Cruz',
+    timeCommitment: '8 weeks of full-time summer research',
+    majorTags: ['science', 'engineering', 'cs', 'humanities', 'research'],
+    applicationInfo:
+        'Open to high school students worldwide; projects span all five UCSC academic divisions and program fees apply',
+    description:
+        'Contribute to an authentic open-ended research project with a UCSC faculty, graduate, or postdoctoral mentor',
+    icon: Icons.science,
+    url: 'https://sip.ucsc.edu/',
+    links: ['UCSC SIP overview', 'SIP application information'],
+    detailNote:
+        'This is a tuition-based program, with financial support initiatives for students from historically excluded backgrounds',
+  ),
+  const Resource(
+    id: 'wolfram_hs_research',
+    title: 'Wolfram High School Summer Research Program',
+    category: 'research',
+    field: 'cs',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Residential program in the Boston area',
+    timeCommitment: 'About 2.5 weeks of intensive project work',
+    majorTags: ['cs', 'math', 'data_sci', 'research'],
+    applicationInfo:
+        'For motivated high school students with strong quantitative interests; need-based scholarships are available',
+    description:
+        'Build a personalized computational research project and publish it as an interactive Wolfram essay',
+    icon: Icons.computer,
+    url: 'https://education.wolfram.com/summer-research-high-school/',
+    links: ['Wolfram research program', 'Wolfram admissions information'],
+  ),
+  const Resource(
+    id: 'aspirnaut_michigan',
+    title: 'Aspirnaut Summer Research Internship',
+    category: 'research',
+    field: 'biology',
+    scope: 'state',
+    format: 'in_person',
+    locationNote: 'University of Michigan in Ann Arbor, Michigan',
+    timeCommitment: '6-week residential summer program',
+    majorTags: ['biology', 'medicine', 'research'],
+    applicationInfo:
+        'For Michigan high school students entering senior year; housing, meals, and stipends are provided',
+    description:
+        'Work on an active life-science research project while learning how professional scientists design and communicate their work',
+    icon: Icons.biotech,
+    url: 'https://aspirnaut.lsi.umich.edu/',
+    links: ['Aspirnaut program', 'Aspirnaut application information'],
+  ),
+  const Resource(
+    id: 'tufts_research_experience',
+    title: 'Tufts Summer Research Experience',
+    category: 'research',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Tufts University in the Greater Boston area',
+    timeCommitment: '6 weeks in summer',
+    majorTags: ['science', 'research', 'biology', 'engineering'],
+    applicationInfo:
+        'A tuition-based pre-college research program for high school students; the school requests a high school contact during application',
+    description:
+        'Develop a research project with university guidance and present your findings at a concluding poster session',
+    icon: Icons.science,
+    url:
+        'https://universitycollege.tufts.edu/pre-college/browse/tufts-summer-research-experience',
+    links: ['Tufts research experience', 'Tufts program details'],
+  ),
+  const Resource(
+    id: 'utah_hs_research',
+    title: 'University of Utah High School Research Internship',
+    category: 'research',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'University of Utah in Salt Lake City, Utah',
+    timeCommitment: 'About 8 weeks in summer',
+    majorTags: ['engineering', 'science', 'research'],
+    applicationInfo:
+        'For students graduating in the two classes specified for each cycle; project-specific math or technical readiness may be expected',
+    description:
+        'Join a College of Engineering laboratory and contribute to a mentored technical research project',
+    icon: Icons.engineering,
+    url:
+        'https://www.price.utah.edu/k12/high-school-summer-research-internship',
+    links: ['Utah research internship', 'Research project information'],
+  ),
+  const Resource(
+    id: 'cosmos_ucsc',
+    title: 'California COSMOS at UC Santa Cruz',
+    category: 'research',
+    field: 'science',
+    scope: 'state',
+    format: 'in_person',
+    locationNote: 'Residential program at UC Santa Cruz',
+    timeCommitment: '4 weeks in summer',
+    majorTags: ['science', 'math', 'engineering', 'research'],
+    applicationInfo:
+        'Designed primarily for California high school students; tuition and financial-aid details vary by cycle',
+    description:
+        'Explore an advanced math or science cluster through hands-on university coursework, projects, and research communication',
+    icon: Icons.science,
+    url: 'https://cosmos.ucsc.edu/',
+    links: ['COSMOS at UC Santa Cruz', 'COSMOS clusters and admissions'],
+  ),
+  const Resource(
+    id: 'fred_hutch_ship',
+    title: 'Fred Hutch Summer High School Internship',
+    category: 'internship',
+    field: 'biology',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'Fred Hutch Cancer Center in Seattle, Washington',
+    timeCommitment: '8 weeks full-time in summer',
+    majorTags: ['biology', 'medicine', 'public_health', 'research'],
+    applicationInfo:
+        'Paid program for students entering senior year who are at least 16 and live in Greater Seattle or the surrounding area',
+    description:
+        'Learn laboratory and scientific communication skills while completing a mentored cancer or biomedical research project',
+    icon: Icons.biotech,
+    url:
+        'https://www.fredhutch.org/en/education-training/high-school-students/summer-high-school-internship-program.html',
+    links: ['Fred Hutch high school internship', 'SHIP eligibility'],
+    detailNote:
+        'The program does not provide housing, so students must be able to commute to the Seattle campus',
+  ),
+  const Resource(
+    id: 'nist_ship',
+    title: 'NIST Summer High School Intern Program',
+    category: 'internship',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote:
+        'NIST campuses in Gaithersburg, Maryland, or Boulder, Colorado',
+    timeCommitment: 'About 7 weeks in summer',
+    majorTags: ['science', 'engineering', 'physics', 'cs', 'research'],
+    applicationInfo:
+        'For eligible high school students interested in laboratory research; citizenship and local commuting rules should be checked for each cycle',
+    description:
+        'Work alongside NIST researchers on measurement science, engineering, computing, physics, or related laboratory projects',
+    icon: Icons.science,
+    url: 'https://www.nist.gov/ship',
+    links: ['NIST SHIP', 'NIST application and eligibility'],
+  ),
+  const Resource(
+    id: 'ucsf_hip',
+    title: 'UCSF High School Intern Program',
+    category: 'internship',
+    field: 'biology',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'UC San Francisco laboratories',
+    timeCommitment: '8-week paid summer internship',
+    majorTags: ['biology', 'medicine', 'public_health', 'research'],
+    applicationInfo:
+        'Local eligibility rules apply; selection is designed to look beyond grades and prior access to science opportunities',
+    description:
+        'Learn how biomedical research works through paid laboratory placement, mentorship, professional development, and college preparation',
+    icon: Icons.biotech,
+    url: 'https://sep.ucsf.edu/programs/high-school-students/intern-program/',
+    links: ['UCSF High School Intern Program', 'UCSF HIP application'],
+  ),
+  const Resource(
+    id: 'ucsf_ssrp',
+    title: 'UCSF Summer Student Research Program',
+    category: 'internship',
+    field: 'biology',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'UCSF clinics and research laboratories in San Francisco',
+    timeCommitment: '7 weeks in summer',
+    majorTags: ['biology', 'medicine', 'public_health', 'research'],
+    applicationInfo:
+        'Places eligible high school and college students from diverse backgrounds into active clinical and basic-science projects',
+    description:
+        'Contribute to an active biomedical or clinical research project with a UCSF mentor',
+    icon: Icons.biotech,
+    url: 'https://summerstudents.ucsf.edu/',
+    links: ['UCSF Summer Student Research Program', 'Program eligibility'],
+  ),
+  const Resource(
+    id: 'fiu_summer_research',
+    title: 'FIU High School Summer Research Internship',
+    category: 'internship',
+    field: 'science',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'Florida International University in Miami, Florida',
+    timeCommitment: '8 weeks in summer',
+    majorTags: ['science', 'biology', 'engineering', 'research'],
+    applicationInfo:
+        'Eligibility and school partnerships vary by cycle; review the official page before applying',
+    description:
+        'Learn laboratory procedures and research methods while working with an FIU science mentor',
+    icon: Icons.science,
+    url:
+        'https://case.fiu.edu/opportunities/internships-jobs/summer-research-internship/',
+    links: ['FIU summer research internship', 'FIU program information'],
+  ),
+  const Resource(
+    id: 'seattle_youth_employment',
+    title: 'Seattle Youth Employment Program',
+    category: 'internship',
+    field: 'all',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'City departments, nonprofits, and employers across Seattle',
+    timeCommitment:
+        '6 to 8 weeks in summer, with school-year options available',
+    majorTags: ['all_subjects', 'business', 'social_impact'],
+    applicationInfo:
+        'Paid placements have Seattle residency, school enrollment, age, and income eligibility rules; check the current application',
+    description:
+        'Build professional skills in a paid placement matched with a City department, community organization, or private employer',
+    icon: Icons.business_center,
+    url:
+        'https://www.seattle.gov/human-services/services-and-programs/youth-and-young-adults/seattle-youth-employment-program',
+    links: ['Seattle Youth Employment Program', 'SYEP eligibility'],
+  ),
+  const Resource(
+    id: 'port_seattle_hs_internship',
+    title: 'Port of Seattle High School Internships',
+    category: 'internship',
+    field: 'all',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'SEA Airport, Seattle waterfront, and Port facilities',
+    timeCommitment: 'Paid summer and occasional winter placements',
+    majorTags: ['all_subjects', 'business', 'engineering', 'env_sci'],
+    applicationInfo:
+        'Applicants must be at least 16, enrolled in or recently graduated from high school, and authorized to work in the United States',
+    description:
+        'Complete real projects in aviation, maritime operations, governance, community engagement, skilled trades, or green jobs',
+    icon: Icons.business_center,
+    url: 'https://www.portseattle.org/programs/high-school-internships',
+    links: [
+      'Port of Seattle high school internships',
+      'Port application guide',
+    ],
+  ),
+  const Resource(
+    id: 'king_county_metro_internships',
+    title: 'King County Metro High School Internships',
+    category: 'internship',
+    field: 'all',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'King County Metro teams across the Seattle region',
+    timeCommitment: 'Varies by placement and application cycle',
+    majorTags: ['all_subjects', 'engineering', 'public_policy', 'business'],
+    applicationInfo:
+        'Metro accepts high school students for selected roles and offers an interest form for notifications when the next cycle opens',
+    description:
+        'Gain public-sector experience in transportation, operations, communications, planning, technology, or green career pathways',
+    icon: Icons.directions_bus,
+    url: 'https://kingcounty.gov/en/dept/metro/about/careers/internships',
+    links: ['King County Metro internships', '2027 internship interest form'],
+  ),
+  const Resource(
+    id: 'kirkland_chamber_inquiry',
+    title: 'Greater Kirkland Chamber Student Internship Inquiry',
+    category: 'internship',
+    field: 'business',
+    scope: 'local',
+    format: 'in_person',
+    locationNote:
+        'Greater Kirkland Chamber of Commerce in Kirkland, Washington',
+    timeCommitment:
+        'Flexible and arranged directly if a placement is available',
+    majorTags: ['business', 'entrepreneurship', 'marketing', 'nonprofit'],
+    applicationInfo:
+        'Send a short, professional introduction and resume to info@kirklandchamber.org asking whether a student project, event, communications, or office placement is available',
+    description:
+        'Pitch a student-created internship or volunteer project supporting local business events, outreach, marketing, or community programs',
+    icon: Icons.business_center,
+    url: 'https://www.kirklandchamber.org/',
+    links: ['Kirkland Chamber website', 'Email info@kirklandchamber.org'],
+    detailNote:
+        'This is a direct-outreach lead, not a standing advertised internship, so a placement is not guaranteed',
+  ),
+  const Resource(
+    id: 'kirkland_ktub_jobs',
+    title: 'Kirkland Teen Union Building Jobs and Volunteering',
+    category: 'internship',
+    field: 'education',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'Kirkland Teen Union Building in Kirkland, Washington',
+    timeCommitment: 'Year-round and summer opportunities vary',
+    majorTags: ['education', 'social_work', 'nonprofit', 'social_impact'],
+    applicationInfo:
+        'Recreation Attendant roles begin at age 16, while teen volunteer opportunities and summer openings are posted separately',
+    description:
+        'Support teen programs, activities, drop-in operations, camps, and community events through paid or volunteer work',
+    icon: Icons.groups,
+    url: 'https://www.kirklandwa.gov/KTUB',
+    links: ['KTUB opportunities', 'City of Kirkland employment openings'],
+  ),
+  const Resource(
+    id: 'uw_bright_up',
+    title: 'UW BRIGHT-UP Biomedical Research Internship',
+    category: 'internship',
+    field: 'biology',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'University of Washington health-science programs in Seattle',
+    timeCommitment: 'Summer biomedical research and training',
+    majorTags: ['biology', 'medicine', 'public_health', 'research'],
+    applicationInfo:
+        'For high school students in grades 9 through 12 who meet at least one listed first-generation or low-income eligibility pathway',
+    description:
+        'Explore biomedical research and health careers through mentorship, skill-building, and a structured summer experience',
+    icon: Icons.biotech,
+    url: 'https://www.hcop.uw.edu/bright-up/',
+    links: ['UW BRIGHT-UP', 'BRIGHT-UP eligibility'],
+  ),
+  const Resource(
+    id: 'uw_teaching_tomorrow',
+    title: 'UW Teaching Tomorrow Internship',
+    category: 'internship',
+    field: 'education',
+    scope: 'local',
+    format: 'hybrid',
+    locationNote:
+        'Seattle early-learning classrooms and University of Washington sessions',
+    timeCommitment: '6 months from spring through summer',
+    majorTags: ['education', 'social_work', 'psychology'],
+    applicationInfo:
+        'Paid program for eligible Seattle Public Schools students who meet the age requirement for the current cycle',
+    description:
+        'Work in an early-learning classroom while earning mentorship, professional training, credit, and an education credential',
+    icon: Icons.school,
+    url: 'https://cultivatelearning.uw.edu/high-school-internship/',
+    links: ['Teaching Tomorrow internship', 'Program schedule and eligibility'],
+  ),
 ];
 
 // ===========================================================================
@@ -3590,24 +4008,46 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_art_history': {
     'Course material · Smarthistory AP Art History guide':
         'https://smarthistory.org/guide-type/syllabus/',
+    'Course material · Google Arts and Culture collections':
+        'https://artsandculture.google.com/',
+    'Course material · The Met Heilbrunn Timeline of Art History':
+        'https://www.metmuseum.org/toah/',
   },
   'ap_music_theory': {
     'Course material · MusicTheory.net lessons':
         'https://www.musictheory.net/lessons',
     'Practice questions · MusicTheory.net exercises':
         'https://www.musictheory.net/exercises',
+    'Course material · uTheory music theory and ear training':
+        'https://utheory.com/',
+    'Course material · Open Music Theory textbook':
+        'https://viva.pressbooks.pub/openmusictheory/',
+    'Practice questions · Teoria ear training and exercises':
+        'https://www.teoria.com/en/exercises/',
   },
   'ap_english_lang': {
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Purdue OWL writing and rhetoric':
         'https://owl.purdue.edu/owl/general_writing/academic_writing/index.html',
+    'Notes · AP English Language study guide':
+        'https://uploads-ssl.webflow.com/605fe570e5454a357d1e1811/60a039a509ab73d9c20c9e67_SS-AP-English-Lang.pdf',
+    'Notes · AP Language survival guide':
+        'http://www.matermiddlehigh.org/ourpages/auto/2009/10/30/35408373/AP%20Language%20Survival%20Guide.pdf',
+    'Practice test · High School Test Prep AP Language':
+        'https://highschooltestprep.com/ap/english-language/',
+    'Practice questions · Varsity Tutors AP English Language':
+        'https://www.varsitytutors.com/ap_english_language-flashcards',
   },
   'ap_english_lit': {
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Purdue OWL writing and literature':
         'https://owl.purdue.edu/owl/subject_specific_writing/writing_in_literature/index.html',
+    'Video · Crash Course Literature playlists':
+        'https://www.youtube.com/@crashcourse/search?query=literature',
+    'Course material · Poetry Foundation poems and analysis':
+        'https://www.poetryfoundation.org/',
   },
   'ap_euro': {
     'Video · Heimler’s History AP European History':
@@ -3616,26 +4056,106 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://resources.heimlershistory.com/store',
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · Tom Richey AP European History':
+        'https://www.tomrichey.net/ap-european-history.html',
+    'Notes · Volke AP European History lecture notes':
+        'http://www.volkeeurohistory.com/lecture-notes.html',
+    'Notes · Lumisource AP European History review':
+        'https://www.lumisource.io/ap/european-history/unit1/review',
+    'Practice test · High School Test Prep AP European History':
+        'https://highschooltestprep.com/ap/european-history/',
+    'Practice questions · Varsity Tutors AP European History':
+        'https://www.varsitytutors.com/ap_european_history-flashcards',
   },
   'ap_human_geo': {
     'Video · Heimler’s History AP Human Geography':
         'https://www.youtube.com/@heimlershistory',
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Notes · AP Human Geography Big Ideas review packet':
+        'http://apgeographymhs.files.wordpress.com/2012/04/sbigideaspacket2012.pdf',
+    'Notes · Lumisource Human Geography unit reviews':
+        'https://www.lumisource.io/ap/human-geography/unit1/review',
+    'Practice test · High School Test Prep Human Geography':
+        'https://highschooltestprep.com/ap/human-geography/',
+    'Practice questions · Geography Quiz topic library':
+        'https://geographyquiz.org',
+    'Practice questions · Varsity Tutors Human Geography':
+        'https://www.varsitytutors.com/ap_human_geography-flashcards',
   },
   'ap_macro': {
     'Video · Heimler’s History AP Macroeconomics':
         'https://www.youtube.com/@heimlershistory',
+    'Video · ACDC Economics macroeconomics playlists':
+        'https://www.youtube.com/user/ACDCLeadership/playlists',
+    'Notes · AP Macroeconomics exam review sheet':
+        'http://jsher.myclassupdates.com/sitebuildercontent/sitebuilderfiles/apmacroexamreviewsheet.pdf',
+    'Notes · Macroeconomics course outlines':
+        'http://www.course-notes.org/Economics/Macro_Economics/Outlines/Macroeconomics_15th_Edition_Textbook',
+    'Practice test · Lumisource AP Macroeconomics':
+        'https://www.lumisource.io/ap/macroeconomics/practice/all',
+    'Practice questions · Varsity Tutors AP Macroeconomics':
+        'https://www.varsitytutors.com/ap_macroeconomics-flashcards',
+    'Practice questions · Hamilton AP Macro worksheets':
+        'https://sites.google.com/hamilton.k12.wi.us/ap-macroeconomics/home/ap-exam-review/practice-problems',
+  },
+  'ap_micro': {
+    'Video · ACDC Economics microeconomics playlists':
+        'https://www.youtube.com/user/ACDCLeadership/playlists',
+    'Video · Jason Welker economics lessons':
+        'https://www.youtube.com/@JasonWelker',
+    'Notes · Lumisource complete AP Micro review':
+        'https://www.lumisource.io/ap/microeconomics/review/all',
+    'Notes · AP Microeconomics study guide':
+        'https://ahsanderson.weebly.com/uploads/1/3/7/7/13770485/ap-micro-exam-study-guide.pdf',
+    'Practice test · Lumisource AP Microeconomics':
+        'https://www.lumisource.io/ap/microeconomics/unit1/practice-test',
+    'Practice questions · ReviewEcon AP Micro game':
+        'https://www.reviewecon.com/games-activities/micro-mc-exam',
+    'Practice questions · Varsity Tutors AP Microeconomics':
+        'https://www.varsitytutors.com/ap_microeconomics-flashcards',
   },
   'ap_psych': {
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Notes · WikiNotes AP Psychology chapter notes':
+        'http://wikinotes.wikidot.com/psychology-index',
+    'Notes · AP Psychology complete review document':
+        'https://drive.google.com/file/d/1sQ6TcTzIdfs7sOPmk1Kh6sTOrwdtRCNj/view',
+    'Notes · Simple Studies AP Psychology':
+        'https://www.simplestudies.org/groups/ap-psychology',
+    'Course material · SparkNotes Psychology':
+        'https://www.sparknotes.com/psychology/',
+  },
+  'ap_comp_gov': {
+    'Course material · C-SPAN Classroom Comparative Government':
+        'https://sites.google.com/view/c-spanclassroom-featured/world-history-and-governments/ap-comparative-government-and-politics',
+    'Course material · Mr. Tredinnick Comparative Government':
+        'http://www.mrtredinnick.com/ap-comparative-government.html',
+    'Notes · Comparative Government country comparison chart':
+        'https://uploads-ssl.webflow.com/632be2995229ca0bd3715246/640a3e46ba2b9b0dac096585_AP_Comp_Gov_Cram_Chart.pdf',
+    'Notes · Athens Academy Comparative Government notes':
+        'http://athensdesantis.com/apcpsnotes.html',
+    'Video · Comparative Government complete playlist':
+        'https://www.youtube.com/playlist?list=PL0TCFkN2cK4eLzdttDpcCcjealYzf8LuG',
   },
   'ap_us_gov': {
     'Video · Heimler’s History AP Government':
         'https://www.youtube.com/@heimlershistory',
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · C-SPAN Classroom AP Government':
+        'https://sites.google.com/view/c-spanclassroom-featured/u-s-government-and-civics/ap-u-s-government-and-politics',
+    'Notes · EBSCO AP Government study guide':
+        'https://support.ebsco.com/LEX/AP-US-Government-and-Politics-Study-Guide.pdf',
+    'Notes · Social Studies Help AP Government notes':
+        'http://www.socialstudieshelp.com/APGOV_Class_Page.htm',
+    'Practice test · High School Test Prep AP Government':
+        'https://highschooltestprep.com/ap/us-government/',
+    'Practice questions · US Government Quiz':
+        'https://www.usgovernmentquiz.com/',
+    'Practice test · Lumisource AP Government':
+        'https://www.lumisource.io/ap/us-government/unit1-1/practice-test',
   },
   'ap_us_history': {
     'Video · Heimler’s History AP United States History':
@@ -3644,6 +4164,16 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://resources.heimlershistory.com/store',
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · Gilder Lehrman AP US History':
+        'https://www.gilderlehrman.org/ap-us-history',
+    'Course material · American History Central APUSH guide':
+        'https://www.americanhistorycentral.com/entries/apush-guide/',
+    'Notes · Doves Library APUSH period notes':
+        'https://www.doveslibrary.com/history-and-social-sciences/ap-united-states-history/period-1-a-new-world-1491-1607/1-2-native-american-societies-before-european-contact',
+    'Practice test · High School Test Prep AP US History':
+        'https://highschooltestprep.com/ap/us-history/',
+    'Practice questions · Gilder Lehrman APUSH questions':
+        'https://www.gilderlehrman.org/ap-us-history/practice-questions',
   },
   'ap_world': {
     'Video · Heimler’s History AP World History':
@@ -3652,18 +4182,51 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://resources.heimlershistory.com/store',
     'Course material · Marco Learning free study guides':
         'https://marcolearning.com/students/ap-study-guides/',
+    'Course material · AP Worldipedia': 'http://www.apworldipedia.com',
+    'Notes · AP World History complete study guide':
+        'https://uploads-ssl.webflow.com/605fe570e5454a357d1e1811/609f602ab8c522d2fbb74495_SS-AP-World-History.pdf',
+    'Notes · Lumisource AP World History review':
+        'https://www.lumisource.io/ap/world-history/review/all',
+    'Notes · Teacher Oz AP World exam review':
+        'http://www.teacheroz.com/apexamreview.html',
+    'Practice test · High School Test Prep AP World History':
+        'https://highschooltestprep.com/ap/world-history/',
+    'Practice test · Lumisource AP World History':
+        'https://www.lumisource.io/ap/world-history/unit1/practice-test',
+    'Course material · World History Encyclopedia':
+        'https://www.worldhistory.org/',
   },
   'ap_calc_ab': {
     'Course material · Math Medic AP Calculus lessons':
         'https://mathmedic.com/',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+    'Course material · Paul’s Online Calculus I notes':
+        'https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx',
+    'Notes · Paul’s complete calculus cheat sheet':
+        'https://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf',
+    'Notes · IITian Academy AP Calculus summaries':
+        'https://www.iitianacademy.com/ap-calculus-ab-and-bc-concise-summary-notes/',
+    'Notes · AP Calculus when-you-see reference sheet':
+        'https://www.gpschools.org/cms/lib/MI01000971/Centricity/Domain/429/WhenYouSeeWAnswers.pdf',
+    'Notes · Elaine Cheong AP Calculus review book':
+        'http://www.elainetron.com/apcalc/apcalc.pdf',
   },
   'ap_calc_bc': {
     'Course material · Math Medic AP Calculus lessons':
         'https://mathmedic.com/',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+    'Course material · Paul’s Online Calculus II notes':
+        'https://tutorial.math.lamar.edu/Classes/CalcII/CalcII.aspx',
+    'Course material · Mr. Felling AP Calculus BC':
+        'https://www.mrfelling.com/apcalcbc.html',
+    'Course material · Mr. Tiger AP Calculus AB and BC':
+        'https://mrtigercalculus.weebly.com/new-ap-calculus-abbc.html',
+    'Notes · Paul’s complete calculus cheat sheet':
+        'https://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf',
+    'Notes · AP Calculus BC final notes':
+        'http://staff.orecity.k12.or.us/steven.becker/Final%20Notes%20for%20AB%20and%20BC.pdf',
   },
   'ap_precalc': {
     'Course material · Math Medic AP Precalculus lessons':
@@ -3676,10 +4239,24 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://mathmedic.com/',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
+    'Notes · Statistics Handbook':
+        'https://mathguy.us/Handbooks/StatisticsHandbook.pdf',
+    'Notes · EBSCO AP Statistics study guide':
+        'https://support.ebsco.com/LEX/AP-Statistics_Study-Guide.pdf',
+    'Course material · Dan Shuster AP Statistics chapters':
+        'http://www.danshuster.com/apstat/apstat_chapters.htm',
+    'Notes · AP Statistics review notes':
+        'https://www.ilearnacademy.net/uploads/3/9/2/2/3922443/stat_review_notes.pdf',
   },
   'ap_csa': {
     'Course material · CSAwesome interactive Java course':
         'https://runestone.academy/runestone/books/published/csawesome2/index.html',
+    'Course material · Code.org AP Computer Science A':
+        'https://code.org/curriculum/csa',
+    'Practice questions · CodingBat AP Java problems':
+        'https://codingbat.com/java/AP-1',
+    'Practice questions · CodingBat Java practice library':
+        'https://codingbat.com/java',
   },
   'ap_csp': {
     'Course material · Code.org AP CSP curriculum':
@@ -3690,6 +4267,18 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://apbiopenguins.weebly.com/',
     'Video · Bozeman Science AP Biology':
         'https://www.bozemanscience.com/ap-biology',
+    'Notes · IITian Academy AP Biology summary notes':
+        'https://www.iitianacademy.com/ap-biology-concise-summary-notes/',
+    'Notes · Chou AP Biology lecture notes':
+        'https://sites.google.com/a/svvsd.org/chou/welcome/ap-biology/ap-biology-lecture-notes',
+    'Notes · AP Biology full review guide':
+        'https://drive.google.com/file/d/1p5h3hETnFvhbekquJ_xXecPpKOVmp5yp/view',
+    'Practice test · High School Test Prep AP Biology':
+        'https://highschooltestprep.com/ap/biology/',
+    'Practice test · AP Bio Penguins full practice exam':
+        'https://apbiopenguins.weebly.com/2025-2026-exam-review.html',
+    'Practice questions · AP Biology vocabulary review':
+        'https://quizlet.com/22315269/ultimate-ap-biology-vocabulary-review-flash-cards/',
   },
   'ap_chem': {
     'Video · Jeremy Krug complete AP Chemistry course':
@@ -3698,56 +4287,140 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://jeremykrug.com/',
     'Video · Bozeman Science AP Chemistry':
         'https://www.bozemanscience.com/ap-chemistry',
+    'Course material · ScienceGeek AP Chemistry':
+        'https://www.sciencegeek.net/APchemistry/Powerpoints.shtml',
+    'Notes · Simple Studies AP Chemistry':
+        'https://www.simplestudies.org/groups/ap-chemistry',
+    'Notes · AP Chemistry quick review':
+        'http://smicchem.weebly.com/uploads/1/0/0/2/10026459/apquickreview.pdf',
+    'Notes · EBSCO AP Chemistry study guide':
+        'https://support.ebsco.com/LEX/AP-Chemistry_Study-Guide.pdf',
+    'Practice questions · ScienceGeek interactive review':
+        'http://www.sciencegeek.net/APchemistry/APtaters/directory.shtml',
+    'Practice questions · Varsity Tutors AP Chemistry':
+        'https://www.varsitytutors.com/ap_chemistry-flashcards',
+    'Practice test · AP Chemistry midterm exam':
+        'https://drive.google.com/file/d/1R0e_YPaSyNxLmOoUHhrg18rYF7oyENaY/view',
   },
   'ap_env_sci': {
     'Video · Bozeman Science AP Environmental Science':
         'https://www.bozemanscience.com/ap-environmental-science',
+    'Notes · Mr. Rittner AP Environmental Science notes':
+        'https://mrrittnerisapes.weebly.com/class-notes.html',
+    'Notes · Kwanga AP Environmental Science notes':
+        'http://www.kwanga.net/apes-notes1.html#susfuture',
+    'Notes · Lumisource AP Environmental Science reviews':
+        'https://www.lumisource.io/ap/environmental-science/unit1/review',
   },
   'ap_physics_1': {
     'Video · Flipping Physics AP Physics 1 playlists':
         'https://www.flippingphysics.com/playlists.html',
     'Video · Bozeman Science AP Physics 1':
         'https://www.bozemanscience.com/ap-physics-1',
+    'Notes · Flipping Physics complete Physics 1 notes':
+        'https://www.flippingphysics.com/uploads/2/1/1/0/21103672/ap_physics_1_review_lecture_notes_-_all.pdf',
+    'Notes · Mr. Bigler AP Physics 1 notes':
+        'https://www.mrbigler.com/CP1-Physics-1/Notes-Physics-1.pdf',
+    'Notes · IITian Academy AP Physics 1 summaries':
+        'https://www.iitianacademy.com/ap-physics-1-concise-summary-notes/',
+    'Course material · Campbell AP Physics 1 notes':
+        'https://campbellap.weebly.com/notes.html',
   },
   'ap_physics_2': {
     'Video · Flipping Physics AP Physics 2 library':
         'https://www.flippingphysics.com/physics-videos.html',
     'Video · Bozeman Science AP Physics 2':
         'https://www.bozemanscience.com/ap-physics-2',
+    'Notes · Mr. Bigler AP Physics 2 notes':
+        'https://www.mrbigler.com/AP-Physics-2/Notes-AP-Physics-2.pdf',
+    'Course material · Bluhm AP Physics 2 documents':
+        'https://sites.google.com/a/jeffcoschools.us/bluhm-ap-physics-2/home/documents',
   },
   'ap_physics_c_em': {
     'Video · Flipping Physics E&M playlist and review':
         'https://www.flippingphysics.com/ap-physics-c-review.html',
+    'Course material · Laufer AP Physics C E&M':
+        'https://sites.google.com/view/lauferphysics/ap-physics-c-em',
+    'Course material · Milligan AP Physics C':
+        'https://www.milliganphysics.com/ap_physics_c.html',
+    'Practice questions · Varsity Tutors Physics C E&M':
+        'https://www.varsitytutors.com/ap_physics_c_electricity-flashcards',
+    'Practice test · AP Physics C E&M practice exam':
+        'https://www.worldwisetutoring.com/wp-content/uploads/2022/05/AP-Physics-C-EM-Test-1.pdf',
   },
   'ap_physics_c_mech': {
     'Video · Flipping Physics Mechanics playlist and review':
         'https://www.flippingphysics.com/ap-physics-c-review.html',
+    'Notes · Flipping Physics complete Mechanics notes':
+        'https://www.flippingphysics.com/uploads/2/1/1/0/21103672/ap_physics_c_mechanics_review_lecture_notes_-_all.pdf',
+    'Notes · Barlow Academy AP Physics C notes':
+        'https://barlowacademy.com/ap-physics-c-notes/',
+    'Course material · Milligan AP Physics C':
+        'https://www.milliganphysics.com/ap_physics_c.html',
+    'Practice test · AP Physics C revision guide':
+        'https://www.gonzmosis.com/uploads/7/4/8/4/7484591/ap_physics_c_revision_guide.pdf',
+  },
+  'ap_chinese': {
+    'Course material · Chinese Grammar Wiki':
+        'https://resources.allsetlearning.com/chinese/grammar/',
+    'Practice questions · Arch Chinese vocabulary and writing tools':
+        'https://www.archchinese.com/',
   },
   'ap_french': {
     'Practice questions · Conjuguemos French drills':
         'https://conjuguemos.com/activities/french/verb/1',
+    'Course material · Aprelendo authentic French practice':
+        'https://www.aprelendo.com/',
+    'Course material · Lawless French grammar and listening':
+        'https://www.lawlessfrench.com/',
   },
   'ap_german': {
     'Practice questions · Conjuguemos German drills':
         'https://conjuguemos.com/activities/german/verb/1',
+    'Course material · Aprelendo authentic German practice':
+        'https://www.aprelendo.com/',
+    'Course material · Deutsche Welle German learning':
+        'https://learngerman.dw.com/',
   },
   'ap_italian': {
     'Practice questions · Conjuguemos Italian drills':
         'https://conjuguemos.com/activities/italian/verb/1',
+    'Course material · Aprelendo authentic Italian practice':
+        'https://www.aprelendo.com/',
+  },
+  'ap_japanese': {
+    'Course material · Tae Kim Japanese grammar guide':
+        'https://guidetojapanese.org/learn/',
+    'Course material · NHK Easy Japanese lessons':
+        'https://www.nhk.or.jp/lesson/en/',
+    'Course material · Marugoto Japanese learning platform':
+        'https://minato-jf.jp/',
   },
   'ap_latin': {
     'Course material · Dickinson Latin commentaries':
         'https://dcc.dickinson.edu/',
     'Practice questions · Conjuguemos Latin drills':
         'https://conjuguemos.com/activities/latin/verb/1',
+    'Course material · Perseus Latin text collection':
+        'https://www.perseus.tufts.edu/hopper/collections',
   },
   'ap_spanish_lang': {
     'Practice questions · Conjuguemos Spanish drills':
         'https://conjuguemos.com/activities/spanish/verb/1',
+    'Course material · Aprelendo authentic Spanish practice':
+        'https://www.aprelendo.com/',
+    'Course material · SpanishDict grammar and vocabulary':
+        'https://www.spanishdict.com/guide',
+    'Video · Radio Ambulante Spanish stories and transcripts':
+        'https://radioambulante.org/',
   },
   'ap_spanish_lit': {
     'Practice questions · Conjuguemos Spanish drills':
         'https://conjuguemos.com/activities/spanish/verb/1',
+    'Course material · Biblioteca Virtual Miguel de Cervantes':
+        'https://www.cervantesvirtual.com/',
+    'Course material · SpanishDict grammar and vocabulary':
+        'https://www.spanishdict.com/guide',
   },
   'ap_research': {
     'Course material · Purdue OWL research guidance':
