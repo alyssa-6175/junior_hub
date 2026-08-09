@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
@@ -95,6 +96,115 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
         location.contains('king county') ||
         location.contains('redmond') ||
         location.contains('puget sound');
+  }
+
+  void _showOutreachTemplates() {
+    final isResearch = widget.category == 'research';
+    final templates = isResearch
+        ? const [
+            (
+              'Professor or lab introduction',
+              '''Subject: High school student interested in [specific research area]
+
+Hello Professor [Last Name],
+
+My name is [Name], and I am a [grade] student at [school]. I found your work on [specific topic] while learning more about [field], and I was especially interested in [one real detail from their work].
+
+I have experience with [two relevant skills, classes, or projects], and I can commit [honest weekly availability] from [start date] through [end date]. Would you be open to a short conversation about whether I could help with literature review, data cleanup, coding, lab preparation, or another age-appropriate task?
+
+I attached a one-page resume for context. Thank you for considering it, and I completely understand if your lab cannot take on a high school student right now
+
+Best,
+[Name]
+[Email] | [Phone, optional]''',
+            ),
+            (
+              'Research follow-up',
+              '''Subject: Following up on my research inquiry
+
+Hello Professor [Last Name],
+
+I wanted to follow up on the note I sent on [date] about possibly helping with your work on [topic]. I am still very interested and would be glad to start with a small, clearly defined task.
+
+If there is someone else in your lab or department I should contact, I would really appreciate a referral. Thank you again for your time
+
+Best,
+[Name]''',
+            ),
+          ]
+        : const [
+            (
+              'Local organization internship pitch',
+              '''Subject: Student internship or project inquiry for [season]
+
+Hello [Name or Organization Team],
+
+My name is [Name], and I am a [grade] student at [school]. I admire your work on [specific program, event, or community goal], and I would love to contribute during [dates].
+
+I can help with [two or three useful tasks, such as event support, social media, research, spreadsheets, outreach, translation, or basic coding]. I am available [schedule] and can commit for [number] weeks. Would your team be open to a student internship, job shadow, or small project built around a current need?
+
+I attached a one-page resume and would be happy to speak for 15 minutes. Thank you for considering it
+
+Best,
+[Name]
+[Email] | [Phone, optional]''',
+            ),
+            (
+              'Internship follow-up',
+              '''Subject: Following up on my student internship inquiry
+
+Hello [Name],
+
+I wanted to follow up on the message I sent on [date] about helping with [organization or project]. I remain interested and can be flexible about the role, schedule, and whether the opportunity is paid, volunteer, or project-based.
+
+Please let me know if there is a better person to contact. Thank you again for your time
+
+Best,
+[Name]''',
+            ),
+          ];
+
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) => DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.78,
+        maxChildSize: 0.92,
+        minChildSize: 0.5,
+        builder: (_, controller) => ListView(
+          controller: controller,
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 24),
+          children: [
+            Text(
+              isResearch
+                  ? 'Research cold email templates'
+                  : 'Internship cold email templates',
+              style: GoogleFonts.inter(
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                color: kTextPrimary,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              'Personalize every bracketed section. A short specific email is much stronger than sending the same message everywhere',
+              style: GoogleFonts.inter(
+                fontSize: 11,
+                height: 1.4,
+                color: kTextSecondary,
+              ),
+            ),
+            const SizedBox(height: 12),
+            ...templates.map(
+              (template) =>
+                  _EmailTemplateCard(title: template.$1, body: template.$2),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -213,6 +323,29 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
                   ],
                 ),
               ),
+              if (widget.category == 'research' ||
+                  widget.category == 'internship') ...[
+                const SizedBox(height: 3),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                    onPressed: _showOutreachTemplates,
+                    icon: const Icon(Icons.mail_outline, size: 14),
+                    label: const Text('Cold email templates'),
+                    style: TextButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      textStyle: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
@@ -239,6 +372,65 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _EmailTemplateCard extends StatelessWidget {
+  final String title;
+  final String body;
+
+  const _EmailTemplateCard({required this.title, required this.body});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kSurface,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kBorderLight),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: kTextPrimary,
+                  ),
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(text: body));
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Template copied')),
+                  );
+                },
+                icon: const Icon(Icons.copy_outlined, size: 13),
+                label: const Text('Copy'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          SelectableText(
+            body,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              height: 1.45,
+              color: kTextSecondary,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

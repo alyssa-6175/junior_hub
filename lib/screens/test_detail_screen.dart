@@ -15,7 +15,7 @@ class TestDetailScreen extends StatefulWidget {
 }
 
 class _TestDetailScreenState extends State<TestDetailScreen> {
-  int _tab = 0; // 0=Board 1=Official 2=Videos 3=Books 4=Practice Qs
+  int _tab = 1; // Open on All so the visible list always matches the total
   String? _section;
   bool _guideExpanded = false;
 
@@ -67,6 +67,11 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       'cb_question_bank',
       'cb_practice_specific_questions',
       'cb_official_study_guide',
+      'act_official',
+      'act_current_structure',
+      'act_free_practice_hub',
+      'act_official_sample_questions',
+      'act_official_prep_guide',
     };
     final official = _sort(
       _applySection(_all.where((r) => officialIds.contains(r.id)).toList()),
@@ -74,20 +79,51 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
+    final all = _sort(_applySection(_all), pinned, seen);
+
     final videos = _sort(
-      _applySection(_all.where((r) => r.icon == Icons.smart_display).toList()),
+      _applySection(
+        _all
+            .where(
+              (r) =>
+                  r.icon == Icons.smart_display ||
+                  (r.url ?? '').toLowerCase().contains('youtube.com'),
+            )
+            .toList(),
+      ),
       pinned,
       seen,
     );
 
-    final bookIds = {'princeton_review_sat', 'kaplan_sat'};
+    final bookIds = {
+      'princeton_review_sat',
+      'kaplan_sat',
+      'critical_reader_sat',
+      'college_panda_sat_math',
+      'pr_act',
+      'critical_reader_act_english',
+      'college_panda_act_math',
+      'prepscholar_sat',
+      'prepscholar_act',
+      'magoosh_act_course',
+      'preppros_act',
+      'supertutor_sat',
+      'supertutor_act',
+      'act_official_prep_guide',
+    };
     final books = _sort(
       _applySection(_all.where((r) => bookIds.contains(r.id)).toList()),
       pinned,
       seen,
     );
 
-    final practiceQIds = {'khan_academy_sat', 'knowt_sat'};
+    final practiceQIds = {
+      'khan_academy_sat',
+      'knowt_sat_hub',
+      'knowt_act',
+      'mathchops_sat',
+      'mathchops_act',
+    };
     final qs = _sort(
       _applySection(
         _all
@@ -97,6 +133,9 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                   (!officialIds.contains(r.id) &&
                       !bookIds.contains(r.id) &&
                       (r.icon == Icons.quiz ||
+                          r.title.toLowerCase().contains('practice') ||
+                          r.title.toLowerCase().contains('question') ||
+                          r.title.toLowerCase().contains('drill') ||
                           r.links.any(
                             (l) =>
                                 l.toLowerCase().contains('knowt') ||
@@ -110,8 +149,15 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
-    final tabs = ['Board', 'Official', 'Videos', 'Books', 'Practice Qs'];
-    final bodies = [board, official, videos, books, qs];
+    final tabs = [
+      'Board',
+      'All',
+      'Official',
+      'Videos',
+      'Books & Courses',
+      'Practice',
+    ];
+    final bodies = [board, all, official, videos, books, qs];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,12 +248,12 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                 ),
                 ...List.generate(tabs.length, (i) {
                   final isBoard = i == 0;
-                  final count = isBoard ? board.length : 0;
+                  final count = bodies[i].length;
                   return _TabBtn(
                     label: tabs[i],
                     active: _tab == i,
                     icon: isBoard ? Icons.push_pin_outlined : null,
-                    badge: isBoard && count > 0 ? '$count' : null,
+                    badge: count > 0 ? '$count' : null,
                     onTap: () => setState(() => _tab = i),
                   );
                 }),

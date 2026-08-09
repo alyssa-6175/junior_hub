@@ -744,13 +744,13 @@ final List<Resource> allResources = [
         'Eligibility and deadlines are district-specific; use the official district finder.',
     description:
         'Create an original app, explain the problem it solves, and submit it to the competition run by your congressional district',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'October 26, 2026 at 12:00 PM ET',
+    deadlineIso: '2026-10-26T12:00:00-04:00',
     icon: Icons.emoji_events,
     url: 'https://www.congressionalappchallenge.us/',
     links: ['Congressional App Challenge'],
     detailNote:
-        'No single verified nationwide 2026 deadline was posted when checked.',
+        'Students may compete individually or in teams of up to four through a participating congressional district',
   ),
   const Resource(
     id: 'cyberpatriot_afa',
@@ -1150,6 +1150,66 @@ final List<Resource> allResources = [
     links: ['Regeneron STS', '2027 application requirements'],
     detailNote:
         'The technical support deadline is November 4, so the program recommends submitting before the final day',
+  ),
+  const Resource(
+    id: 'diamond_challenge',
+    title: 'Diamond Challenge',
+    category: 'competition',
+    field: 'business',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Online submission with live or virtual pitch rounds',
+    timeCommitment: 'Several months to build and pitch a venture concept',
+    majorTags: ['business', 'entrepreneurship', 'social_impact', 'innovation'],
+    applicationInfo:
+        'Teams of two to four students ages 14 to 18 enter with an adult advisor and choose a business or social innovation track',
+    description:
+        'Turn a business or social-impact idea into a tested venture concept, written submission, and competition pitch',
+    deadline: 'January 14, 2027 at 5:00 PM ET',
+    deadlineIso: '2027-01-14T17:00:00-05:00',
+    icon: Icons.diamond_outlined,
+    url: 'https://diamondchallenge.org/competition/',
+    links: ['Diamond Challenge competition', '2027 timeline and rules'],
+  ),
+  const Resource(
+    id: 'blue_ocean_competition',
+    title: 'Blue Ocean Student Entrepreneur Competition',
+    category: 'competition',
+    field: 'business',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online pitch submission',
+    timeCommitment: 'Self-paced venture design and a short video pitch',
+    majorTags: ['business', 'entrepreneurship', 'innovation', 'marketing'],
+    applicationInfo:
+        'High school students may register for the 2027 competition and compete from anywhere',
+    description:
+        'Design an original business idea around an unmet need and explain the strategy in a concise virtual pitch',
+    icon: Icons.waves_outlined,
+    url: 'https://blueoceancompetition.org/compete/',
+    links: ['Blue Ocean competition', '2027 competition timeline'],
+    detailNote:
+        'Registration for 2027 is available, while the final submission date should be confirmed on the published timeline',
+  ),
+  const Resource(
+    id: 'technovation_girls',
+    title: 'Technovation Girls',
+    category: 'competition',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Global program with online curriculum and local chapters',
+    timeCommitment: 'Season runs from roughly August through May',
+    majorTags: ['cs', 'ai', 'app_dev', 'entrepreneurship', 'social_impact'],
+    applicationInfo:
+        'Free for girls and students who identify in a female-centered environment, ages 8 to 18; participants may work in teams',
+    description:
+        'Build an app or AI-based solution to a community problem, then pair the technology with a business plan and pitch',
+    icon: Icons.phone_android_outlined,
+    url: 'https://technovationchallenge.org/get-involved/students/',
+    links: ['Technovation Girls student page', '2026–2027 season updates'],
+    detailNote:
+        'Student registration for the new season was not open when checked, so use the official notification form for updates',
   ),
 
   // ORIGINAL COMMENTED-OUT SUMMER AND SEASONAL COMPETITIONS
@@ -2756,6 +2816,63 @@ final List<Resource> allResources = [
     url: 'https://www.youtube.com/@ScalarLearning',
     links: ['Watch Scalar Learning'],
   ),
+  const Resource(
+    id: 'collegeboard_tailored_practice',
+    title: 'College Board Tailored Practice',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Official targeted question sets based on your Bluebook practice-test results',
+    icon: Icons.track_changes_outlined,
+    url: 'https://satsuite.collegeboard.org/practice',
+    links: ['College Board Tailored Practice'],
+  ),
+  const Resource(
+    id: 'tutorllini_sat_math',
+    title: 'Tutorllini Digital SAT Math Videos',
+    category: 'sat',
+    field: 'math',
+    testSection: 'math',
+    description:
+        'Free Digital SAT math lessons, Desmos strategies, formula sheets, and complete test walkthroughs',
+    icon: Icons.smart_display,
+    url: 'https://www.youtube.com/@Tutorllini',
+    links: ['Tutorllini Digital SAT Math'],
+  ),
+  const Resource(
+    id: 'mathchops_sat',
+    title: 'Mathchops Adaptive SAT Math',
+    category: 'sat',
+    field: 'math',
+    testSection: 'math',
+    description:
+        'Adaptive SAT math practice that adjusts difficulty and mixes older skills back into review',
+    icon: Icons.quiz_outlined,
+    url: 'https://www.mathchops.com/',
+    links: ['Mathchops SAT practice', 'Free and paid plans'],
+  ),
+  const Resource(
+    id: 'prepscholar_sat',
+    title: 'PrepScholar Digital SAT Course',
+    category: 'sat',
+    field: 'all',
+    description:
+        'A paid adaptive course with diagnostics, lessons, study plans, and a large practice library',
+    icon: Icons.school_outlined,
+    url: 'https://www.prepscholar.com/sat/s/',
+    links: ['PrepScholar SAT course', 'Paid with a trial'],
+  ),
+  const Resource(
+    id: 'supertutor_sat',
+    title: 'SupertutorTV Digital SAT Prep',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Video-led Digital SAT lessons, original practice tests, strategy videos, and a paid self-paced course',
+    icon: Icons.smart_display,
+    url: 'https://supertutortv.com/the-best-sat-prep-course-ever/',
+    links: ['SupertutorTV SAT course', 'Free videos available'],
+  ),
 
   // ===========================================================================
   // ACT PREPARATION
@@ -2777,7 +2894,8 @@ final List<Resource> allResources = [
     title: 'ACT Official Practice',
     category: 'act',
     field: 'all',
-    description: 'Official ACT practice tests from act.org. 5 free tests.',
+    description:
+        'Official full-length practice tests, answer keys, online quizzes, and preparation guidance',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.check_circle_outline,
@@ -2786,24 +2904,12 @@ final List<Resource> allResources = [
     links: ['act.org/products/high-school-resources'],
   ),
   const Resource(
-    id: 'act_khan',
-    title: 'Khan Academy ACT Prep',
-    category: 'act',
-    field: 'all',
-    description:
-        'ACT prep video lessons and practice questions covering all sections.',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.smart_display,
-    url: 'https://www.khanacademy.org/test-prep/act',
-    links: ['khanacademy.org/test-prep/act'],
-  ),
-  const Resource(
     id: 'pr_act',
     title: 'Princeton Review ACT Prep',
     category: 'act',
     field: 'all',
-    description: '2025 edition with 6 full-length practice tests.',
+    description:
+        'Updated Enhanced ACT instruction, practice tests, strategy lessons, and course options',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.book,
@@ -2815,6 +2921,7 @@ final List<Resource> allResources = [
     title: 'ACT English: Grammar & Usage',
     category: 'act',
     field: 'all',
+    testSection: 'english',
     description: 'Covers punctuation, grammar, usage, and sentence structure.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -2830,6 +2937,7 @@ final List<Resource> allResources = [
     title: 'ACT Science: Data Interpretation',
     category: 'act',
     field: 'all',
+    testSection: 'science',
     description:
         'ACT Science is about data interpretation and critical thinking.',
     deadline: 'TODO',
@@ -2844,13 +2952,14 @@ final List<Resource> allResources = [
     title: 'ACT Math: Full Prep',
     category: 'act',
     field: 'all',
+    testSection: 'math',
     description: 'ACT Math covers pre-algebra through trigonometry.',
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.calculate,
     url:
         'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/act-exam-sections-and-structure.html',
-    links: ['khanacademy.org/act-math', 'Kaplan ACT Math'],
+    links: ['Official ACT Math overview'],
   ),
   const Resource(
     id: 'act_current_structure',
@@ -3014,6 +3123,86 @@ final List<Resource> allResources = [
     icon: Icons.psychology_outlined,
     url: 'https://www.larrylearns.com/act',
     links: ['Larry Learns ACT'],
+  ),
+  const Resource(
+    id: 'act_official_sample_questions',
+    title: 'Official ACT Online Sample Questions',
+    category: 'act',
+    field: 'all',
+    description:
+        'Current official sample questions for English, math, reading, science, and writing',
+    icon: Icons.verified_outlined,
+    url:
+        'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep/act-online-test-sample-questions.html',
+    links: ['Official ACT sample questions'],
+  ),
+  const Resource(
+    id: 'act_official_prep_guide',
+    title: 'The Official ACT Prep Guide',
+    category: 'act',
+    field: 'all',
+    description:
+        'The current ACT guide with authentic practice tests, answer explanations, and section review',
+    icon: Icons.menu_book_outlined,
+    url:
+        'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation.html',
+    links: ['Official ACT preparation products', 'Paid book'],
+  ),
+  const Resource(
+    id: 'prepscholar_act',
+    title: 'PrepScholar Enhanced ACT Course',
+    category: 'act',
+    field: 'all',
+    description:
+        'A paid adaptive course rebuilt for the Enhanced ACT with diagnostics, lessons, and practice tests',
+    icon: Icons.school_outlined,
+    url: 'https://www.prepscholar.com/act-test-prep/',
+    links: ['PrepScholar ACT course', 'Paid with a trial'],
+  ),
+  const Resource(
+    id: 'magoosh_act_course',
+    title: 'Magoosh Enhanced ACT Course',
+    category: 'act',
+    field: 'all',
+    description:
+        'A lower-cost paid course with video lessons, timed tests, practice questions, and study schedules',
+    icon: Icons.smart_display,
+    url: 'https://act.magoosh.com/',
+    links: ['Magoosh ACT course', 'Seven-day trial'],
+  ),
+  const Resource(
+    id: 'preppros_act',
+    title: 'PrepPros Ultimate ACT Course',
+    category: 'act',
+    field: 'all',
+    description:
+        'Detailed Enhanced ACT lessons, books, study plans, official-test walkthroughs, and extensive practice',
+    icon: Icons.school_outlined,
+    url: 'https://www.preppros.io/act-course',
+    links: ['PrepPros ACT course', 'Paid course'],
+  ),
+  const Resource(
+    id: 'supertutor_act',
+    title: 'SupertutorTV Enhanced ACT Prep',
+    category: 'act',
+    field: 'all',
+    description:
+        'Video-based Enhanced ACT instruction with free strategy videos and a paid self-paced course',
+    icon: Icons.smart_display,
+    url: 'https://supertutortv.com/act/',
+    links: ['SupertutorTV ACT prep', 'Free videos available'],
+  ),
+  const Resource(
+    id: 'mathchops_act',
+    title: 'Mathchops Adaptive ACT Math',
+    category: 'act',
+    field: 'math',
+    testSection: 'math',
+    description:
+        'Adaptive ACT math drills that target weak topics while continuing to review mastered skills',
+    icon: Icons.quiz_outlined,
+    url: 'https://www.mathchops.com/',
+    links: ['Mathchops ACT math', 'Free and paid plans'],
   ),
 
   // ===========================================================================
@@ -3930,6 +4119,127 @@ final List<Resource> allResources = [
     url: 'https://www.usaeop.com/program/high-school-internships/',
     links: ['AEOP high school apprenticeships', 'Browse host sites'],
   ),
+  const Resource(
+    id: 'amnh_srmp',
+    title: 'American Museum of Natural History SRMP',
+    category: 'research',
+    field: 'science',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'American Museum of Natural History in New York City',
+    timeCommitment:
+        'Summer institute followed by a full academic year of research',
+    majorTags: ['science', 'research', 'biology', 'earth_science', 'data_sci'],
+    applicationInfo:
+        'For eligible New York City high school students who can participate throughout the summer and school year',
+    description:
+        'Join a museum scientist on one research project and build the skills to present your work publicly',
+    icon: Icons.museum_outlined,
+    url:
+        'https://www.amnh.org/learn-teach/teens/science-research-mentoring-program/join-srmp',
+    links: ['AMNH SRMP', 'Current application guide'],
+  ),
+  const Resource(
+    id: 'van_andel_hs_research',
+    title: 'Van Andel High School Graduate Research Program',
+    category: 'research',
+    field: 'biology',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'Van Andel Institute in Grand Rapids, Michigan',
+    timeCommitment: 'Eight-week paid summer research program',
+    majorTags: ['biology', 'medicine', 'research', 'biotech'],
+    applicationInfo:
+        'For recent high school graduates from the Grand Rapids area; the 2027 application window is scheduled for January through mid-March',
+    description:
+        'Work in a biomedical research laboratory, develop a scientific poster, and learn how research careers function day to day',
+    icon: Icons.biotech_outlined,
+    url: 'https://www.vai.org/graduate-school/hs-program/',
+    links: ['Van Andel high school program', '2027 application information'],
+  ),
+  const Resource(
+    id: 'asdrp_research',
+    title: 'Aspiring Scholars Directed Research Program',
+    category: 'research',
+    field: 'science',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Bay Area laboratories with selected remote research groups',
+    timeCommitment: 'Multi-month mentored research with regular group meetings',
+    majorTags: ['research', 'science', 'cs', 'engineering', 'data_sci'],
+    applicationInfo:
+        'A tuition-based program with multiple application rounds and some financial aid; eligibility varies by research group',
+    description:
+        'Join a small research team, learn its methods, and contribute to a longer-term project under a working scientist',
+    icon: Icons.science_outlined,
+    url: 'https://www.asdrp.org/apply',
+    links: ['ASDRP application process', 'Research departments'],
+  ),
+  const Resource(
+    id: 'seattle_parks_career_explorations',
+    title: 'Seattle Parks Career Explorations',
+    category: 'internship',
+    field: 'all',
+    scope: 'local',
+    format: 'in_person',
+    locationNote: 'Seattle Parks and Recreation sites across Seattle',
+    timeCommitment:
+        'Mentorship followed by an eight-week paid summer placement',
+    majorTags: ['all_subjects', 'education', 'public_policy', 'environment'],
+    applicationInfo:
+        'Seattle youth begin with the Career Explorations mentorship, which is the entry point for paid summer internship assignments',
+    description:
+        'Build workplace skills with a mentor, then support recreation, environmental, community, or youth programs across the city',
+    icon: Icons.park_outlined,
+    url:
+        'https://www.seattle.gov/parks/childcare/teen-programs/career-explorations',
+    links: ['Seattle Parks Career Explorations', 'Program eligibility'],
+  ),
+  const Resource(
+    id: 'hutton_fisheries',
+    title: 'Hutton Junior Fisheries Biology Program',
+    category: 'internship',
+    field: 'biology',
+    scope: 'national',
+    format: 'in_person',
+    locationNote:
+        'Placements with fisheries professionals across the United States',
+    timeCommitment: 'Eight-week paid summer internship and mentoring program',
+    majorTags: ['biology', 'ecology', 'env_sci', 'research'],
+    applicationInfo:
+        'Designed for current high school students, especially students from backgrounds underrepresented in fisheries and aquatic science',
+    description:
+        'Work alongside a fisheries professional on field sampling, habitat work, data collection, education, or aquatic-resource management',
+    icon: Icons.water_outlined,
+    url: 'https://hutton.fisheries.org/students/',
+    links: ['Hutton student information', 'Program timeline and application'],
+  ),
+  const Resource(
+    id: 'nps_student_pathways',
+    title: 'National Park Service Student Opportunities',
+    category: 'internship',
+    field: 'all',
+    scope: 'national',
+    format: 'in_person',
+    locationNote:
+        'National parks and partner organizations across the United States',
+    timeCommitment:
+        'Placements range from summer projects to longer Pathways roles',
+    majorTags: [
+      'environment',
+      'history',
+      'engineering',
+      'communications',
+      'all_subjects',
+    ],
+    applicationInfo:
+        'High school students may qualify for selected Pathways jobs and partner internships; each posting has its own age, location, and enrollment rules',
+    description:
+        'Find paid and stipend-supported work in conservation, history, maintenance, interpretation, communications, science, or visitor services',
+    icon: Icons.landscape_outlined,
+    url: 'https://www.nps.gov/subjects/youthprograms/jobs-and-internships.htm',
+    links: ['NPS youth jobs and internships', 'NPS Pathways information'],
+  ),
 ];
 
 // ===========================================================================
@@ -4583,6 +4893,13 @@ const List<DeadlineItem> upcomingDeadlines = [
     majorTags: ['aerospace', 'physics', 'engineering', 'applied_math'],
   ),
   DeadlineItem(
+    title: 'Congressional App Challenge',
+    date: 'October 26, 2026 at 12:00 PM ET',
+    dateIso: '2026-10-26T12:00:00-04:00',
+    resourceId: 'cac',
+    majorTags: ['cs', 'app_dev', 'civics'],
+  ),
+  DeadlineItem(
     title: 'AMC 8',
     date: 'October 28, 2026 (early registration)',
     dateIso: '2026-10-28T23:59:00-04:00',
@@ -4595,6 +4912,20 @@ const List<DeadlineItem> upcomingDeadlines = [
     dateIso: '2027-01-20T23:59:00-05:00',
     resourceId: 'studentcam',
     majorTags: ['film_prod', 'documentary', 'civics', 'journalism_media'],
+  ),
+  DeadlineItem(
+    title: 'Regeneron Science Talent Search 2027',
+    date: 'November 5, 2026 at 8:00 PM ET',
+    dateIso: '2026-11-05T20:00:00-05:00',
+    resourceId: 'regeneron_sts',
+    majorTags: ['science', 'research', 'engineering', 'cs', 'math'],
+  ),
+  DeadlineItem(
+    title: 'Diamond Challenge 2027',
+    date: 'January 14, 2027 at 5:00 PM ET',
+    dateIso: '2027-01-14T17:00:00-05:00',
+    resourceId: 'diamond_challenge',
+    majorTags: ['business', 'entrepreneurship', 'social_impact'],
   ),
 
   // ===========================================================================
@@ -4624,6 +4955,11 @@ const Map<String, String> _commonApLinks = {
       'https://www.varsitytutors.com/practice',
   'Course material · Prep Den AP study guides (paid)': 'https://prepden.com/',
   'Course material · APStudy review assistant': 'https://apstudy.org/',
+  'Course material · Marco Learning AP study guides':
+      'https://marcolearning.com/students/ap-study-guides/',
+  'Course material · Kaplan AP prep (paid)': 'https://www.kaptest.com/ap',
+  'Course material · Save My Exams AP guides (paid)':
+      'https://www.savemyexams.com/ap/',
 };
 
 const Map<String, Map<String, String>> _supplementalApLinks = {

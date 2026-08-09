@@ -49,19 +49,169 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     return [...pinned, ...normal, ...seen];
   }
 
+  String? _firstLabelContaining(Resource resource, String needle) {
+    return resource.links.cast<String?>().firstWhere(
+      (label) => label!.toLowerCase().contains(needle),
+      orElse: () => null,
+    );
+  }
+
+  String? _apCentralCourseUrl(Resource resource) {
+    final uri = Uri.tryParse(resource.url ?? '');
+    if (uri == null || uri.pathSegments.isEmpty) return null;
+    final slug = uri.pathSegments.last;
+    return 'https://apcentral.collegeboard.org/courses/$slug';
+  }
+
+  bool _isHeaderLink(String label) {
+    final lower = label.toLowerCase();
+    return lower.contains('official course page') ||
+        lower.contains('official ap seminar course page') ||
+        lower.contains('ap classroom') ||
+        lower.contains('official exam page');
+  }
+
+  bool _isApWideLink(String label) {
+    final lower = label.toLowerCase();
+    return lower.contains('ap daily') ||
+        lower.contains('albert ap question bank') ||
+        lower.contains('fiveable ap study hub') ||
+        lower.contains('knowt ap study hub') ||
+        lower.contains('uworld ap exam prep') ||
+        lower.contains('varsity tutors ap learning tools') ||
+        lower.contains('prep den ap study guides') ||
+        lower.contains('apstudy review assistant') ||
+        lower.contains('marco learning ap study guides') ||
+        lower.contains('kaplan ap prep') ||
+        lower.contains('save my exams ap guides');
+  }
+
+  bool _isCommunityNotes(String label) {
+    final lower = label.toLowerCase();
+    const markers = [
+      'teacher',
+      'mr.',
+      'weebly',
+      'lumisource',
+      'wikinotes',
+      'simple studies',
+      'course-notes',
+      'social studies help',
+      'athens academy',
+      'doves library',
+      'iitian academy',
+      'high school test prep',
+      'ap worldipedia',
+      'ap bio penguins',
+      'sciencegeek',
+      'barlow academy',
+      'campbell ap',
+      'bluhm ap',
+      'laufer ap',
+      'milligan ap',
+      'dan shuster',
+      'tom richey',
+      'jason welker',
+      'jeremy krug',
+      'paul',
+      'elaine cheong',
+      'reviewecon',
+      'gonzmosis',
+      'worldwise tutoring',
+      'ilearnacademy',
+      'kwanga',
+    ];
+    return markers.any(lower.contains);
+  }
+
+  void _showApWideTools(BuildContext context, Resource resource) {
+    final tools = linksForResource(resource).where(_isApWideLink).toList();
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'AP-wide tools',
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: kTextPrimary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'These broad resources cover many AP subjects, so they live here instead of repeating in every course tab',
+                style: GoogleFonts.inter(
+                  fontSize: 11,
+                  height: 1.4,
+                  color: kTextSecondary,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: tools.length,
+                  separatorBuilder: (_, __) => const Divider(height: 1),
+                  itemBuilder: (_, index) {
+                    final label = tools[index];
+                    final url = resolveUrl(label, resource);
+                    final display = label.contains(' · ')
+                        ? label.substring(label.indexOf(' · ') + 3)
+                        : label;
+                    return ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.link, size: 16),
+                      title: Text(
+                        display,
+                        style: GoogleFonts.inter(fontSize: 12),
+                      ),
+                      trailing: const Icon(Icons.open_in_new, size: 14),
+                      onTap: url == null ? null : () => openUrl(context, url),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Read the provider at the top of build
     final provider = context.watch<AppProvider>();
     final isSaved = provider.isSaved(widget.resource.id);
     final res = widget.resource;
-    final officialCourseLabel = res.links.cast<String?>().firstWhere(
-      (label) => label!.toLowerCase().contains('official course page'),
-      orElse: () => null,
-    );
+    final officialCourseLabel =
+        _firstLabelContaining(res, 'official course page') ??
+        _firstLabelContaining(res, 'official ap seminar course page');
     final officialCourseUrl = officialCourseLabel == null
         ? res.url
         : resolveUrl(officialCourseLabel, res);
+    final classroomLabel = _firstLabelContaining(res, 'ap classroom');
+    final examLabel = _firstLabelContaining(res, 'official exam page');
+    final examUrl = examLabel == null ? null : resolveUrl(examLabel, res);
+    final headerLinks = <(String, String?)>[
+      ('Official course page', officialCourseUrl),
+      (
+        'AP Classroom',
+        classroomLabel == null
+            ? 'https://myap.collegeboard.org/'
+            : resolveUrl(classroomLabel, res),
+      ),
+      ('Course & exam description', _apCentralCourseUrl(res)),
+      ('Exam information', examUrl),
+    ].where((item) => item.$2 != null).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,32 +309,24 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                             color: kTextSecondary,
                           ),
                         ),
-                        if (officialCourseUrl != null) ...[
+                        if (headerLinks.isNotEmpty) ...[
                           const SizedBox(height: 5),
-                          MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: GestureDetector(
-                              onTap: () => openUrl(context, officialCourseUrl),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(
-                                    Icons.open_in_new,
-                                    size: 12,
-                                    color: Color(0xFF1D9E75),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    'Official course page',
-                                    style: GoogleFonts.inter(
-                                      fontSize: 10.5,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF1D9E75),
-                                    ),
-                                  ),
-                                ],
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 5,
+                            children: [
+                              ...headerLinks.map(
+                                (item) => _HeaderLinkChip(
+                                  label: item.$1,
+                                  onTap: () => openUrl(context, item.$2!),
+                                ),
                               ),
-                            ),
+                              _HeaderLinkChip(
+                                label: 'AP-wide tools',
+                                icon: Icons.apps_outlined,
+                                onTap: () => _showApWideTools(context, res),
+                              ),
+                            ],
                           ),
                         ],
                       ],
@@ -213,7 +355,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                   ),
                 ],
               ),
-              // Tip box
+              // Course-specific note
               if (res.detailNote != null &&
                   !res.detailNote!.contains('not published when checked')) ...[
                 const SizedBox(height: 12),
@@ -246,6 +388,37 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                   ),
                 ),
               ],
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEAF7F2),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color(0xFF1D9E75).withValues(alpha: 0.25),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.tips_and_updates_outlined,
+                      size: 13,
+                      color: Color(0xFF1D9E75),
+                    ),
+                    const SizedBox(width: 7),
+                    Expanded(
+                      child: Text(
+                        'The Course and Exam Description always includes a few official practice questions, so check those before moving on to larger question banks',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: kTextPrimary,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -319,7 +492,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _courseMaterial(Resource r) {
     return linksForResource(r)
-        .where((l) => !l.toLowerCase().contains('official course page'))
+        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
               !l.toLowerCase().startsWith('notes ·') &&
@@ -339,6 +513,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _videos(Resource r) {
     return linksForResource(r)
+        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
               l.toLowerCase().startsWith('video ·') ||
@@ -349,13 +525,17 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   }
 
   List<String> _notes(Resource r) {
-    return linksForResource(
-      r,
-    ).where((l) => l.toLowerCase().startsWith('notes ·')).toList();
+    return linksForResource(r)
+        .where(
+          (l) => l.toLowerCase().startsWith('notes ·') || _isCommunityNotes(l),
+        )
+        .toList();
   }
 
   List<String> _practiceTests(Resource r) {
     return linksForResource(r)
+        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
               l.toLowerCase().startsWith('practice test ·') ||
@@ -374,7 +554,40 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       ..._videos(r),
       ..._practiceTests(r),
     ];
-    return linksForResource(r).where((l) => !matched.contains(l)).toList();
+    return linksForResource(r)
+        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !matched.contains(l))
+        .toList();
+  }
+}
+
+class _HeaderLinkChip extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _HeaderLinkChip({
+    required this.label,
+    this.icon = Icons.open_in_new,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ActionChip(
+      avatar: Icon(icon, size: 12, color: const Color(0xFF1D9E75)),
+      label: Text(label),
+      labelStyle: GoogleFonts.inter(
+        fontSize: 10.5,
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFF1D9E75),
+      ),
+      side: BorderSide(color: const Color(0xFF1D9E75).withValues(alpha: 0.25)),
+      backgroundColor: const Color(0xFFEAF7F2),
+      visualDensity: VisualDensity.compact,
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      onPressed: onTap,
+    );
   }
 }
 
