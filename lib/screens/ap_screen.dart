@@ -69,6 +69,40 @@ class _ApScreenState extends State<ApScreen> {
               const SizedBox(height: 2),
 
               const SizedBox(height: 14),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 11,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEAF7F2),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color(0xFF1D9E75).withValues(alpha: 0.25),
+                  ),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(
+                      Icons.tips_and_updates_outlined,
+                      size: 14,
+                      color: Color(0xFF1D9E75),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Every AP Course and Exam Description includes a few official practice questions, so make sure to check it out',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: kTextPrimary,
+                          height: 1.35,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               // Sub-category filters
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

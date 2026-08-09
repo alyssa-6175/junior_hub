@@ -67,6 +67,10 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       'cb_question_bank',
       'cb_practice_specific_questions',
       'cb_official_study_guide',
+      'cb_sat_practice_hub',
+      'cb_sat_student_guide',
+      'cb_sat_skills_insight',
+      'cb_sat_sample_questions',
       'act_official',
       'act_current_structure',
       'act_free_practice_hub',
@@ -110,6 +114,10 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       'supertutor_sat',
       'supertutor_act',
       'act_official_prep_guide',
+      'cb_official_study_guide',
+      'barrons_digital_sat',
+      'barrons_act',
+      'act_official_subject_guides',
     };
     final books = _sort(
       _applySection(_all.where((r) => bookIds.contains(r.id)).toList()),

@@ -388,37 +388,6 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                   ),
                 ),
               ],
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFEAF7F2),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color(0xFF1D9E75).withValues(alpha: 0.25),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.tips_and_updates_outlined,
-                      size: 13,
-                      color: Color(0xFF1D9E75),
-                    ),
-                    const SizedBox(width: 7),
-                    Expanded(
-                      child: Text(
-                        'The Course and Exam Description always includes a few official practice questions, so check those before moving on to larger question banks',
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          color: kTextPrimary,
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

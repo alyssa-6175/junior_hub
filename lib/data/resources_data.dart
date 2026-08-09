@@ -662,6 +662,38 @@ const Map<String, String> kLinkUrls = {
 // ─────────────────────────────────────────────────────────────────────────────
 // ALL RESOURCES
 // ─────────────────────────────────────────────────────────────────────────────
+Resource _competition({
+  required String id,
+  required String title,
+  required String field,
+  required String scope,
+  required String format,
+  required String locationNote,
+  required List<String> majorTags,
+  required String applicationInfo,
+  required String description,
+  required String url,
+  String timeCommitment = 'Check the current competition cycle',
+  IconData icon = Icons.emoji_events,
+}) => Resource(
+  id: id,
+  title: title,
+  category: 'competition',
+  field: field,
+  scope: scope,
+  format: format,
+  locationNote: locationNote,
+  timeCommitment: timeCommitment,
+  majorTags: majorTags,
+  applicationInfo: applicationInfo,
+  description: description,
+  icon: icon,
+  url: url,
+  links: [title],
+  detailNote:
+      'Dates and eligibility can change between cycles, so confirm the current rules on the official site',
+);
+
 final List<Resource> allResources = [
   // ===========================================================================
   // COMPETITIONS
@@ -1585,6 +1617,783 @@ final List<Resource> allResources = [
   //   url: 'TODO',
   //   links: ['TODO'],
   // ),
+
+  // More current high-school competitions
+  _competition(
+    id: 'frontier_cascadia',
+    title: 'Frontier Cascadia',
+    field: 'cs',
+    scope: 'regional',
+    format: 'in_person',
+    locationNote: 'Seattle, Washington',
+    majorTags: ['cs', 'app_dev', 'engineering', 'design'],
+    applicationInfo:
+        'Apply through the official participant form when the next event opens',
+    description:
+        'Spend a weekend building a real project with other high school students, mentors, workshops, and plenty of room for beginners',
+    url: 'https://frontiercascadia.org/',
+    timeCommitment: 'Weekend high school hackathon',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'mit_blueprint',
+    title: 'MIT Blueprint',
+    field: 'cs',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'MIT campus, Cambridge, Massachusetts',
+    majorTags: ['cs', 'app_dev', 'engineering'],
+    applicationInfo:
+        'High school students apply individually through the event site',
+    description:
+        'Learn from MIT mentors, team up with other students, and turn an idea into a working software or hardware project',
+    url: 'https://blueprint.hackmit.org/',
+    timeCommitment: 'Weekend hackathon',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'hacktj',
+    title: 'HackTJ',
+    field: 'cs',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Northern Virginia',
+    majorTags: ['cs', 'app_dev', 'design'],
+    applicationInfo:
+        'Open to current high school students through participant registration',
+    description:
+        'Build something bold in 24 hours with workshops, mentors, teammates, and a welcoming track for first-time hackers',
+    url: 'https://hacktj.org/',
+    timeCommitment: '24-hour hackathon',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'picoctf',
+    title: 'picoCTF',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cs', 'cybersecurity', 'cryptography'],
+    applicationInfo:
+        'Create a free account and join the annual competition as an eligible student',
+    description:
+        'Solve beginner-friendly cybersecurity puzzles in forensics, cryptography, web security, reverse engineering, and more',
+    url: 'https://picoctf.org/',
+    timeCommitment: 'Multi-day online capture-the-flag',
+    icon: Icons.security,
+  ),
+  _competition(
+    id: 'national_cyber_league',
+    title: 'National Cyber League',
+    field: 'cs',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online in the United States and Canada',
+    majorTags: ['cs', 'cybersecurity', 'networking'],
+    applicationInfo:
+        'Students age 13 or older can register for an individual and team season',
+    description:
+        'Practice in a guided cyber range, then test real skills in individual and team games covering modern security work',
+    url: 'https://nationalcyberleague.org/',
+    timeCommitment: 'Season with practice, individual, and team games',
+    icon: Icons.security,
+  ),
+  _competition(
+    id: 'american_rocketry_challenge',
+    title: 'American Rocketry Challenge',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Local qualification flights and a national final',
+    majorTags: ['engineering', 'aerospace', 'physics'],
+    applicationInfo:
+        'Students in grades 6–12 register as a team with an adult advisor',
+    description:
+        'Design, build, and fly a model rocket toward a new altitude, duration, and payload target each season',
+    url: 'https://www.rocketrychallenge.org/',
+    timeCommitment: 'Season-long build and flight challenge',
+    icon: Icons.rocket_launch,
+  ),
+  _competition(
+    id: 'future_city_high_school',
+    title: 'Future City High School',
+    field: 'engineering',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Regional events and national championship',
+    majorTags: ['engineering', 'sustainability', 'urban_planning'],
+    applicationInfo:
+        'Form a high school team and register through the official program',
+    description:
+        'Use the engineering design process to imagine a resilient city and explain how your team would make it work',
+    url: 'https://futurecity.org/',
+    timeCommitment: 'Multi-month team design project',
+    icon: Icons.engineering,
+  ),
+
+  _competition(
+    id: 'purple_comet',
+    title: 'Purple Comet Math Meet',
+    field: 'math',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'A teacher or adult supervisor registers a free high school team',
+    description:
+        'Work as a team on a lively set of challenging problems in a free international online math meet',
+    url: 'https://www.purplecomet.org/',
+    timeCommitment: '90-minute team contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'hmmt',
+    title: 'Harvard-MIT Mathematics Tournament',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Harvard or MIT campus, Massachusetts',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'School teams and eligible individuals apply through the tournament site',
+    description:
+        'Take on demanding individual, team, and guts-round problems at one of the largest student-run high school math tournaments',
+    url: 'https://www.hmmt.org/',
+    timeCommitment: 'One-day tournament',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'arml',
+    title: 'American Regions Mathematics League',
+    field: 'math',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Regional teams compete at several U.S. host sites',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo: 'Join a regional team or ask a coach about forming one',
+    description:
+        'Compete on a 15-person regional team through individual, team, power, and relay rounds',
+    url: 'https://www.arml.com/',
+    timeCommitment: 'Annual team tournament',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'm3_challenge',
+    title: 'MathWorks Math Modeling Challenge',
+    field: 'math',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['math', 'statistics', 'modeling'],
+    applicationInfo:
+        'Eligible schools register a team of three to five juniors or seniors with a coach',
+    description:
+        'Use data, research, and mathematical modeling to tackle a real issue during one focused problem-solving weekend',
+    url: 'https://m3challenge.siam.org/',
+    timeCommitment: '14-hour team challenge',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'himcm',
+    title: 'High School Mathematical Contest in Modeling',
+    field: 'math',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online through a school or approved program',
+    majorTags: ['math', 'statistics', 'modeling', 'writing'],
+    applicationInfo: 'An advisor registers a team of up to four students',
+    description:
+        'Choose a real-world problem, build a mathematical model, and communicate your reasoning in a polished team paper',
+    url: 'https://www.comap.com/contests/himcm-midmcm',
+    timeCommitment: 'Up to 14 days',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'mathcon',
+    title: 'MathCON',
+    field: 'math',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online qualifying round and in-person national finals',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'Students register through a participating school or approved organization',
+    description:
+        'Start with an accessible online math competition and earn a chance to solve deeper problems at the national finals',
+    url: 'https://www.mathcon.org/',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'math_league',
+    title: 'Math League High School Contests',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Hosted by schools and local contest sites',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'Ask a teacher, parent, or coach to locate or host a high school contest',
+    description:
+        'Build consistency through short local contests, then advance toward state, national, and international championship events',
+    url: 'https://mathleague.org/hs.php',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'math_kangaroo',
+    title: 'Math Kangaroo USA',
+    field: 'math',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'In-person and approved online centers',
+    majorTags: ['math', 'logic', 'problem_solving'],
+    applicationInfo:
+        'Students in grades 1–12 register through an approved center',
+    description:
+        'Try creative, visual, and logical problems in a friendly international contest with grade-level rankings',
+    url: 'https://mathkangaroo.org/mks/',
+    timeCommitment: '75-minute individual contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'csmc',
+    title: 'Canadian Senior Mathematics Contest',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Participating schools worldwide',
+    majorTags: ['math', 'proof', 'problem_solving'],
+    applicationInfo:
+        'A school contest supervisor orders and administers the contest',
+    description:
+        'Solve a mix of short-answer and full-solution problems where clear mathematical communication matters',
+    url: 'https://cemc.uwaterloo.ca/contests/csimc',
+    timeCommitment: 'Two-hour contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'stanford_math_tournament',
+    title: 'Stanford Math Tournament',
+    field: 'math',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Stanford campus with a separate online tournament',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'U.S. high school teams apply for the campus event; other students can use the online option',
+    description:
+        'Choose subject tests, collaborate on team rounds, and meet a large community of students who genuinely enjoy hard math',
+    url: 'https://www.stanfordmathtournament.org/',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'berkeley_math_tournament',
+    title: 'Berkeley Math Tournament',
+    field: 'math',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'UC Berkeley and online options',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'High school students register in teams when applications open',
+    description:
+        'Work through individual and collaborative rounds written and run by UC Berkeley students',
+    url: 'https://bmt.berkeley.edu/',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'pumac',
+    title: 'Princeton University Mathematics Competition',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Princeton University, New Jersey',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo:
+        'High school teams apply through the PUMaC registration process',
+    description:
+        'Test advanced problem solving through individual subject rounds, team events, and a fast-paced power competition',
+    url: 'https://pumac.princeton.edu/',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'caribou_math',
+    title: 'Caribou Mathematics Competition',
+    field: 'math',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online through a school or coordinator',
+    majorTags: ['math', 'logic', 'problem_solving'],
+    applicationInfo:
+        'Register through a participating school, coordinator, or approved homeschool setup',
+    description:
+        'Solve interactive math and logic problems across several rounds during the school year',
+    url: 'https://cariboutests.com/',
+    icon: Icons.calculate,
+  ),
+
+  _competition(
+    id: 'genes_in_space',
+    title: 'Genes in Space',
+    field: 'biology',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online proposal with finalist presentations',
+    majorTags: ['biology', 'genetics', 'space_science'],
+    applicationInfo:
+        'U.S. students in grades 7–12 submit individually or in a team',
+    description:
+        'Design a DNA experiment that could help solve a real challenge of living and working in space',
+    url: 'https://www.genesinspace.org/us-contest/',
+    icon: Icons.biotech,
+  ),
+  _competition(
+    id: 'international_brain_bee',
+    title: 'International Brain Bee',
+    field: 'biology',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Local and national bees lead to the world championship',
+    majorTags: ['biology', 'neuroscience', 'health'],
+    applicationInfo:
+        'Start with the recognized local or national Brain Bee for your region',
+    description:
+        'Study the brain, neurological conditions, anatomy, and neuroscience research as you advance through quiz and practical rounds',
+    url: 'https://www.thebrainbee.org/',
+    icon: Icons.biotech,
+  ),
+  _competition(
+    id: 'envirothon',
+    title: 'NCF-Envirothon',
+    field: 'science',
+    scope: 'international',
+    format: 'in_person',
+    locationNote:
+        'Local and regional events lead to an international competition',
+    majorTags: ['environmental_science', 'ecology', 'sustainability'],
+    applicationInfo:
+        'Students in grades 9–12 join a team through their state or provincial program',
+    description:
+        'Apply field knowledge in ecology, forestry, soils, wildlife, and current environmental issues with a five-person team',
+    url: 'https://envirothon.org/',
+    icon: Icons.eco,
+  ),
+  _competition(
+    id: 'stockholm_junior_water_prize',
+    title: 'Stockholm Junior Water Prize',
+    field: 'science',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote:
+        'National competitions lead to the international final in Stockholm',
+    majorTags: ['environmental_science', 'chemistry', 'sustainability'],
+    applicationInfo:
+        'Submit original water-related research through the official national organizer',
+    description:
+        'Turn original research on water quality, conservation, treatment, or access into a concise scientific competition project',
+    url: 'https://www.siwi.org/prizes/stockholm-junior-water-prize/',
+    icon: Icons.water_drop,
+  ),
+  _competition(
+    id: 'physicsbowl',
+    title: 'PhysicsBowl',
+    field: 'physics',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Participating schools administer the exam',
+    majorTags: ['physics', 'math', 'problem_solving'],
+    applicationInfo:
+        'A teacher registers students through the American Association of Physics Teachers',
+    description:
+        'Measure your physics problem-solving speed against students from schools around the world in a focused multiple-choice exam',
+    url: 'https://www.aapt.org/programs/physicsbowl/',
+    timeCommitment: '45-minute contest',
+    icon: Icons.science,
+  ),
+  _competition(
+    id: 'national_ocean_sciences_bowl',
+    title: 'National Ocean Sciences Bowl',
+    field: 'science',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Regional bowls lead to a national final',
+    majorTags: ['oceanography', 'biology', 'chemistry', 'earth_science'],
+    applicationInfo:
+        'Join a four-student high school team through the nearest regional bowl',
+    description:
+        'Race through ocean science questions and work as a team on topics spanning biology, chemistry, geology, policy, and technology',
+    url: 'https://nosb.org/',
+    icon: Icons.water,
+  ),
+  _competition(
+    id: 'biogeneius',
+    title: 'BioGENEius Challenges',
+    field: 'biology',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Regional programs and an international showcase',
+    majorTags: ['biology', 'biotechnology', 'research'],
+    applicationInfo:
+        'Enter through a participating regional BioGENEius program',
+    description:
+        'Present original biotechnology research and learn how scientific ideas move from the lab toward real-world use',
+    url: 'https://biotechinstitute.org/biogeneius/',
+    icon: Icons.biotech,
+  ),
+
+  _competition(
+    id: 'deca_competitive_events',
+    title: 'DECA Competitive Events',
+    field: 'business',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Local, state, and international conferences',
+    majorTags: ['business', 'finance', 'marketing', 'entrepreneurship'],
+    applicationInfo:
+        'Join a high school DECA chapter and select an eligible competitive event',
+    description:
+        'Practice business through role-plays, case studies, prepared projects, and simulations in finance, marketing, hospitality, and entrepreneurship',
+    url: 'https://www.deca.org/compete',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'fbla_competitive_events',
+    title: 'FBLA High School Competitive Events',
+    field: 'business',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'Local and state events lead to the National Leadership Conference',
+    majorTags: ['business', 'finance', 'marketing', 'cs'],
+    applicationInfo:
+        'Join or form an FBLA High School chapter and choose a competitive event',
+    description:
+        'Choose from dozens of tests, presentations, role-plays, and production events across business, finance, technology, and communication',
+    url: 'https://www.fbla.org/high-school/competitive-events/',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'bpa_competitions',
+    title: 'Business Professionals of America Competitions',
+    field: 'business',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'Chapter events, virtual competitions, and a national conference',
+    majorTags: ['business', 'finance', 'it', 'leadership'],
+    applicationInfo:
+        'Participate through an eligible BPA secondary-school chapter',
+    description:
+        'Show what you can do in business, finance, IT, marketing, leadership, and workplace skills through practical competitive events',
+    url: 'https://bpa.org/competitions/',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'national_personal_finance_challenge',
+    title: 'National Personal Finance Challenge',
+    field: 'business',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'State competitions lead to the national finals',
+    majorTags: ['finance', 'economics', 'business'],
+    applicationInfo:
+        'A teacher or coach registers a high school team through the applicable state program',
+    description:
+        'Work with a team to make smart decisions about income, spending, saving, investing, credit, and financial risk',
+    url: 'https://financechallenge.unl.edu/',
+    icon: Icons.account_balance_wallet,
+  ),
+  _competition(
+    id: 'nfte_wsi',
+    title: 'NFTE World Series of Innovation',
+    field: 'business',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['entrepreneurship', 'business', 'innovation'],
+    applicationInfo:
+        'Young people enter individually or in teams through the current challenge portal',
+    description:
+        'Design an actionable idea around a global challenge and shape it into a clear entrepreneurial solution',
+    url: 'https://innovation.nfte.com/',
+    icon: Icons.lightbulb,
+  ),
+  _competition(
+    id: 'harvard_crimson_case',
+    title: 'Harvard Crimson Global Case Competition',
+    field: 'business',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online regional and global rounds',
+    majorTags: ['business', 'strategy', 'consulting'],
+    applicationInfo:
+        'Students ages 13–18 register individually, then compete in a team of two to four',
+    description:
+        'Step into a consultant role, unpack a company challenge, and present a practical strategy under a tight deadline',
+    url: 'https://www.casecomp.org/',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'global_youth_entrepreneurship_challenge',
+    title: 'Global Youth Entrepreneurship Challenge',
+    field: 'business',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['entrepreneurship', 'business', 'innovation'],
+    applicationInfo:
+        'Eligible students ages 14–18 form a team of three to eight',
+    description:
+        'Create and pitch a sustainable business idea for a global issue during an intense 12-hour online challenge',
+    url: 'https://entreplanet.org/GYEC/',
+    timeCommitment: '12-hour team challenge',
+    icon: Icons.lightbulb,
+  ),
+  _competition(
+    id: 'tie_young_entrepreneurs',
+    title: 'TiE Young Entrepreneurs Global Competition',
+    field: 'business',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Local TiE chapters and a global final',
+    majorTags: ['entrepreneurship', 'business', 'pitching'],
+    applicationInfo:
+        'Apply through a participating local TiE Young Entrepreneurs program',
+    description:
+        'Learn the basics of launching a company, build a team plan, and pitch to experienced entrepreneurs and investors',
+    url: 'https://tie.org/tye/',
+    icon: Icons.lightbulb,
+  ),
+  _competition(
+    id: 'ja_titan',
+    title: 'JA Titan Business Challenge',
+    field: 'business',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online simulation with local and regional events',
+    majorTags: ['business', 'economics', 'strategy'],
+    applicationInfo:
+        'Check Junior Achievement in your area for a student competition or classroom event',
+    description:
+        'Run a simulated company, balance price, production, marketing, and research decisions, and compete on business performance',
+    url: 'https://jausa.ja.org/programs/ja-titan',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'international_economics_olympiad',
+    title: 'International Economics Olympiad',
+    field: 'business',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'National selection leads to the international olympiad',
+    majorTags: ['economics', 'finance', 'business'],
+    applicationInfo:
+        'Enter through the official national selection process for your country',
+    description:
+        'Combine economics theory, financial literacy, and a business case as part of a national team',
+    url: 'https://ieo-official.org/',
+    icon: Icons.account_balance,
+  ),
+
+  _competition(
+    id: 'scholastic_awards',
+    title: 'Scholastic Art & Writing Awards',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Regional programs and national recognition',
+    majorTags: ['creative_writing', 'art', 'journalism_media'],
+    applicationInfo:
+        'Students in grades 7–12 submit work through their regional program',
+    description:
+        'Share original art or writing across a wide range of categories, from poetry and journalism to photography and design',
+    url: 'https://www.artandwriting.org/',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'bennington_young_writers',
+    title: 'Bennington Young Writers Awards',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission through a sponsoring teacher',
+    majorTags: ['creative_writing', 'english', 'poetry'],
+    applicationInfo:
+        'High school students submit poetry, fiction, or nonfiction with a teacher sponsor',
+    description:
+        'Send your strongest poetry, fiction, or nonfiction to a focused college-run competition for young writers',
+    url: 'https://www.bennington.edu/events/young-writers-awards',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'poetry_out_loud',
+    title: 'Poetry Out Loud',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'School and state contests lead to national finals',
+    majorTags: ['poetry', 'public_speaking', 'english'],
+    applicationInfo:
+        'Ask a teacher or school coordinator about joining the local recitation program',
+    description:
+        'Choose a published poem, make it your own through careful recitation, and build confidence on stage',
+    url: 'https://www.arts.gov/initiatives/poetry-out-loud',
+    icon: Icons.record_voice_over,
+  ),
+  _competition(
+    id: 'nsda_nationals',
+    title: 'National Speech & Debate Tournament',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Qualifying district tournaments lead to nationals',
+    majorTags: ['debate', 'public_speaking', 'civics'],
+    applicationInfo:
+        'Compete through an NSDA member school and qualify through your district',
+    description:
+        'Develop arguments, performances, and speaking skills across debate, interpretation, oratory, and extemporaneous events',
+    url: 'https://www.speechanddebate.org/national-tournament/',
+    icon: Icons.record_voice_over,
+  ),
+  _competition(
+    id: 'we_the_people',
+    title: 'We the People Constitutional Competition',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'State competitions lead to national finals',
+    majorTags: ['civics', 'history', 'public_policy'],
+    applicationInfo:
+        'Participate through a class or school team using the official state program',
+    description:
+        'Prepare thoughtful constitutional testimony as a class, then answer judges’ follow-up questions in simulated hearings',
+    url: 'https://civiced.org/we-the-people',
+    icon: Icons.account_balance,
+  ),
+  _competition(
+    id: 'npr_student_podcast',
+    title: 'NPR Student Podcast Challenge',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online audio submission',
+    majorTags: ['journalism_media', 'audio', 'storytelling'],
+    applicationInfo:
+        'Middle and high school students submit with an educator or parent sponsor',
+    description:
+        'Report, interview, write, and edit a short podcast that tells a story only you and your community could tell',
+    url: 'https://studentpodcastchallenge.npr.org/',
+    icon: Icons.podcasts,
+  ),
+  _competition(
+    id: 'profile_in_courage',
+    title: 'Profile in Courage Essay Contest',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online essay submission',
+    majorTags: ['history', 'civics', 'english'],
+    applicationInfo:
+        'Eligible U.S. high school students submit an original essay through the JFK Library',
+    description:
+        'Research a lesser-known act of political courage and explain the choices, risks, and consequences behind it',
+    url:
+        'https://www.jfklibrary.org/learn/education/profile-in-courage-essay-contest',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'foyle_young_poets_active',
+    title: 'Foyle Young Poets of the Year Award',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online poetry submission',
+    majorTags: ['poetry', 'creative_writing', 'english'],
+    applicationInfo:
+        'Young poets ages 11–17 may submit original poems for free',
+    description:
+        'Send your most distinctive poems to a free international award built specifically for young writers',
+    url:
+        'https://poetrysociety.org.uk/competitions/foyle-young-poets-of-the-year-award/',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'afsa_essay',
+    title: 'AFSA National High School Essay Contest',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online essay submission',
+    majorTags: ['international_relations', 'history', 'english'],
+    applicationInfo:
+        'Eligible U.S. students in grades 9–12 submit an original essay on the annual prompt',
+    description:
+        'Explore diplomacy and international affairs through a research-based essay tied to a new foreign-service question each year',
+    url: 'https://afsa.org/essay-contest',
+    icon: Icons.public,
+  ),
+  _competition(
+    id: 'national_high_school_ethics_bowl',
+    title: 'National High School Ethics Bowl',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Regional bowls lead to the national championship',
+    majorTags: ['philosophy', 'ethics', 'debate'],
+    applicationInfo:
+        'Form a school team and register with the nearest recognized regional competition',
+    description:
+        'Discuss difficult ethical cases with clarity and empathy, responding to another team without treating the round like a shouting match',
+    url: 'https://nhseb.unc.edu/',
+    icon: Icons.forum,
+  ),
+  _competition(
+    id: 'youngarts',
+    title: 'YoungArts National Competition',
+    field: 'humanities',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online application with in-person award programs',
+    majorTags: ['art', 'creative_writing', 'film_prod', 'performing_arts'],
+    applicationInfo:
+        'U.S. artists ages 15–18 or in grades 10–12 submit a portfolio or audition',
+    description:
+        'Share polished work in writing, visual arts, film, music, dance, theater, design, or voice for feedback and national recognition',
+    url: 'https://youngarts.org/apply/',
+    icon: Icons.palette,
+  ),
+  _competition(
+    id: 'john_locke_essay',
+    title: 'John Locke Global Essay Prize',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online essay submission',
+    majorTags: ['philosophy', 'economics', 'history', 'public_policy'],
+    applicationInfo:
+        'Students choose a question and register before submitting through the official portal',
+    description:
+        'Build a careful argument around a challenging question in philosophy, politics, economics, history, psychology, theology, or law',
+    url: 'https://www.johnlockeinstitute.com/essay-competition',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'congressional_art_competition',
+    title: 'Congressional Art Competition',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Entries are handled by participating congressional offices',
+    majorTags: ['art', 'civics', 'design'],
+    applicationInfo:
+        'Check the rules and deadline from your U.S. representative’s district office',
+    description:
+        'Submit an original two-dimensional artwork through your congressional district for a chance to be displayed at the U.S. Capitol',
+    url:
+        'https://www.house.gov/educators-and-students/congressional-art-competition',
+    icon: Icons.palette,
+  ),
 
   // ===========================================================================
   // AP COURSES AND EXAM RESOURCES
@@ -2620,6 +3429,63 @@ final List<Resource> allResources = [
     links: ['Available in print or PDF'],
   ),
   const Resource(
+    id: 'cb_sat_practice_hub',
+    title: 'College Board SAT Practice Hub',
+    category: 'sat',
+    field: 'all',
+    description:
+        'The official starting point for study plans, Bluebook tests, question banks, student guides, and practice advice',
+    icon: Icons.verified_outlined,
+    url: 'https://satsuite.collegeboard.org/practice',
+    links: ['Free official College Board materials'],
+  ),
+  const Resource(
+    id: 'cb_sat_student_guide',
+    title: 'College Board SAT Student Guide',
+    category: 'sat',
+    field: 'all',
+    description:
+        'The official student handbook for test-day rules, digital testing, scores, and section expectations',
+    icon: Icons.article_outlined,
+    url: 'https://satsuite.collegeboard.org/media/pdf/sat-student-guide.pdf',
+    links: ['Free official PDF'],
+  ),
+  const Resource(
+    id: 'cb_sat_skills_insight',
+    title: 'College Board SAT Skills Insight',
+    category: 'sat',
+    field: 'all',
+    description:
+        'Official score-band skill descriptions with example questions for reading, writing, and math',
+    icon: Icons.insights_outlined,
+    url:
+        'https://satsuite.collegeboard.org/media/pdf/skills-insight-digital-sat-suite.pdf',
+    links: ['Free official PDF'],
+  ),
+  const Resource(
+    id: 'cb_sat_sample_questions',
+    title: 'College Board Digital SAT Sample Questions',
+    category: 'sat',
+    field: 'all',
+    description:
+        'A compact official set showing the question styles, skills, answer formats, and explanations used on the digital SAT',
+    icon: Icons.quiz_outlined,
+    url:
+        'https://satsuite.collegeboard.org/media/pdf/digital-sat-sample-questions.pdf',
+    links: ['Free official PDF'],
+  ),
+  const Resource(
+    id: 'barrons_digital_sat',
+    title: 'Barron\'s Digital SAT Study Guide Premium',
+    category: 'sat',
+    field: 'all',
+    description:
+        'A paid 2027 study guide with content review, strategy lessons, practice questions, and online companion materials',
+    icon: Icons.menu_book_outlined,
+    url: 'https://www.barronseduc.com/digital-sat',
+    links: ['Paid book', 'Digital SAT edition'],
+  ),
+  const Resource(
     id: 'khan_academy_sat',
     title: 'Khan Academy SAT Practice',
     category: 'sat',
@@ -3147,6 +4013,29 @@ final List<Resource> allResources = [
     url:
         'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation.html',
     links: ['Official ACT preparation products', 'Paid book'],
+  ),
+  const Resource(
+    id: 'act_official_subject_guides',
+    title: 'Official ACT Subject Guides',
+    category: 'act',
+    field: 'all',
+    description:
+        'Official paid guides with focused review and authentic practice for individual ACT sections',
+    icon: Icons.library_books_outlined,
+    url:
+        'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation.html',
+    links: ['Official ACT preparation products', 'Paid books'],
+  ),
+  const Resource(
+    id: 'barrons_act',
+    title: 'Barron\'s ACT Study Guide Premium',
+    category: 'act',
+    field: 'all',
+    description:
+        'A paid 2026 guide with full-length practice tests, section review, strategies, and online practice',
+    icon: Icons.menu_book_outlined,
+    url: 'https://www.barronseduc.com/booksonline',
+    links: ['Paid book', 'ACT Study Guide Premium 2026'],
   ),
   const Resource(
     id: 'prepscholar_act',

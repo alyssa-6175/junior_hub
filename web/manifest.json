@@ -1,11 +1,11 @@
 {
-    "name": "junior_hub",
-    "short_name": "junior_hub",
+    "name": "Junior Hub | Eastside Preparatory School",
+    "short_name": "Junior Hub",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFFFFF",
+    "theme_color": "#073B6F",
+    "description": "Student resources for Eastside Preparatory School",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
