@@ -150,7 +150,7 @@ class _ContentArea extends StatelessWidget {
         return const ResourceListScreen(
           category: 'dual_credit',
 
-          title: 'College Credit',
+          title: 'College Courses',
 
           icon: Icons.school_outlined,
         );
@@ -287,7 +287,7 @@ class _AppSidebar extends StatelessWidget {
                   _NavItem(
                     icon: Icons.school_outlined,
 
-                    label: 'College Credit',
+                    label: 'College Courses',
 
                     view: 'dual_credit',
 

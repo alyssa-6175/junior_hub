@@ -61,6 +61,11 @@ class _SavedScreenState extends State<SavedScreen> {
           'puget sound',
           'tacoma',
           'everett',
+          'shoreline',
+          'lynnwood',
+          'edmonds',
+          'auburn',
+          'des moines',
         ].any(location.contains);
         if (resource.scope == 'local' && isNearby) return 0;
         if (resource.scope == 'regional' || resource.scope == 'state') return 1;
@@ -131,7 +136,7 @@ class _SavedScreenState extends State<SavedScreen> {
                       onTap: (v) => setState(() => _filter = v),
                     ),
                     _FilterChip(
-                      label: 'College Credit',
+                      label: 'College Courses',
                       value: 'dual_credit',
                       selected: _filter,
                       onTap: (v) => setState(() => _filter = v),

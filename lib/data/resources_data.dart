@@ -4095,262 +4095,510 @@ final List<Resource> allResources = [
   ),
 
   // ===========================================================================
-  // COLLEGE CREDIT AND DUAL ENROLLMENT
+  // INDEPENDENT COLLEGE COURSES FOR HIGH SCHOOL STUDENTS
   // ===========================================================================
   const Resource(
-    id: 'bellevue_college_dual_credit',
-    title: 'Bellevue College Dual Credit',
+    id: 'uw_summer_sessions_high_school',
+    title: 'UW Summer Sessions',
     category: 'dual_credit',
+    collegeCourseType: 'independent',
     field: 'all',
     scope: 'local',
     format: 'hybrid',
-    locationNote: 'Bellevue campus with course formats that vary by quarter',
-    timeCommitment: 'Usually one college quarter per course',
+    locationNote: 'UW Seattle campus, with some online courses',
+    timeCommitment: 'Four-and-a-half-week or nine-week summer courses',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'Running Start is for eligible juniors and seniors. Bellevue College also offers College in the High School and CTE dual credit routes',
+        'U.S. high school students who have completed eighth grade apply directly. Students under 18 only need the university form signed by a parent or guardian',
     instructions:
-        'Meet with your EPS counselor first. Apply to Bellevue College as a Running Start student, complete the college admissions steps and placement requirements, submit the enrollment verification form, then register for an approved course',
+        'Browse the public course offerings, apply online, pay the application fee, activate the UW NetID, register for an open course in Register.UW, and pay tuition. EPS involvement is optional and is not part of UW enrollment',
     description:
-        'Earn real Bellevue College credit locally through Running Start, College in the High School, or eligible career and technical courses',
-    icon: Icons.school_outlined,
-    url: 'https://www.bellevuecollege.edu/high-school-dual-credit/',
-    links: ['Bellevue College dual credit', 'Running Start admissions'],
-    detailNote:
-        'Start with an introductory writing, psychology, business, computer science, language, or general education course. Calculus and lab sciences are better for students who already meet the prerequisites. Running Start tuition is covered within the approved credit limit, but fees, books, and transportation may remain',
-  ),
-  const Resource(
-    id: 'cascadia_running_start',
-    title: 'Cascadia College Running Start',
-    category: 'dual_credit',
-    field: 'all',
-    scope: 'local',
-    format: 'hybrid',
-    locationNote:
-        'Bothell, the Redmond Together Center, online, and hybrid options',
-    timeCommitment: 'One quarter at a time, part-time or full-time',
-    majorTags: ['all_subjects'],
-    applicationInfo:
-        'For eligible high school juniors and seniors. Admission, placement, orientation, and quarterly enrollment forms are required',
-    instructions:
-        'Talk with your EPS counselor, apply to Cascadia, submit the Running Start contract and placement documents, complete new student registration, then submit an enrollment verification form each quarter',
-    description:
-        'Take college classes in Bothell, Redmond, online, or in a hybrid format while earning high school and college credit together',
-    icon: Icons.school_outlined,
-    url:
-        'https://www.cascadia.edu/student-resources/high-school-programs/running.aspx',
-    links: ['Cascadia Running Start', 'Application and quarterly deadlines'],
-    detailNote:
-        'Cascadia covers business, communication and design, environmental studies, health, STEM, social science, and education. Any course with an unmet prerequisite stays off-limits, and college grades appear on the permanent transcript',
-  ),
-  const Resource(
-    id: 'lwtech_running_start',
-    title: 'LWTech Running Start',
-    category: 'dual_credit',
-    field: 'all',
-    scope: 'local',
-    format: 'hybrid',
-    locationNote: 'Kirkland campus with selected online and hybrid classes',
-    timeCommitment: 'One college quarter per course',
-    majorTags: ['all_subjects'],
-    applicationInfo:
-        'Eligible juniors and seniors complete college admission, placement, orientation, and high school approval before registration',
-    instructions:
-        'Review the LWTech program with your EPS counselor, apply for Running Start, establish placement, attend orientation, submit the enrollment verification form, and choose classes that fit your graduation plan',
-    description:
-        'Explore academic transfer courses and hands-on career programs at Lake Washington Institute of Technology in Kirkland',
-    icon: Icons.engineering_outlined,
-    url:
-        'https://www.lwtech.edu/academics/high-school/running-start/index.aspx',
-    links: ['LWTech Running Start', 'LWTech programs and application steps'],
-    detailNote:
-        'A strong local option for engineering technology, computing, design, business, health, and skilled technical fields, alongside general education courses. Course format and high school equivalency should be confirmed before registration',
-  ),
-  const Resource(
-    id: 'seattle_colleges_running_start',
-    title: 'Seattle Colleges Running Start',
-    category: 'dual_credit',
-    field: 'all',
-    scope: 'local',
-    format: 'hybrid',
-    locationNote:
-        'North Seattle College, Seattle Central College, or South Seattle College',
-    timeCommitment: 'One college quarter per course',
-    majorTags: ['all_subjects'],
-    applicationInfo:
-        'Eligible juniors and seniors follow the application and enrollment process for the Seattle college they plan to attend',
-    instructions:
-        'Choose a Seattle Colleges campus, review the plan with your EPS counselor, apply, complete placement and orientation, submit school authorization, then register for approved classes',
-    description:
-        'Choose from three public Seattle colleges with broad transfer, technical, arts, business, health, and STEM offerings',
-    icon: Icons.location_city_outlined,
-    url: 'https://www.seattlecolleges.edu/running-start',
-    links: ['Seattle Colleges Running Start', 'Choose a Seattle campus'],
-    detailNote:
-        'The three-campus system makes it easier to compare schedules and specialized programs. Travel time matters for in-person sections, so prioritize online or clustered class times if you are also taking courses at EPS',
-  ),
-  const Resource(
-    id: 'uw_high_school',
-    title: 'UW in the High School',
-    category: 'dual_credit',
-    field: 'all',
-    scope: 'regional',
-    format: 'in_person',
-    locationNote: 'Taught at participating Washington high schools',
-    timeCommitment: 'Runs with the participating high school course',
-    majorTags: ['all_subjects'],
-    applicationInfo:
-        'Students in grades 9 through 12 may register only when their school offers an approved UW course with an approved teacher',
-    instructions:
-        'Ask the EPS counseling office whether any current EPS classes are approved for UW in the High School. If one is offered, follow the teacher and UW registration instructions during the enrollment window',
-    description:
-        'Earn University of Washington credit in an approved class taught at your own high school by a UW-affiliated teacher',
+        'Take a regular UW summer course alongside university students and earn graded UW credit on an official transcript',
     icon: Icons.account_balance_outlined,
-    url: 'https://www.uwhs.uw.edu/',
-    links: ['UW in the High School', 'Course list and registration'],
+    url:
+        'https://www.summer.uw.edu/registration-costs/how-to-register/us-high-school-students',
+    links: ['UW registration steps', 'Course offerings', 'Tuition and fees'],
     detailNote:
-        'The catalog can include subjects such as astronomy, calculus, programming, writing, and world languages, but availability depends completely on what EPS is approved to offer in a given year',
+        'UW offers nearly 1,000 summer courses across more than 100 fields. Introductory 100-level classes are the simplest starting point, while courses such as multivariable calculus or linear algebra require the listed prerequisites and available space',
   ),
   const Resource(
-    id: 'wa_running_start_directory',
-    title: 'Washington Dual Credit Program Finder',
+    id: 'uiuc_netmath_high_school',
+    title: 'University of Illinois NetMath',
     category: 'dual_credit',
-    field: 'all',
-    scope: 'regional',
-    format: 'hybrid',
-    locationNote: 'Public colleges across Washington',
-    timeCommitment: 'Varies by college and course',
-    majorTags: ['all_subjects'],
+    collegeCourseType: 'independent',
+    field: 'math',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online through the University of Illinois Urbana-Champaign',
+    timeCommitment: 'Most courses are self-paced over 16 weeks',
+    majorTags: ['stem', 'math', 'cs', 'engineering', 'data_science', 'physics'],
     applicationInfo:
-        'Use the state guidance to compare Running Start, College in the High School, CTE dual credit, and other approved pathways',
+        'Students age 15 or older register directly through the university’s nondegree portal after documenting the published prerequisites',
     instructions:
-        'Read the state overview, identify nearby participating colleges, then take the shortlist to your EPS counselor before applying anywhere',
+        'Choose a course, check its prerequisite evidence, create a nondegree account, submit the course request, confirm the university letter of intent, activate the Illinois NetID, and pay tuition',
     description:
-        'Use Washington’s official dual-credit guidance to compare public college options beyond the Eastside',
-    icon: Icons.map_outlined,
-    url:
-        'https://www.sbctc.edu/becoming-a-student/high-school/dual-credit-student.aspx',
-    links: ['Washington dual credit options', 'State college directory'],
+        'Earn University of Illinois transcript credit through rigorous online mathematics courses built for independent enrollment',
+    icon: Icons.calculate_outlined,
+    url: 'https://netmath.illinois.edu/academics/netmath-high-school-programs',
+    links: ['High school courses', 'Course catalog', 'Registration'],
     detailNote:
-        'This is a planning resource rather than a college application. It is useful if an Eastside schedule does not work or another Washington college has a program that matches your intended major',
+        'Options range from college algebra to Calculus III, differential equations, number theory, and real analysis. MATH 257 Linear Algebra with Computational Applications is a three-credit course using Python and requires prior calculus and programming preparation',
   ),
   const Resource(
     id: 'asu_universal_learner',
     title: 'ASU Universal Learner Courses',
     category: 'dual_credit',
+    collegeCourseType: 'independent',
     field: 'all',
     scope: 'national',
     format: 'virtual',
     locationNote: 'Fully online through Arizona State University',
-    timeCommitment: 'Typically 8 or 16 weeks, depending on the course',
+    timeCommitment: 'Usually 8 or 16 weeks',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'Open-enrollment courses begin with a low registration fee. Students pay the transcript fee only if they choose to place a completed course on the ASU transcript',
+        'Students enroll directly with a small initial fee and pay the transcript fee only if they choose to keep the completed course',
     instructions:
-        'Create a Universal Learner account, confirm the course choice with your EPS counselor, check prerequisites and dates, complete the class, then decide whether the final grade is worth adding to an ASU transcript',
+        'Create an account, choose a course, pay the registration fee, complete the work, review the final grade, and purchase ASU transcript credit only when you want the result recorded',
     description:
-        'Try an online ASU course first and choose after completion whether to convert the result into transcripted university credit',
+        'Try a real ASU course online and decide after seeing the final grade whether to add it to an official transcript',
     icon: Icons.laptop_chromebook_outlined,
     url: 'https://ea.asu.edu/courses/',
-    links: ['ASU Universal Learner course catalog', 'Cost and credit FAQs'],
+    links: ['Course catalog', 'Enrollment and credit FAQs', 'Course calendar'],
     detailNote:
-        'The broad catalog covers business, communication, design, health, humanities, math, science, social science, and technology. Introductory courses are accessible starting points, while calculus, chemistry, and programming require stronger preparation',
+        'The catalog covers business, communication, design, health, humanities, math, science, social science, and technology. This is a lower-risk choice because an unsuccessful attempt does not have to be added to the transcript',
   ),
   const Resource(
     id: 'und_enroll_anytime',
     title: 'UND Enroll Anytime',
     category: 'dual_credit',
+    collegeCourseType: 'independent',
     field: 'all',
     scope: 'national',
     format: 'virtual',
-    locationNote:
-        'Fully online and self-paced through the University of North Dakota',
-    timeCommitment: 'Self-paced, with up to nine months to finish most courses',
+    locationNote: 'Fully online through the University of North Dakota',
+    timeCommitment: 'Self-paced, with up to nine months for most courses',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'High school students may enroll in eligible 100- and 200-level courses. Dual high school credit requires prior approval from the student’s school',
+        'High school students independently enroll in eligible 100- and 200-level courses after meeting the prerequisites',
     instructions:
-        'Get written EPS approval if you need high school credit, confirm prerequisites, register for an eligible lower-division course, work through the proctored and graded requirements, then order the UND transcript when complete',
+        'Choose an eligible lower-division course, confirm prerequisites and proctoring rules, register and pay directly through UND, finish the graded work, and order the university transcript',
     description:
-        'Complete a flexible self-paced university course online with a long completion window and a permanent UND transcript',
+        'Complete a self-paced university course on your own schedule and receive a permanent University of North Dakota grade',
     icon: Icons.schedule_outlined,
     url: 'https://und.edu/academics/online/enroll-anytime/index.html',
-    links: ['UND Enroll Anytime courses', 'High school student information'],
+    links: ['Course catalog', 'High school eligibility', 'Registration'],
     detailNote:
-        'Useful for students who need schedule flexibility. Start with an introductory humanities or social science class if self-paced college work is new to you. Math, science, and language sequences demand more consistent weekly practice',
+        'Subjects include mathematics, chemistry, government, psychology, languages, communication, and humanities. Introductory courses are approachable first choices, while calculus, science, and language sequences need more preparation',
+  ),
+  const Resource(
+    id: 'berkeley_precollege_scholars',
+    title: 'UC Berkeley Pre-College Scholars',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'UC Berkeley campus or virtual summer track',
+    timeCommitment: 'Usually one or two six- or eight-week courses',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'High school students apply directly and select eligible lower-division Berkeley Summer Sessions courses',
+    instructions:
+        'Choose the on-campus or virtual track, browse eligible courses, apply through Berkeley’s portal, submit the requested student and family materials, then register and pay after admission',
+    description:
+        'Join regular UC Berkeley summer classes, earn university credit, and receive a Berkeley transcript',
+    icon: Icons.account_balance_outlined,
+    url: 'https://summer.berkeley.edu/students/high-school',
+    links: ['High school program', 'Application', 'Summer class schedule'],
+    detailNote:
+        'Hundreds of lower-division courses span science, engineering, computing, economics, social science, languages, arts, and humanities. Check prerequisites carefully because the accelerated schedule moves quickly',
+  ),
+  const Resource(
+    id: 'ucla_summer_high_school_courses',
+    title: 'UCLA Summer Courses for High School Students',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'UCLA campus, online, or an approved intensive format',
+    timeCommitment: 'Most courses run for six weeks',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'High school students register directly for one or two courses from UCLA’s approved course list',
+    instructions:
+        'Review the current approved list, confirm prerequisites and format, submit the UCLA Summer Sessions registration materials and fee, enroll in the course, and pay tuition',
+    description:
+        'Study beside college students in an approved UCLA course and finish with graded UCLA credit on an official transcript',
+    icon: Icons.school_outlined,
+    url: 'https://summer.ucla.edu/high-school-students/',
+    links: ['High school options', 'Approved courses', 'Registration and fees'],
+    detailNote:
+        'The approved list changes each summer and includes in-person and online options across many majors. Regular summer courses focus on the actual class without requiring a separate school partnership',
+  ),
+  const Resource(
+    id: 'stanford_summer_high_school',
+    title: 'Stanford Summer Session',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Stanford campus with commuter and residential choices',
+    timeCommitment: 'Eight-week summer quarter',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Current sophomores, juniors, and seniors who meet the age range apply directly with a transcript and essay',
+    instructions:
+        'Review eligibility and courses, apply to Summer Session, submit the transcript and essay, accept admission, choose commuter or residential status, then register in Axess',
+    description:
+        'Attend Stanford’s regular summer quarter as a visiting high school student and earn Stanford credit with an official transcript',
+    icon: Icons.account_balance_outlined,
+    url: 'https://summer.stanford.edu/high-school',
+    links: ['High school Summer Session', 'Course catalog', 'Application'],
+    detailNote:
+        'More than 130 courses cover over 30 departments and every Summer Session course carries Stanford University credit. Admission is selective and the required course load makes this a substantial commitment',
+  ),
+  const Resource(
+    id: 'harvard_secondary_school_program',
+    title: 'Harvard Secondary School Program',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Harvard campus, online, or Boston-area commuter option',
+    timeCommitment: 'Four-week or seven-week intensive program',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible high school students apply directly to the selective credit-bearing program',
+    instructions:
+        'Choose the four- or seven-week format, review age and graduation-year eligibility, apply with the requested academic materials, accept admission, then register for one or two courses',
+    description:
+        'Complete a Harvard Summer School course for college credit through an online, commuter, or residential option',
+    icon: Icons.school_outlined,
+    url:
+        'https://summer.harvard.edu/high-school-programs/secondary-school-program/',
+    links: ['Program details', 'Credit course catalog', 'Application and cost'],
+    detailNote:
+        'The seven-week catalog includes more than 200 courses in biology, psychology, entrepreneurship, law, computer science, writing, sociology, and other fields. The separate two-week Pre-College Program does not award credit',
+  ),
+  const Resource(
+    id: 'cornell_precollege_studies',
+    title: 'Cornell Precollege Studies',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Cornell campus or online summer and winter courses',
+    timeCommitment: 'Three- or six-week courses',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible high school juniors and seniors ages 15 to 19 apply directly to Cornell Precollege Studies',
+    instructions:
+        'Choose an online, commuter, or residential session, browse eligible courses, apply with the required student materials, accept admission, register, and pay tuition',
+    description:
+        'Take a Cornell course alongside undergraduates and earn three to twelve credits on an official Cornell transcript',
+    icon: Icons.school_outlined,
+    url: 'https://sce.cornell.edu/precollege',
+    links: ['Precollege Studies', 'Credit courses', 'Application and tuition'],
+    detailNote:
+        'Courses explore majors across STEM, business, policy, social science, humanities, and the arts. Online choices add flexibility, while campus courses provide a traditional university experience',
+  ),
+  const Resource(
+    id: 'boston_university_high_school_honors',
+    title: 'Boston University High School Honors',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Boston University campus, with selected online courses',
+    timeCommitment: 'Six-week summer program',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Students entering junior or senior year apply directly and choose one or two approved undergraduate courses',
+    instructions:
+        'Review the course list, check prerequisites, apply through BU Summer Term, choose commuter or residential status, then register and pay after admission',
+    description:
+        'Choose from more than 80 BU undergraduate courses, study with college students, and earn up to eight university credits',
+    icon: Icons.school_outlined,
+    url: 'https://www.bu.edu/summer/high-school-programs/high-school-honors/',
+    links: ['Program details', 'Approved courses', 'Application and costs'],
+    detailNote:
+        'Subjects include computer science, business, biology, neuroscience, economics, languages, mathematics, statistics, writing, media, art, and social science',
+  ),
+  const Resource(
+    id: 'georgetown_summer_college',
+    title: 'Georgetown Summer College',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    field: 'all',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Georgetown campus in Washington, D.C., or online',
+    timeCommitment: 'Five-week on-campus or eight-week online courses',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible high school students apply directly and may take up to two approved courses per session',
+    instructions:
+        'Review the course list and eligibility, apply to Summer College, submit the requested academic and family materials, then enroll and pay after admission',
+    description:
+        'Take a Georgetown course with undergraduate students and receive credit on an official university transcript',
+    icon: Icons.account_balance_outlined,
+    url: 'https://summer.georgetown.edu/programs/SHS04/college-credit-courses/',
+    links: ['Summer College', 'Course options', 'Application and tuition'],
+    detailNote:
+        'Courses are generally three credits and cover fields such as government, international relations, economics, business, writing, science, and humanities',
   ),
   const Resource(
     id: 'alabama_early_college',
     title: 'University of Alabama Early College',
     category: 'dual_credit',
+    collegeCourseType: 'independent',
     field: 'all',
     scope: 'national',
     format: 'virtual',
-    locationNote: 'Online, with optional on-campus experiences in Alabama',
+    locationNote: 'Online, with optional summer experiences in Alabama',
     timeCommitment: 'Semester-length university courses',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'Open to eligible students who have completed eighth grade and hold the required high school GPA. The program includes an introductory readiness course',
+        'Students who have completed eighth grade and meet the GPA requirement apply directly to Early College',
     instructions:
-        'Review eligibility and cost with your family and EPS counselor, apply to Early College, complete the introductory course and advising, then select an approved online class',
+        'Submit the Early College application and academic record, complete the introductory readiness course and orientation, then choose and register for an approved course',
     description:
-        'Join a structured early-college program with advising and online courses across more than 80 subject areas',
+        'Build a University of Alabama transcript independently through online courses across more than 80 subjects',
     icon: Icons.school_outlined,
     url: 'https://earlycollege.ua.edu/',
-    links: [
-      'University of Alabama Early College',
-      'Courses, cost, and eligibility',
-    ],
+    links: ['Early College', 'Course list', 'Eligibility and tuition'],
     detailNote:
-        'Options span chemistry, communication, engineering, languages, math, computer science, political science, English, history, and the arts. The readiness course helps students transition before taking harder major-specific classes',
+        'Options include chemistry, communication, engineering, languages, mathematics, computer science, political science, English, history, and the arts',
   ),
+
+  // Counselor-supported dual enrollment options
   const Resource(
-    id: 'idaho_dual_credit',
-    title: 'University of Idaho Dual Credit',
+    id: 'bellevue_college_dual_credit',
+    title: 'Bellevue College Running Start',
     category: 'dual_credit',
+    collegeCourseType: 'counselor',
     field: 'all',
-    scope: 'national',
-    format: 'virtual',
-    locationNote: 'Online university courses, plus Idaho-based partner options',
-    timeCommitment: 'Semester-length university courses',
+    scope: 'local',
+    format: 'hybrid',
+    locationNote: 'Bellevue campus with online options that vary by quarter',
+    timeCommitment: 'One college quarter at a time',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'High school students need parent or guardian approval and must meet the published GPA, prerequisite, and course eligibility rules',
+        'Eligible juniors and seniors coordinate enrollment and course equivalencies with their high school',
     instructions:
-        'Confirm with EPS that the course fits your plan, review admission and prerequisite rules, apply as a dual-credit student, obtain required approval, and register for an online section',
+        'Apply to Bellevue College, complete placement and orientation, work with the school counselor on the enrollment verification form, then register for approved courses',
     description:
-        'Take an online University of Idaho course for transcripted credit in subjects ranging from arts and social science to STEM',
-    icon: Icons.cast_for_education_outlined,
-    url: 'https://www.uidaho.edu/academics/dual-credit',
-    links: ['University of Idaho dual credit', 'Online course options'],
+        'Take Bellevue College classes tuition-free within the Running Start credit limit while earning high school and college credit',
+    icon: Icons.school_outlined,
+    url: 'https://www.bellevuecollege.edu/high-school-dual-credit/',
+    links: ['Running Start', 'Admissions steps', 'Course catalog'],
     detailNote:
-        'The catalog includes subjects such as art, computer science, environmental science, psychology, writing, and mathematics. Check that the exact section is approved for dual-credit enrollment before planning around it',
+        'A broad local catalog for writing, psychology, business, computer science, languages, mathematics, laboratory science, and general education',
   ),
   const Resource(
-    id: 'byu_independent_study_university',
-    title: 'BYU Independent Study University Courses',
+    id: 'cascadia_running_start',
+    title: 'Cascadia College Running Start',
     category: 'dual_credit',
+    collegeCourseType: 'counselor',
     field: 'all',
-    scope: 'national',
-    format: 'virtual',
+    scope: 'local',
+    format: 'hybrid',
+    locationNote: 'Bothell, Redmond, online, and hybrid options',
+    timeCommitment: 'One quarter at a time, part-time or full-time',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible juniors and seniors need placement, orientation, and a school-approved enrollment verification form',
+    instructions:
+        'Apply to Cascadia, submit the Running Start contract and placement documents, complete registration orientation, then coordinate the quarterly verification form with the counselor',
+    description:
+        'Earn high school and college credit together through a flexible Eastside-area Running Start schedule',
+    icon: Icons.school_outlined,
+    url:
+        'https://www.cascadia.edu/student-resources/high-school-programs/running.aspx',
+    links: ['Running Start', 'Application', 'Quarterly deadlines'],
+    detailNote:
+        'Course areas include business, communication and design, environmental studies, health, STEM, social science, and education',
+  ),
+  const Resource(
+    id: 'lwtech_running_start',
+    title: 'LWTech Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'local',
+    format: 'hybrid',
+    locationNote: 'Kirkland campus with selected online and hybrid classes',
+    timeCommitment: 'One college quarter at a time',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible juniors and seniors complete college admission and submit school authorization before registering',
+    instructions:
+        'Apply for Running Start, establish placement, attend orientation, complete the enrollment verification form with the counselor, then choose approved classes',
+    description:
+        'Combine transferable academics with hands-on technical courses at Lake Washington Institute of Technology',
+    icon: Icons.engineering_outlined,
+    url:
+        'https://www.lwtech.edu/academics/high-school/running-start/index.aspx',
+    links: ['Running Start', 'Programs', 'Enrollment steps'],
+    detailNote:
+        'A strong option for engineering technology, computing, design, business, health, and career-focused technical fields',
+  ),
+  const Resource(
+    id: 'seattle_colleges_running_start',
+    title: 'Seattle Colleges Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'local',
+    format: 'hybrid',
+    locationNote: 'North Seattle, Seattle Central, or South Seattle College',
+    timeCommitment: 'One college quarter at a time',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible juniors and seniors complete the selected college’s application and school verification process',
+    instructions:
+        'Choose a campus, apply, complete placement and orientation, coordinate the enrollment verification form with the counselor, then register for approved classes',
+    description:
+        'Compare three Seattle campuses with broad transfer, technical, arts, business, health, and STEM offerings',
+    icon: Icons.location_city_outlined,
+    url: 'https://www.seattlecolleges.edu/running-start',
+    links: ['Running Start', 'Choose a campus', 'Application steps'],
+  ),
+  const Resource(
+    id: 'uw_high_school',
+    title: 'UW in the High School',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'in_person',
     locationNote:
-        'Fully online and self-paced through Brigham Young University',
-    timeCommitment: 'Self-paced within the course’s allowed completion window',
+        'Available only through participating Washington high schools',
+    timeCommitment: 'Runs with the approved high school course',
     majorTags: ['all_subjects'],
     applicationInfo:
-        'Students register for individual university courses and should secure EPS approval in advance if they expect the course to meet a high school requirement',
+        'Students may register only when their school offers an approved UW course with an approved teacher',
     instructions:
-        'Ask your EPS counselor to review the course, verify college prerequisites and exam rules, register directly through Independent Study, complete all assessments, then request the BYU transcript',
+        'Ask the counseling office which current school courses carry UW credit, then follow the teacher and UW registration instructions during the enrollment window',
     description:
-        'Choose an individual self-paced online university course without enrolling in a full degree program',
-    icon: Icons.menu_book_outlined,
-    url: 'https://is.byu.edu/university',
-    links: [
-      'BYU Independent Study university courses',
-      'Accreditation and policies',
-    ],
-    detailNote:
-        'Common options include writing, government, college algebra, calculus, science, humanities, and world languages. Self-paced does not mean light workload, especially in quantitative and language courses. BYU is a religiously affiliated university, and course context varies by subject',
+        'Earn University of Washington credit in an approved course taught at the high school',
+    icon: Icons.account_balance_outlined,
+    url: 'https://www.uwhs.uw.edu/',
+    links: ['Program information', 'Course list', 'Registration'],
+  ),
+  const Resource(
+    id: 'shoreline_running_start',
+    title: 'Shoreline College Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'hybrid',
+    locationNote:
+        'Shoreline campus with flexible morning and afternoon schedules',
+    timeCommitment: 'Part-time or full-time college quarters',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Washington public-school juniors and seniors complete college placement and school enrollment verification',
+    instructions:
+        'Apply to Shoreline, establish English placement, attend the required onboarding, complete the verification form with the counselor, then register',
+    description:
+        'Choose advanced transfer or career courses that count toward high school and college requirements',
+    icon: Icons.school_outlined,
+    url:
+        'https://www.shoreline.edu/high-school-programs/running-start/default.aspx',
+    links: ['Running Start', 'Eligibility', 'Information sessions'],
+  ),
+  const Resource(
+    id: 'edmonds_running_start',
+    title: 'Edmonds College Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'hybrid',
+    locationNote: 'Lynnwood campus with in-person and online classes',
+    timeCommitment: 'Part-time or full-time college quarters',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Washington juniors and seniors may participate regardless of GPA, with school coordination for funded credits',
+    instructions:
+        'Apply to Edmonds, complete the Running Start enrollment steps, work with the counselor on the verification form and course plan, then register',
+    description:
+        'Take tuition-free college courses in transfer and career fields while completing high school requirements',
+    icon: Icons.school_outlined,
+    url: 'https://www.edmonds.edu/programs-and-degrees/running-start/',
+    links: ['Running Start', 'Enroll', 'Costs and support'],
+  ),
+  const Resource(
+    id: 'green_river_running_start',
+    title: 'Green River College Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'hybrid',
+    locationNote: 'Auburn-area campuses and online courses',
+    timeCommitment: 'Part-time or full-time college quarters',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Academically qualified Washington juniors and seniors coordinate funded enrollment with their school',
+    instructions:
+        'Complete the Green River application and eligibility steps, build a course plan with school support, submit the verification form, then register',
+    description:
+        'Explore university-transfer and career-technical courses across Green River campuses or online',
+    icon: Icons.school_outlined,
+    url:
+        'https://www.greenriver.edu/students/academics/running-start/about.html',
+    links: ['Running Start', 'Get started', 'Programs and courses'],
+  ),
+  const Resource(
+    id: 'highline_running_start',
+    title: 'Highline College Running Start',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'hybrid',
+    locationNote: 'Des Moines, Washington, with online course options',
+    timeCommitment: 'Part-time or full-time college quarters',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Eligible juniors and seniors submit a new-student packet completed with a counselor and parent or guardian',
+    instructions:
+        'Apply to Highline, determine placement, complete the Running Start packet and verification form with the counselor, then attend onboarding and register',
+    description:
+        'Choose transfer courses or career-focused pathways while earning tuition-free high school and college credit',
+    icon: Icons.school_outlined,
+    url: 'https://highline.edu/apply-enroll/admissions/running-start.html',
+    links: ['Running Start admission', 'Career Start', 'Course catalog'],
+  ),
+  const Resource(
+    id: 'wa_running_start_directory',
+    title: 'Washington Dual Credit Program Finder',
+    category: 'dual_credit',
+    collegeCourseType: 'counselor',
+    field: 'all',
+    scope: 'regional',
+    format: 'hybrid',
+    locationNote: 'All 34 Washington community and technical colleges',
+    timeCommitment: 'Varies by college and course',
+    majorTags: ['all_subjects'],
+    applicationInfo:
+        'Use the official state guide to compare Running Start, College in the High School, and CTE dual credit routes',
+    instructions:
+        'Compare nearby participating colleges, choose a program, then work with the school counselor and college coordinator on its enrollment process',
+    description:
+        'Find additional accredited Washington dual-credit options when the featured local colleges do not fit your schedule or subject',
+    icon: Icons.map_outlined,
+    url:
+        'https://www.sbctc.edu/becoming-a-student/high-school/dual-credit-student.aspx',
+    links: ['State dual credit guide', 'College directory', 'Program FAQ'],
   ),
 
   // ===========================================================================

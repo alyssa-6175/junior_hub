@@ -28,6 +28,7 @@ class ResourceListScreen extends StatefulWidget {
 class _ResourceListScreenState extends State<ResourceListScreen> {
   int _tab = 1; // Default to the full list
   String? _majorFilter;
+  String _collegeCourseType = 'independent';
 
   static const _competitionSubjects = [
     ('cs_eng', 'Computer Science & Engineering'),
@@ -89,6 +90,11 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       'puget sound',
       'tacoma',
       'everett',
+      'shoreline',
+      'lynnwood',
+      'edmonds',
+      'auburn',
+      'des moines',
     ].any(location.contains);
     if (resource.scope == 'local' && isNearby) return 0;
     if (resource.scope == 'regional' || resource.scope == 'state') return 1;
@@ -241,6 +247,11 @@ Alyssa''',
     final seen = provider.seen;
 
     var items = resourcesByCategory(widget.category);
+    if (widget.category == 'dual_credit') {
+      items = items
+          .where((r) => r.collegeCourseType == _collegeCourseType)
+          .toList();
+    }
     if (_majorFilter != null && widget.category == 'competition') {
       items = items
           .where((r) => _matchesCompetitionSubject(r, _majorFilter!))
@@ -309,6 +320,30 @@ Alyssa''',
                 ],
               ),
               const SizedBox(height: 10),
+              if (widget.category == 'dual_credit') ...[
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _MajorChip(
+                        label: 'Enroll Independently',
+                        active: _collegeCourseType == 'independent',
+                        color: CategoryColors.textFor('dual_credit'),
+                        onTap: () =>
+                            setState(() => _collegeCourseType = 'independent'),
+                      ),
+                      _MajorChip(
+                        label: 'Counselor-Supported',
+                        active: _collegeCourseType == 'counselor',
+                        color: CategoryColors.textFor('dual_credit'),
+                        onTap: () =>
+                            setState(() => _collegeCourseType = 'counselor'),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 7),
+              ],
               // Subject filters are intentionally separate from profile majors:
               // every competition belongs to one clear, visible subject.
               SingleChildScrollView(
@@ -373,10 +408,6 @@ Alyssa''',
                   ),
                 ),
               ],
-              if (widget.category == 'dual_credit') ...[
-                const SizedBox(height: 8),
-                const _DualCreditGuide(),
-              ],
             ],
           ),
         ),
@@ -403,56 +434,6 @@ Alyssa''',
           ),
         ),
       ],
-    );
-  }
-}
-
-class _DualCreditGuide extends StatelessWidget {
-  const _DualCreditGuide();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: CategoryColors.bgFor('dual_credit'),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: CategoryColors.textFor('dual_credit').withValues(alpha: 0.18),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'How college credit works',
-            style: GoogleFonts.inter(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: CategoryColors.textFor('dual_credit'),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Start with your EPS counselor before enrolling. Confirm how the course fits your graduation plan, apply to the college, complete any placement or prerequisites, then register and save the syllabus. The grade becomes part of a real college transcript. Credit transfer is always decided by the college that receives it, so check its transfer tool before paying',
-            style: GoogleFonts.inter(
-              fontSize: 10.5,
-              height: 1.4,
-              color: kTextSecondary,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'A good first course is usually an introductory class in writing, psychology, business, computing, or a world language. Calculus, lab science, and advanced programming are stronger next steps once you meet the prerequisites. When you apply to college, report the course and the college that issued the transcript wherever the application asks about college coursework',
-            style: GoogleFonts.inter(
-              fontSize: 10.5,
-              height: 1.4,
-              color: kTextSecondary,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

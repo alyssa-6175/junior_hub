@@ -22,6 +22,7 @@ class Resource {
   final String? applicationInfo;
   final String? testSection;
   final String? instructions;
+  final String? collegeCourseType;
 
   const Resource({
     required this.id,
@@ -44,6 +45,7 @@ class Resource {
     this.applicationInfo,
     this.testSection,
     this.instructions,
+    this.collegeCourseType,
   });
 
   // ─── Urgency Calculation ──────────────────────────────────────────────────
@@ -148,7 +150,7 @@ class Resource {
       'ap': 'AP Course',
       'research': 'Research',
       'internship': 'Internship',
-      'dual_credit': 'College Credit',
+      'dual_credit': 'College Course',
       'sat': 'SAT',
       'act': 'ACT',
     };

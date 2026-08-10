@@ -66,6 +66,11 @@ class _FieldScreenState extends State<FieldScreen>
         'puget sound',
         'tacoma',
         'everett',
+        'shoreline',
+        'lynnwood',
+        'edmonds',
+        'auburn',
+        'des moines',
       ].any(location.contains);
       if (resource.scope == 'local' && isNearby) return 0;
       if (resource.scope == 'regional' || resource.scope == 'state') return 1;
