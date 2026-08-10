@@ -24,7 +24,7 @@ class _FieldScreenState extends State<FieldScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: 4, vsync: this); // Board + 3 content tabs
+    _tabs = TabController(length: 4, vsync: this); // Starred + 3 content tabs
   }
 
   @override
@@ -39,7 +39,7 @@ class _FieldScreenState extends State<FieldScreen>
     category,
   ).where((resource) => resourceMatchesMajor(resource, _majorKey)).toList();
 
-  List<Resource> _aps() => _forCategory('ap');
+  List<Resource> _aps() => _forCategory('ap') + _forCategory('dual_credit');
   List<Resource> _opps() =>
       _forCategory('research') + _forCategory('internship');
   List<Resource> _comps() => _forCategory('competition');
@@ -54,14 +54,35 @@ class _FieldScreenState extends State<FieldScreen>
     Set<String> pinned,
     Set<String> seen,
   ) {
-    final pins = items
-        .where((r) => pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final normal = items
-        .where((r) => !pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final seenL = items.where((r) => seen.contains(r.id)).toList();
-    return [...pins, ...normal, ...seenL];
+    int scopeRank(Resource resource) {
+      final location = (resource.locationNote ?? '').toLowerCase();
+      final isNearby = [
+        'seattle',
+        'bellevue',
+        'kirkland',
+        'redmond',
+        'bothell',
+        'king county',
+        'puget sound',
+        'tacoma',
+        'everett',
+      ].any(location.contains);
+      if (resource.scope == 'local' && isNearby) return 0;
+      if (resource.scope == 'regional' || resource.scope == 'state') return 1;
+      return 2;
+    }
+
+    int compare(Resource a, Resource b) {
+      final scopeCompare = scopeRank(a).compareTo(scopeRank(b));
+      if (scopeCompare != 0) return scopeCompare;
+      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+    }
+
+    final starred = items.where((r) => pinned.contains(r.id)).toList()
+      ..sort(compare);
+    final remaining = items.where((r) => !pinned.contains(r.id)).toList()
+      ..sort(compare);
+    return [...starred, ...remaining];
   }
 
   @override
@@ -86,9 +107,11 @@ class _FieldScreenState extends State<FieldScreen>
     final displayName = subMajor?.label ?? group.label;
     final color = group.color;
 
-    final boardItems = _allForScreen()
-        .where((r) => pinned.contains(r.id))
-        .toList();
+    final boardItems = _sortFn(
+      _allForScreen().where((r) => pinned.contains(r.id)).toList(),
+      pinned,
+      seen,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,14 +160,14 @@ class _FieldScreenState extends State<FieldScreen>
             indicatorWeight: 2,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             tabs: [
-              // Board tab with pin icon + badge count if any pinned
+              // Starred tab with badge count
               Tab(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.push_pin_outlined, size: 13),
+                    const Icon(Icons.star_border, size: 13),
                     const SizedBox(width: 4),
-                    const Text('Board'),
+                    const Text('Starred'),
                     if (boardItems.isNotEmpty) ...[
                       const SizedBox(width: 4),
                       Container(
@@ -179,20 +202,20 @@ class _FieldScreenState extends State<FieldScreen>
           child: TabBarView(
             controller: _tabs,
             children: [
-              // Board tab
+              // Starred tab
               boardItems.isEmpty
                   ? Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(
-                            Icons.push_pin_outlined,
+                            Icons.star_border,
                             size: 32,
                             color: kTextTertiary,
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'Nothing pinned yet',
+                            'Nothing starred yet',
                             style: GoogleFonts.inter(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
@@ -201,7 +224,7 @@ class _FieldScreenState extends State<FieldScreen>
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Pin any resource from the other tabs to keep it here.',
+                            'Star any resource from the other tabs to keep it here.',
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               color: kTextSecondary,

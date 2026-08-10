@@ -16,6 +16,7 @@ class ResourceTile extends StatelessWidget {
     'competition',
     'research',
     'internship',
+    'dual_credit',
     'sat',
     'act',
   ].contains(category);
@@ -146,9 +147,9 @@ class ResourceTile extends StatelessWidget {
                       context.read<AppProvider>().toggleSaved(resource.id),
                 ),
                 _ActionButton(
-                  icon: isPinned ? Icons.push_pin : Icons.push_pin_outlined,
+                  icon: isPinned ? Icons.star : Icons.star_border,
                   color: isPinned ? kGold : kTextTertiary,
-                  tooltip: isPinned ? 'Unpin from Board' : 'Pin to Board',
+                  tooltip: isPinned ? 'Unstar' : 'Star this resource',
                   onTap: () =>
                       context.read<AppProvider>().togglePinned(resource.id),
                 ),

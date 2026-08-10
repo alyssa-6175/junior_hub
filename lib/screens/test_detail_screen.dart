@@ -15,7 +15,7 @@ class TestDetailScreen extends StatefulWidget {
 }
 
 class _TestDetailScreenState extends State<TestDetailScreen> {
-  int _tab = 1; // Open on All so the visible list always matches the total
+  int _tab = 1; // Open on Official
   String? _section;
   bool _guideExpanded = false;
 
@@ -43,14 +43,13 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     Set<String> pinned,
     Set<String> seen,
   ) {
-    final pins = items
-        .where((r) => pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final normal = items
-        .where((r) => !pinned.contains(r.id) && !seen.contains(r.id))
-        .toList();
-    final seenL = items.where((r) => seen.contains(r.id)).toList();
-    return [...pins, ...normal, ...seenL];
+    int byTitle(Resource a, Resource b) =>
+        a.title.toLowerCase().compareTo(b.title.toLowerCase());
+    final starred = items.where((r) => pinned.contains(r.id)).toList()
+      ..sort(byTitle);
+    final remaining = items.where((r) => !pinned.contains(r.id)).toList()
+      ..sort(byTitle);
+    return [...starred, ...remaining];
   }
 
   @override
@@ -59,7 +58,11 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     final pinned = provider.pinned;
     final seen = provider.seen;
 
-    final board = _all.where((r) => pinned.contains(r.id)).toList();
+    final board = _sort(
+      _applySection(_all.where((r) => pinned.contains(r.id)).toList()),
+      pinned,
+      seen,
+    );
 
     final officialIds = {
       'bluebook_tests',
@@ -82,8 +85,6 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       pinned,
       seen,
     );
-
-    final all = _sort(_applySection(_all), pinned, seen);
 
     final videos = _sort(
       _applySection(
@@ -158,14 +159,13 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     );
 
     final tabs = [
-      'Board',
-      'All',
+      'Starred',
       'Official',
       'Videos',
       'Books & Courses',
       'Practice',
     ];
-    final bodies = [board, all, official, videos, books, qs];
+    final bodies = [board, official, videos, books, qs];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +235,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
             child: Row(
               children: [
                 _SectionChip(
-                  label: 'All',
+                  label: 'Every section',
                   active: _section == null,
                   onTap: () => setState(() => _section = null),
                 ),
@@ -260,7 +260,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                   return _TabBtn(
                     label: tabs[i],
                     active: _tab == i,
-                    icon: isBoard ? Icons.push_pin_outlined : null,
+                    icon: isBoard ? Icons.star_border : null,
                     badge: count > 0 ? '$count' : null,
                     onTap: () => setState(() => _tab = i),
                   );
@@ -283,13 +283,13 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
-                        Icons.push_pin_outlined,
+                        Icons.star_border,
                         size: 30,
                         color: kTextTertiary,
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Nothing pinned yet.',
+                        'Nothing starred yet.',
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           color: kTextPrimary,
@@ -298,7 +298,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Pin resources from the other tabs to keep them here.',
+                        'Star resources from the other tabs to keep them here.',
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: kTextSecondary,

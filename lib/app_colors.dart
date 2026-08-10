@@ -22,6 +22,7 @@ class CategoryColors {
     'ap': Color(0xFF3C3489),
     'research': Color(0xFF993C1D),
     'internship': Color(0xFF993556),
+    'dual_credit': Color(0xFF24677A),
     'sat': Color(0xFF085041),
     'act': Color(0xFF1546A0),
   };
@@ -30,6 +31,7 @@ class CategoryColors {
     'ap': Color(0xFFEEEDFE),
     'research': Color(0xFFFAECE7),
     'internship': Color(0xFFFBEAF0),
+    'dual_credit': Color(0xFFE6F3F7),
     'sat': Color(0xFFE1F5EE),
     'act': Color(0xFFDEEBFF),
   };

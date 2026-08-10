@@ -329,8 +329,8 @@ class ResourceDetailModal extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     _FooterAction(
-                      icon: isPinned ? Icons.push_pin : Icons.push_pin_outlined,
-                      label: isPinned ? 'Pinned' : 'Pin to Board',
+                      icon: isPinned ? Icons.star : Icons.star_border,
+                      label: isPinned ? 'Starred' : 'Star',
                       color: isPinned ? kGold : kTextSecondary,
                       onTap: () =>
                           context.read<AppProvider>().togglePinned(resource.id),

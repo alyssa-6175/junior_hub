@@ -17,8 +17,7 @@ class SavedScreen extends StatefulWidget {
 }
 
 class _SavedScreenState extends State<SavedScreen> {
-  String _filter =
-      'all'; // 'all' | 'competition' | 'ap' | 'research' | 'internship' | 'sat'
+  String _filter = 'all'; // all supported resource categories
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,40 @@ class _SavedScreenState extends State<SavedScreen> {
     // Filter by category chip selection.
     List<Resource> items = allResources
         .where((r) => savedIds.contains(r.id))
-        .where((r) => _filter == 'all' || r.category == _filter)
+        .where(
+          (r) =>
+              _filter == 'all' ||
+              r.category == _filter ||
+              (_filter == 'tests' &&
+                  (r.category == 'sat' || r.category == 'act')),
+        )
         .toList();
+    items.sort((a, b) {
+      final aStarred = provider.isPinned(a.id);
+      final bStarred = provider.isPinned(b.id);
+      if (aStarred != bStarred) return aStarred ? -1 : 1;
+      int scopeRank(Resource resource) {
+        final location = (resource.locationNote ?? '').toLowerCase();
+        final isNearby = [
+          'seattle',
+          'bellevue',
+          'kirkland',
+          'redmond',
+          'bothell',
+          'king county',
+          'puget sound',
+          'tacoma',
+          'everett',
+        ].any(location.contains);
+        if (resource.scope == 'local' && isNearby) return 0;
+        if (resource.scope == 'regional' || resource.scope == 'state') return 1;
+        return 2;
+      }
+
+      final scopeCompare = scopeRank(a).compareTo(scopeRank(b));
+      if (scopeCompare != 0) return scopeCompare;
+      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+    });
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,8 +131,14 @@ class _SavedScreenState extends State<SavedScreen> {
                       onTap: (v) => setState(() => _filter = v),
                     ),
                     _FilterChip(
+                      label: 'College Credit',
+                      value: 'dual_credit',
+                      selected: _filter,
+                      onTap: (v) => setState(() => _filter = v),
+                    ),
+                    _FilterChip(
                       label: 'SAT / ACT',
-                      value: 'sat',
+                      value: 'tests',
                       selected: _filter,
                       onTap: (v) => setState(() => _filter = v),
                     ),

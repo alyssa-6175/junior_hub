@@ -39,14 +39,11 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _sortedLinks(List<String> links, AppProvider provider) {
     final id = widget.resource.id;
-    final pinned = links.where((l) => provider.isLinkPinned(id, l)).toList();
-    final normal = links
-        .where(
-          (l) => !provider.isLinkPinned(id, l) && !provider.isLinkSeen(id, l),
-        )
-        .toList();
-    final seen = links.where((l) => provider.isLinkSeen(id, l)).toList();
-    return [...pinned, ...normal, ...seen];
+    final starred = links.where((l) => provider.isLinkPinned(id, l)).toList()
+      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    final remaining = links.where((l) => !provider.isLinkPinned(id, l)).toList()
+      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    return [...starred, ...remaining];
   }
 
   String? _firstLabelContaining(Resource resource, String needle) {
@@ -653,7 +650,7 @@ class _LinkItem extends StatelessWidget {
                     child: Row(
                       children: [
                         if (isPinned) ...[
-                          const Icon(Icons.push_pin, size: 11, color: kGold),
+                          const Icon(Icons.star, size: 11, color: kGold),
                           const SizedBox(width: 5),
                         ],
                         const Icon(Icons.link, size: 13, color: kTextTertiary),
@@ -688,11 +685,11 @@ class _LinkItem extends StatelessWidget {
             ),
             // Divider
             Container(width: 1, height: 36, color: kBorderLight),
-            // Pin to top
+            // Star and move to the top
             _MiniAction(
-              icon: isPinned ? Icons.push_pin : Icons.push_pin_outlined,
+              icon: isPinned ? Icons.star : Icons.star_border,
               color: isPinned ? kGold : kTextTertiary,
-              tooltip: isPinned ? 'Unpin' : 'Pin to top',
+              tooltip: isPinned ? 'Unstar' : 'Star and move to top',
               onTap: () => context.read<AppProvider>().toggleLinkPinned(
                 resource.id,
                 label,

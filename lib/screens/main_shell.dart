@@ -146,6 +146,15 @@ class _ContentArea extends StatelessWidget {
           icon: Icons.work,
         );
 
+      case 'dual_credit':
+        return const ResourceListScreen(
+          category: 'dual_credit',
+
+          title: 'College Credit',
+
+          icon: Icons.school_outlined,
+        );
+
       case 'major':
         return FieldScreen(
           majorGroupId: provider.currentMajorGroup ?? 'cs_eng',
@@ -271,6 +280,16 @@ class _AppSidebar extends StatelessWidget {
                     label: 'Internships',
 
                     view: 'internship',
+
+                    current: provider.currentView,
+                  ),
+
+                  _NavItem(
+                    icon: Icons.school_outlined,
+
+                    label: 'College Credit',
+
+                    view: 'dual_credit',
 
                     current: provider.currentView,
                   ),

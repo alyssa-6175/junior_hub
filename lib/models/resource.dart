@@ -148,6 +148,7 @@ class Resource {
       'ap': 'AP Course',
       'research': 'Research',
       'internship': 'Internship',
+      'dual_credit': 'College Credit',
       'sat': 'SAT',
       'act': 'ACT',
     };

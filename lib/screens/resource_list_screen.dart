@@ -26,7 +26,7 @@ class ResourceListScreen extends StatefulWidget {
 }
 
 class _ResourceListScreenState extends State<ResourceListScreen> {
-  int _tab = 1; // Default to 'All'
+  int _tab = 1; // Default to the full list
   String? _majorFilter;
 
   static const _competitionSubjects = [
@@ -65,37 +65,34 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     Set<String> seen,
   ) {
     int compareResources(Resource a, Resource b) {
-      if (widget.category == 'internship') {
-        final aSeattle = _isSeattleArea(a);
-        final bSeattle = _isSeattleArea(b);
-        if (aSeattle != bSeattle) return aSeattle ? -1 : 1;
-      }
-      return a.title.compareTo(b.title);
+      final scopeCompare = _scopeRank(a).compareTo(_scopeRank(b));
+      if (scopeCompare != 0) return scopeCompare;
+      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
     }
 
-    final pins =
-        items
-            .where((r) => pinned.contains(r.id) && !seen.contains(r.id))
-            .toList()
-          ..sort(compareResources);
-    final normal =
-        items
-            .where((r) => !pinned.contains(r.id) && !seen.contains(r.id))
-            .toList()
-          ..sort(compareResources);
-    final seenL = items.where((r) => seen.contains(r.id)).toList()
+    final starred = items.where((r) => pinned.contains(r.id)).toList()
       ..sort(compareResources);
-    return [...pins, ...normal, ...seenL];
+    final remaining = items.where((r) => !pinned.contains(r.id)).toList()
+      ..sort(compareResources);
+    return [...starred, ...remaining];
   }
 
-  bool _isSeattleArea(Resource resource) {
-    if (resource.scope != 'local') return false;
+  int _scopeRank(Resource resource) {
     final location = (resource.locationNote ?? '').toLowerCase();
-    return location.contains('seattle') ||
-        location.contains('kirkland') ||
-        location.contains('king county') ||
-        location.contains('redmond') ||
-        location.contains('puget sound');
+    final isNearby = [
+      'seattle',
+      'bellevue',
+      'kirkland',
+      'redmond',
+      'bothell',
+      'king county',
+      'puget sound',
+      'tacoma',
+      'everett',
+    ].any(location.contains);
+    if (resource.scope == 'local' && isNearby) return 0;
+    if (resource.scope == 'regional' || resource.scope == 'state') return 1;
+    return 2;
   }
 
   void _showOutreachTemplates() {
@@ -131,6 +128,21 @@ If there is someone else in your lab or department I should contact, I would rea
 Best,
 [Name]''',
             ),
+            (
+              'Gentle follow-up',
+              '''Subject: Following up on [research topic or request]
+
+Hi [Name],
+
+I hope you’re doing well. I wanted to follow up on my previous message regarding [briefly restate your research topic or request]. I understand you may have a busy schedule, but I’d really appreciate any insight or guidance you might be able to share.
+
+If it’s easier, I’d be happy to work around your availability or connect briefly at a time that’s convenient for you.
+
+Thank you again for your time and consideration. I look forward to hearing from you!
+
+Best regards,
+Alyssa''',
+            ),
           ]
         : const [
             (
@@ -161,6 +173,21 @@ Please let me know if there is a better person to contact. Thank you again for y
 
 Best,
 [Name]''',
+            ),
+            (
+              'Gentle follow-up',
+              '''Subject: Following up on [internship or request]
+
+Hi [Name],
+
+I hope you’re doing well. I wanted to follow up on my previous message regarding [briefly restate your research topic or request]. I understand you may have a busy schedule, but I’d really appreciate any insight or guidance you might be able to share.
+
+If it’s easier, I’d be happy to work around your availability or connect briefly at a time that’s convenient for you.
+
+Thank you again for your time and consideration. I look forward to hearing from you!
+
+Best regards,
+Alyssa''',
             ),
           ];
 
@@ -234,7 +261,7 @@ Best,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title row + Board/All selector inline on the right
+              // Title row + Starred/All selector inline on the right
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -265,10 +292,10 @@ Best,
                     ],
                   ),
                   const Spacer(),
-                  // Inline tab selector (Board | All resources)
+                  // Inline tab selector (Starred | All resources)
                   _InlineTab(
-                    icon: Icons.push_pin_outlined,
-                    label: 'Board',
+                    icon: Icons.star_border,
+                    label: 'Starred',
                     count: boardItems.length,
                     active: _tab == 0,
                     onTap: () => setState(() => _tab = 0),
@@ -346,6 +373,10 @@ Best,
                   ),
                 ),
               ],
+              if (widget.category == 'dual_credit') ...[
+                const SizedBox(height: 8),
+                const _DualCreditGuide(),
+              ],
             ],
           ),
         ),
@@ -354,11 +385,11 @@ Best,
           child: IndexedStack(
             index: _tab,
             children: [
-              // Board
+              // Starred
               boardItems.isEmpty
                   ? Center(
                       child: Text(
-                        'Nothing pinned yet.',
+                        'Nothing starred yet.',
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           color: kTextTertiary,
@@ -372,6 +403,56 @@ Best,
           ),
         ),
       ],
+    );
+  }
+}
+
+class _DualCreditGuide extends StatelessWidget {
+  const _DualCreditGuide();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: CategoryColors.bgFor('dual_credit'),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: CategoryColors.textFor('dual_credit').withValues(alpha: 0.18),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'How college credit works',
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: CategoryColors.textFor('dual_credit'),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Start with your EPS counselor before enrolling. Confirm how the course fits your graduation plan, apply to the college, complete any placement or prerequisites, then register and save the syllabus. The grade becomes part of a real college transcript. Credit transfer is always decided by the college that receives it, so check its transfer tool before paying',
+            style: GoogleFonts.inter(
+              fontSize: 10.5,
+              height: 1.4,
+              color: kTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'A good first course is usually an introductory class in writing, psychology, business, computing, or a world language. Calculus, lab science, and advanced programming are stronger next steps once you meet the prerequisites. When you apply to college, report the course and the college that issued the transcript wherever the application asks about college coursework',
+            style: GoogleFonts.inter(
+              fontSize: 10.5,
+              height: 1.4,
+              color: kTextSecondary,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
