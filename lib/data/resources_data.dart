@@ -4108,6 +4108,15 @@ final List<Resource> allResources = [
     locationNote: 'UW Seattle campus, with some online courses',
     timeCommitment: 'Four-and-a-half-week or nine-week summer courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Linear algebra and advanced mathematics',
+      'Computer science and data science',
+      'Biology, chemistry, physics, and astronomy',
+      'Economics, business, and public policy',
+      'Psychology and social sciences',
+      'Writing, literature, history, and languages',
+      'Art, design, music, and communication',
+    ],
     applicationInfo:
         'U.S. high school students who have completed eighth grade apply directly. Students under 18 only need the university form signed by a parent or guardian',
     instructions:
@@ -4132,6 +4141,18 @@ final List<Resource> allResources = [
     locationNote: 'Online through the University of Illinois Urbana-Champaign',
     timeCommitment: 'Most courses are self-paced over 16 weeks',
     majorTags: ['stem', 'math', 'cs', 'engineering', 'data_science', 'physics'],
+    courseOfferings: [
+      'College Algebra and Trigonometry',
+      'MATH 241: Calculus III',
+      'MATH 257: Linear Algebra with Computational Applications',
+      'MATH 285: Introductory Differential Equations',
+      'MATH 314: Introduction to Higher Mathematics',
+      'MATH 416: Abstract Linear Algebra',
+      'MATH 417: Abstract Algebra',
+      'MATH 423: Differential Geometry',
+      'MATH 444: Elementary Real Analysis',
+      'MATH 453: Number Theory',
+    ],
     applicationInfo:
         'Students age 15 or older register directly through the university’s nondegree portal after documenting the published prerequisites',
     instructions:
@@ -4155,6 +4176,15 @@ final List<Resource> allResources = [
     locationNote: 'Fully online through Arizona State University',
     timeCommitment: 'Usually 8 or 16 weeks',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'College algebra, precalculus, and calculus for engineers',
+      'Introduction to programming',
+      'English composition and human communication',
+      'Psychology, macroeconomics, and microeconomics',
+      'Biology and environmental science',
+      'U.S. history and government',
+      'Business and entrepreneurship',
+    ],
     applicationInfo:
         'Students enroll directly with a small initial fee and pay the transcript fee only if they choose to keep the completed course',
     instructions:
@@ -4178,6 +4208,14 @@ final List<Resource> allResources = [
     locationNote: 'Fully online through the University of North Dakota',
     timeCommitment: 'Self-paced, with up to nine months for most courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'College algebra, precalculus, and calculus',
+      'General chemistry and nutrition',
+      'Introduction to psychology',
+      'American government and economics',
+      'English composition and communication',
+      'Business and world languages',
+    ],
     applicationInfo:
         'High school students independently enroll in eligible 100- and 200-level courses after meeting the prerequisites',
     instructions:
@@ -4201,6 +4239,15 @@ final List<Resource> allResources = [
     locationNote: 'UC Berkeley campus or virtual summer track',
     timeCommitment: 'Usually one or two six- or eight-week courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and data science',
+      'Engineering and mathematics',
+      'Biology, chemistry, and physics',
+      'Economics and business',
+      'Psychology, sociology, and political science',
+      'Writing, literature, and languages',
+      'Art, architecture, and design',
+    ],
     applicationInfo:
         'High school students apply directly and select eligible lower-division Berkeley Summer Sessions courses',
     instructions:
@@ -4224,6 +4271,14 @@ final List<Resource> allResources = [
     locationNote: 'UCLA campus, online, or an approved intensive format',
     timeCommitment: 'Most courses run for six weeks',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science, engineering, and mathematics',
+      'Biology, chemistry, physics, and health',
+      'Economics, business, and public affairs',
+      'Psychology and social science',
+      'Writing, literature, and languages',
+      'Film, media, and performing arts',
+    ],
     applicationInfo:
         'High school students register directly for one or two courses from UCLA’s approved course list',
     instructions:
@@ -4247,6 +4302,15 @@ final List<Resource> allResources = [
     locationNote: 'Stanford campus with commuter and residential choices',
     timeCommitment: 'Eight-week summer quarter',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and data science',
+      'Engineering and mathematics',
+      'Biology and human health',
+      'Economics and entrepreneurship',
+      'Psychology and social science',
+      'Writing, literature, philosophy, and politics',
+      'Art, music, and film',
+    ],
     applicationInfo:
         'Current sophomores, juniors, and seniors who meet the age range apply directly with a transcript and essay',
     instructions:
@@ -4270,6 +4334,14 @@ final List<Resource> allResources = [
     locationNote: 'Harvard campus, online, or Boston-area commuter option',
     timeCommitment: 'Four-week or seven-week intensive program',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Molecular and cellular biology',
+      'Computer science, data science, mathematics, and statistics',
+      'Psychology and neuroscience',
+      'Economics and entrepreneurship',
+      'Law, government, and sociology',
+      'Creative writing, literature, history, and languages',
+    ],
     applicationInfo:
         'Eligible high school students apply directly to the selective credit-bearing program',
     instructions:
@@ -4294,6 +4366,14 @@ final List<Resource> allResources = [
     locationNote: 'Cornell campus or online summer and winter courses',
     timeCommitment: 'Three- or six-week courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Engineering and computer science',
+      'Biology, health, and animal science',
+      'Business and economics',
+      'Architecture, art, and design',
+      'Public policy, government, and social science',
+      'Writing and humanities',
+    ],
     applicationInfo:
         'Eligible high school juniors and seniors ages 15 to 19 apply directly to Cornell Precollege Studies',
     instructions:
@@ -4317,6 +4397,15 @@ final List<Resource> allResources = [
     locationNote: 'Boston University campus, with selected online courses',
     timeCommitment: 'Six-week summer program',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science, mathematics, and statistics',
+      'Biology, neuroscience, health sciences, and physics',
+      'Business, management, economics, and hospitality',
+      'Political science and international relations',
+      'Psychology, sociology, and anthropology',
+      'Writing, literature, and languages',
+      'Film, media, photography, theatre, music, and visual arts',
+    ],
     applicationInfo:
         'Students entering junior or senior year apply directly and choose one or two approved undergraduate courses',
     instructions:
@@ -4340,6 +4429,15 @@ final List<Resource> allResources = [
     locationNote: 'Georgetown campus in Washington, D.C., or online',
     timeCommitment: 'Five-week on-campus or eight-week online courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Government and international relations',
+      'Economics and business',
+      'Writing and humanities',
+      'Psychology and social science',
+      'Biology and health',
+      'Computer science and mathematics',
+      'Law and public policy',
+    ],
     applicationInfo:
         'Eligible high school students apply directly and may take up to two approved courses per session',
     instructions:
@@ -4363,6 +4461,14 @@ final List<Resource> allResources = [
     locationNote: 'Online, with optional summer experiences in Alabama',
     timeCommitment: 'Semester-length university courses',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and engineering',
+      'Chemistry and mathematics',
+      'Business, communication, and economics',
+      'Political science, English, and history',
+      'Psychology and anthropology',
+      'World languages and art history',
+    ],
     applicationInfo:
         'Students who have completed eighth grade and meet the GPA requirement apply directly to Early College',
     instructions:
@@ -4388,6 +4494,14 @@ final List<Resource> allResources = [
     locationNote: 'Bellevue campus with online options that vary by quarter',
     timeCommitment: 'One college quarter at a time',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and information technology',
+      'Mathematics, statistics, and laboratory science',
+      'Business, accounting, and economics',
+      'Psychology and social science',
+      'English, communication, and world languages',
+      'Art, design, music, and health sciences',
+    ],
     applicationInfo:
         'Eligible juniors and seniors coordinate enrollment and course equivalencies with their high school',
     instructions:
@@ -4411,6 +4525,14 @@ final List<Resource> allResources = [
     locationNote: 'Bothell, Redmond, online, and hybrid options',
     timeCommitment: 'One quarter at a time, part-time or full-time',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and engineering',
+      'Mathematics and natural science',
+      'Environmental studies and earth science',
+      'Business',
+      'Communication, creative arts, and design',
+      'Psychology, education, and human services',
+    ],
     applicationInfo:
         'Eligible juniors and seniors need placement, orientation, and a school-approved enrollment verification form',
     instructions:
@@ -4435,6 +4557,15 @@ final List<Resource> allResources = [
     locationNote: 'Kirkland campus with selected online and hybrid classes',
     timeCommitment: 'One college quarter at a time',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and software development',
+      'Engineering technology and electronics',
+      'Design and digital gaming',
+      'Business and entrepreneurship',
+      'Health sciences',
+      'Biology, chemistry, and mathematics',
+      'Transportation and manufacturing',
+    ],
     applicationInfo:
         'Eligible juniors and seniors complete college admission and submit school authorization before registering',
     instructions:
@@ -4459,6 +4590,15 @@ final List<Resource> allResources = [
     locationNote: 'North Seattle, Seattle Central, or South Seattle College',
     timeCommitment: 'One college quarter at a time',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science, engineering, and natural science',
+      'Mathematics, business, and accounting',
+      'Nursing and allied health',
+      'Psychology and social science',
+      'English, communication, and languages',
+      'Art, music, film, and design',
+      'Skilled trades and technical programs',
+    ],
     applicationInfo:
         'Eligible juniors and seniors complete the selected college’s application and school verification process',
     instructions:
@@ -4481,6 +4621,15 @@ final List<Resource> allResources = [
         'Available only through participating Washington high schools',
     timeCommitment: 'Runs with the approved high school course',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Calculus and advanced mathematics',
+      'Computer programming',
+      'Astronomy and earth science',
+      'Biology, chemistry, and physics',
+      'English composition and literature',
+      'History and social science',
+      'Spanish, French, German, and Japanese',
+    ],
     applicationInfo:
         'Students may register only when their school offers an approved UW course with an approved teacher',
     instructions:
@@ -4503,6 +4652,14 @@ final List<Resource> allResources = [
         'Shoreline campus with flexible morning and afternoon schedules',
     timeCommitment: 'Part-time or full-time college quarters',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science, engineering, and mathematics',
+      'Natural science, health, and nursing',
+      'Business and economics',
+      'Psychology and social science',
+      'Writing, communication, and languages',
+      'Music, art, film, and automotive technology',
+    ],
     applicationInfo:
         'Washington public-school juniors and seniors complete college placement and school enrollment verification',
     instructions:
@@ -4525,6 +4682,14 @@ final List<Resource> allResources = [
     locationNote: 'Lynnwood campus with in-person and online classes',
     timeCommitment: 'Part-time or full-time college quarters',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and engineering technology',
+      'Mathematics and natural science',
+      'Business, accounting, health, and nursing',
+      'Psychology, education, and social science',
+      'English, communication, art, and design',
+      'Career and technical programs',
+    ],
     applicationInfo:
         'Washington juniors and seniors may participate regardless of GPA, with school coordination for funded credits',
     instructions:
@@ -4546,6 +4711,14 @@ final List<Resource> allResources = [
     locationNote: 'Auburn-area campuses and online courses',
     timeCommitment: 'Part-time or full-time college quarters',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and data analytics',
+      'Engineering, mathematics, and natural science',
+      'Business, accounting, nursing, and health',
+      'Psychology and social science',
+      'English, communication, and languages',
+      'Aviation and career-technical programs',
+    ],
     applicationInfo:
         'Academically qualified Washington juniors and seniors coordinate funded enrollment with their school',
     instructions:
@@ -4568,6 +4741,14 @@ final List<Resource> allResources = [
     locationNote: 'Des Moines, Washington, with online course options',
     timeCommitment: 'Part-time or full-time college quarters',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Computer science and cybersecurity',
+      'Engineering, mathematics, and environmental science',
+      'Business, accounting, health, and nursing',
+      'Psychology and social science',
+      'Writing, communication, and languages',
+      'Career Start professional-technical pathways',
+    ],
     applicationInfo:
         'Eligible juniors and seniors submit a new-student packet completed with a counselor and parent or guardian',
     instructions:
@@ -4589,6 +4770,13 @@ final List<Resource> allResources = [
     locationNote: 'All 34 Washington community and technical colleges',
     timeCommitment: 'Varies by college and course',
     majorTags: ['all_subjects'],
+    courseOfferings: [
+      'University-transfer courses at 34 community and technical colleges',
+      'Career and Technical Education dual credit',
+      'College in the High School courses',
+      'Running Start academic courses',
+      'Professional and technical certificates',
+    ],
     applicationInfo:
         'Use the official state guide to compare Running Start, College in the High School, and CTE dual credit routes',
     instructions:

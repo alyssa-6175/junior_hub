@@ -303,6 +303,22 @@ Alyssa''',
                     ],
                   ),
                   const Spacer(),
+                  if (widget.category == 'dual_credit') ...[
+                    _InlineTab(
+                      label: 'Independent',
+                      active: _collegeCourseType == 'independent',
+                      onTap: () =>
+                          setState(() => _collegeCourseType = 'independent'),
+                    ),
+                    const SizedBox(width: 2),
+                    _InlineTab(
+                      label: 'Counselor',
+                      active: _collegeCourseType == 'counselor',
+                      onTap: () =>
+                          setState(() => _collegeCourseType = 'counselor'),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
                   // Inline tab selector (Starred | All resources)
                   _InlineTab(
                     icon: Icons.star_border,
@@ -320,30 +336,6 @@ Alyssa''',
                 ],
               ),
               const SizedBox(height: 10),
-              if (widget.category == 'dual_credit') ...[
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      _MajorChip(
-                        label: 'Enroll Independently',
-                        active: _collegeCourseType == 'independent',
-                        color: CategoryColors.textFor('dual_credit'),
-                        onTap: () =>
-                            setState(() => _collegeCourseType = 'independent'),
-                      ),
-                      _MajorChip(
-                        label: 'Counselor-Supported',
-                        active: _collegeCourseType == 'counselor',
-                        color: CategoryColors.textFor('dual_credit'),
-                        onTap: () =>
-                            setState(() => _collegeCourseType = 'counselor'),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 7),
-              ],
               // Subject filters are intentionally separate from profile majors:
               // every competition belongs to one clear, visible subject.
               SingleChildScrollView(

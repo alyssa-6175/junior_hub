@@ -212,6 +212,86 @@ class ResourceDetailModal extends StatelessWidget {
                         ),
                       ),
                     ],
+                    if (resource.courseOfferings.isNotEmpty) ...[
+                      const SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kSurface,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: kBorderLight),
+                        ),
+                        child: Theme(
+                          data: Theme.of(
+                            context,
+                          ).copyWith(dividerColor: Colors.transparent),
+                          child: ExpansionTile(
+                            tilePadding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
+                            childrenPadding: const EdgeInsets.fromLTRB(
+                              12,
+                              0,
+                              12,
+                              10,
+                            ),
+                            leading: const Icon(
+                              Icons.menu_book_outlined,
+                              size: 18,
+                              color: kNavy,
+                            ),
+                            title: Text(
+                              'Courses offered',
+                              style: GoogleFonts.inter(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: kTextPrimary,
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Representative options, availability changes by term',
+                              style: GoogleFonts.inter(
+                                fontSize: 11,
+                                color: kTextSecondary,
+                              ),
+                            ),
+                            children: resource.courseOfferings
+                                .map(
+                                  (offering) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 7),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 6,
+                                            right: 8,
+                                          ),
+                                          child: Icon(
+                                            Icons.circle,
+                                            size: 5,
+                                            color: kTextTertiary,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            offering,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 12,
+                                              height: 1.4,
+                                              color: kTextSecondary,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                    ],
                     if (resource.instructions != null) ...[
                       const SizedBox(height: 16),
                       Text(
