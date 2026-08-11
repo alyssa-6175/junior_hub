@@ -29,6 +29,13 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   int _tab = 1; // Default to the full list
   String? _majorFilter;
   String _collegeCourseType = 'independent';
+  String? _collegeCourseTermFilter;
+
+  static const _collegeCourseTerms = [
+    ('summer', 'Summer'),
+    ('school_year', 'School Year'),
+    ('self_paced', 'Self-Paced'),
+  ];
 
   static const _competitionSubjects = [
     ('cs_eng', 'Computer Science & Engineering'),
@@ -251,12 +258,17 @@ Alyssa''',
       items = items
           .where((r) => r.collegeCourseType == _collegeCourseType)
           .toList();
+      if (_collegeCourseTermFilter != null) {
+        items = items
+            .where((r) => r.courseTermTags.contains(_collegeCourseTermFilter))
+            .toList();
+      }
     }
     if (_majorFilter != null && widget.category == 'competition') {
       items = items
           .where((r) => _matchesCompetitionSubject(r, _majorFilter!))
           .toList();
-    } else if (_majorFilter != null) {
+    } else if (_majorFilter != null && widget.category != 'dual_credit') {
       items = items
           .where((r) => resourceMatchesMajor(r, _majorFilter!))
           .toList();
@@ -307,15 +319,19 @@ Alyssa''',
                     _InlineTab(
                       label: 'Independent',
                       active: _collegeCourseType == 'independent',
-                      onTap: () =>
-                          setState(() => _collegeCourseType = 'independent'),
+                      onTap: () => setState(() {
+                        _collegeCourseType = 'independent';
+                        _collegeCourseTermFilter = null;
+                      }),
                     ),
                     const SizedBox(width: 2),
                     _InlineTab(
                       label: 'Counselor',
                       active: _collegeCourseType == 'counselor',
-                      onTap: () =>
-                          setState(() => _collegeCourseType = 'counselor'),
+                      onTap: () => setState(() {
+                        _collegeCourseType = 'counselor';
+                        _collegeCourseTermFilter = null;
+                      }),
                     ),
                     const SizedBox(width: 8),
                   ],
@@ -336,19 +352,34 @@ Alyssa''',
                 ],
               ),
               const SizedBox(height: 10),
-              // Subject filters are intentionally separate from profile majors:
-              // every competition belongs to one clear, visible subject.
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
                     _MajorChip(
                       label: 'All',
-                      active: _majorFilter == null,
+                      active: widget.category == 'dual_credit'
+                          ? _collegeCourseTermFilter == null
+                          : _majorFilter == null,
                       color: kNavy,
-                      onTap: () => setState(() => _majorFilter = null),
+                      onTap: () => setState(() {
+                        if (widget.category == 'dual_credit') {
+                          _collegeCourseTermFilter = null;
+                        } else {
+                          _majorFilter = null;
+                        }
+                      }),
                     ),
-                    ...(widget.category == 'competition'
+                    ...(widget.category == 'dual_credit'
+                            ? _collegeCourseTerms.map(
+                                (term) => MajorGroup(
+                                  id: term.$1,
+                                  label: term.$2,
+                                  color: CategoryColors.textFor('dual_credit'),
+                                  subcategories: const [],
+                                ),
+                              )
+                            : widget.category == 'competition'
                             ? _competitionSubjects.map(
                                 (subject) => MajorGroup(
                                   id: subject.$1,
@@ -365,13 +396,22 @@ Alyssa''',
                         .map(
                           (g) => _MajorChip(
                             label: g.label,
-                            active: _majorFilter == g.id,
+                            active: widget.category == 'dual_credit'
+                                ? _collegeCourseTermFilter == g.id
+                                : _majorFilter == g.id,
                             color: g.color,
-                            onTap: () => setState(
-                              () => _majorFilter = _majorFilter == g.id
-                                  ? null
-                                  : g.id,
-                            ),
+                            onTap: () => setState(() {
+                              if (widget.category == 'dual_credit') {
+                                _collegeCourseTermFilter =
+                                    _collegeCourseTermFilter == g.id
+                                    ? null
+                                    : g.id;
+                              } else {
+                                _majorFilter = _majorFilter == g.id
+                                    ? null
+                                    : g.id;
+                              }
+                            }),
                           ),
                         ),
                   ],

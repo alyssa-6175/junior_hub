@@ -24,6 +24,7 @@ class Resource {
   final String? instructions;
   final String? collegeCourseType;
   final List<String> courseOfferings;
+  final List<String> courseTermTags;
 
   const Resource({
     required this.id,
@@ -48,6 +49,7 @@ class Resource {
     this.instructions,
     this.collegeCourseType,
     this.courseOfferings = const [],
+    this.courseTermTags = const [],
   });
 
   // ─── Urgency Calculation ──────────────────────────────────────────────────
