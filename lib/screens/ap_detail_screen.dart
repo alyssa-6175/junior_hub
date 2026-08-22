@@ -22,7 +22,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: 5, vsync: this);
+    _tabs = TabController(length: 7, vsync: this);
     // Track this view (runs after the frame is built so context is valid)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -332,6 +332,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               Tab(text: 'Videos'),
               Tab(text: 'Practice Tests'),
               Tab(text: 'Practice Questions'),
+              Tab(text: 'Question Banks'),
+              Tab(text: 'General Study Hubs'),
             ],
           ),
         ),
@@ -366,6 +368,16 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                 items: _sortedLinks(_practiceQuestions(res), provider),
                 emptyText: 'No practice questions added yet.',
               ),
+              _ApTab(
+                icon: Icons.account_tree_outlined,
+                items: _sortedLinks(_questionBanks(res), provider),
+                emptyText: 'No question banks added yet.',
+              ),
+              _ApTab(
+                icon: Icons.auto_awesome_mosaic_outlined,
+                items: _sortedLinks(_generalStudyHubs(res), provider),
+                emptyText: 'No general study hubs added yet.',
+              ),
             ],
           ),
         ),
@@ -375,9 +387,15 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   // ── Smart string filtering to sort your links ─────
 
+  bool _isQuestionBank(String label) => apQuestionBankHubs.containsKey(label);
+
+  bool _isGeneralStudyHub(String label) =>
+      apGeneralStudyHubs.containsKey(label) || label == 'APCS Exam Prep';
+
   List<String> _courseMaterial(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
+        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -399,6 +417,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   List<String> _videos(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
+        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -420,13 +439,17 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   List<String> _practiceTests(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
+        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
-          (l) =>
-              l.toLowerCase().startsWith('practice test ·') ||
-              l.toLowerCase().contains('test') ||
-              l.toLowerCase().contains('frq') ||
-              l.toLowerCase().contains('exam'),
+          (l) {
+            final lower = l.toLowerCase();
+            if (lower.startsWith('practice test ·')) return true;
+            if (lower.startsWith('practice questions ·')) return false;
+            return lower.contains('test') ||
+                lower.contains('frq') ||
+                lower.contains('exam');
+          },
         )
         .toList();
   }
@@ -441,9 +464,16 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     ];
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
+        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
         .where((l) => !matched.contains(l))
         .toList();
   }
+
+  List<String> _questionBanks(Resource r) =>
+      linksForResource(r).where(_isQuestionBank).toList();
+
+  List<String> _generalStudyHubs(Resource r) =>
+      linksForResource(r).where(_isGeneralStudyHub).toList();
 }
 
 class _HeaderLinkChip extends StatelessWidget {

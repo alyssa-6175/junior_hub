@@ -2405,8 +2405,9 @@ final List<Resource> allResources = [
     applicationInfo:
         'U.S. citizens or permanent residents age 18 or younger submit a significant completed body of work with two nominators',
     description:
-        'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to \$100,000',
-    url: 'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
+        'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to $100,000',
+    url:
+        'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
     timeCommitment: 'Major completed project plus a detailed application',
     icon: Icons.workspace_premium,
   ),
@@ -2424,8 +2425,7 @@ final List<Resource> allResources = [
         'Spend the school year designing and testing a human-powered or remote-controlled rover, then navigate lunar-style terrain and mission tasks at NASA’s final event',
     url:
         'https://www.nasa.gov/learning-resources/nasa-human-exploration-rover-challenge/',
-    timeCommitment:
-        'Nine-month engineering challenge; finals April 21–24, 2027',
+    timeCommitment: 'Nine-month engineering challenge; finals April 21–24, 2027',
     icon: Icons.rocket_launch,
   ),
   _competition(
@@ -2453,7 +2453,7 @@ final List<Resource> allResources = [
     locationNote: 'Online project mentorship with a possible trip to MIT',
     majorTags: ['science', 'engineering', 'cs', 'research'],
     applicationInfo:
-        'U.S. high school students submit a proposal for a feasible one-semester project that can be completed with a \$1,000 budget',
+        'U.S. high school students submit a proposal for a feasible one-semester project that can be completed with a $1,000 budget',
     description:
         'Turn a well-researched STEM idea into a realistic proposal, with finalists receiving project funding, weekly mentorship, and an MIT campus visit when offered',
     url: 'https://think.mit.edu/',
@@ -2482,8 +2482,7 @@ final List<Resource> allResources = [
     field: 'biology',
     scope: 'international',
     format: 'hybrid',
-    locationNote:
-        'Regional and state events can lead to the International Leadership Conference',
+    locationNote: 'Regional and state events can lead to the International Leadership Conference',
     majorTags: ['health', 'biology', 'medicine', 'leadership'],
     applicationInfo:
         'Join an eligible HOSA chapter, select one event, and follow the deadlines set by your state association and advisor',
@@ -2500,12 +2499,7 @@ final List<Resource> allResources = [
     scope: 'international',
     format: 'virtual',
     locationNote: 'Fully online',
-    majorTags: [
-      'writing',
-      'journalism_media',
-      'creative_writing',
-      'humanities',
-    ],
+    majorTags: ['writing', 'journalism_media', 'creative_writing', 'humanities'],
     applicationInfo:
         'Middle and high school students register online and submit an essay in the creative, argumentative, or journalistic category',
     description:
@@ -2520,8 +2514,7 @@ final List<Resource> allResources = [
     field: 'business',
     scope: 'international',
     format: 'hybrid',
-    locationNote:
-        'Online preliminary round with an invited championship at Harvard',
+    locationNote: 'Online preliminary round with an invited championship at Harvard',
     majorTags: ['business', 'entrepreneurship', 'finance', 'public_policy'],
     applicationInfo:
         'Students in grades 6–12 may enter individually or in a team and develop a business plan around a published global challenge',
@@ -6010,7 +6003,7 @@ final List<Resource> allResources = [
     timeCommitment: 'Eight weeks, about 20 to 30 hours per week',
     majorTags: ['engineering', 'cs', 'research', 'humanities', 'biology'],
     applicationInfo:
-        'Current U.S. high school juniors and seniors who are citizens or permanent residents may apply when the application opens in December 2026; the program is unpaid and has a \$95 application fee',
+        'Current U.S. high school juniors and seniors who are citizens or permanent residents may apply when the application opens in December 2026; the program is unpaid and has a 95 dollar application fee',
     description:
         'Work in a small mentored group on interdisciplinary research spanning engineering, computing, science, design, linguistics, psychology, and the humanities',
     icon: Icons.science_outlined,
@@ -6748,98 +6741,67 @@ const Map<String, String> _commonApLinks = {
 
 const Map<String, Map<String, String>> _apBookLinks = {
   'ap_bio': {
-    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
-    'Course material · Barron’s AP Biology Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
-    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
+    'Course material · Barron’s AP Biology Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
+    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
   },
   'ap_calc_ab': {
-    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
-    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
-    'Course material · Pearson Calculus in SI Units (Amazon)':
-        'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
+    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
+    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
+    'Course material · Pearson Calculus in SI Units (Amazon)': 'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
   },
   'ap_calc_bc': {
-    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
+    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
   },
   'ap_chem': {
-    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
-    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
+    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
+    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
   },
   'ap_chinese': {
-    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
+    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
   },
   'ap_csa': {
-    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
-    'Course material · Barron’s AP Computer Science A 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
-    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
+    'Course material · Barron’s AP Computer Science A 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
+    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
   },
   'ap_csp': {
-    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
+    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
   },
   'ap_env_sci': {
-    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
-    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
+    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
   },
   'ap_french': {
-    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
-    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
+    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
+    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
   },
   'ap_human_geo': {
-    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
-    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
-    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
+    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
+    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
   },
   'ap_macro': {
-    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
+    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
   },
   'ap_micro': {
-    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
+    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
   },
   'ap_physics_c_mech': {
-    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
-    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
-    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
+    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
+    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
   },
   'ap_psych': {
-    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
-    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
-    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
+    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
+    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
   },
   'ap_us_history': {
-    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
+    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
   },
   'ap_world': {
-    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
+    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
   },
 };
 

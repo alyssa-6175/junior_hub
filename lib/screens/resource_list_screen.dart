@@ -42,8 +42,19 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     ('math', 'Mathematics'),
     ('science', 'Science'),
     ('business', 'Business & Economics'),
+    ('essay_writing', 'Essay & Writing'),
     ('humanities', 'Humanities & Social Sciences'),
   ];
+
+  bool _isEssayWritingCompetition(Resource resource) {
+    final title = resource.title.toLowerCase();
+    return title.contains('essay') ||
+        title.contains('writing') ||
+        title.contains('writer') ||
+        title.contains('poet') ||
+        resource.majorTags.contains('creative_writing') ||
+        resource.majorTags.contains('poetry');
+  }
 
   bool _matchesCompetitionSubject(Resource resource, String subject) {
     switch (subject) {
@@ -60,8 +71,11 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
         }.contains(resource.field);
       case 'business':
         return resource.field == 'business';
+      case 'essay_writing':
+        return _isEssayWritingCompetition(resource);
       case 'humanities':
-        return resource.field == 'humanities';
+        return resource.field == 'humanities' &&
+            !_isEssayWritingCompetition(resource);
       default:
         return false;
     }
