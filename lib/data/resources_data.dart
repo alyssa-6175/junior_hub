@@ -6568,6 +6568,353 @@ const Map<String, String> _commonApLinks = {
       'https://www.savemyexams.com/ap/',
 };
 
+// Drive files supplied by the Junior Hub team. Every file ID is compared
+// against existing Junior Hub URLs before it is included here.
+const Map<String, Map<String, String>> _driveApFileLinks = {
+  'ap_art_history': {
+    'Practice test · AP Art History 2008':
+        'https://drive.google.com/file/d/1GAZcySB_TbKzlEiP5oXWxV6LoBS21lBf/view',
+    'Practice test · AP Art History 2010':
+        'https://drive.google.com/file/d/1JHNWd6NJhttpQ8F9AiKxya_3g2lEBjwP/view',
+    'Practice test · AP Art History 2012':
+        'https://drive.google.com/file/d/1cNVagyqZ0PDeSrqDb-UH5nIQdyTP2JqB/view',
+    'Practice test · AP Art History 2015':
+        'https://drive.google.com/file/d/1FLpWl03amNUH3HUDRYhgrHhuYcRlIR1V/view',
+  },
+  'ap_bio': {
+    'Practice test · 5 Steps to a 5 AP Biology 2024':
+        'https://drive.google.com/file/d/1xo6joZDoCt1rmg7ZD22msWlHUZDKWvpc/view',
+    'Practice test · Barron\'s AP Biology Practice Tests 2024':
+        'https://drive.google.com/file/d/17K0kXk7uGUs_w4l5lmnPdj-PEEd2eT2Y/view',
+    'Practice test · The Princeton Review AP Biology Prep 2024':
+        'https://drive.google.com/file/d/1wAA6bZop-MMst_Ghy9YBk2L9oPI0WMMr/view',
+  },
+  'ap_calc_ab': {
+    'Notes · AP Calculus AB Unit 1 study guide':
+        'https://drive.google.com/file/d/10OpxcyYeOiApP9QhZTwh9sCwVjK4JlpI/view',
+    'Notes · AP Calculus AB Unit 2 study guide':
+        'https://drive.google.com/file/d/1XqLUk8NhkEj4mMZv0NEnI-DvfcZB3Yvp/view',
+    'Notes · AP Calculus AB Unit 3 study guide':
+        'https://drive.google.com/file/d/1fRzryuOFdj_50bT-dhWzsIDXlgRKeygF/view',
+    'Notes · AP Calculus AB Unit 4 study guide':
+        'https://drive.google.com/file/d/1P8k9L-QyWVhTIwr6E-aqX7zMqRdwppSZ/view',
+    'Notes · AP Calculus AB Unit 6 study guide':
+        'https://drive.google.com/file/d/1DCr09Ln-U5H77w83a9hlBNAdV2Ec4mo1/view',
+    'Notes · AP Calculus AB Unit 7 study guide':
+        'https://drive.google.com/file/d/1zl-iSVqmY1_YzapRn2WKxnR3TA-Vx8Sy/view',
+    'Notes · AP Calculus AB Unit 7FRQCalc study guide':
+        'https://drive.google.com/file/d/1ESjt14UcmKH4gSy__U67mTSBfv51QeB1/view',
+    'Notes · AP Calculus AB Unit 7FRQNoCALC study guide':
+        'https://drive.google.com/file/d/1Is1ndqbeM-12Uwr97Dt7bl5APlACaGNI/view',
+    'Notes · AP Calculus AB Unit 8FRQNoCalc study guide':
+        'https://drive.google.com/file/d/1YWADpDQ1jhiII6TuEGuhuk6qQQqKs8dw/view',
+    'Notes · AP Calculus AB Unit 8MCQNoCalc study guide':
+        'https://drive.google.com/file/d/1SWTLxtBcU4oLnD5DJCKcX-faGV6tyd6r/view',
+    'Practice questions · AP Calculus AB Unit 1 test bank':
+        'https://drive.google.com/file/d/1McEOT_ZnO7_oh4vuhmt611mRSTrlAWkb/view',
+    'Practice questions · AP Calculus AB Unit 2 test bank':
+        'https://drive.google.com/file/d/1TQdDqs-FHANwz-jH3SjBsx15V5CJHP6T/view',
+    'Practice questions · AP Calculus AB Unit 3 test bank':
+        'https://drive.google.com/file/d/12dkLiKZzrh4KL-zfXm-So5wSI_32Hh1P/view',
+    'Practice questions · AP Calculus AB Unit 4 test bank':
+        'https://drive.google.com/file/d/1GOEhMILdMS7_xtTkH5LipzVGeAomDSj9/view',
+    'Practice questions · AP Calculus AB Unit 6 test bank':
+        'https://drive.google.com/file/d/1XSMvyYd2uXGLHJcUJdaSKPztQxWTSSno/view',
+    'Practice questions · AP Calculus AB Unit 7 test bank':
+        'https://drive.google.com/file/d/1YfwnZZtabzwoA2pEkn6LBVclW8k6PxMB/view',
+    'Practice questions · AP Calculus AB Unit 7FRQCalc test bank':
+        'https://drive.google.com/file/d/1tgm9FE5XlXjUh0AQbtWzIeT5vzZqhvtG/view',
+    'Practice questions · AP Calculus AB Unit 7FRQNoCALC test bank':
+        'https://drive.google.com/file/d/12Cqsc8QmX24TLEC8yvpMy3JtYqag4YNn/view',
+    'Practice questions · AP Calculus AB Unit 8FRQNoCalc test bank':
+        'https://drive.google.com/file/d/1pRTLvi5OzsDMSFTgGL9yafq6QrWWsXIx/view',
+    'Practice questions · AP Calculus AB Unit 8MCQCalc test bank':
+        'https://drive.google.com/file/d/1R-cOG2M63hLk4TEP0j_kIIU25Nme3zEH/view',
+    'Practice questions · AP Calculus AB Unit 8MCQNoCalc test bank':
+        'https://drive.google.com/file/d/1wL3IU0PPAQiKSCXFt6CFFZcbFpGbWGG6/view',
+    'Practice test · 5 Steps to a 5 AP Calculus AB 2024':
+        'https://drive.google.com/file/d/1tFiO9oDN7QlWkZB9cjmmF3mUj3aBwdCC/view',
+    'Practice test · AP Calculus AB 2008':
+        'https://drive.google.com/file/d/12_9d2iffc_Bh_KuEJRwho619EzNmnUdu/view',
+    'Practice test · AP Calculus AB 2012':
+        'https://drive.google.com/file/d/1484GH1wRCj6ADvvs5kmFX1yvyqjw8N3I/view',
+    'Practice test · AP Calculus AB 2013':
+        'https://drive.google.com/file/d/1MzENiL9cfWDNeL6zq2Wlx0MQhfb6mPGH/view',
+    'Practice test · AP Calculus AB 2014':
+        'https://drive.google.com/file/d/1gcNQxng_vj9Q2Ap2iikckOLNb_J3EPPx/view',
+    'Practice test · AP Calculus AB 2015':
+        'https://drive.google.com/file/d/1Fy19E91RbfX0X7rG0XgMNujxCdmo_VLs/view',
+    'Practice test · AP Calculus AB 2016 (1)':
+        'https://drive.google.com/file/d/1T7XOO7vsO7_UHpQbSqtb_8QiQW6Hq8l_/view',
+    'Practice test · AP Calculus AB 2016 (2)':
+        'https://drive.google.com/file/d/1Ke7ryp_Szd1dyxpw3hx6TZ46PLQCmrz6/view',
+    'Practice test · AP Calculus AB 2017':
+        'https://drive.google.com/file/d/1mxq3e-3t7PrhTumopH6bVuVcn6rbMTYT/view',
+    'Practice test · AP Calculus AB 2018':
+        'https://drive.google.com/file/d/1VBhf0GCsEz2qCNu7alqeWg0TWAn6BDQi/view',
+    'Practice test · AP Calculus AB 2020 (1)':
+        'https://drive.google.com/file/d/1fVsI2zfWedxWYwnlMAtkgzlQ3AdxOpxt/view',
+    'Practice test · AP Calculus AB 2020 (2)':
+        'https://drive.google.com/file/d/1YKxFEvjM9JbmkiInfFzZG1MP-29a5DNW/view',
+    'Practice test · AP Calculus AB 2020 (3)':
+        'https://drive.google.com/file/d/1YuGuXJw0AvjJZvFyOgYBOM4EreN7Khoh/view',
+    'Practice test · Combined AP Calculus AB and BC practice tests 2024':
+        'https://drive.google.com/file/d/13BdDfW_04rWN4mbgSZw4uHNBYAkdWaJO/view',
+    'Practice test · Combined AP Calculus AB and BC practice tests 2025':
+        'https://drive.google.com/file/d/1cMuo1Ig3KUrHrtia9_oK-fNOgKTEvmdJ/view',
+    'Practice test · Princeton - AP Calculus AB Practice Tests 2020':
+        'https://drive.google.com/file/d/15FJl9RsYoYpdDGN3qzS7uaV-8U8agRNB/view',
+    'Practice test · Textbook-Calculus in SI Units 2019 Pearson':
+        'https://drive.google.com/file/d/1kqdL_Hn2DP7MUpKCy5xgcshEdIpHHPsp/view',
+  },
+  'ap_calc_bc': {
+    'Practice test · 5 Steps to a 5 AP Calculus BC 2024':
+        'https://drive.google.com/file/d/1m4vQliAtl7DZcv_nSBqrdoIwVenVhW0O/view',
+    'Practice test · AP Calc BC 2015 (1)':
+        'https://drive.google.com/file/d/1ZdG9sQRqNhtqyf0gJ9vAw0o2nFFvatEW/view',
+  },
+  'ap_chem': {
+    'Practice test · Barron\'s AP Chemistry Practice Tests 2025':
+        'https://drive.google.com/file/d/17siRtMFEif3SIqaiUSyJVM9KPCGgxd-X/view',
+    'Practice test · The Princeton review - AP Chemistry Premium Prep 2023':
+        'https://drive.google.com/file/d/1DWxTuwidpHQx1MKD1QiwKdMzit1iWCd9/view',
+  },
+  'ap_chinese': {
+    'Practice test · AP Chinese 2016':
+        'https://drive.google.com/file/d/1CAJ9JfyrDcAO37uaR1416GaV9LVAy9Ce/view',
+    'Practice test · Barron\'s AP Chinese Language and Culture Practice Tests 2023':
+        'https://drive.google.com/file/d/1boEfdBENGdEGikJJ09RukIFz_Gv2xoqD/view',
+  },
+  'ap_comp_gov': {
+    'Practice test · AP Comp Gov 2008':
+        'https://drive.google.com/file/d/1_9cNBWYlKUW5S9vThOvseXjoCRy2LFAy/view',
+    'Practice test · AP Comp Gov 2009':
+        'https://drive.google.com/file/d/1NTWah6X-_kCqAJR1SDM6D6zJCrYNKOGe/view',
+    'Practice test · AP Comp Gov 2010':
+        'https://drive.google.com/file/d/1hYHXVHJ1_WLlDG1cmxgjUAo_7HOD5Ws-/view',
+    'Practice test · AP Comp Gov 2015':
+        'https://drive.google.com/file/d/1hxr2P-4gBMil7loA2x7V55DGNd5L7dkZ/view',
+  },
+  'ap_csa': {
+    'Practice test · 5 Steps to a 5 AP Computer Science A 2024':
+        'https://drive.google.com/file/d/1OPunMhNVwZEiMZEZMUh88srM3_Zfn8ym/view',
+    'Practice test · Barron\'s AP Computer Science A Practice Tests 2024':
+        'https://drive.google.com/file/d/10TsrLVLlmZf70HNTj8ENkNkAWQdFP3XB/view',
+    'Practice test · The Princeton Review AP Computer Science A Prep 2024':
+        'https://drive.google.com/file/d/1vyFq7qgHiVSmiN98lVUYR__M6FdZt-se/view',
+  },
+  'ap_csp': {
+    'Practice test · 5 Steps to a 5 AP Computer Science Principles 2023':
+        'https://drive.google.com/file/d/1pVVE9dNij0W3niiM7-UmCBVc61_d-lLe/view',
+    'Practice test · AP Computer Science Principles 2023 Practice Tests':
+        'https://drive.google.com/file/d/1NS6taKvMq0m38FFJYHQftwOZ_MV3azrq/view',
+  },
+  'ap_english_lang': {
+    'Practice test · AP Lang 2012':
+        'https://drive.google.com/file/d/1C66nwrMpRItG631cqpHIJjJR_yizb_tH/view',
+    'Practice test · AP Lang 2013':
+        'https://drive.google.com/file/d/1f02_a6M0iELfPSOo__YaCPPxsD97ruUq/view',
+    'Practice test · AP Lang 2015':
+        'https://drive.google.com/file/d/1F9elQimIFjCSYEqsAu2fWksCvyY8jD1r/view',
+    'Practice test · AP Lang 2016':
+        'https://drive.google.com/file/d/1tr9P5bgg1wKFQ3LaPCVBhGM2Nkk1vqhV/view',
+    'Practice test · AP Lang 2017':
+        'https://drive.google.com/file/d/1CfX5ZSRovhkaGslwbizhKXbo-odUI6aj/view',
+    'Practice test · AP Lang 2018':
+        'https://drive.google.com/file/d/1BYCC0K1ByG2WRodqqPX1_xl4A_ErJl40/view',
+  },
+  'ap_english_lit': {
+    'Practice test · AP Lit 2012':
+        'https://drive.google.com/file/d/1BfK86gvsr9MRRZIAwil8vRNEK3V9HnG3/view',
+    'Practice test · AP Lit 2013':
+        'https://drive.google.com/file/d/1iJymXLXle4wCCcbJZ6hP4wLccdNljM8j/view',
+    'Practice test · AP Lit 2014':
+        'https://drive.google.com/file/d/1MhtlqQaooGYhoOtnhkR6Xt3mr4glknWA/view',
+    'Practice test · AP Lit 2015':
+        'https://drive.google.com/file/d/1SpXpDM8q23JOWCx8n2vr0NkAl9uBhq38/view',
+    'Practice test · AP Lit 2016':
+        'https://drive.google.com/file/d/1S2OS33n0nAHCGMTjaZZdJElGhuWiyGWI/view',
+    'Practice test · AP Lit 2017':
+        'https://drive.google.com/file/d/1Cb9E9mEeEX7045KXpZhNL8DEksScoJql/view',
+    'Practice test · AP Lit 2018':
+        'https://drive.google.com/file/d/1HzwRyyUkc0TIpOJaWn7tjO-MlQHNXGpp/view',
+  },
+  'ap_env_sci': {
+    'Practice test · 5 Steps to a 5 AP Environmental Science 2021':
+        'https://drive.google.com/file/d/1nYhT9JCh86oCiVk71kfOAZ24kRWdgcJE/view',
+    'Practice test · The Princeton Review-AP Environmental Science Practice Tests 2020':
+        'https://drive.google.com/file/d/1i2t4bzd7OA3P4zLPrOKIcsL3mw0jG8m7/view',
+    'Practice test · The Princeton Review-AP Environmental Science Prep 2023':
+        'https://drive.google.com/file/d/1r1l7-f3h7lasiKhqLiR7O9qw-lqjCKfo/view',
+  },
+  'ap_euro': {
+    'Practice test · AP Euro 2008':
+        'https://drive.google.com/file/d/1wY133JSzkjlFrBjIizaxviOd45mEt2pF/view',
+    'Practice test · AP Euro 2015':
+        'https://drive.google.com/file/d/1Fxb4yLuKKME3KCiiSDmEqE0dK08XDxge/view',
+    'Practice test · AP Euro 2016':
+        'https://drive.google.com/file/d/1lsqH0vY3ekKBo7ndoT_SCuOMq0iHT0aE/view',
+    'Practice test · AP Euro 2017':
+        'https://drive.google.com/file/d/1Rdd47JcyzN16VDXA8ZeN3bhE2FZl_K41/view',
+  },
+  'ap_french': {
+    'Practice test · 5 Steps to a 5 AP French Language and Culture 2020':
+        'https://drive.google.com/file/d/1tl_Wjwi3Uxo29VyuNT_fdbAVNy2UrvHU/view',
+    'Practice test · AP French Lang 2008':
+        'https://drive.google.com/file/d/1GQwbm3rb1zDJvTt2GUKteo9oNYhBe55E/view',
+    'Practice test · AP French Lang 2011':
+        'https://drive.google.com/file/d/1xcm7lGt9SdIt4IPARqwG4xtmqo_RsS29/view',
+    'Practice test · AP French Lang 2017':
+        'https://drive.google.com/file/d/1dAdk2hWYZu5XNe7hqTvUEJ-GZ7PVbgRL/view',
+    'Practice test · Barron\'s AP French Language and Culture Practice Tests 2022':
+        'https://drive.google.com/file/d/1kyC41pu_Wenqq05s9tc4be0XxUaeUFZu/view',
+  },
+  'ap_german': {
+    'Practice test · AP German Practice 2017':
+        'https://drive.google.com/file/d/1mcN3I-pe38vNq6XApCt6NaCNlEj5-uZN/view',
+  },
+  'ap_human_geo': {
+    'Practice test · 5 Steps to a 5 AP Human Geography 2024':
+        'https://drive.google.com/file/d/1tfCxCAoY90OH0be9MIVifxx4vMfbuTr3/view',
+    'Practice test · AP Human Geography Practice Test':
+        'https://drive.google.com/file/d/1tzlSDCOZvBf5j9gyZys-JHIr5kCS6Kb6/view',
+    'Practice test · Barron\'s AP Human Geography Practice Tests 2024':
+        'https://drive.google.com/file/d/1DYg-YJE5cu-ZPO1P0idms14Wj5O4vJE5/view',
+    'Practice test · The Princeton Review AP Human Geography Premium Prep 2023':
+        'https://drive.google.com/file/d/1H7lKYRADSJvWEgzYImHPo22fY-X9b-Ty/view',
+  },
+  'ap_italian': {
+    'Practice test · AP Italian 2018':
+        'https://drive.google.com/file/d/1m3hk5VNze1drHhHqkcPiDekAfIkotPZU/view',
+  },
+  'ap_japanese': {
+    'Practice test · AP Japanese 2016':
+        'https://drive.google.com/file/d/1V7tC_ic3t33iwqZLnUZCEJCUyQSm9Rhu/view',
+  },
+  'ap_latin': {
+    'Practice test · AP Latin Vergil 2005':
+        'https://drive.google.com/file/d/1vBtdUxIdwuvIB7odQwQrGugAjh4W_R8s/view',
+    'Practice test · AP Latin Vergil 2008':
+        'https://drive.google.com/file/d/1NH_1nJGezGN6qzL6cIfIYmYzuy8UIg9B/view',
+    'Practice test · AP Latin Vergil 2012':
+        'https://drive.google.com/file/d/1bSMlr9PpNSjLx8PCA3W5ostB9ts2HBqp/view',
+    'Practice test · AP Latin Vergil 2018':
+        'https://drive.google.com/file/d/1P9SJkeDgP7eGM2ddcWx6-czIxlLPAzol/view',
+  },
+  'ap_macro': {
+    'Practice questions · AP Macro MCQ 1995':
+        'https://drive.google.com/file/d/1LQAJO_bRa8CneoQqQKMu2O9M_7zSxaqv/view',
+    'Practice questions · AP Macro Unit 2 MCQ':
+        'https://drive.google.com/file/d/1LxbYIDbli1wbC2Fzy9vUZxneK2whw6Nx/view',
+    'Practice questions · AP Macro Unit 2 MCQ-Answers':
+        'https://drive.google.com/file/d/1rHzlEjvzJ6Nd_6adjS4q4q6WU0ajCq12/view',
+    'Practice questions · AP Macro Unit 3.1-3.5 MCQs':
+        'https://drive.google.com/file/d/1Dsi3VtEO9rHdJ-Lx4DOOiTelHhKkWEIC/view',
+    'Practice questions · AP Macro Unit 3.1-3.5 MCQs-Answers':
+        'https://drive.google.com/file/d/1NTFLTlgKbDQnvuH_OkyAq5tkwNQTz4zw/view',
+    'Practice questions · AP Macro Unit 3.6-3.9 MCQs':
+        'https://drive.google.com/file/d/1g2yCz_8Dkks7PuR5NvtkRGU3aLYiM_2i/view',
+    'Practice questions · AP Macro Unit 3.6-3.9 MCQs-Answers':
+        'https://drive.google.com/file/d/1yxyymPYv4eOzU6o22LKlal1x1G4ibfPC/view',
+    'Practice questions · AP Macro Unit 4 MCQ':
+        'https://drive.google.com/file/d/1KpYaowV_rGv1NhAIbO_WM2fF_Tnd8DXC/view',
+    'Practice questions · AP Macro Unit 4 MCQ-Answers':
+        'https://drive.google.com/file/d/1dWtfVDr4Qo9DBjUF0pGzySM68XDucDIz/view',
+    'Practice questions · AP Macro Unit 5 MCQs':
+        'https://drive.google.com/file/d/1iGgn-nTaBk4sWIV450J9NfKUDeZugB-x/view',
+    'Practice questions · AP Macro Unit 5 MCQs-Answers':
+        'https://drive.google.com/file/d/1ItuE1syCHRU-fRyyCbCMJKWJEJTgPs1z/view',
+    'Practice test · 5 Steps to a 5 AP Macroeconomics 2022':
+        'https://drive.google.com/file/d/1xYL-a54DoZxxnNAFqBjR4PaUJeFD-VNg/view',
+    'Practice test · Combined AP Macro and Micro 2021':
+        'https://drive.google.com/file/d/1nzv2MSEMJMIcC9mWp0gjSJrPK3KgAhOe/view',
+    'Practice test · Combined AP Macro and Micro 2023':
+        'https://drive.google.com/file/d/1hz_LLGip_0G6R3L20YzOJNaDMA45YW6d/view',
+    'Practice test · Combined AP Macro and Micro 2024':
+        'https://drive.google.com/file/d/1D0d3oLglp_iqKnbutY39naKwauNIvpTP/view',
+  },
+  'ap_micro': {
+    'Practice test · 5 Steps to a 5 AP Microeconomics 2022':
+        'https://drive.google.com/file/d/1P4hImtQrXsj5sr_r-Tgojs6-1sDPkc9o/view',
+  },
+  'ap_music_theory': {
+    'Practice test · AP Music 2003':
+        'https://drive.google.com/file/d/1Pmw16qSrN7dPzWEPP2gnYDlNCJYNXCqg/view',
+    'Practice test · AP Music 2008':
+        'https://drive.google.com/file/d/1fUywAfP3GwyrbRZYKZfnTz2KoTZiXLo5/view',
+    'Practice test · AP Music 2016':
+        'https://drive.google.com/file/d/1jlVxyDs6V52RZT9pZ6XSpOGBAeqSakpx/view',
+  },
+  'ap_physics_c_mech': {
+    'Practice test · 5 Steps to a 5 AP Physics C 2024':
+        'https://drive.google.com/file/d/1zXKvJvI3rgw_-OQY4sS9jLeFkEL_TLgz/view',
+    'Practice test · Barron\'s AP Physics C Practice Tests 2024':
+        'https://drive.google.com/file/d/1bm9-Z9k72dUeK3lAax0R5oKLhAm2rSSE/view',
+    'Practice test · The Princeton Review AP Physics C Mechanics Prep 2020':
+        'https://drive.google.com/file/d/1L_K-FPtK4px6fH3holIkRRoCQhOIcm5g/view',
+  },
+  'ap_psych': {
+    'Practice questions · AP Psychology MCQ 2004':
+        'https://drive.google.com/file/d/1mAe36FiwUaGWPok9dFjL7rSCz73frCSs/view',
+    'Practice test · 5 Steps to a 5 AP Psychology 2021':
+        'https://drive.google.com/file/d/1dWmLPAkYgNlyAgmdXWAlhabyFfgdcden/view',
+    'Practice test · AP Psychology 2007':
+        'https://drive.google.com/file/d/1n9lBELmoRwDtkVxbx6TgfmAko3lXZzVu/view',
+    'Practice test · AP Psychology 2008':
+        'https://drive.google.com/file/d/11-2A4UJvM66oLSGiRvWD1l0Fv6wRz51H/view',
+    'Practice test · AP Psychology 2012':
+        'https://drive.google.com/file/d/1V5okt4nTybncUce_YIfCeeG-Lsp3DuDB/view',
+    'Practice test · AP Psychology 2013':
+        'https://drive.google.com/file/d/1NgiKNyObFamW8c0KpKvC87bgJwNkUW51/view',
+    'Practice test · AP Psychology 2014':
+        'https://drive.google.com/file/d/1gxTvBr9UkgZ9KS2VsQdo4QmjoLRgIAiI/view',
+    'Practice test · AP Psychology 2015':
+        'https://drive.google.com/file/d/1apEOFnae6WlqdHQemXWKYD81lNKvI2sC/view',
+    'Practice test · AP Psychology 2016':
+        'https://drive.google.com/file/d/1ChEPXPm9RTCzRhgK4ob46YLql1VRNK0r/view',
+    'Practice test · AP Psychology 2017':
+        'https://drive.google.com/file/d/19g5Fg4Q9w5JVKfgu4RCfGJX4g8y7HEGm/view',
+    'Practice test · AP Psychology 2018':
+        'https://drive.google.com/file/d/1b38R0QRrA5Dpd25nR1APSJoqN5Bd_6BL/view',
+    'Practice test · Barron\'s - AP Psychology 2022-2023 Practice Tests':
+        'https://drive.google.com/file/d/10I7CVC5B9NDy7bJINbtPDjXVgMU_hsJi/view',
+    'Practice test · Barron\'s - AP Psychology Practice Tests 2025':
+        'https://drive.google.com/file/d/17vBE5VVtylih-xsvT3zA3gHqmgm6ouYL/view',
+    'Practice test · The Princeton Review-AP Psychology Premium Prep 2022':
+        'https://drive.google.com/file/d/1cQSUIk3bsmTHLOFcUQUXh89Kn7zlyecu/view',
+  },
+  'ap_spanish_lang': {
+    'Practice test · AP Spanish Lang 2008':
+        'https://drive.google.com/file/d/1QLt8rkUN-dLRYo3s92CZ1W-LWl_SPBtT/view',
+  },
+  'ap_spanish_lit': {
+    'Practice test · AP Spanish Lit 2008':
+        'https://drive.google.com/file/d/1S2ffzGFqgcXNN-a1-uK7vFn2YdBn_VaQ/view',
+    'Practice test · AP Spanish Lit 2018':
+        'https://drive.google.com/file/d/1OesBwHWvV0F1LtwW3syXBJvpyrOLMgVd/view',
+  },
+  'ap_us_gov': {
+    'Practice test · AP US Gov 2008':
+        'https://drive.google.com/file/d/1sTuTuH01yRZV2piufyHfQi251-Tgpl9I/view',
+    'Practice test · AP US Gov 2012':
+        'https://drive.google.com/file/d/1XGETXE6X-QPPgasErIeqq21OvwlZK4x6/view',
+    'Practice test · AP US Gov 2013':
+        'https://drive.google.com/file/d/1ynSnr2Rpln9lOZWT-AYPej384a-rDqUd/view',
+    'Practice test · AP US Gov 2018':
+        'https://drive.google.com/file/d/1PSD-O8gfccxNVo43oTE3YBqXrmxVAEgV/view',
+  },
+  'ap_us_history': {
+    'Practice test · The Princeton Review AP US History 2021':
+        'https://drive.google.com/file/d/1I2HB6vEjvRcmiHqNIOcDzLtLl-E9Klt9/view',
+  },
+  'ap_world': {
+    'Practice test · 5 Steps to a 5 AP World History 2024':
+        'https://drive.google.com/file/d/12d1y0R85Eq83grEc0OzGOk0f2eYmVqC_/view',
+    'Practice test · AP World History 2002':
+        'https://drive.google.com/file/d/15EARYGH1kn1MBkNpjrNz2eooy2ud5GCn/view',
+  },
+};
+
 const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_art_history': {
     'Course material · Smarthistory AP Art History guide':
@@ -7017,6 +7364,7 @@ List<String> linksForResource(Resource resource) {
     ...resource.links,
     ..._commonApLinks.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
+    ...?_driveApFileLinks[resource.id]?.keys,
   }.toList();
 }
 
@@ -7063,5 +7411,6 @@ String? resolveUrl(String linkLabel, Resource resource) {
   return kLinkUrls[linkLabel] ??
       _commonApLinks[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
+      _driveApFileLinks[resource.id]?[linkLabel] ??
       resource.url;
 }

@@ -128,6 +128,10 @@ class AppProvider extends ChangeNotifier {
 
   String? _currentSubMajor;
 
+  String _detailReturnView = 'ap';
+
+  String _savedCategoryFilter = 'all';
+
   String get currentView => _currentView;
 
   String? get detailResourceId => _detailResourceId;
@@ -135,6 +139,16 @@ class AppProvider extends ChangeNotifier {
   String? get currentMajorGroup => _currentMajorGroup;
 
   String? get currentSubMajor => _currentSubMajor;
+
+  String get detailReturnView => _detailReturnView;
+
+  String get savedCategoryFilter => _savedCategoryFilter;
+
+  String get detailReturnLabel => switch (_detailReturnView) {
+    'home' => 'Saved resources',
+    'my_majors' || 'major' => 'My Majors',
+    _ => 'AP Courses',
+  };
 
   // ── Init ─────────────────────────────────────────────────────────────────
 
@@ -668,6 +682,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   void navigateTo(String view, {String? detailId}) {
+    if (view == 'ap_detail') {
+      _detailReturnView = _currentView;
+    }
+
     _currentView = view;
 
     _detailResourceId = detailId;
@@ -679,6 +697,26 @@ class AppProvider extends ChangeNotifier {
         parameters: {'course_id': detailId},
       );
     }
+
+    notifyListeners();
+  }
+
+  void returnFromResourceDetail() {
+    final returnView = _detailReturnView;
+
+    _currentView = returnView;
+
+    _detailResourceId = null;
+
+    _detailReturnView = 'ap';
+
+    notifyListeners();
+  }
+
+  void setSavedCategoryFilter(String category) {
+    if (_savedCategoryFilter == category) return;
+
+    _savedCategoryFilter = category;
 
     notifyListeners();
   }

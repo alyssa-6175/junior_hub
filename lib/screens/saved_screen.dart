@@ -17,11 +17,10 @@ class SavedScreen extends StatefulWidget {
 }
 
 class _SavedScreenState extends State<SavedScreen> {
-  String _filter = 'all'; // all supported resource categories
-
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
+    final filter = provider.savedCategoryFilter;
 
     // Guests can't save anything — show a prompt.
     if (provider.isGuest) {
@@ -39,9 +38,9 @@ class _SavedScreenState extends State<SavedScreen> {
         .where((r) => savedIds.contains(r.id))
         .where(
           (r) =>
-              _filter == 'all' ||
-              r.category == _filter ||
-              (_filter == 'tests' &&
+              filter == 'all' ||
+              r.category == filter ||
+              (filter == 'tests' &&
                   (r.category == 'sat' || r.category == 'act')),
         )
         .toList();
@@ -108,44 +107,44 @@ class _SavedScreenState extends State<SavedScreen> {
                     _FilterChip(
                       label: 'All',
                       value: 'all',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'Competitions',
                       value: 'competition',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'AP Courses',
                       value: 'ap',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'Research',
                       value: 'research',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'Internships',
                       value: 'internship',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'College Courses',
                       value: 'dual_credit',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                     _FilterChip(
                       label: 'SAT / ACT',
                       value: 'tests',
-                      selected: _filter,
-                      onTap: (v) => setState(() => _filter = v),
+                      selected: filter,
+                      onTap: provider.setSavedCategoryFilter,
                     ),
                   ],
                 ),

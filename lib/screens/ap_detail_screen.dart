@@ -223,7 +223,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () => context.read<AppProvider>().navigateTo('ap'),
+                  onTap: () =>
+                      context.read<AppProvider>().returnFromResourceDetail(),
                   child: Row(
                     children: [
                       const Icon(
@@ -233,7 +234,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'AP Courses',
+                        provider.detailReturnLabel,
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: kTextSecondary,
