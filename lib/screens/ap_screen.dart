@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/url_helper.dart';
 import '../widgets/tappable.dart';
 
 class ApScreen extends StatefulWidget {
@@ -103,6 +104,40 @@ class _ApScreenState extends State<ApScreen> {
                 ),
               ),
               const SizedBox(height: 10),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  const panels = [
+                    _ApHubPanel(
+                      title: 'Question banks',
+                      icon: Icons.quiz_outlined,
+                      links: apQuestionBankHubs,
+                    ),
+                    _ApHubPanel(
+                      title: 'General study hubs',
+                      icon: Icons.auto_awesome_mosaic_outlined,
+                      links: apGeneralStudyHubs,
+                    ),
+                  ];
+                  if (constraints.maxWidth < 720) {
+                    return Column(
+                      children: [
+                        panels.first,
+                        const SizedBox(height: 7),
+                        panels.last,
+                      ],
+                    );
+                  }
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: panels.first),
+                      const SizedBox(width: 8),
+                      Expanded(child: panels.last),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
               // Sub-category filters
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -143,6 +178,68 @@ class _ApScreenState extends State<ApScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ApHubPanel extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Map<String, String> links;
+
+  const _ApHubPanel({
+    required this.title,
+    required this.icon,
+    required this.links,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
+      decoration: BoxDecoration(
+        color: kSurface,
+        borderRadius: BorderRadius.circular(9),
+        border: Border.all(color: kBorderLight),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 14, color: CategoryColors.textFor('ap')),
+              const SizedBox(width: 6),
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                  color: kTextPrimary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: links.entries
+                .map(
+                  (entry) => ActionChip(
+                    label: Text(entry.key),
+                    avatar: const Icon(Icons.open_in_new, size: 11),
+                    labelStyle: GoogleFonts.inter(fontSize: 10.5),
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(horizontal: 1),
+                    side: const BorderSide(color: kBorderLight),
+                    backgroundColor: kBackground,
+                    onPressed: () => openUrl(context, entry.value),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2394,6 +2394,159 @@ final List<Resource> allResources = [
         'https://www.house.gov/educators-and-students/congressional-art-competition',
     icon: Icons.palette,
   ),
+  _competition(
+    id: 'davidson_fellows',
+    title: 'Davidson Fellows Scholarship',
+    field: 'science',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online application with an awards event in Washington, D.C.',
+    majorTags: ['science', 'cs', 'engineering', 'math', 'humanities', 'art'],
+    applicationInfo:
+        'U.S. citizens or permanent residents age 18 or younger submit a significant completed body of work with two nominators',
+    description:
+        'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to \$100,000',
+    url: 'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
+    timeCommitment: 'Major completed project plus a detailed application',
+    icon: Icons.workspace_premium,
+  ),
+  _competition(
+    id: 'nasa_herc',
+    title: 'NASA Human Exploration Rover Challenge',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'U.S. Space & Rocket Center in Huntsville, Alabama',
+    majorTags: ['engineering', 'aerospace', 'robotics', 'physics'],
+    applicationInfo:
+        'Middle school and high school teams submit a proposal and work with an adult mentor under the 2027 handbook',
+    description:
+        'Spend the school year designing and testing a human-powered or remote-controlled rover, then navigate lunar-style terrain and mission tasks at NASA’s final event',
+    url:
+        'https://www.nasa.gov/learning-resources/nasa-human-exploration-rover-challenge/',
+    timeCommitment:
+        'Nine-month engineering challenge; finals April 21–24, 2027',
+    icon: Icons.rocket_launch,
+  ),
+  _competition(
+    id: 'mate_rov',
+    title: 'MATE ROV Competition',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Regional events can lead to the world championship',
+    majorTags: ['engineering', 'robotics', 'marine_science', 'cs'],
+    applicationInfo:
+        'Students form a team, choose the appropriate competition class, and register through a participating regional event',
+    description:
+        'Design an underwater robot around a real marine mission while your team also builds the technical documentation, presentation, and project-management side of the company',
+    url: 'https://materovcompetition.org/',
+    timeCommitment: 'Season-long ROV build and regional competition',
+    icon: Icons.water,
+  ),
+  _competition(
+    id: 'mit_think',
+    title: 'MIT THINK Scholars Program',
+    field: 'engineering',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online project mentorship with a possible trip to MIT',
+    majorTags: ['science', 'engineering', 'cs', 'research'],
+    applicationInfo:
+        'U.S. high school students submit a proposal for a feasible one-semester project that can be completed with a \$1,000 budget',
+    description:
+        'Turn a well-researched STEM idea into a realistic proposal, with finalists receiving project funding, weekly mentorship, and an MIT campus visit when offered',
+    url: 'https://think.mit.edu/',
+    timeCommitment: 'Proposal followed by one semester of work for finalists',
+    icon: Icons.science_outlined,
+  ),
+  _competition(
+    id: 'igem_high_school',
+    title: 'iGEM High School Competition',
+    field: 'biology',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Team research locally with an international jamboree',
+    majorTags: ['biology', 'biotech', 'engineering', 'cs', 'entrepreneurship'],
+    applicationInfo:
+        'A high school, community lab, or approved organizer registers the team through an adult principal investigator',
+    description:
+        'Build a synthetic-biology project from experiment design through safety, modeling, community engagement, a public wiki, and a final presentation',
+    url: 'https://competition.igem.org/registration/overview',
+    timeCommitment: 'Multi-month research and engineering season',
+    icon: Icons.biotech,
+  ),
+  _competition(
+    id: 'hosa_competitive_events',
+    title: 'HOSA Competitive Events',
+    field: 'biology',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote:
+        'Regional and state events can lead to the International Leadership Conference',
+    majorTags: ['health', 'biology', 'medicine', 'leadership'],
+    applicationInfo:
+        'Join an eligible HOSA chapter, select one event, and follow the deadlines set by your state association and advisor',
+    description:
+        'Choose from health-science tests, clinical skills, emergency preparedness, biomedical debate, research, leadership, and team events',
+    url: 'https://hosa.org/guidelines/',
+    timeCommitment: 'Chapter preparation plus regional and state rounds',
+    icon: Icons.medical_services_outlined,
+  ),
+  _competition(
+    id: 'harvard_crimson_essay',
+    title: 'Harvard Crimson Global Essay Competition',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Fully online',
+    majorTags: [
+      'writing',
+      'journalism_media',
+      'creative_writing',
+      'humanities',
+    ],
+    applicationInfo:
+        'Middle and high school students register online and submit an essay in the creative, argumentative, or journalistic category',
+    description:
+        'Respond to a university-style prompt in one of three writing categories, use the included workshops, and have your essay evaluated in a global field',
+    url: 'https://www.essaycomp.org/',
+    timeCommitment: 'Registration, optional workshops, and one polished essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'harvard_crimson_business',
+    title: 'Harvard Crimson Business Competition',
+    field: 'business',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote:
+        'Online preliminary round with an invited championship at Harvard',
+    majorTags: ['business', 'entrepreneurship', 'finance', 'public_policy'],
+    applicationInfo:
+        'Students in grades 6–12 may enter individually or in a team and develop a business plan around a published global challenge',
+    description:
+        'Identify a real global problem, research the market, and shape a feasible business plan that can advance from an online round to a live championship',
+    url: 'https://programs.thecrimson.com/hcbc-guidelines',
+    timeCommitment: 'Multi-stage business plan and presentation',
+    icon: Icons.business_center,
+  ),
+  _competition(
+    id: 'codeforces_contests',
+    title: 'Codeforces Contests',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Create a free account and enter any rated round whose start time and rules work for you',
+    description:
+        'Practice competitive programming in frequent timed rounds, earn a rating, and learn from editorials and other competitors’ solutions afterward',
+    url: 'https://codeforces.com/contests',
+    timeCommitment: 'Frequent contests, usually two to three hours each',
+    icon: Icons.code,
+  ),
 
   // ===========================================================================
   // AP COURSES AND EXAM RESOURCES
@@ -5846,6 +5999,27 @@ final List<Resource> allResources = [
     url: 'https://www.nps.gov/subjects/youthprograms/jobs-and-internships.htm',
     links: ['NPS youth jobs and internships', 'NPS Pathways information'],
   ),
+  const Resource(
+    id: 'stanford_shtem_2027',
+    title: 'Stanford SHTEM 2027',
+    category: 'internship',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Stanford University in Stanford, California',
+    timeCommitment: 'Eight weeks, about 20 to 30 hours per week',
+    majorTags: ['engineering', 'cs', 'research', 'humanities', 'biology'],
+    applicationInfo:
+        'Current U.S. high school juniors and seniors who are citizens or permanent residents may apply when the application opens in December 2026; the program is unpaid and has a \$95 application fee',
+    description:
+        'Work in a small mentored group on interdisciplinary research spanning engineering, computing, science, design, linguistics, psychology, and the humanities',
+    icon: Icons.science_outlined,
+    url:
+        'https://compression.stanford.edu/outreach/shtem-summer-internships-high-schoolers',
+    links: ['Stanford SHTEM 2027 overview', 'Eligibility and application'],
+    detailNote:
+        'Housing and transportation are not provided, and Stanford states that the internship is unpaid',
+  ),
 ];
 
 // ===========================================================================
@@ -6548,24 +6722,125 @@ const List<DeadlineItem> upcomingDeadlines = [
 // ===========================================================================
 // HELPER FUNCTIONS
 // ===========================================================================
+const Map<String, String> apQuestionBankHubs = {
+  'Albert (paid)': 'https://www.albert.io/subjects/high-school/ap',
+  'AP Practice Exams': 'https://www.appracticeexams.com/',
+  'CrackAP': 'https://www.crackap.com/',
+  'UWorld (paid)': 'https://collegeprep.uworld.com/ap/',
+  'Varsity Tutors': 'https://www.varsitytutors.com/practice',
+};
+
+const Map<String, String> apGeneralStudyHubs = {
+  'AP Daily': 'https://apstudents.collegeboard.org/ap-daily-archived',
+  'APStudy': 'https://apstudy.org/',
+  'Fiveable': 'https://fiveable.me/ap',
+  'Kaplan (paid)': 'https://www.kaptest.com/ap',
+  'Knowt': 'https://knowt.com/ap',
+  'Marco Learning': 'https://marcolearning.com/students/ap-study-guides/',
+  'Prep Den (paid)': 'https://prepden.com/',
+  'Save My Exams (paid)': 'https://www.savemyexams.com/ap/',
+};
+
 const Map<String, String> _commonApLinks = {
-  'Video · AP Daily in AP Classroom':
-      'https://apstudents.collegeboard.org/ap-daily-archived',
-  'Practice questions · Albert AP question bank (paid)':
-      'https://www.albert.io/subjects/high-school/ap',
-  'Course material · Fiveable AP study hub': 'https://fiveable.me/ap',
-  'Course material · Knowt AP study hub': 'https://knowt.com/ap',
-  'Course material · UWorld AP exam prep (paid)':
-      'https://collegeprep.uworld.com/ap/',
-  'Practice questions · Varsity Tutors AP learning tools':
-      'https://www.varsitytutors.com/practice',
-  'Course material · Prep Den AP study guides (paid)': 'https://prepden.com/',
-  'Course material · APStudy review assistant': 'https://apstudy.org/',
-  'Course material · Marco Learning AP study guides':
-      'https://marcolearning.com/students/ap-study-guides/',
-  'Course material · Kaplan AP prep (paid)': 'https://www.kaptest.com/ap',
-  'Course material · Save My Exams AP guides (paid)':
-      'https://www.savemyexams.com/ap/',
+  ...apQuestionBankHubs,
+  ...apGeneralStudyHubs,
+};
+
+const Map<String, Map<String, String>> _apBookLinks = {
+  'ap_bio': {
+    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
+    'Course material · Barron’s AP Biology Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
+    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
+  },
+  'ap_calc_ab': {
+    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
+    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
+    'Course material · Pearson Calculus in SI Units (Amazon)':
+        'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
+  },
+  'ap_calc_bc': {
+    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
+  },
+  'ap_chem': {
+    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
+    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
+  },
+  'ap_chinese': {
+    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
+  },
+  'ap_csa': {
+    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
+    'Course material · Barron’s AP Computer Science A 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
+    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
+  },
+  'ap_csp': {
+    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
+  },
+  'ap_env_sci': {
+    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
+    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
+  },
+  'ap_french': {
+    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
+    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
+  },
+  'ap_human_geo': {
+    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
+    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
+    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
+  },
+  'ap_macro': {
+    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
+  },
+  'ap_micro': {
+    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
+  },
+  'ap_physics_c_mech': {
+    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
+    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
+    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
+  },
+  'ap_psych': {
+    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
+    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
+    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
+  },
+  'ap_us_history': {
+    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
+  },
+  'ap_world': {
+    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
+  },
 };
 
 // Drive files supplied by the Junior Hub team. Every file ID is compared
@@ -7360,11 +7635,21 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
 /// Every link displayed for a resource, including verified AP supplements.
 List<String> linksForResource(Resource resource) {
   if (resource.category != 'ap') return resource.links;
+  bool isOldCommercialBook(String label) {
+    final lower = label.toLowerCase();
+    return lower.contains('barron') ||
+        lower.contains('princeton') ||
+        lower.contains('5 steps to a 5') ||
+        lower.contains('textbook-calculus');
+  }
+
   return <String>{
     ...resource.links,
-    ..._commonApLinks.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
-    ...?_driveApFileLinks[resource.id]?.keys,
+    ...?_driveApFileLinks[resource.id]?.keys.where(
+      (label) => !isOldCommercialBook(label),
+    ),
+    ...?_apBookLinks[resource.id]?.keys,
   }.toList();
 }
 
@@ -7412,5 +7697,6 @@ String? resolveUrl(String linkLabel, Resource resource) {
       _commonApLinks[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??
+      _apBookLinks[resource.id]?[linkLabel] ??
       resource.url;
 }

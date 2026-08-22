@@ -68,21 +68,6 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         lower.contains('official exam page');
   }
 
-  bool _isApWideLink(String label) {
-    final lower = label.toLowerCase();
-    return lower.contains('ap daily') ||
-        lower.contains('albert ap question bank') ||
-        lower.contains('fiveable ap study hub') ||
-        lower.contains('knowt ap study hub') ||
-        lower.contains('uworld ap exam prep') ||
-        lower.contains('varsity tutors ap learning tools') ||
-        lower.contains('prep den ap study guides') ||
-        lower.contains('apstudy review assistant') ||
-        lower.contains('marco learning ap study guides') ||
-        lower.contains('kaplan ap prep') ||
-        lower.contains('save my exams ap guides');
-  }
-
   bool _isCommunityNotes(String label) {
     final lower = label.toLowerCase();
     const markers = [
@@ -119,68 +104,6 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       'kwanga',
     ];
     return markers.any(lower.contains);
-  }
-
-  void _showApWideTools(BuildContext context, Resource resource) {
-    final tools = linksForResource(resource).where(_isApWideLink).toList();
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (sheetContext) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'AP-wide tools',
-                style: GoogleFonts.inter(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: kTextPrimary,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'These broad resources cover many AP subjects, so they live here instead of repeating in every course tab',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  height: 1.4,
-                  color: kTextSecondary,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: tools.length,
-                  separatorBuilder: (_, __) => const Divider(height: 1),
-                  itemBuilder: (_, index) {
-                    final label = tools[index];
-                    final url = resolveUrl(label, resource);
-                    final display = label.contains(' · ')
-                        ? label.substring(label.indexOf(' · ') + 3)
-                        : label;
-                    return ListTile(
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.link, size: 16),
-                      title: Text(
-                        display,
-                        style: GoogleFonts.inter(fontSize: 12),
-                      ),
-                      trailing: const Icon(Icons.open_in_new, size: 14),
-                      onTap: url == null ? null : () => openUrl(context, url),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -319,11 +242,6 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                                   onTap: () => openUrl(context, item.$2!),
                                 ),
                               ),
-                              _HeaderLinkChip(
-                                label: 'AP-wide tools',
-                                icon: Icons.apps_outlined,
-                                onTap: () => _showApWideTools(context, res),
-                              ),
                             ],
                           ),
                         ],
@@ -459,7 +377,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _courseMaterial(Resource r) {
     return linksForResource(r)
-        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isHeaderLink(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -480,7 +398,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _videos(Resource r) {
     return linksForResource(r)
-        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isHeaderLink(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -501,7 +419,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _practiceTests(Resource r) {
     return linksForResource(r)
-        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isHeaderLink(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -522,7 +440,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       ..._practiceTests(r),
     ];
     return linksForResource(r)
-        .where((l) => !_isHeaderLink(l) && !_isApWideLink(l))
+        .where((l) => !_isHeaderLink(l))
         .where((l) => !matched.contains(l))
         .toList();
   }
@@ -530,19 +448,14 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
 class _HeaderLinkChip extends StatelessWidget {
   final String label;
-  final IconData icon;
   final VoidCallback onTap;
 
-  const _HeaderLinkChip({
-    required this.label,
-    this.icon = Icons.open_in_new,
-    required this.onTap,
-  });
+  const _HeaderLinkChip({required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ActionChip(
-      avatar: Icon(icon, size: 12, color: const Color(0xFF1D9E75)),
+      avatar: const Icon(Icons.open_in_new, size: 12, color: Color(0xFF1D9E75)),
       label: Text(label),
       labelStyle: GoogleFonts.inter(
         fontSize: 10.5,
@@ -614,9 +527,15 @@ class _LinkItem extends StatelessWidget {
     final isPinned = provider.isLinkPinned(resource.id, label);
     final isSeen = provider.isLinkSeen(resource.id, label);
     final url = resolveUrl(label, resource);
-    final displayLabel = label.contains(' · ')
+    final rawDisplayLabel = label.contains(' · ')
         ? label.substring(label.indexOf(' · ') + 3)
         : label;
+    final displayLabel = rawDisplayLabel.contains('2027 (Amazon)')
+        ? rawDisplayLabel.replaceFirst(
+            '2027 (Amazon)',
+            '2027, with 2026 fallback (Amazon)',
+          )
+        : rawDisplayLabel;
 
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 200),

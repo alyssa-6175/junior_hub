@@ -275,6 +275,9 @@ Alyssa''',
     }
     final allSorted = _sorted(items, pinned, seen);
     final boardItems = allSorted.where((r) => pinned.contains(r.id)).toList();
+    final localItems = widget.category == 'internship'
+        ? allSorted.where(_isLocalOpportunity).toList()
+        : const <Resource>[];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,6 +352,16 @@ Alyssa''',
                     active: _tab == 1,
                     onTap: () => setState(() => _tab = 1),
                   ),
+                  if (widget.category == 'internship') ...[
+                    const SizedBox(width: 2),
+                    _InlineTab(
+                      icon: Icons.location_on_outlined,
+                      label: 'Local',
+                      count: localItems.length,
+                      active: _tab == 2,
+                      onTap: () => setState(() => _tab = 2),
+                    ),
+                  ],
                 ],
               ),
               const SizedBox(height: 10),
@@ -462,11 +475,32 @@ Alyssa''',
                   : _ListView(items: boardItems),
               // All
               _ListView(items: allSorted),
+              if (widget.category == 'internship') _ListView(items: localItems),
             ],
           ),
         ),
       ],
     );
+  }
+
+  bool _isLocalOpportunity(Resource resource) {
+    if (resource.scope == 'local') return true;
+    final location = (resource.locationNote ?? '').toLowerCase();
+    const localMarkers = [
+      'seattle',
+      'bellevue',
+      'kirkland',
+      'redmond',
+      'bothell',
+      'king county',
+      'puget sound',
+      'tacoma',
+      'everett',
+      'shoreline',
+      'lynnwood',
+      'edmonds',
+    ];
+    return localMarkers.any(location.contains);
   }
 }
 
