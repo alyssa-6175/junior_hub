@@ -203,6 +203,7 @@ const Map<String, String> kLinkUrls = {
       'https://www.crackap.com/ap/computer-science-a/',
   'AP Computer Science A AP CS Exam Prep: Test and Course Content':
       'https://www.apcsexamprep.com/',
+  'APCS Exam Prep': 'https://www.apcsexamprep.com/',
   'AP Computer Science A CodingBat Java Practice': 'https://codingbat.com/java',
   'AP Computer Science Principles Official Course Page':
       'https://apstudents.collegeboard.org/courses/ap-computer-science-principles',
@@ -2405,7 +2406,7 @@ final List<Resource> allResources = [
     applicationInfo:
         'U.S. citizens or permanent residents age 18 or younger submit a significant completed body of work with two nominators',
     description:
-        'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to $100,000',
+        'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to \$100,000',
     url:
         'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
     timeCommitment: 'Major completed project plus a detailed application',
@@ -2453,7 +2454,7 @@ final List<Resource> allResources = [
     locationNote: 'Online project mentorship with a possible trip to MIT',
     majorTags: ['science', 'engineering', 'cs', 'research'],
     applicationInfo:
-        'U.S. high school students submit a proposal for a feasible one-semester project that can be completed with a $1,000 budget',
+        'U.S. high school students submit a proposal for a feasible one-semester project that can be completed with a \$1,000 budget',
     description:
         'Turn a well-researched STEM idea into a realistic proposal, with finalists receiving project funding, weekly mentorship, and an MIT campus visit when offered',
     url: 'https://think.mit.edu/',
@@ -2972,7 +2973,7 @@ final List<Resource> allResources = [
       'AP Computer Science A Fiveable Study Guides',
       'AP Computer Science A Knowt Study Guides',
       'AP Computer Science A CrackAP Practice Questions',
-      'AP Computer Science A AP CS Exam Prep: Test and Course Content',
+      'APCS Exam Prep',
       'AP Computer Science A CodingBat Java Practice',
       'AP CSA Exam 2015',
       'AP CSA Exam 2014',
@@ -3002,7 +3003,7 @@ final List<Resource> allResources = [
       'AP Computer Science Principles Fiveable Study Guides',
       'AP Computer Science Principles Knowt Study Guides',
       'AP Computer Science Principles CrackAP Practice Questions',
-      'AP Computer Science Principles AP CS Exam Prep: Test and Course Content',
+      'APCS Exam Prep',
       'AP Computer Science Principles Code.org Curriculum',
       'AP CSP Exam 2018',
       'AP CSP Exam 2016',
@@ -3496,7 +3497,7 @@ final List<Resource> allResources = [
       'AP Cybersecurity Official Course Page',
       'AP Cybersecurity AP Classroom',
       'AP Cybersecurity Official Exam Page',
-      'AP Cybersecurity AP CS Exam Prep: Test and Course Content',
+      'APCS Exam Prep',
     ],
     apSubCategory: 'cs',
     detailNote:
@@ -7397,6 +7398,22 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.ilearnacademy.net/uploads/3/9/2/2/3922443/stat_review_notes.pdf',
   },
   'ap_csa': {
+    'Course material · APCS Exam Prep complete AP CSA course':
+        'https://www.apcsexamprep.com/pages/ap-csa-course',
+    'Course material · APCS Exam Prep AP CSA resource hub':
+        'https://www.apcsexamprep.com/pages/ap-csa-exam-prep-hub',
+    'Practice test · APCS Exam Prep AP CSA exams':
+        'https://www.apcsexamprep.com/pages/ap-csa-practice-exams',
+    'Practice test · APCS Exam Prep tests by topic':
+        'https://www.apcsexamprep.com/pages/ap-csa-practice-tests-by-topic',
+    'Practice questions · APCS Exam Prep custom test builder':
+        'https://www.apcsexamprep.com/pages/ap-csa-test-builder',
+    'Practice questions · APCS Exam Prep FRQ archive':
+        'https://www.apcsexamprep.com/pages/ap-csa-frq-archive',
+    'Video · APCS Exam Prep AP CSA course playlist':
+        'https://www.youtube.com/playlist?list=PLmwzeqwf733_c11PIESYrCx1X2y6oya1D',
+    'Video · APCS Exam Prep AP CSA FRQ walkthroughs':
+        'https://www.youtube.com/playlist?list=PLmwzeqwf733-axztyA2X4DfjNxSnsiWMn',
     'Course material · CSAwesome interactive Java course':
         'https://runestone.academy/runestone/books/published/csawesome2/index.html',
     'Course material · Code.org AP Computer Science A':
@@ -7407,6 +7424,20 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://codingbat.com/java',
   },
   'ap_csp': {
+    'Course material · APCS Exam Prep complete AP CSP course':
+        'https://www.apcsexamprep.com/pages/ap-csp-course',
+    'Course material · APCS Exam Prep AP CSP resource hub':
+        'https://www.apcsexamprep.com/pages/ap-computer-science-principles-resources',
+    'Practice test · APCS Exam Prep AP CSP exams':
+        'https://www.apcsexamprep.com/pages/ap-csp-practice-exams',
+    'Practice test · APCS Exam Prep tests by topic':
+        'https://www.apcsexamprep.com/pages/ap-csp-practice-tests-by-topic',
+    'Practice questions · APCS Exam Prep custom test builder':
+        'https://www.apcsexamprep.com/pages/ap-csp-test-builder',
+    'Practice questions · APCS Exam Prep Top 100 questions':
+        'https://www.apcsexamprep.com/pages/ap-csp-top-100-questions',
+    'Video · APCS Exam Prep AP CSP playlist':
+        'https://www.youtube.com/playlist?list=PLmwzeqwf733_6nuemUG0OlmhvR6Cdd5k_',
     'Course material · Code.org AP CSP curriculum':
         'https://code.org/cs/curriculum/computer-science-principles',
   },
@@ -7583,6 +7614,18 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.zotero.org/',
   },
   'ap_cybersecurity': {
+    'Course material · APCS Exam Prep complete AP Cybersecurity course':
+        'https://www.apcsexamprep.com/pages/ap-cybersecurity-complete-course-guide',
+    'Course material · APCS Exam Prep AP Cybersecurity study guides':
+        'https://www.apcsexamprep.com/pages/ap-cybersecurity-study-guides',
+    'Practice test · APCS Exam Prep AP Cybersecurity exam':
+        'https://www.apcsexamprep.com/pages/ap-cybersecurity-practice-exam',
+    'Practice questions · APCS Exam Prep AP Cybersecurity question bank':
+        'https://www.apcsexamprep.com/pages/ap-cybersecurity-practice-questions',
+    'Practice questions · APCS Exam Prep daily question':
+        'https://www.apcsexamprep.com/pages/ap-cybersecurity-question-of-the-day',
+    'Video · APCS Exam Prep AP Cybersecurity playlist':
+        'https://www.youtube.com/playlist?list=PLmwzeqwf733_hZo-QXj-iwBtx9P6jbnJ-',
     'Course material · Cisco Introduction to Cybersecurity':
         'https://www.cisco.com/site/us/en/learn/training-certifications/training/netacad/index.html',
   },

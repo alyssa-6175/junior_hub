@@ -18,13 +18,13 @@ class _ApScreenState extends State<ApScreen> {
   String _filter = 'all';
 
   static const _sections = [
-    ('arts', 'Arts'),
-    ('lang', 'English, World Languages & Literature'),
-    ('history', 'History & Social Sciences'),
-    ('math', 'Mathematics'),
-    ('cs', 'Computer Science'),
     ('science', 'Sciences'),
+    ('math', 'Mathematics'),
+    ('history', 'History & Social Sciences'),
+    ('cs', 'Computer Science'),
     ('capstone', 'AP Capstone'),
+    ('lang', 'English, World Languages & Literature'),
+    ('arts', 'Arts'),
   ];
 
   @override
