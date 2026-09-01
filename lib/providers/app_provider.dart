@@ -492,6 +492,14 @@ class AppProvider extends ChangeNotifier {
   Future<void> addPersonalDeadline(PersonalDeadline deadline) async {
     if (!isLoggedIn) return;
 
+    final alreadySaved = _personalDeadlines.any(
+      (saved) =>
+          saved.id == deadline.id ||
+          (saved.resourceId == deadline.resourceId &&
+              saved.dateIso == deadline.dateIso),
+    );
+    if (alreadySaved) return;
+
     _personalDeadlines.add(deadline);
 
     await _analytics.logEvent(name: 'personal_deadline_added');
@@ -504,6 +512,12 @@ class AppProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  bool hasPersonalDeadline(String resourceId, String dateIso) =>
+      _personalDeadlines.any(
+        (deadline) =>
+            deadline.resourceId == resourceId && deadline.dateIso == dateIso,
+      );
 
   Future<void> removePersonalDeadline(String id) async {
     if (!isLoggedIn) return;

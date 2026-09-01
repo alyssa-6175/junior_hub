@@ -53,7 +53,7 @@ class UrgencyColors {
   };
   static const Map<String, String> label = {
     'urgent': 'Urgent',
-    'soon': 'Coming up',
+    'soon': 'Soon',
     'later': 'Later',
   };
   static Color textFor(String u) => text[u] ?? text['later']!;

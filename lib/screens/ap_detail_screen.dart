@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
+import '../models/personal_deadline.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
@@ -106,12 +107,51 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     return markers.any(lower.contains);
   }
 
+  DeadlineItem? _examDeadlineFor(String resourceId) {
+    for (final deadline in upcomingDeadlines) {
+      if (deadline.resourceId == resourceId && !deadline.isTodo) {
+        return deadline;
+      }
+    }
+    return null;
+  }
+
+  Future<void> _saveExamDate(
+    BuildContext context,
+    AppProvider provider,
+    Resource resource,
+    DeadlineItem deadline,
+  ) async {
+    if (!provider.isLoggedIn) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sign in to save exam dates')),
+      );
+      return;
+    }
+
+    await provider.addPersonalDeadline(
+      PersonalDeadline(
+        id: 'ap_exam_${resource.id}_${deadline.dateIso.substring(0, 10)}',
+        title: deadline.title,
+        dateIso: deadline.dateIso,
+        resourceId: resource.id,
+      ),
+    );
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${deadline.date} added to your deadlines')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Read the provider at the top of build
     final provider = context.watch<AppProvider>();
     final isSaved = provider.isSaved(widget.resource.id);
     final res = widget.resource;
+    final examDeadline = _examDeadlineFor(res.id);
+    final isExamDateSaved = examDeadline != null &&
+        provider.hasPersonalDeadline(res.id, examDeadline.dateIso);
     final officialCourseLabel =
         _firstLabelContaining(res, 'official course page') ??
         _firstLabelContaining(res, 'official ap seminar course page');
@@ -138,7 +178,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       children: [
         // Header section
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -179,25 +219,25 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                   ),
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 9),
               // Subject header row
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 40,
-                    height: 40,
+                    width: 34,
+                    height: 34,
                     decoration: BoxDecoration(
                       color: res.categoryBgColor,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
                       res.icon,
                       color: res.categoryTextColor,
-                      size: 20,
+                      size: 18,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,24 +245,15 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                         Text(
                           res.title,
                           style: GoogleFonts.inter(
-                            fontSize: 17,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: kTextPrimary,
                           ),
                         ),
-                        Text(
-                          res.hasDeadline
-                              ? '${res.deadline} · ${res.apSubCategoryLabel}'
-                              : res.apSubCategoryLabel,
-                          style: GoogleFonts.inter(
-                            fontSize: 12,
-                            color: kTextSecondary,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 2),
                         Text(
                           res.displayDescription,
-                          maxLines: 3,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.inter(
                             fontSize: 11,
@@ -231,7 +262,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                           ),
                         ),
                         if (headerLinks.isNotEmpty) ...[
-                          const SizedBox(height: 5),
+                          const SizedBox(height: 4),
                           Wrap(
                             spacing: 6,
                             runSpacing: 5,
@@ -248,25 +279,40 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                       ],
                     ),
                   ),
-                  // Bookmark button
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
+                  const SizedBox(width: 10),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    alignment: WrapAlignment.end,
                     children: [
-                      IconButton(
-                        mouseCursor: SystemMouseCursors.click,
-                        onPressed: () =>
+                      _HeaderActionButton(
+                        label: isSaved ? 'Saved' : 'Save',
+                        icon: isSaved
+                            ? Icons.bookmark
+                            : Icons.bookmark_outlined,
+                        active: isSaved,
+                        onTap: () =>
                             context.read<AppProvider>().toggleSaved(res.id),
-                        tooltip: isSaved
-                            ? 'Remove from home'
-                            : 'Flag to home screen',
-                        icon: Icon(
-                          isSaved ? Icons.bookmark : Icons.bookmark_outlined,
-                          color: isSaved
-                              ? const Color(0xFFD4537E)
-                              : kTextTertiary,
-                          size: 20,
-                        ),
                       ),
+                      if (examDeadline != null)
+                        _HeaderActionButton(
+                          label: isExamDateSaved
+                              ? 'Exam date saved'
+                              : 'Add exam date',
+                          icon: isExamDateSaved
+                              ? Icons.event_available
+                              : Icons.event_outlined,
+                          active: isExamDateSaved,
+                          tooltip: examDeadline.date,
+                          onTap: isExamDateSaved
+                              ? null
+                              : () => _saveExamDate(
+                                  context,
+                                  provider,
+                                  res,
+                                  examDeadline,
+                                ),
+                        ),
                     ],
                   ),
                 ],
@@ -274,7 +320,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               // Course-specific note
               if (res.detailNote != null &&
                   !res.detailNote!.contains('not published when checked')) ...[
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -307,7 +353,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         // Tab bar
         Container(
           decoration: const BoxDecoration(
@@ -474,6 +520,44 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _generalStudyHubs(Resource r) =>
       linksForResource(r).where(_isGeneralStudyHub).toList();
+}
+
+class _HeaderActionButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final bool active;
+  final String? tooltip;
+  final VoidCallback? onTap;
+
+  const _HeaderActionButton({
+    required this.label,
+    required this.icon,
+    required this.active,
+    required this.onTap,
+    this.tooltip,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final button = OutlinedButton.icon(
+      onPressed: onTap,
+      icon: Icon(icon, size: 14),
+      label: Text(label),
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size(0, 30),
+        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+        visualDensity: VisualDensity.compact,
+        foregroundColor: active ? kNavy : kTextSecondary,
+        backgroundColor: active ? kGoldLight : kSurface,
+        side: BorderSide(color: active ? kGold : kBorderLight),
+        textStyle: GoogleFonts.inter(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+    return tooltip == null ? button : Tooltip(message: tooltip!, child: button);
+  }
 }
 
 class _HeaderLinkChip extends StatelessWidget {

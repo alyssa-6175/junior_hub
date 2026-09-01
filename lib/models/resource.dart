@@ -53,7 +53,7 @@ class Resource {
   });
 
   // ─── Urgency Calculation ──────────────────────────────────────────────────
-  /// Determines if a deadline is 'soon' (within 90 days), 'later', or 'none'.
+  /// Uses the same 30-day and 90-day windows as saved deadlines.
   String get urgency {
     if (deadlineIso == null || deadlineIso!.isEmpty) return 'none';
 
@@ -64,8 +64,9 @@ class Resource {
 
       if (difference < 0) {
         return 'none'; // Deadline passed
+      } else if (difference <= 30) {
+        return 'urgent';
       } else if (difference <= 90) {
-        // Less than 3 months away
         return 'soon';
       } else {
         return 'later';
@@ -78,36 +79,17 @@ class Resource {
 
   // ─── Urgency Colors & Labels ──────────────────────────────────────────────
   Color get urgencyTextColor {
-    switch (urgency) {
-      case 'soon':
-        return const Color(0xFFA52A2A); // Red/Brown text
-      case 'later':
-        return const Color(0xFFD4AF37); // Gold text
-      default:
-        return const Color(0xFF6B7280); // Gray text
-    }
+    if (urgency == 'none') return const Color(0xFF6B7280);
+    return UrgencyColors.textFor(urgency);
   }
 
   Color get urgencyBgColor {
-    switch (urgency) {
-      case 'soon':
-        return const Color(0xFFFEE2E2); // Light red background
-      case 'later':
-        return const Color(0xFFFEF9C3); // Light yellow background
-      default:
-        return const Color(0xFFF3F4F6); // Light gray background
-    }
+    if (urgency == 'none') return const Color(0xFFF3F4F6);
+    return UrgencyColors.bgFor(urgency);
   }
 
   String get urgencyLabel {
-    switch (urgency) {
-      case 'soon':
-        return 'Soon';
-      case 'later':
-        return 'Later';
-      default:
-        return '';
-    }
+    return urgency == 'none' ? '' : UrgencyColors.labelFor(urgency);
   }
 
   /// Placeholder dates are internal data markers, never user-facing deadlines.
@@ -120,26 +102,12 @@ class Resource {
   // ─── Deadline Date Styling ────────────────────────────────────────────────
   /// Returns the color for the deadline date text based on urgency
   Color get deadlineTextColor {
-    switch (urgency) {
-      case 'soon':
-        return const Color(0xFFA52A2A); // Red/Brown for urgent
-      case 'later':
-        return const Color(0xFFD4AF37); // Gold for coming soon
-      default:
-        return const Color(0xFF6B7280); // Gray for no deadline
-    }
+    return urgencyTextColor;
   }
 
   /// Returns the urgency badge label for the date icon
   String get urgencyBadgeLabel {
-    switch (urgency) {
-      case 'soon':
-        return 'Urgent';
-      case 'later':
-        return 'Coming Soon';
-      default:
-        return '';
-    }
+    return urgencyLabel;
   }
 
   // ─── Convenience getters ──────────────────────────────────────────────────

@@ -674,6 +674,9 @@ Resource _competition({
   required String applicationInfo,
   required String description,
   required String url,
+  String? deadline,
+  String? deadlineIso,
+  String? detailNote,
   String timeCommitment = 'Check the current competition cycle',
   IconData icon = Icons.emoji_events,
 }) => Resource(
@@ -688,10 +691,12 @@ Resource _competition({
   majorTags: majorTags,
   applicationInfo: applicationInfo,
   description: description,
+  deadline: deadline,
+  deadlineIso: deadlineIso,
   icon: icon,
   url: url,
   links: [title],
-  detailNote:
+  detailNote: detailNote ??
       'Dates and eligibility can change between cycles, so confirm the current rules on the official site',
 );
 
@@ -820,14 +825,14 @@ final List<Resource> allResources = [
     applicationInfo: 'Free teams of 4–6 students with a teacher advisor.',
     description:
         'Build a thoughtful investment strategy for a real client, track a simulated portfolio, and defend your decisions in a final report',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'September 11, 2026 at 5:00 PM ET',
+    deadlineIso: '2026-09-11T17:00:00-04:00',
     icon: Icons.trending_up,
     url:
         'https://globalyouth.wharton.upenn.edu/competitions/investment-competition/register-now/',
     links: ['Wharton registration'],
     detailNote:
-        'The official site says 2026–27 registration opens in August, but it does not yet give a day or closing deadline.',
+        'Registration for the 2026–27 competition closes at 5:00 PM Eastern Time',
   ),
   const Resource(
     id: 'breakthrough_junior',
@@ -1022,13 +1027,13 @@ final List<Resource> allResources = [
         'Teams register for an eligible regional event through the official Department of Energy directory.',
     description:
         'Race another team to answer questions in biology, chemistry, physics, math, Earth science, and energy',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'November 23, 2026 at 11:59 PM local time',
+    deadlineIso: '2026-11-23T23:59:00-08:00',
     icon: Icons.science,
     url: 'https://science.osti.gov/wdts/nsb',
     links: ['National Science Bowl'],
     detailNote:
-        'Regional registration deadlines vary, so there is no single national registration date.',
+        'Registration opens October 5 at noon Eastern. An approved school must submit Team 1 by November 23 to keep its reserved regional spot',
   ),
   const Resource(
     id: 'naclo',
@@ -1218,11 +1223,13 @@ final List<Resource> allResources = [
         'High school students may register for the 2027 competition and compete from anywhere',
     description:
         'Design an original business idea around an unmet need and explain the strategy in a concise virtual pitch',
+    deadline: 'February 21, 2027 at 11:59 PM local time',
+    deadlineIso: '2027-02-21T23:59:00-08:00',
     icon: Icons.waves_outlined,
     url: 'https://blueoceancompetition.org/compete/',
     links: ['Blue Ocean competition', '2027 competition timeline'],
     detailNote:
-        'Registration for 2027 is available, while the final submission date should be confirmed on the published timeline',
+        'The submission deadline follows the student’s local time zone',
   ),
   const Resource(
     id: 'technovation_girls',
@@ -1697,6 +1704,10 @@ final List<Resource> allResources = [
     description:
         'Practice in a guided cyber range, then test real skills in individual and team games covering modern security work',
     url: 'https://nationalcyberleague.org/',
+    deadline: 'October 13, 2026 (late registration)',
+    deadlineIso: '2026-10-13T23:59:00-04:00',
+    detailNote:
+        'Regular registration ends October 9. The individual game runs October 23–25 and the team game runs November 6–8, 2026',
     timeCommitment: 'Season with practice, individual, and team games',
     icon: Icons.security,
   ),
@@ -1713,6 +1724,8 @@ final List<Resource> allResources = [
     description:
         'Design, build, and fly a model rocket toward a new altitude, duration, and payload target each season',
     url: 'https://www.rocketrychallenge.org/',
+    deadline: 'December 6, 2026 at 11:59 PM ET',
+    deadlineIso: '2026-12-06T23:59:00-05:00',
     timeCommitment: 'Season-long build and flight challenge',
     icon: Icons.rocket_launch,
   ),
@@ -1762,6 +1775,8 @@ final List<Resource> allResources = [
     description:
         'Take on demanding individual, team, and guts-round problems at one of the largest student-run high school math tournaments',
     url: 'https://www.hmmt.org/',
+    deadline: 'September 20, 2026 (registration)',
+    deadlineIso: '2026-09-20T23:59:00-04:00',
     timeCommitment: 'One-day tournament',
     icon: Icons.calculate,
   ),
@@ -1808,6 +1823,8 @@ final List<Resource> allResources = [
     description:
         'Choose a real-world problem, build a mathematical model, and communicate your reasoning in a polished team paper',
     url: 'https://www.comap.com/contests/himcm-midmcm',
+    deadline: 'November 4, 2026 at 2:00 PM ET',
+    deadlineIso: '2026-11-04T14:00:00-05:00',
     timeCommitment: 'Up to 14 days',
     icon: Icons.calculate,
   ),
@@ -1824,6 +1841,10 @@ final List<Resource> allResources = [
     description:
         'Start with an accessible online math competition and earn a chance to solve deeper problems at the national finals',
     url: 'https://www.mathcon.org/',
+    deadline: 'March 17, 2027 (online round)',
+    deadlineIso: '2027-03-17T23:59:00-05:00',
+    detailNote:
+        'Registration is open, and coordinators may add students through the final day of the online testing window',
     icon: Icons.calculate,
   ),
   _competition(
@@ -1854,6 +1875,10 @@ final List<Resource> allResources = [
     description:
         'Try creative, visual, and logical problems in a friendly international contest with grade-level rankings',
     url: 'https://mathkangaroo.org/mks/',
+    deadline: 'December 31, 2026 (regular registration)',
+    deadlineIso: '2026-12-31T23:59:00-05:00',
+    detailNote:
+        'Late registration remains available through February 1, 2027',
     timeCommitment: '75-minute individual contest',
     icon: Icons.calculate,
   ),
@@ -1870,6 +1895,8 @@ final List<Resource> allResources = [
     description:
         'Solve a mix of short-answer and full-solution problems where clear mathematical communication matters',
     url: 'https://cemc.uwaterloo.ca/contests/csimc',
+    deadline: 'October 22, 2026 (school ordering)',
+    deadlineIso: '2026-10-22T23:59:00-04:00',
     timeCommitment: 'Two-hour contest',
     icon: Icons.calculate,
   ),
@@ -2133,6 +2160,8 @@ final List<Resource> allResources = [
     description:
         'Step into a consultant role, unpack a company challenge, and present a practical strategy under a tight deadline',
     url: 'https://www.casecomp.org/',
+    deadline: 'October 14, 2026 at 11:59 PM GMT',
+    deadlineIso: '2026-10-14T23:59:00Z',
     icon: Icons.business_center,
   ),
   _competition(
@@ -2210,6 +2239,10 @@ final List<Resource> allResources = [
     description:
         'Share original art or writing across a wide range of categories, from poetry and journalism to photography and design',
     url: 'https://www.artandwriting.org/',
+    deadline: 'December 1, 2026–January 6, 2027 (varies by region)',
+    deadlineIso: '2026-12-01T23:59:00-05:00',
+    detailNote:
+        'Regional programs set their own deadlines. The first close December 1, 2026, while some remain open through January 6, 2027',
     icon: Icons.edit_note,
   ),
   _competition(
@@ -2362,6 +2395,8 @@ final List<Resource> allResources = [
     description:
         'Share polished work in writing, visual arts, film, music, dance, theater, design, or voice for feedback and national recognition',
     url: 'https://youngarts.org/apply/',
+    deadline: 'October 6, 2026 at 8:00 PM ET',
+    deadlineIso: '2026-10-06T20:00:00-04:00',
     icon: Icons.palette,
   ),
   _competition(
@@ -2426,6 +2461,10 @@ final List<Resource> allResources = [
         'Spend the school year designing and testing a human-powered or remote-controlled rover, then navigate lunar-style terrain and mission tasks at NASA’s final event',
     url:
         'https://www.nasa.gov/learning-resources/nasa-human-exploration-rover-challenge/',
+    deadline: 'September 17, 2026 at 8:00 AM CT',
+    deadlineIso: '2026-09-17T08:00:00-05:00',
+    detailNote:
+        'The 2027 team proposal is due at 8:00 AM Central Time',
     timeCommitment: 'Nine-month engineering challenge; finals April 21–24, 2027',
     icon: Icons.rocket_launch,
   ),
