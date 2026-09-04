@@ -81,6 +81,10 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     }
   }
 
+  bool _isResearchJournal(Resource resource) =>
+      resource.category == 'research' &&
+      resource.majorTags.contains('publication');
+
   List<Resource> _sorted(
     List<Resource> items,
     Set<String> pinned,
@@ -292,6 +296,9 @@ Alyssa''',
     final localItems = widget.category == 'internship'
         ? allSorted.where(_isLocalOpportunity).toList()
         : const <Resource>[];
+    final journalItems = widget.category == 'research'
+        ? allSorted.where(_isResearchJournal).toList()
+        : const <Resource>[];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -372,6 +379,16 @@ Alyssa''',
                       icon: Icons.location_on_outlined,
                       label: 'Local',
                       count: localItems.length,
+                      active: _tab == 2,
+                      onTap: () => setState(() => _tab = 2),
+                    ),
+                  ],
+                  if (widget.category == 'research') ...[
+                    const SizedBox(width: 2),
+                    _InlineTab(
+                      icon: Icons.menu_book_outlined,
+                      label: 'Journals',
+                      count: journalItems.length,
                       active: _tab == 2,
                       onTap: () => setState(() => _tab = 2),
                     ),
@@ -489,6 +506,8 @@ Alyssa''',
                   : _ListView(items: boardItems),
               // All
               _ListView(items: allSorted),
+              if (widget.category == 'research')
+                _ListView(items: journalItems),
               if (widget.category == 'internship') _ListView(items: localItems),
             ],
           ),

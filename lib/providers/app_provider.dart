@@ -116,6 +116,15 @@ class AppProvider extends ChangeNotifier {
 
   Set<String> get checkedMajors => Set.unmodifiable(_checkedMajors);
 
+  final List<String> _checkedMajorOrder = [];
+
+  List<String> get checkedMajorOrder => List.unmodifiable(_checkedMajorOrder);
+
+  final List<String> _checkedSubMajorOrder = [];
+
+  List<String> get checkedSubMajorOrder =>
+      List.unmodifiable(_checkedSubMajorOrder);
+
   bool isMajorChecked(String id) => _checkedMajors.contains(id);
 
   // ── Navigation State ─────────────────────────────────────────────────────
@@ -315,6 +324,10 @@ class AppProvider extends ChangeNotifier {
 
     _checkedMajors.clear();
 
+    _checkedMajorOrder.clear();
+
+    _checkedSubMajorOrder.clear();
+
     _personalDeadlines.clear();
 
     _currentView = 'home';
@@ -348,6 +361,18 @@ class AppProvider extends ChangeNotifier {
     _linkSeen.addAll(List<String>.from(data['linkSeen'] ?? []));
 
     _checkedMajors.addAll(List<String>.from(data['checkedMajors'] ?? []));
+
+    _checkedMajorOrder.addAll(
+      List<String>.from(
+        data['checkedMajorOrder'] ?? [],
+      ).where((id) => majorGroups.any((group) => group.id == id)),
+    );
+
+    _checkedSubMajorOrder.addAll(
+      List<String>.from(
+        data['checkedSubMajorOrder'] ?? [],
+      ).where((id) => findSubMajor(id) != null),
+    );
 
     // NEW: Load completed tests map from Firestore
     final ctData = data['completedTests'] as Map<String, dynamic>? ?? {};
@@ -572,11 +597,19 @@ class AppProvider extends ChangeNotifier {
       if (allSubsChecked) {
         _checkedMajors.remove(id);
 
+        _checkedMajorOrder.remove(id);
+
         for (final sub in group.subcategories) {
           _checkedMajors.remove(sub.id);
+
+          _checkedSubMajorOrder.remove(sub.id);
         }
       } else {
         _checkedMajors.add(id);
+
+        _checkedMajorOrder
+          ..remove(id)
+          ..insert(0, id);
 
         for (final sub in group.subcategories) {
           _checkedMajors.add(sub.id);
@@ -587,8 +620,14 @@ class AppProvider extends ChangeNotifier {
     } else {
       if (_checkedMajors.contains(id)) {
         _checkedMajors.remove(id);
+
+        _checkedSubMajorOrder.remove(id);
       } else {
         _checkedMajors.add(id);
+
+        _checkedSubMajorOrder
+          ..remove(id)
+          ..insert(0, id);
 
         wasAdded = true;
       }
@@ -605,6 +644,17 @@ class AppProvider extends ChangeNotifier {
         } else {
           _checkedMajors.remove(parentGroup.id);
         }
+
+        final anyChecked = parentGroup.subcategories.any(
+          (sub) => _checkedMajors.contains(sub.id),
+        );
+        if (anyChecked && wasAdded) {
+          _checkedMajorOrder
+            ..remove(parentGroup.id)
+            ..insert(0, parentGroup.id);
+        } else if (!anyChecked) {
+          _checkedMajorOrder.remove(parentGroup.id);
+        }
       }
     }
 
@@ -617,6 +667,10 @@ class AppProvider extends ChangeNotifier {
     }
 
     await _save('checkedMajors', _checkedMajors.toList());
+
+    await _save('checkedMajorOrder', _checkedMajorOrder);
+
+    await _save('checkedSubMajorOrder', _checkedSubMajorOrder);
 
     notifyListeners();
   }

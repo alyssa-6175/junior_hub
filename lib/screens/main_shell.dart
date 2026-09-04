@@ -183,6 +183,31 @@ class _AppSidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
 
+    final orderedMajorGroups = [...majorGroups];
+    final originalMajorIndexes = {
+      for (var i = 0; i < majorGroups.length; i++) majorGroups[i].id: i,
+    };
+    bool groupIsChecked(MajorGroup group) =>
+        provider.isMajorChecked(group.id) ||
+        group.subcategories.any((sub) => provider.isMajorChecked(sub.id));
+    orderedMajorGroups.sort((a, b) {
+      final aChecked = groupIsChecked(a);
+      final bChecked = groupIsChecked(b);
+      if (aChecked != bChecked) return aChecked ? -1 : 1;
+
+      if (aChecked) {
+        final aOrder = provider.checkedMajorOrder.indexOf(a.id);
+        final bOrder = provider.checkedMajorOrder.indexOf(b.id);
+        if (aOrder >= 0 || bOrder >= 0) {
+          if (aOrder < 0) return 1;
+          if (bOrder < 0) return -1;
+          if (aOrder != bOrder) return aOrder.compareTo(bOrder);
+        }
+      }
+
+      return originalMajorIndexes[a.id]!.compareTo(originalMajorIndexes[b.id]!);
+    });
+
     return Container(
       width: 200,
 
@@ -296,15 +321,13 @@ class _AppSidebar extends StatelessWidget {
 
                   const _SectionLabel('By major'),
 
-                  ...majorGroups.map(
+                  ...orderedMajorGroups.map(
                     (group) => _ExpandableMajorGroup(
+                      key: ValueKey(group.id),
+
                       group: group,
 
                       provider: provider, // ← Added provider injection
-
-                      currentGroup: provider.currentMajorGroup,
-
-                      currentSubMajor: provider.currentSubMajor,
                     ),
                   ),
                 ],
@@ -645,20 +668,14 @@ class _SidebarFooter extends StatelessWidget {
 class _ExpandableMajorGroup extends StatefulWidget {
   final MajorGroup group;
 
-  final String? currentGroup;
-
-  final String? currentSubMajor;
-
   final AppProvider provider; // ← Added parameter
 
   const _ExpandableMajorGroup({
+    super.key,
+
     required this.group,
 
     required this.provider, // ← Added requirement
-
-    this.currentGroup,
-
-    this.currentSubMajor,
   });
 
   @override
@@ -668,45 +685,51 @@ class _ExpandableMajorGroup extends StatefulWidget {
 class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
   bool _open = false;
 
-  bool get isGroupActive => widget.currentGroup == widget.group.id;
-
-  @override
-  void didUpdateWidget(_ExpandableMajorGroup old) {
-    super.didUpdateWidget(old);
-
-    // Auto-expand when this group becomes active.
-
-    if (isGroupActive && !_open) setState(() => _open = true);
-  }
-
   @override
   Widget build(BuildContext context) {
     // Simplify access to provider logic as requested
 
     final provider = widget.provider;
+    final isGroupChecked =
+        provider.isMajorChecked(widget.group.id) ||
+        widget.group.subcategories.any(
+          (sub) => provider.isMajorChecked(sub.id),
+        );
+    final orderedSubcategories = [...widget.group.subcategories];
+    final originalSubcategoryIndexes = {
+      for (var i = 0; i < widget.group.subcategories.length; i++)
+        widget.group.subcategories[i].id: i,
+    };
+    orderedSubcategories.sort((a, b) {
+      final aChecked = provider.isMajorChecked(a.id);
+      final bChecked = provider.isMajorChecked(b.id);
+      if (aChecked != bChecked) return aChecked ? -1 : 1;
+
+      if (aChecked) {
+        final aOrder = provider.checkedSubMajorOrder.indexOf(a.id);
+        final bOrder = provider.checkedSubMajorOrder.indexOf(b.id);
+        if (aOrder >= 0 || bOrder >= 0) {
+          if (aOrder < 0) return 1;
+          if (bOrder < 0) return -1;
+          if (aOrder != bOrder) return aOrder.compareTo(bOrder);
+        }
+      }
+
+      return originalSubcategoryIndexes[a.id]!.compareTo(
+        originalSubcategoryIndexes[b.id]!,
+      );
+    });
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
 
       children: [
-        // Group header row (tap to expand/collapse OR navigate to group)
+        // Group header row only expands or collapses the fixed sidebar section.
         MouseRegion(
           cursor: SystemMouseCursors.click,
 
           child: GestureDetector(
-            onTap: () {
-              if (_open) {
-                // Already open → just collapse, don't navigate
-
-                setState(() => _open = false);
-              } else {
-                // Closed → expand and navigate to the group
-
-                setState(() => _open = true);
-
-                context.read<AppProvider>().navigateToMajor(widget.group.id);
-              }
-            },
+            onTap: () => setState(() => _open = !_open),
 
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 150),
@@ -716,13 +739,13 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
 
               decoration: BoxDecoration(
-                color: isGroupActive && widget.currentSubMajor == null
+                color: isGroupChecked
                     ? kGold.withValues(alpha: 0.18)
                     : Colors.transparent,
 
                 borderRadius: BorderRadius.circular(8),
 
-                border: isGroupActive && widget.currentSubMajor == null
+                border: isGroupChecked
                     ? const Border(left: BorderSide(color: kGold, width: 2))
                     : null,
               ),
@@ -750,11 +773,11 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
                       style: GoogleFonts.inter(
                         fontSize: 12,
 
-                        fontWeight: isGroupActive
+                        fontWeight: isGroupChecked
                             ? FontWeight.w500
                             : FontWeight.normal,
 
-                        color: isGroupActive
+                        color: isGroupChecked
                             ? kGold
                             : Colors.white.withValues(alpha: 0.75),
                       ),
@@ -799,87 +822,74 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
 
         // Subcategory items (shown when expanded)
         if (_open)
-          ...widget.group.subcategories.map((sub) {
-            final isActive = widget.currentSubMajor == sub.id;
+          ...orderedSubcategories.map((sub) {
+            final isChecked = provider.isMajorChecked(sub.id);
 
-            return MouseRegion(
-              cursor: SystemMouseCursors.click,
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
 
-              child: GestureDetector(
-                onTap: () => context.read<AppProvider>().navigateToMajor(
-                  widget.group.id,
+              margin: const EdgeInsets.only(
+                left: 24,
 
-                  subMajorId: sub.id,
-                ),
+                right: 8,
 
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 120),
+                top: 1,
 
-                  margin: const EdgeInsets.only(
-                    left: 24,
+                bottom: 1,
+              ),
 
-                    right: 8,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
 
-                    top: 1,
+              decoration: BoxDecoration(
+                color: isChecked
+                    ? kGold.withValues(alpha: 0.15)
+                    : Colors.transparent,
 
-                    bottom: 1,
-                  ),
+                borderRadius: BorderRadius.circular(6),
+              ),
 
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      sub.label,
 
-                    vertical: 6,
-                  ),
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
 
-                  decoration: BoxDecoration(
-                    color: isActive
-                        ? kGold.withValues(alpha: 0.15)
-                        : Colors.transparent,
+                        fontWeight: isChecked
+                            ? FontWeight.w500
+                            : FontWeight.normal,
 
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          sub.label,
-
-                          style: GoogleFonts.inter(
-                            fontSize: 11,
-
-                            fontWeight: isActive
-                                ? FontWeight.w500
-                                : FontWeight.normal,
-
-                            color: isActive
-                                ? kGold
-                                : Colors.white.withValues(alpha: 0.55),
-                          ),
-                        ),
+                        color: isChecked
+                            ? kGold
+                            : Colors.white.withValues(alpha: 0.55),
                       ),
-
-                      // ← Added Checkbox at the end of subcategory row
-                      GestureDetector(
-                        onTap: () => context
-                            .read<AppProvider>()
-                            .toggleCheckedMajor(sub.id),
-
-                        child: Icon(
-                          provider.isMajorChecked(sub.id)
-                              ? Icons.check_box
-                              : Icons.check_box_outline_blank,
-
-                          size: 12,
-
-                          color: provider.isMajorChecked(sub.id)
-                              ? kGold
-                              : Colors.white.withValues(alpha: 0.2),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+
+                    child: GestureDetector(
+                      onTap: () => context
+                          .read<AppProvider>()
+                          .toggleCheckedMajor(sub.id),
+
+                      child: Icon(
+                        isChecked
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+
+                        size: 12,
+
+                        color: isChecked
+                            ? kGold
+                            : Colors.white.withValues(alpha: 0.2),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           }),

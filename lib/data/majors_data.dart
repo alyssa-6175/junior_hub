@@ -236,7 +236,7 @@ const Map<String, Set<String>> _majorTagAliases = {
   'philosophy': {'philosophy', 'logic'},
   'creative_writing': {'creative_writing', 'poetry'},
   'languages': {'languages', 'linguistics'},
-  'art_design': {'fine_arts', 'art_design'},
+  'art_design': {'fine_arts', 'art_design', 'art', 'design'},
   'music': {'music'},
   'film_media': {'film_prod', 'documentary', 'digital_media'},
   'journalism': {'journalism_media'},

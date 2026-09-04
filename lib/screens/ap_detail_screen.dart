@@ -23,7 +23,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: 7, vsync: this);
+    _tabs = TabController(
+      length: _hasReferenceSheet(widget.resource) ? 6 : 5,
+      vsync: this,
+    );
     // Track this view (runs after the frame is built so context is valid)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -46,6 +49,44 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
     return [...starred, ...remaining];
   }
+
+  List<String> _sortedPracticeTests(List<String> links, AppProvider provider) {
+    int year(String label) {
+      final matches = RegExp(r'\b(19|20)\d{2}\b').allMatches(label);
+      if (matches.isEmpty) return -1;
+      return matches
+          .map((match) => int.parse(match.group(0)!))
+          .reduce((a, b) => a > b ? a : b);
+    }
+
+    int compare(String a, String b) {
+      final aOfficial = a.toLowerCase().contains('official college board');
+      final bOfficial = b.toLowerCase().contains('official college board');
+      if (aOfficial != bOfficial) return aOfficial ? -1 : 1;
+      final byYear = year(b).compareTo(year(a));
+      if (byYear != 0) return byYear;
+      final aPinned = provider.isLinkPinned(widget.resource.id, a);
+      final bPinned = provider.isLinkPinned(widget.resource.id, b);
+      if (aPinned != bPinned) return aPinned ? -1 : 1;
+      return a.toLowerCase().compareTo(b.toLowerCase());
+    }
+
+    return [...links]..sort(compare);
+  }
+
+  bool _hasReferenceSheet(Resource resource) => const {
+    'ap_stats',
+    'ap_chem',
+    'ap_csa',
+    'ap_csp',
+    'ap_precalc',
+    'ap_bio',
+    'ap_env_sci',
+    'ap_physics_1',
+    'ap_physics_2',
+    'ap_physics_c_em',
+    'ap_physics_c_mech',
+  }.contains(resource.id);
 
   String? _firstLabelContaining(Resource resource, String needle) {
     return resource.links.cast<String?>().firstWhere(
@@ -150,7 +191,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     final isSaved = provider.isSaved(widget.resource.id);
     final res = widget.resource;
     final examDeadline = _examDeadlineFor(res.id);
-    final isExamDateSaved = examDeadline != null &&
+    final isExamDateSaved =
+        examDeadline != null &&
         provider.hasPersonalDeadline(res.id, examDeadline.dateIso);
     final officialCourseLabel =
         _firstLabelContaining(res, 'official course page') ??
@@ -372,14 +414,13 @@ class _ApDetailScreenState extends State<ApDetailScreen>
             indicatorWeight: 2,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             isScrollable: true,
-            tabs: const [
-              Tab(text: 'Course Material'),
-              Tab(text: 'Notes'),
-              Tab(text: 'Videos'),
-              Tab(text: 'Practice Tests'),
-              Tab(text: 'Practice Questions'),
-              Tab(text: 'Question Banks'),
-              Tab(text: 'General Study Hubs'),
+            tabs: [
+              const Tab(text: 'Course Material'),
+              if (_hasReferenceSheet(res)) const Tab(text: 'Reference Sheet'),
+              const Tab(text: 'Videos'),
+              const Tab(text: 'Practice Tests'),
+              const Tab(text: 'Practice Questions & Banks'),
+              const Tab(text: 'General Study Hubs'),
             ],
           ),
         ),
@@ -394,11 +435,12 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                 items: _sortedLinks(_courseMaterial(res), provider),
                 emptyText: 'No course material added yet.',
               ),
-              _ApTab(
-                icon: Icons.description_outlined,
-                items: _sortedLinks(_notes(res), provider),
-                emptyText: 'No notes added yet.',
-              ),
+              if (_hasReferenceSheet(res))
+                _ApTab(
+                  icon: Icons.description_outlined,
+                  items: _sortedLinks(_referenceSheets(res), provider),
+                  emptyText: 'No official reference sheet added yet.',
+                ),
               _ApTab(
                 icon: Icons.smart_display_outlined,
                 items: _sortedLinks(_videos(res), provider),
@@ -406,18 +448,13 @@ class _ApDetailScreenState extends State<ApDetailScreen>
               ),
               _ApTab(
                 icon: Icons.assignment_outlined,
-                items: _sortedLinks(_practiceTests(res), provider),
+                items: _sortedPracticeTests(_practiceTests(res), provider),
                 emptyText: 'No practice tests added yet.',
               ),
               _ApTab(
                 icon: Icons.quiz_outlined,
-                items: _sortedLinks(_practiceQuestions(res), provider),
-                emptyText: 'No practice questions added yet.',
-              ),
-              _ApTab(
-                icon: Icons.account_tree_outlined,
-                items: _sortedLinks(_questionBanks(res), provider),
-                emptyText: 'No question banks added yet.',
+                items: _sortedLinks(_practiceQuestionsAndBanks(res), provider),
+                emptyText: 'No practice questions or question banks added yet.',
               ),
               _ApTab(
                 icon: Icons.auto_awesome_mosaic_outlined,
@@ -474,12 +511,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .toList();
   }
 
-  List<String> _notes(Resource r) {
-    return linksForResource(r)
-        .where(
-          (l) => l.toLowerCase().startsWith('notes ·') || _isCommunityNotes(l),
-        )
-        .toList();
+  List<String> _referenceSheets(Resource r) {
+    return linksForResource(
+      r,
+    ).where((l) => l.toLowerCase().startsWith('reference sheet ·')).toList();
   }
 
   List<String> _practiceTests(Resource r) {
@@ -487,16 +522,14 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .where((l) => !_isHeaderLink(l))
         .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
         .where((l) => !_isCommunityNotes(l))
-        .where(
-          (l) {
-            final lower = l.toLowerCase();
-            if (lower.startsWith('practice test ·')) return true;
-            if (lower.startsWith('practice questions ·')) return false;
-            return lower.contains('test') ||
-                lower.contains('frq') ||
-                lower.contains('exam');
-          },
-        )
+        .where((l) {
+          final lower = l.toLowerCase();
+          if (lower.startsWith('practice test ·')) return true;
+          if (lower.startsWith('practice questions ·')) return false;
+          return lower.contains('test') ||
+              lower.contains('frq') ||
+              lower.contains('exam');
+        })
         .toList();
   }
 
@@ -504,7 +537,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     // Anything that didn't get caught by the filters above goes here
     final matched = [
       ..._courseMaterial(r),
-      ..._notes(r),
+      ..._referenceSheets(r),
       ..._videos(r),
       ..._practiceTests(r),
     ];
@@ -515,8 +548,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .toList();
   }
 
-  List<String> _questionBanks(Resource r) =>
-      linksForResource(r).where(_isQuestionBank).toList();
+  List<String> _practiceQuestionsAndBanks(Resource r) => <String>{
+    ..._practiceQuestions(r),
+    ...linksForResource(r).where(_isQuestionBank),
+  }.toList();
 
   List<String> _generalStudyHubs(Resource r) =>
       linksForResource(r).where(_isGeneralStudyHub).toList();
@@ -550,10 +585,7 @@ class _HeaderActionButton extends StatelessWidget {
         foregroundColor: active ? kNavy : kTextSecondary,
         backgroundColor: active ? kGoldLight : kSurface,
         side: BorderSide(color: active ? kGold : kBorderLight),
-        textStyle: GoogleFonts.inter(
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-        ),
+        textStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500),
       ),
     );
     return tooltip == null ? button : Tooltip(message: tooltip!, child: button);

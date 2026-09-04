@@ -117,6 +117,9 @@ class Resource {
   String get fieldLabel => FieldColors.labelFor(field);
 
   String get categoryLabel {
+    if (category == 'research' && majorTags.contains('publication')) {
+      return 'Research Journal';
+    }
     const labels = {
       'competition': 'Competition',
       'ap': 'AP Course',

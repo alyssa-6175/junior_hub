@@ -201,7 +201,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                     ),
                   ),
                   Text(
-                    '${_all.length} resources',
+                    'Official prep, lessons, and practice',
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       color: kTextSecondary,
@@ -256,12 +256,10 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                 ),
                 ...List.generate(tabs.length, (i) {
                   final isBoard = i == 0;
-                  final count = bodies[i].length;
                   return _TabBtn(
                     label: tabs[i],
                     active: _tab == i,
                     icon: isBoard ? Icons.star_border : null,
-                    badge: count > 0 ? '$count' : null,
                     onTap: () => setState(() => _tab = i),
                   );
                 }),
@@ -543,13 +541,11 @@ class _TabBtn extends StatelessWidget {
   final String label;
   final bool active;
   final IconData? icon;
-  final String? badge;
   final VoidCallback onTap;
   const _TabBtn({
     required this.label,
     required this.active,
     this.icon,
-    this.badge,
     required this.onTap,
   });
 
@@ -584,27 +580,6 @@ class _TabBtn extends StatelessWidget {
                   color: active ? kNavy : kTextSecondary,
                 ),
               ),
-              if (badge != null) ...[
-                const SizedBox(width: 4),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 5,
-                    vertical: 1,
-                  ),
-                  decoration: BoxDecoration(
-                    color: kGold.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    badge!,
-                    style: const TextStyle(
-                      fontSize: 9,
-                      color: kGold,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
             ],
           ),
         ),

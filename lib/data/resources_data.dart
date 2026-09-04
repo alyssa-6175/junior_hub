@@ -696,8 +696,42 @@ Resource _competition({
   icon: icon,
   url: url,
   links: [title],
-  detailNote: detailNote ??
+  detailNote:
+      detailNote ??
       'Dates and eligibility can change between cycles, so confirm the current rules on the official site',
+);
+
+Resource _researchJournal({
+  required String id,
+  required String title,
+  required String field,
+  required String scope,
+  required List<String> majorTags,
+  required String applicationInfo,
+  required String description,
+  required String url,
+  required String detailNote,
+  String? deadline,
+  String? deadlineIso,
+  String timeCommitment = 'Rolling or issue-based review',
+}) => Resource(
+  id: id,
+  title: title,
+  category: 'research',
+  field: field,
+  scope: scope,
+  format: 'virtual',
+  locationNote: 'Online submission',
+  timeCommitment: timeCommitment,
+  majorTags: ['publication', 'research', ...majorTags],
+  applicationInfo: applicationInfo,
+  description: description,
+  deadline: deadline,
+  deadlineIso: deadlineIso,
+  icon: Icons.menu_book_outlined,
+  url: url,
+  links: ['Submission guidelines'],
+  detailNote: detailNote,
 );
 
 final List<Resource> allResources = [
@@ -746,27 +780,6 @@ final List<Resource> allResources = [
     links: ['MAA AMC registration', 'AoPS AMC archive'],
     detailNote:
         'Regular registration: October 15; late registration: October 28. AMC A: November 5; AMC B: November 13, 2026.',
-  ),
-  const Resource(
-    id: 'amc8',
-    title: 'AMC 8',
-    category: 'competition',
-    field: 'math',
-    scope: 'international',
-    format: 'in_person',
-    locationNote: 'Registered school or competition center',
-    timeCommitment: '40 minutes',
-    majorTags: ['math', 'problem_solving', 'logic'],
-    applicationInfo:
-        'Students register through an approved school or competition manager.',
-    description:
-        'A fast, approachable 25-question contest that rewards creative problem solving for students in grade 8 and below',
-    deadline: 'October 28, 2026 (early registration)',
-    deadlineIso: '2026-10-28T23:59:00-04:00',
-    icon: Icons.emoji_events,
-    url: 'https://maa.org/amcreg/',
-    links: ['MAA AMC registration', 'AoPS AMC archive'],
-    detailNote: 'Contest window: January 21–27, 2027.',
   ),
   const Resource(
     id: 'cac',
@@ -1228,8 +1241,7 @@ final List<Resource> allResources = [
     icon: Icons.waves_outlined,
     url: 'https://blueoceancompetition.org/compete/',
     links: ['Blue Ocean competition', '2027 competition timeline'],
-    detailNote:
-        'The submission deadline follows the student’s local time zone',
+    detailNote: 'The submission deadline follows the student’s local time zone',
   ),
   const Resource(
     id: 'technovation_girls',
@@ -1628,22 +1640,6 @@ final List<Resource> allResources = [
 
   // More current high-school competitions
   _competition(
-    id: 'frontier_cascadia',
-    title: 'Frontier Cascadia',
-    field: 'cs',
-    scope: 'regional',
-    format: 'in_person',
-    locationNote: 'Seattle, Washington',
-    majorTags: ['cs', 'app_dev', 'engineering', 'design'],
-    applicationInfo:
-        'Apply through the official participant form when the next event opens',
-    description:
-        'Spend a weekend building a real project with other high school students, mentors, workshops, and plenty of room for beginners',
-    url: 'https://frontiercascadia.org/',
-    timeCommitment: 'Weekend high school hackathon',
-    icon: Icons.code,
-  ),
-  _competition(
     id: 'mit_blueprint',
     title: 'MIT Blueprint',
     field: 'cs',
@@ -1674,6 +1670,60 @@ final List<Resource> allResources = [
     url: 'https://hacktj.org/',
     timeCommitment: '24-hour hackathon',
     icon: Icons.code,
+  ),
+  _competition(
+    id: 'hack_club_hackathons',
+    title: 'Hack Club High School Hackathons',
+    field: 'cs',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Online and in-person events worldwide',
+    majorTags: ['cs', 'app_dev', 'engineering', 'design'],
+    applicationInfo:
+        'Browse the live calendar and register with the organizer of each listed event',
+    description:
+        'Find a frequently updated calendar of hackathons built for high school students, including virtual events you can join from anywhere',
+    url: 'https://hackathons.hackclub.com/',
+    timeCommitment: 'Usually one day to one weekend per event',
+    detailNote:
+        'The calendar is maintained by Hack Club; eligibility and registration dates belong to each event organizer',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'banana_hacks_2026',
+    title: 'Banana Hacks 2026',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online worldwide',
+    majorTags: ['cs', 'app_dev', 'design', 'innovation'],
+    applicationInfo:
+        'High school students register online, then build and submit a project during the event window',
+    description:
+        'Join a fully online student hackathon with several days to form a team, attend workshops, and ship a software or hardware project',
+    url: 'https://www.bananahacks.tech/',
+    deadline: 'October 9–12, 2026 (event window)',
+    deadlineIso: '2026-10-09T00:00:00-04:00',
+    timeCommitment: 'Four-day online event',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'nasa_space_apps',
+    title: 'NASA International Space Apps Challenge',
+    field: 'engineering',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Local and virtual events worldwide',
+    majorTags: ['space', 'engineering', 'cs', 'data_sci', 'earth_science'],
+    applicationInfo:
+        'Choose a local or virtual event, register for free, and form a team to solve a NASA challenge',
+    description:
+        'Use NASA open data to build a project around space, Earth science, climate, technology, or storytelling in a global weekend hackathon',
+    url: 'https://www.spaceappschallenge.org/',
+    deadline: 'November 14–15, 2026 (event window)',
+    deadlineIso: '2026-11-14T00:00:00-05:00',
+    timeCommitment: 'One weekend plus optional preparation',
+    icon: Icons.rocket_launch,
   ),
   _competition(
     id: 'picoctf',
@@ -1877,8 +1927,7 @@ final List<Resource> allResources = [
     url: 'https://mathkangaroo.org/mks/',
     deadline: 'December 31, 2026 (regular registration)',
     deadlineIso: '2026-12-31T23:59:00-05:00',
-    detailNote:
-        'Late registration remains available through February 1, 2027',
+    detailNote: 'Late registration remains available through February 1, 2027',
     timeCommitment: '75-minute individual contest',
     icon: Icons.calculate,
   ),
@@ -2068,6 +2117,66 @@ final List<Resource> allResources = [
         'Present original biotechnology research and learn how scientific ideas move from the lab toward real-world use',
     url: 'https://biotechinstitute.org/biogeneius/',
     icon: Icons.biotech,
+  ),
+  _competition(
+    id: 'exploravision',
+    title: 'Toshiba/NSTA ExploraVision',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission for students in the U.S. and Canada',
+    majorTags: ['science', 'research', 'engineering', 'innovation'],
+    applicationInfo:
+        'Teams of two to four K–12 students work with a coach and submit a future-technology research project',
+    description:
+        'Research an existing technology, project how it could evolve at least ten years into the future, and explain the breakthroughs and consequences',
+    url: 'https://www.exploravision.org/',
+    deadline: 'January 27, 2027 at 8:00 PM ET',
+    deadlineIso: '2027-01-27T20:00:00-05:00',
+    timeCommitment: 'Multi-week team research and design project',
+    icon: Icons.science,
+  ),
+  _competition(
+    id: 'sarc',
+    title: 'High School Academic Research Competition (SARC)',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Fully online',
+    majorTags: [
+      'research',
+      'science',
+      'engineering',
+      'humanities',
+      'economics',
+    ],
+    applicationInfo:
+        'Students ages 13–18 enter individually, complete research bootcamps, and submit a short research proposal',
+    description:
+        'Develop a two-page proposal in a field of your choice, then pitch it by video if selected as a finalist',
+    url: 'https://www.researchcomp.org/welcome-to-sarc',
+    timeCommitment: 'Several weeks of guided research and a finalist pitch',
+    detailNote:
+        'The 2026 cycle is complete and the next registration dates have not been published; check the official timeline before applying',
+    icon: Icons.science,
+  ),
+  _competition(
+    id: 'hs3mt',
+    title: 'High School Three Minute Thesis (HS3MT)',
+    field: 'science',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online video submission',
+    majorTags: ['research', 'science_communication', 'science', 'humanities'],
+    applicationInfo:
+        'High school researchers prepare a three-minute presentation of original work from any discipline',
+    description:
+        'Explain a substantial research project clearly and persuasively in three minutes for national recognition and prizes',
+    url: 'https://www.hs3mt.org/',
+    deadline: 'Opens December 1, 2026',
+    deadlineIso: '2026-12-01T00:00:00-05:00',
+    timeCommitment: 'Research summary, single-slide design, and recorded pitch',
+    icon: Icons.record_voice_over,
   ),
 
   _competition(
@@ -2442,8 +2551,7 @@ final List<Resource> allResources = [
         'U.S. citizens or permanent residents age 18 or younger submit a significant completed body of work with two nominators',
     description:
         'Present a substantial original project in science, technology, engineering, mathematics, literature, music, philosophy, or an interdisciplinary field for a scholarship of up to \$100,000',
-    url:
-        'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
+    url: 'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
     timeCommitment: 'Major completed project plus a detailed application',
     icon: Icons.workspace_premium,
   ),
@@ -2463,9 +2571,9 @@ final List<Resource> allResources = [
         'https://www.nasa.gov/learning-resources/nasa-human-exploration-rover-challenge/',
     deadline: 'September 17, 2026 at 8:00 AM CT',
     deadlineIso: '2026-09-17T08:00:00-05:00',
-    detailNote:
-        'The 2027 team proposal is due at 8:00 AM Central Time',
-    timeCommitment: 'Nine-month engineering challenge; finals April 21–24, 2027',
+    detailNote: 'The 2027 team proposal is due at 8:00 AM Central Time',
+    timeCommitment:
+        'Nine-month engineering challenge; finals April 21–24, 2027',
     icon: Icons.rocket_launch,
   ),
   _competition(
@@ -2522,7 +2630,8 @@ final List<Resource> allResources = [
     field: 'biology',
     scope: 'international',
     format: 'hybrid',
-    locationNote: 'Regional and state events can lead to the International Leadership Conference',
+    locationNote:
+        'Regional and state events can lead to the International Leadership Conference',
     majorTags: ['health', 'biology', 'medicine', 'leadership'],
     applicationInfo:
         'Join an eligible HOSA chapter, select one event, and follow the deadlines set by your state association and advisor',
@@ -2539,7 +2648,12 @@ final List<Resource> allResources = [
     scope: 'international',
     format: 'virtual',
     locationNote: 'Fully online',
-    majorTags: ['writing', 'journalism_media', 'creative_writing', 'humanities'],
+    majorTags: [
+      'writing',
+      'journalism_media',
+      'creative_writing',
+      'humanities',
+    ],
     applicationInfo:
         'Middle and high school students register online and submit an essay in the creative, argumentative, or journalistic category',
     description:
@@ -2554,7 +2668,8 @@ final List<Resource> allResources = [
     field: 'business',
     scope: 'international',
     format: 'hybrid',
-    locationNote: 'Online preliminary round with an invited championship at Harvard',
+    locationNote:
+        'Online preliminary round with an invited championship at Harvard',
     majorTags: ['business', 'entrepreneurship', 'finance', 'public_policy'],
     applicationInfo:
         'Students in grades 6–12 may enter individually or in a team and develop a business plan around a published global challenge',
@@ -2580,6 +2695,196 @@ final List<Resource> allResources = [
     timeCommitment: 'Frequent contests, usually two to three hours each',
     icon: Icons.code,
   ),
+  _competition(
+    id: 'technology_student_association',
+    title: 'Technology Student Association Competitions',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote:
+        'Local and state conferences lead to the National TSA Conference',
+    majorTags: [
+      'engineering',
+      'cs',
+      'architecture',
+      'design',
+      'biotech',
+      'data_sci',
+    ],
+    applicationInfo:
+        'Join or start a high school TSA chapter, then enter events through your state association',
+    description:
+        'Choose from more than 40 high school events spanning coding, cybersecurity, data science, biotechnology, CAD, engineering design, robotics, drones, video games, and communication',
+    url: 'https://tsaweb.org/competitions',
+    timeCommitment: 'Chapter season with regional, state, and national rounds',
+    detailNote:
+        'The official 2027–2028 high school guide lists more than 40 events. State associations set qualifying and registration deadlines',
+    icon: Icons.engineering,
+  ),
+  _competition(
+    id: 'modeling_the_future_challenge',
+    title: 'Modeling the Future Challenge',
+    field: 'math',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online across the United States and its territories',
+    majorTags: ['math', 'statistics', 'data_sci', 'modeling', 'economics'],
+    applicationInfo:
+        'Teams of one to five U.S. high school students register with an adult coach; participants should be taking an advanced mathematics course',
+    description:
+        'Use mathematical modeling, data analysis, and risk management to investigate a real problem and communicate an evidence-based solution',
+    url: 'https://www.mtfchallenge.org/',
+    deadline: 'November 8, 2026 at 11:59 PM PT (team registration)',
+    deadlineIso: '2026-11-08T23:59:00-08:00',
+    timeCommitment: 'Multi-phase challenge from fall through spring',
+    detailNote:
+        'The 2026–27 scenario response and project proposal are due December 7, 2026; semifinalist project reports are due March 1, 2027',
+    icon: Icons.analytics_outlined,
+  ),
+  _competition(
+    id: 'the_earth_prize',
+    title: 'The Earth Prize',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online worldwide',
+    majorTags: [
+      'environmental_science',
+      'sustainability',
+      'research',
+      'engineering',
+      'entrepreneurship',
+    ],
+    applicationInfo:
+        'Students ages 13–19 register individually or in a team of up to five and submit an environmental solution',
+    description:
+        'Develop a practical, innovative response to an environmental challenge for mentorship, international recognition, and a share of \$100,000 in awards',
+    url: 'https://www.theearthprize.org/competition',
+    timeCommitment: 'Research-and-design project with several judging phases',
+    detailNote:
+        'The 2027 competition is open, but the official timeline page still displays the prior cycle dates; confirm the new submission deadline before planning',
+    icon: Icons.eco,
+  ),
+  _competition(
+    id: 'genius_olympiad',
+    title: 'GENIUS Olympiad',
+    field: 'science',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote:
+        'Online application with international finals in Rochester, New York',
+    majorTags: [
+      'environmental_science',
+      'research',
+      'engineering',
+      'cs',
+      'art',
+      'film_prod',
+    ],
+    applicationInfo:
+        'High school students submit an environmental project in science, coding, robotics, business, art, music, short film, or speech',
+    description:
+        'Present original work on an environmental issue in a selective international project competition with eight distinct disciplines',
+    url: 'https://geniusolympiad.org/',
+    deadline: 'March 1, 2027 at 9:00 AM ET (general application)',
+    deadlineIso: '2027-03-01T09:00:00-05:00',
+    timeCommitment: 'Project preparation plus June finals for selected teams',
+    detailNote:
+        'The 2027 portal is scheduled to open in December 2026. Affiliated fairs and some regions use separate selection deadlines',
+    icon: Icons.science_outlined,
+  ),
+  _competition(
+    id: 'samsung_solve_for_tomorrow',
+    title: 'Samsung Solve for Tomorrow',
+    field: 'engineering',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'School-based projects with virtual judging and national recognition',
+    majorTags: ['engineering', 'science', 'cs', 'design', 'social_impact'],
+    applicationInfo:
+        'A U.S. public-school educator age 21 or older submits a community-focused STEAM idea created with students in grades 6–12',
+    description:
+        'Apply STEAM to a real local problem and develop the idea through project, video, and presentation rounds for technology awards for your school',
+    url: 'https://www.samsung.com/us/solvefortomorrow/about/',
+    timeCommitment: 'School-year team project',
+    detailNote:
+        'Samsung announced that the 2026–27 cycle opens in August. The official page had not yet posted a verified closing date when this listing was reviewed',
+    icon: Icons.lightbulb_outline,
+  ),
+  _competition(
+    id: 'us_academic_decathlon',
+    title: 'United States Academic Decathlon',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Local and state competitions lead to national finals',
+    majorTags: [
+      'history',
+      'economics',
+      'math',
+      'science',
+      'literature',
+      'art',
+      'public_speaking',
+    ],
+    applicationInfo:
+        'Join or start a high school team; students compete in GPA-based divisions so the event is intentionally open to varied academic records',
+    description:
+        'Compete in ten events including economics, history and social science, mathematics, science, literature, art, music, essay, speech, and interview',
+    url: 'https://usad.org/',
+    deadline: 'April 29–May 1, 2027 (national finals)',
+    deadlineIso: '2027-04-29T00:00:00-05:00',
+    timeCommitment: 'Year-long team preparation and qualifying rounds',
+    detailNote:
+        'The 2026–27 theme is Journeys of Transformation. State programs set their own entry and qualifying deadlines',
+    icon: Icons.school_outlined,
+  ),
+  _competition(
+    id: 'iac_history_bee_bowl',
+    title: 'National History Bee & Bowl',
+    field: 'humanities',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'Regional tournaments across the United States plus national championships',
+    majorTags: ['history', 'geography', 'science', 'quiz_bowl'],
+    applicationInfo:
+        'High school students enter the individual Bee, a school-based Bowl team, or both through a regional tournament',
+    description:
+        'Test broad historical knowledge in fast-paced buzzer rounds, with related geography and science bees available through the same organizer',
+    url: 'https://www.iacompetitions.com/',
+    timeCommitment:
+        'Regional tournament with optional national and international advancement',
+    detailNote:
+        'The 2026–27 season is active. Registration and competition dates vary by regional tournament',
+    icon: Icons.history_edu,
+  ),
+  _competition(
+    id: 'bow_seat_ocean_awareness',
+    title: 'Ocean Awareness Contest',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online worldwide',
+    majorTags: [
+      'environmental_science',
+      'marine_science',
+      'art',
+      'creative_writing',
+      'film_prod',
+    ],
+    applicationInfo:
+        'Students ages 11–18 submit one original work in visual art, writing, poetry, film, multimedia, music, or dance with an adult sponsor',
+    description:
+        'Combine environmental understanding with creative work that explores an annual ocean theme',
+    url:
+        'https://bowseat.org/programs/ocean-awareness-contest/contest-overview/',
+    timeCommitment: 'One researched creative submission',
+    detailNote:
+        'The 2027 theme and deadline are announced in September; the prior cycle closed June 8, 2026',
+    icon: Icons.water,
+  ),
 
   // ===========================================================================
   // AP COURSES AND EXAM RESOURCES
@@ -2589,6 +2894,7 @@ final List<Resource> allResources = [
     title: 'AP Art History',
     category: 'ap',
     field: 'art_history',
+    majorTags: ['art', 'art_design', 'history', 'humanities'],
     description: 'Art history analysis and visual-context skills.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -2612,6 +2918,7 @@ final List<Resource> allResources = [
     title: 'AP Music Theory',
     category: 'ap',
     field: 'music',
+    majorTags: ['music', 'art_design', 'humanities'],
     description: 'Music theory, aural skills, and composition.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -2681,6 +2988,7 @@ final List<Resource> allResources = [
     title: 'AP African American Studies',
     category: 'ap',
     field: 'history',
+    majorTags: ['history', 'sociology', 'humanities', 'social_impact'],
     description: 'Interdisciplinary study of African American experiences.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -2748,6 +3056,7 @@ final List<Resource> allResources = [
     title: 'AP Human Geography',
     category: 'ap',
     field: 'geography',
+    majorTags: ['environmental_science', 'sociology', 'public_policy'],
     description:
         'Population, culture, cities, development, and spatial patterns.',
     deadline: 'TODO',
@@ -2771,6 +3080,7 @@ final List<Resource> allResources = [
     title: 'AP Macroeconomics',
     category: 'ap',
     field: 'economics',
+    majorTags: ['economics', 'business', 'finance', 'public_policy'],
     description:
         'National economies, stabilization policy, and international economics.',
     deadline: 'TODO',
@@ -2799,6 +3109,7 @@ final List<Resource> allResources = [
     title: 'AP Microeconomics',
     category: 'ap',
     field: 'economics',
+    majorTags: ['economics', 'business', 'finance'],
     description: 'Markets, firms, consumer choice, and market failure.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -2832,6 +3143,13 @@ final List<Resource> allResources = [
     title: 'AP Psychology',
     category: 'ap',
     field: 'psychology',
+    majorTags: [
+      'health_psych',
+      'psychology',
+      'neuroscience',
+      'pre_med',
+      'public_health',
+    ],
     description: 'Scientific foundations of behavior and mental processes.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -3077,6 +3395,7 @@ final List<Resource> allResources = [
     title: 'AP Statistics',
     category: 'ap',
     field: 'statistics',
+    majorTags: ['statistics', 'math', 'data_sci', 'business', 'psychology'],
     description:
         'Data analysis, probability, sampling, and statistical inference.',
     deadline: 'TODO',
@@ -3108,6 +3427,13 @@ final List<Resource> allResources = [
     title: 'AP Biology',
     category: 'ap',
     field: 'biology',
+    majorTags: [
+      'biology',
+      'pre_med',
+      'nursing',
+      'public_health',
+      'neuroscience',
+    ],
     description:
         'Cellular processes, genetics, evolution, ecology, and inquiry.',
     deadline: 'TODO',
@@ -3140,6 +3466,7 @@ final List<Resource> allResources = [
     title: 'AP Chemistry',
     category: 'ap',
     field: 'chemistry',
+    majorTags: ['chemistry', 'pre_med', 'nursing', 'engineering'],
     description:
         'Atomic structure, reactions, kinetics, equilibrium, and thermodynamics.',
     deadline: 'TODO',
@@ -3171,6 +3498,12 @@ final List<Resource> allResources = [
     title: 'AP Environmental Science',
     category: 'ap',
     field: 'env_sci',
+    majorTags: [
+      'environmental_science',
+      'biology',
+      'chemistry',
+      'public_policy',
+    ],
     description: 'Environmental systems, human impacts, and solutions.',
     deadline: 'TODO',
     deadlineIso: '',
@@ -3487,6 +3820,67 @@ final List<Resource> allResources = [
   ),
 
   const Resource(
+    id: 'ap_2d_art',
+    title: 'AP 2-D Art and Design',
+    category: 'ap',
+    field: 'art_history',
+    majorTags: ['art', 'art_design', 'design', 'humanities'],
+    description:
+        'Build and submit a portfolio showing sustained investigation and skill with two-dimensional design',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-2-d-art-and-design',
+    links: ['AP 2-D Art and Design Official Course Page'],
+    apSubCategory: 'arts',
+  ),
+  const Resource(
+    id: 'ap_3d_art',
+    title: 'AP 3-D Art and Design',
+    category: 'ap',
+    field: 'art_history',
+    majorTags: ['art', 'art_design', 'design', 'engineering', 'humanities'],
+    description:
+        'Develop a portfolio focused on depth, space, form, and three-dimensional materials and processes',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-3-d-art-and-design',
+    links: ['AP 3-D Art and Design Official Course Page'],
+    apSubCategory: 'arts',
+  ),
+  const Resource(
+    id: 'ap_drawing',
+    title: 'AP Drawing',
+    category: 'ap',
+    field: 'art_history',
+    majorTags: ['art', 'art_design', 'design', 'humanities'],
+    description:
+        'Create a drawing portfolio that demonstrates sustained inquiry, experimentation, and technical skill',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-drawing',
+    links: ['AP Drawing Official Course Page'],
+    apSubCategory: 'arts',
+  ),
+  const Resource(
+    id: 'ap_research',
+    title: 'AP Research',
+    category: 'ap',
+    field: 'all',
+    majorTags: ['research', 'all_subjects'],
+    description:
+        'Design a yearlong investigation, analyze evidence, write an academic paper, and defend the work in a presentation',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.school,
+    url: 'https://apstudents.collegeboard.org/courses/ap-research',
+    links: ['AP Research Official Course Page'],
+    apSubCategory: 'capstone',
+  ),
+
+  const Resource(
     id: 'ap_seminar',
     title: 'AP Seminar',
     category: 'ap',
@@ -3517,7 +3911,7 @@ final List<Resource> allResources = [
       'AP Business with Personal Finance AP Classroom',
       'AP Business with Personal Finance Official Exam Page',
     ],
-    apSubCategory: 'history',
+    apSubCategory: 'career',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
@@ -5000,6 +5394,259 @@ final List<Resource> allResources = [
   // ===========================================================================
   // RESEARCH PROGRAMS
   // ===========================================================================
+  _researchJournal(
+    id: 'american_journal_student_research',
+    title: 'American Journal of Student Research',
+    field: 'all',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'engineering',
+      'business',
+      'economics',
+      'humanities',
+    ],
+    applicationInfo:
+        'Submit original research, a review, meta-analysis, or perspective through the journal portal. Typical manuscripts run 3,000 to 5,500 words',
+    description:
+        'A multidisciplinary journal for high school and undergraduate authors who are ready to turn a substantial paper into a formal manuscript',
+    deadline: 'September 30, 2026',
+    deadlineIso: '2026-09-30T23:59:00-04:00',
+    url: 'https://ajosr.org/information-to-authors/',
+    detailNote:
+        'The current publication charge is \$496 after acceptance. Optional fast-track review costs \$286, and fee reductions may be requested when submitting',
+  ),
+  _researchJournal(
+    id: 'columbia_junior_science_journal',
+    title: 'Columbia Junior Science Journal',
+    field: 'science',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'biology',
+      'chemistry',
+      'physics',
+      'engineering',
+      'psychology',
+    ],
+    applicationInfo:
+        'High school students may submit an original research paper or review article in the natural sciences, physical sciences, engineering, or social sciences',
+    description:
+        'A student-run science journal supported by the Columbia Undergraduate Science Journal, with a staged editorial and revision process',
+    deadline: 'September 30, 2026',
+    deadlineIso: '2026-09-30T23:59:00-04:00',
+    url: 'https://columbiajuniorsciencejournal.org/',
+    detailNote:
+        'The official 2026 to 2027 timeline lists decisions and revisions through December, followed by publication in March 2027',
+  ),
+  _researchJournal(
+    id: 'concord_review_journal',
+    title: 'The Concord Review',
+    field: 'humanities',
+    scope: 'international',
+    majorTags: ['history', 'humanities', 'english', 'writing'],
+    applicationInfo:
+        'Submit a secondary-school history research paper completed before graduation, with Chicago or Turabian endnotes and a bibliography',
+    description:
+        'A selective quarterly journal for long-form history research papers written by secondary school students',
+    deadline: 'November 1, 2026 consideration date',
+    deadlineIso: '2026-11-01T23:59:00-04:00',
+    timeCommitment: 'Quarterly consideration dates',
+    url: 'https://tcr.org/Submit-redirect',
+    detailNote:
+        'Papers average about 8,500 words and roughly 5 percent are accepted. A submission fee is required, so check the current amount before submitting. Later consideration dates are February 1, May 1, and August 1',
+  ),
+  _researchJournal(
+    id: 'international_hs_research_journal',
+    title: 'International Journal of High School Research',
+    field: 'all',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'engineering',
+      'math',
+      'cs',
+      'psychology',
+      'social_science',
+    ],
+    applicationInfo:
+        'Submit original research or a literature review using the journal template. The journal requests three possible outside expert reviewers',
+    description:
+        'A peer-reviewed journal for high school research across science, engineering, technology, mathematics, and behavioral or social science',
+    url: 'https://ijhsr.terrajournals.org/submissions.html',
+    detailNote:
+        'There is no submission fee. A \$350 publication fee is charged after acceptance, with scholarships available for qualifying students. Review and publication commonly take three to six months',
+  ),
+  _researchJournal(
+    id: 'journal_emerging_investigators',
+    title: 'Journal of Emerging Investigators',
+    field: 'science',
+    scope: 'international',
+    majorTags: ['science', 'biology', 'chemistry', 'physics'],
+    applicationInfo:
+        'Authors must be age 13 or older and submit before starting university. A senior mentor submits the manuscript, and each paper needs at least two authors',
+    description:
+        'A nonprofit journal built for hypothesis-driven biological and physical science research by middle and high school students',
+    url: 'https://www.emerginginvestigators.org/submissions/guidelines',
+    detailNote:
+        'The current \$49 fee is paid at submission, with no later publication charge. Limited fee waivers are available. General reviews, pure mathematics, and pure computer science are outside its scope',
+  ),
+  _researchJournal(
+    id: 'journal_high_school_science',
+    title: 'Journal of High School Science',
+    field: 'science',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'biology',
+      'chemistry',
+      'physics',
+      'engineering',
+      'math',
+      'cs',
+    ],
+    applicationInfo:
+        'Submit a research paper, review paper, or technical note that follows the journal formatting and research-ethics requirements',
+    description:
+        'A peer-reviewed STEAM journal focused on publishing original work by high school researchers',
+    url: 'https://jhss.scholasticahq.com/for-authors',
+    detailNote:
+        'The journal currently charges a non-refundable \$85 submission fee. Read the full author checklist before paying',
+  ),
+  _researchJournal(
+    id: 'national_hs_journal_science',
+    title: 'National High School Journal of Science (NHSJS)',
+    field: 'science',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'biology',
+      'chemistry',
+      'physics',
+      'cs',
+      'psychology',
+    ],
+    applicationInfo:
+        'Use the submission form for original research. Review the journal categories and prepare a complete manuscript before starting the form',
+    description:
+        'A free online peer-reviewed journal that publishes science research and analysis written for a high school audience',
+    url: 'https://nhsjs.com/submit-your-work/submit-original-research/',
+    detailNote:
+        'The journal describes itself as free and accepts work from aspiring high school scientists across a broad range of fields',
+  ),
+  _researchJournal(
+    id: 'ojss',
+    title: 'Oxford Journal of Student Scholarship',
+    field: 'all',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'engineering',
+      'medicine',
+      'business',
+      'economics',
+      'humanities',
+      'law',
+    ],
+    applicationInfo:
+        'High school and undergraduate students may submit work in the sciences, engineering, health, social sciences, humanities, business, or law',
+    description:
+        'A broad student journal for writers who want one publication route that accepts both STEM and humanities scholarship',
+    url: 'https://www.oxfordjss.org/about-3',
+    detailNote:
+        'This is an independent publication and is not affiliated with the University of Oxford. The current \$200 publication charge is due after acceptance. Optional fast-track review costs \$125',
+  ),
+  _researchJournal(
+    id: 'pennscience_hs_journal',
+    title: 'PennScience High School Journal',
+    field: 'all',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'engineering',
+      'math',
+      'cs',
+      'psychology',
+      'social_science',
+    ],
+    applicationInfo:
+        'Submit a concise original research manuscript through the high school division. The journal currently asks for papers around three to five pages',
+    description:
+        'A high school research journal hosted at the University of Pennsylvania and connected with PennScience',
+    url: 'https://www.pshsj.org/',
+    detailNote:
+        'The official page lists November 1 as its submission closing date, but the cycle label may not yet reflect the newest year. Confirm the date on the site before submitting',
+  ),
+  _researchJournal(
+    id: 'stem_fellowship_journal',
+    title: 'STEM Fellowship Journal',
+    field: 'science',
+    scope: 'international',
+    majorTags: ['science', 'engineering', 'math', 'cs', 'biology', 'medicine'],
+    applicationInfo:
+        'High school and undergraduate students may submit original investigations, critical reviews, viewpoints, or conference proceedings through the UBC-hosted portal',
+    description:
+        'An open-access journal where student work is screened by an editor and then reviewed by a subject-matter expert',
+    url: 'https://ojs.library.ubc.ca/index.php/sfj/about/submissions',
+    detailNote:
+        'The current publication fee is \$400 CAD after acceptance unless a discount or waiver applies. Submissions use a journal template and blind-review formatting',
+  ),
+  _researchJournal(
+    id: 'young_researcher_journal',
+    title: 'The Young Researcher',
+    field: 'all',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'humanities',
+      'history',
+      'psychology',
+      'social_science',
+    ],
+    applicationInfo:
+        'Secondary school students may submit original research of up to 5,000 words, plus a short abstract and four to six keywords',
+    description:
+        'An open-access, blind peer-reviewed journal for original secondary-school research across the sciences, humanities, and social sciences',
+    url: 'https://theyoungresearcher.com/index.html',
+    detailNote:
+        'The public guidelines are older and do not clearly publish a current cycle date, so confirm that submissions are active before preparing a paper',
+  ),
+  _researchJournal(
+    id: 'young_scientists_journal',
+    title: 'Young Scientists Journal',
+    field: 'science',
+    scope: 'international',
+    majorTags: [
+      'science',
+      'biology',
+      'chemistry',
+      'physics',
+      'engineering',
+      'math',
+      'cs',
+    ],
+    applicationInfo:
+        'Writers ages 12 to 20 may submit original research, a review article, or a shorter science magazine piece',
+    description:
+        'A youth-led science journal that gives teenage researchers and science writers several ways to publish their work',
+    url: 'https://www.youngscientistsjournal.com/publish',
+    detailNote:
+        'The volunteer-run review process can take several months. Follow the requested Chicago style and British English formatting',
+  ),
+  _researchJournal(
+    id: 'youth_medical_journal',
+    title: 'Youth Medical Journal',
+    field: 'biology',
+    scope: 'international',
+    majorTags: ['biology', 'medicine', 'public_health', 'psychology'],
+    applicationInfo:
+        'Young writers may submit medical original research, reviews, or commentary using the online publication form',
+    description:
+        'A student medical publication for research and evidence-based writing on health, medicine, and related science',
+    url: 'https://youthmedicaljournal.com/publish/',
+    detailNote:
+        'The journal says there are no submission, publication, or editorial fees. Its submission page was last updated in 2024, so confirm the form is still active before investing substantial time',
+  ),
   const Resource(
     id: 'rsi',
     title: 'RSI (Research Science Institute)',
@@ -6713,13 +7360,6 @@ const List<DeadlineItem> upcomingDeadlines = [
     majorTags: ['cs', 'app_dev', 'civics'],
   ),
   DeadlineItem(
-    title: 'AMC 8',
-    date: 'October 28, 2026 (early registration)',
-    dateIso: '2026-10-28T23:59:00-04:00',
-    resourceId: 'amc8',
-    majorTags: ['math', 'problem_solving', 'logic'],
-  ),
-  DeadlineItem(
     title: 'C-SPAN StudentCam 2027',
     date: 'January 20, 2027',
     dateIso: '2027-01-20T23:59:00-05:00',
@@ -6740,6 +7380,55 @@ const List<DeadlineItem> upcomingDeadlines = [
     resourceId: 'diamond_challenge',
     majorTags: ['business', 'entrepreneurship', 'social_impact'],
   ),
+  DeadlineItem(
+    title: 'Banana Hacks 2026',
+    date: 'October 9–12, 2026 (online event)',
+    dateIso: '2026-10-09T00:00:00-04:00',
+    resourceId: 'banana_hacks_2026',
+    majorTags: ['cs', 'app_dev', 'design', 'innovation'],
+  ),
+  DeadlineItem(
+    title: 'Scholastic Art & Writing Awards',
+    date: 'December 1, 2026–January 6, 2027 (varies by region)',
+    dateIso: '2026-12-01T23:59:00-05:00',
+    resourceId: 'scholastic_awards',
+    majorTags: ['creative_writing', 'art', 'journalism_media'],
+  ),
+  DeadlineItem(
+    title: 'NASA International Space Apps Challenge',
+    date: 'November 14–15, 2026',
+    dateIso: '2026-11-14T00:00:00-05:00',
+    resourceId: 'nasa_space_apps',
+    majorTags: ['space', 'engineering', 'cs', 'data_sci', 'earth_science'],
+  ),
+  DeadlineItem(
+    title: 'Toshiba/NSTA ExploraVision',
+    date: 'January 27, 2027 at 8:00 PM ET',
+    dateIso: '2027-01-27T20:00:00-05:00',
+    resourceId: 'exploravision',
+    majorTags: ['science', 'research', 'engineering', 'innovation'],
+  ),
+  DeadlineItem(
+    title: 'Modeling the Future Challenge',
+    date: 'November 8, 2026 at 11:59 PM PT',
+    dateIso: '2026-11-08T23:59:00-08:00',
+    resourceId: 'modeling_the_future_challenge',
+    majorTags: ['math', 'statistics', 'data_sci', 'modeling', 'economics'],
+  ),
+  DeadlineItem(
+    title: 'GENIUS Olympiad 2027',
+    date: 'March 1, 2027 at 9:00 AM ET',
+    dateIso: '2027-03-01T09:00:00-05:00',
+    resourceId: 'genius_olympiad',
+    majorTags: [
+      'environmental_science',
+      'research',
+      'engineering',
+      'cs',
+      'art',
+      'film_prod',
+    ],
+  ),
 
   // ===========================================================================
   // RESEARCH DEADLINES
@@ -6757,8 +7446,10 @@ const List<DeadlineItem> upcomingDeadlines = [
 // ===========================================================================
 const Map<String, String> apQuestionBankHubs = {
   'Albert (paid)': 'https://www.albert.io/subjects/high-school/ap',
-  'AP Practice Exams': 'https://www.appracticeexams.com/',
+  'Fiveable': 'https://fiveable.me/ap',
+  'Knowt': 'https://knowt.com/ap',
   'CrackAP': 'https://www.crackap.com/',
+  'PracticeAP': 'https://practiceap.com/',
   'UWorld (paid)': 'https://collegeprep.uworld.com/ap/',
   'Varsity Tutors': 'https://www.varsitytutors.com/practice',
 };
@@ -6766,9 +7457,7 @@ const Map<String, String> apQuestionBankHubs = {
 const Map<String, String> apGeneralStudyHubs = {
   'AP Daily': 'https://apstudents.collegeboard.org/ap-daily-archived',
   'APStudy': 'https://apstudy.org/',
-  'Fiveable': 'https://fiveable.me/ap',
   'Kaplan (paid)': 'https://www.kaptest.com/ap',
-  'Knowt': 'https://knowt.com/ap',
   'Marco Learning': 'https://marcolearning.com/students/ap-study-guides/',
   'Prep Den (paid)': 'https://prepden.com/',
   'Save My Exams (paid)': 'https://www.savemyexams.com/ap/',
@@ -6779,69 +7468,189 @@ const Map<String, String> _commonApLinks = {
   ...apGeneralStudyHubs,
 };
 
-const Map<String, Map<String, String>> _apBookLinks = {
-  'ap_bio': {
-    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
-    'Course material · Barron’s AP Biology Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
-    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
-  },
-  'ap_calc_ab': {
-    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
-    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
-    'Course material · Pearson Calculus in SI Units (Amazon)': 'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
-  },
+const Map<String, Map<String, String>> _recentOfficialApMirrors = {
   'ap_calc_bc': {
-    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
+    'Practice test · 2023 College Board AP Calculus BC MCQ (Scribd mirror)':
+        'https://www.scribd.com/document/915289457/2023-Calculus-Bc-MC',
+    'Practice questions · 2023 AP Daily Calculus BC MCQ sessions (Scribd mirror)':
+        'https://www.scribd.com/document/729973869/Calc-2',
+    'Practice test · 2019 College Board AP Calculus BC MCQ and answer key (Scribd mirror)':
+        'https://www.scribd.com/document/904476304/AP-Calculus-BC-Practice-Exam-2019',
   },
   'ap_chem': {
-    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
-    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
+    'Practice test · 2023 College Board AP Chemistry MCQ (Scribd mirror)':
+        'https://www.scribd.com/document/860278058/Practice-Mc-2024-AP-Chem-2023-Mcq-Iep',
+    'Practice questions · 2024 College Board AP Daily Chemistry MCQ session (Scribd mirror)':
+        'https://www.scribd.com/document/727295839/2024-AP-DAILY-PRACTICE-SESSIONS-AP-Chemistry-Session-1-MCQ-Individual-Questions',
   },
-  'ap_chinese': {
-    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
-  },
-  'ap_csa': {
-    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
-    'Course material · Barron’s AP Computer Science A 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
-    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
-  },
-  'ap_csp': {
-    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
-  },
-  'ap_env_sci': {
-    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
-    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
-  },
-  'ap_french': {
-    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
-    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
-  },
-  'ap_human_geo': {
-    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
-    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
-    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
+  'ap_physics_1': {
+    'Practice test · 2023 College Board AP Physics 1 international MCQ (Scribd mirror)':
+        'https://www.scribd.com/document/816426789/TB-InternationalExam2023MCQ-1',
   },
   'ap_macro': {
-    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
+    'Practice questions · 2024 AP Daily Macroeconomics MCQ session (Scribd mirror)':
+        'https://www.scribd.com/document/945914036/AP-Macroeconomics-Session1-Worksheet',
+    'Practice test · 2023 College Board AP Macroeconomics MCQ (Scribd mirror)':
+        'https://www.scribd.com/document/999443575/AP-2023%E7%9C%9F%E9%A2%981',
   },
   'ap_micro': {
-    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
+    'Practice test · 2013 College Board AP Microeconomics released exam (Scribd mirror)':
+        'https://www.scribd.com/document/864545546/2013-ap-micro-past-exam',
   },
-  'ap_physics_c_mech': {
-    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
-    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
-    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
-  },
-  'ap_psych': {
-    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
-    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)': 'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
-    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
+  'ap_stats': {
+    'Practice questions · 2024 AP Daily Statistics MCQ session (Scribd mirror)':
+        'https://www.scribd.com/document/909267275/AP-Statistics-Session1-Worksheet',
   },
   'ap_us_history': {
-    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)': 'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
+    'Practice questions · 2016 College Board AP U.S. History sample MCQ (Scribd mirror)':
+        'https://www.scribd.com/document/754427637/Multiple-Choice-Practice-Periods-6-9',
+  },
+  'ap_euro': {
+    'Practice test · 2015 College Board AP European History practice exam (Scribd mirror)':
+        'https://www.scribd.com/document/915472331/AP-Euro-2015',
   },
   'ap_world': {
-    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)': 'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
+    'Practice questions · 2024 AP Daily World History MCQ session (Scribd mirror)':
+        'https://www.scribd.com/document/915479134/AP-World-History-MCQ-Worksheet-2',
+    'Practice test · College Board AP World History: Modern practice exam (Scribd mirror)':
+        'https://www.scribd.com/document/717093782/Practice-Exam-MCQ',
+  },
+};
+
+Map<String, String> _providerLinksFor(Resource resource) {
+  final result = <String, String>{};
+  for (final label in resource.links) {
+    final lower = label.toLowerCase();
+    if (lower.contains('fiveable')) {
+      result['Fiveable'] = kLinkUrls[label] ?? apQuestionBankHubs['Fiveable']!;
+    }
+    if (lower.contains('knowt')) {
+      result['Knowt'] = kLinkUrls[label] ?? apQuestionBankHubs['Knowt']!;
+    }
+    if (lower.contains('crackap')) {
+      result['CrackAP'] = kLinkUrls[label] ?? apQuestionBankHubs['CrackAP']!;
+    }
+  }
+
+  // PracticeAP organizes released FRQs for established AP exams. New pilot
+  // courses do not yet have a released-question archive.
+  if (!const {
+    'ap_business_finance',
+    'ap_cybersecurity',
+  }.contains(resource.id)) {
+    result['PracticeAP'] = apQuestionBankHubs['PracticeAP']!;
+  }
+  return result;
+}
+
+const Set<String> _apsWithReferenceSheets = {
+  'ap_stats',
+  'ap_chem',
+  'ap_csa',
+  'ap_csp',
+  'ap_precalc',
+  'ap_bio',
+  'ap_env_sci',
+  'ap_physics_1',
+  'ap_physics_2',
+  'ap_physics_c_em',
+  'ap_physics_c_mech',
+};
+
+const Map<String, Map<String, String>> _apBookLinks = {
+  'ap_bio': {
+    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
+    'Course material · Barron’s AP Biology Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
+    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
+  },
+  'ap_calc_ab': {
+    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
+    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
+    'Course material · Pearson Calculus in SI Units (Amazon)':
+        'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
+  },
+  'ap_calc_bc': {
+    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
+  },
+  'ap_chem': {
+    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
+    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
+  },
+  'ap_chinese': {
+    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
+  },
+  'ap_csa': {
+    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
+    'Course material · Barron’s AP Computer Science A 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
+    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
+  },
+  'ap_csp': {
+    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
+  },
+  'ap_env_sci': {
+    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
+    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
+  },
+  'ap_french': {
+    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
+    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
+  },
+  'ap_human_geo': {
+    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
+    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
+    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
+  },
+  'ap_macro': {
+    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
+  },
+  'ap_micro': {
+    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
+  },
+  'ap_physics_c_mech': {
+    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
+    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
+    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
+  },
+  'ap_psych': {
+    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
+    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
+    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
+  },
+  'ap_us_history': {
+    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)':
+        'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
+  },
+  'ap_world': {
+    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)':
+        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
   },
 };
 
@@ -7676,6 +8485,17 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   },
 };
 
+const String _officialFrqLabel =
+    'Practice test · Official College Board FRQs (latest and past)';
+const String _officialBluebookLabel =
+    'Practice test · Official College Board Bluebook test preview';
+const String _officialApClassroomLabel =
+    'Practice questions · Official AP Classroom MCQ and FRQ bank';
+const String _officialCourseSamplesLabel =
+    'Practice questions · Official College Board course sample questions';
+const String _officialReferenceSheetLabel =
+    'Reference sheet · Official College Board exam reference information';
+
 /// Every link displayed for a resource, including verified AP supplements.
 List<String> linksForResource(Resource resource) {
   if (resource.category != 'ap') return resource.links;
@@ -7689,6 +8509,14 @@ List<String> linksForResource(Resource resource) {
 
   return <String>{
     ...resource.links,
+    _officialFrqLabel,
+    _officialBluebookLabel,
+    _officialApClassroomLabel,
+    _officialCourseSamplesLabel,
+    if (_apsWithReferenceSheets.contains(resource.id))
+      _officialReferenceSheetLabel,
+    ..._providerLinksFor(resource).keys,
+    ...?_recentOfficialApMirrors[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
     ...?_driveApFileLinks[resource.id]?.keys.where(
       (label) => !isOldCommercialBook(label),
@@ -7737,8 +8565,36 @@ List<Resource> sortBySeen(List<Resource> resources, Set<String> seen) {
 /// Returns the best URL for a given link label + resource.
 /// Checks kLinkUrls first, falls back to resource.url.
 String? resolveUrl(String linkLabel, Resource resource) {
+  if (resource.category == 'ap') {
+    final slug = Uri.tryParse(resource.url ?? '')?.pathSegments.lastOrNull;
+    if (linkLabel == _officialFrqLabel) {
+      if (const {
+        'ap_business_finance',
+        'ap_cybersecurity',
+      }.contains(resource.id)) {
+        return 'https://apcentral.collegeboard.org/courses/past-exam-questions';
+      }
+      return slug == null
+          ? 'https://apcentral.collegeboard.org/courses/past-exam-questions'
+          : 'https://apcentral.collegeboard.org/courses/$slug/exam/past-exam-questions';
+    }
+    if (linkLabel == _officialBluebookLabel) {
+      return 'https://apstudents.collegeboard.org/ap-exams-what-to-know/practice-for-exams';
+    }
+    if (linkLabel == _officialApClassroomLabel) {
+      return 'https://myap.collegeboard.org/';
+    }
+    if (linkLabel == _officialCourseSamplesLabel ||
+        linkLabel == _officialReferenceSheetLabel) {
+      return slug == null
+          ? resource.url
+          : 'https://apcentral.collegeboard.org/courses/$slug/exam';
+    }
+  }
   return kLinkUrls[linkLabel] ??
       _commonApLinks[linkLabel] ??
+      _providerLinksFor(resource)[linkLabel] ??
+      _recentOfficialApMirrors[resource.id]?[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??
       _apBookLinks[resource.id]?[linkLabel] ??
