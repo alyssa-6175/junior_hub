@@ -1116,6 +1116,148 @@ final List<Resource> allResources = [
     detailNote:
         'The 2026 cycle has passed, and the next registration deadline is not yet published.',
   ),
+  _competition(
+    id: 'usaaao',
+    title: 'USA Astronomy and Astrophysics Olympiad (USAAAO)',
+    field: 'physics',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online exams with in-person school proctoring',
+    majorTags: ['astronomy', 'astrophysics', 'physics', 'math', 'space'],
+    applicationInfo:
+        'A teacher proctors the first-round exam; any student may participate, while U.S. citizenship or permanent residency is required for Team USA',
+    description:
+        'Advance through astronomy and astrophysics exams, national training, and team selection for the International Olympiad on Astronomy and Astrophysics',
+    url: 'https://usaaao.org/',
+    timeCommitment: 'Three exam rounds plus training for selected students',
+    detailNote:
+        'The first round is approximately 30 multiple-choice questions. The 2027 registration schedule has not yet been published; the prior cycle registered during January',
+    icon: Icons.nightlight_round,
+  ),
+  _competition(
+    id: 'useso',
+    title: 'United States Earth Science Olympiad (USESO)',
+    field: 'science',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote:
+        'National online exam followed by a residential training camp',
+    majorTags: [
+      'earth_science',
+      'environmental_science',
+      'geology',
+      'climate',
+      'research',
+    ],
+    applicationInfo:
+        'High school students register for the National Open Exam with an approved proctor; top scorers are invited to training camp',
+    description:
+        'Study geology, meteorology, oceanography, astronomy, and environmental systems while competing for the U.S. team at the International Earth Science Olympiad',
+    url: 'https://www.useso.org/',
+    timeCommitment: 'Spring exam and a summer camp for qualifiers',
+    detailNote:
+        'Registration for the 2027 National Open Exam is expected around December 2026; the exam is normally held in March',
+    icon: Icons.public,
+  ),
+  _competition(
+    id: 'usaebo',
+    title: 'USA Economics and Business Olympiad (USAEBO)',
+    field: 'business',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['economics', 'business', 'finance', 'problem_solving'],
+    applicationInfo:
+        'K–12 students may register for the open first round; Team USA has additional residency or school-enrollment eligibility rules',
+    description:
+        'Compete in economics and business through two national rounds for a chance to become one of five U.S. representatives at the International Economics Olympiad',
+    url: 'https://www.usaebo.org/2027-usaebo',
+    deadline: 'February 27, 2027 at 11:59 PM ET',
+    deadlineIso: '2027-02-27T23:59:00-05:00',
+    timeCommitment: 'Two online rounds; first round March 13, 2027',
+    icon: Icons.account_balance,
+  ),
+  _competition(
+    id: 'us_geography_championships',
+    title: 'United States Geography Championships',
+    field: 'humanities',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Qualifying exams and designated competition events',
+    majorTags: [
+      'geography',
+      'earth_science',
+      'history',
+      'international_relations',
+    ],
+    applicationInfo:
+        'Eligible high school students take the Varsity qualifying competition through International Academic Competitions',
+    description:
+        'Test physical, human, economic, and political geography through the official U.S. qualifying route for the International Geography Olympiad',
+    url:
+        'https://www.competitionsciences.org/competitions/us-geography-championships/',
+    timeCommitment:
+        'National qualifying competition with international selection',
+    detailNote:
+        'Qualifying dates depend on the participating IAC tournament and the international championship cycle',
+    icon: Icons.public,
+  ),
+  _competition(
+    id: 'usacyo',
+    title: 'USA Cybersecurity Olympiad (USACyO)',
+    field: 'cs',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cybersecurity', 'cs', 'networking', 'cryptography'],
+    applicationInfo:
+        'K–12 students register individually for the open first round; Team USA eligibility has citizenship, residency, or U.S. school requirements',
+    description:
+        'Solve security challenges across two national rounds through the sole U.S. pathway to the International Cybersecurity Olympiad',
+    url: 'https://www.usacyo.org/',
+    deadline: 'February 28, 2027 (first round)',
+    deadlineIso: '2027-02-28T00:00:00-05:00',
+    timeCommitment: 'Two online rounds; second round March 28, 2027',
+    detailNote:
+        'Registration is open. The organizer has published competition dates but not a separate registration-closing date',
+    icon: Icons.security,
+  ),
+  _competition(
+    id: 'usmdo',
+    title: 'U.S. Medicine and Disease Olympiad (USMDO)',
+    field: 'biology',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online across the United States',
+    majorTags: ['medicine', 'health', 'biology', 'genetics', 'anatomy'],
+    applicationInfo:
+        'U.S. high school students register individually for the annual online exam',
+    description:
+        'Answer advanced questions in cell biology, genetics, human physiology, and disease through the U.S. qualifying competition for the International Medicine and Disease Olympiad',
+    url: 'https://www.usmdo.org/',
+    timeCommitment: 'Two-hour, 160-question online exam',
+    detailNote:
+        'The next cycle has not yet been announced. The official site currently displays the completed August 2026 event',
+    icon: Icons.medical_services_outlined,
+  ),
+  _competition(
+    id: 'american_philosophy_olympiad',
+    title: 'American Philosophy Olympiad',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online proctored essay competition',
+    majorTags: ['philosophy', 'ethics', 'writing', 'world_languages'],
+    applicationInfo:
+        'U.S. high school students with strong French, Spanish, or German apply for a proctored philosophy essay competition',
+    description:
+        'Write a philosophical essay in a non-native language for the chance to become one of two U.S. representatives at the International Philosophy Olympiad',
+    url: 'https://www.americanphilosophyolympiad.org/',
+    timeCommitment: 'Three-hour essay plus possible finalist interview',
+    detailNote:
+        'The 2027 registration details will be posted closer to the February or March competition window',
+    icon: Icons.psychology_alt_outlined,
+  ),
 
   const Resource(
     id: 'first_robotics',
@@ -7429,6 +7571,20 @@ const List<DeadlineItem> upcomingDeadlines = [
       'film_prod',
     ],
   ),
+  DeadlineItem(
+    title: 'USA Economics and Business Olympiad 2027',
+    date: 'February 27, 2027 at 11:59 PM ET',
+    dateIso: '2027-02-27T23:59:00-05:00',
+    resourceId: 'usaebo',
+    majorTags: ['economics', 'business', 'finance', 'problem_solving'],
+  ),
+  DeadlineItem(
+    title: 'USA Cybersecurity Olympiad 2027',
+    date: 'February 28, 2027 (first round)',
+    dateIso: '2027-02-28T00:00:00-05:00',
+    resourceId: 'usacyo',
+    majorTags: ['cybersecurity', 'cs', 'networking', 'cryptography'],
+  ),
 
   // ===========================================================================
   // RESEARCH DEADLINES
@@ -7468,51 +7624,75 @@ const Map<String, String> _commonApLinks = {
   ...apGeneralStudyHubs,
 };
 
-const Map<String, Map<String, String>> _recentOfficialApMirrors = {
+const Map<String, Map<String, String>> _recentOfficialApTests = {
+  'ap_bio': {
+    'Practice test · 2024 AP Daily Biology MCQ set-based questions':
+        'https://www.scribd.com/document/745791326/AP-Biology-Session2-Worksheet',
+  },
   'ap_calc_bc': {
-    'Practice test · 2023 College Board AP Calculus BC MCQ (Scribd mirror)':
+    'Practice test · 2023 College Board AP Calculus BC MCQ':
         'https://www.scribd.com/document/915289457/2023-Calculus-Bc-MC',
-    'Practice questions · 2023 AP Daily Calculus BC MCQ sessions (Scribd mirror)':
+    'Practice test · 2023 AP Daily Calculus BC MCQ sessions':
         'https://www.scribd.com/document/729973869/Calc-2',
-    'Practice test · 2019 College Board AP Calculus BC MCQ and answer key (Scribd mirror)':
+    'Practice test · 2019 College Board AP Calculus BC MCQ and answer key':
         'https://www.scribd.com/document/904476304/AP-Calculus-BC-Practice-Exam-2019',
   },
   'ap_chem': {
-    'Practice test · 2023 College Board AP Chemistry MCQ (Scribd mirror)':
+    'Practice test · 2023 College Board AP Chemistry MCQ':
         'https://www.scribd.com/document/860278058/Practice-Mc-2024-AP-Chem-2023-Mcq-Iep',
-    'Practice questions · 2024 College Board AP Daily Chemistry MCQ session (Scribd mirror)':
+    'Practice test · 2024 AP Daily Chemistry MCQ session':
         'https://www.scribd.com/document/727295839/2024-AP-DAILY-PRACTICE-SESSIONS-AP-Chemistry-Session-1-MCQ-Individual-Questions',
+    'Practice test · 2024 AP Daily Chemistry MCQ session 2':
+        'https://www.scribd.com/document/851694546/AP-Chemistry-Session2-Worksheet',
+  },
+  'ap_csp': {
+    'Practice test · 2024 AP Daily Computer Science Principles MCQ session':
+        'https://www.scribd.com/document/838565641/AP-Computer-Science-Principles-Session3-MCQ',
+    'Practice test · 2024 AP Daily Computer Science Principles MCQ session 4':
+        'https://www.scribd.com/document/838565644/AP-Computer-Science-Principles-Session4-MC',
   },
   'ap_physics_1': {
-    'Practice test · 2023 College Board AP Physics 1 international MCQ (Scribd mirror)':
+    'Practice test · 2023 College Board AP Physics 1 international MCQ':
         'https://www.scribd.com/document/816426789/TB-InternationalExam2023MCQ-1',
+    'Practice test · 2022 College Board AP Physics 1 practice exam 3':
+        'https://www.scribd.com/document/663073737/AP-Physics-1-Practice-Exam-3-for-the-2022-Exam-1-1',
   },
   'ap_macro': {
-    'Practice questions · 2024 AP Daily Macroeconomics MCQ session (Scribd mirror)':
+    'Practice test · 2024 AP Daily Macroeconomics MCQ session':
         'https://www.scribd.com/document/945914036/AP-Macroeconomics-Session1-Worksheet',
-    'Practice test · 2023 College Board AP Macroeconomics MCQ (Scribd mirror)':
+    'Practice test · 2023 College Board AP Macroeconomics MCQ':
         'https://www.scribd.com/document/999443575/AP-2023%E7%9C%9F%E9%A2%981',
   },
   'ap_micro': {
-    'Practice test · 2013 College Board AP Microeconomics released exam (Scribd mirror)':
+    'Practice test · 2013 College Board AP Microeconomics released exam':
         'https://www.scribd.com/document/864545546/2013-ap-micro-past-exam',
   },
+  'ap_precalc': {
+    'Practice test · 2024 AP Daily Precalculus Unit 3 MCQ review':
+        'https://www.scribd.com/document/823113749/Unit-3-Worksheet',
+    'Practice test · 2024 AP Daily Precalculus Unit 1 MCQ review':
+        'https://www.scribd.com/document/823148063/APPrecalc-Unit-1-Practice',
+  },
+  'ap_psych': {
+    'Practice test · 2024 College Board AP Psychology sample exam questions':
+        'https://www.scribd.com/document/950728586/Psychology',
+  },
   'ap_stats': {
-    'Practice questions · 2024 AP Daily Statistics MCQ session (Scribd mirror)':
+    'Practice test · 2024 AP Daily Statistics MCQ session':
         'https://www.scribd.com/document/909267275/AP-Statistics-Session1-Worksheet',
   },
   'ap_us_history': {
-    'Practice questions · 2016 College Board AP U.S. History sample MCQ (Scribd mirror)':
+    'Practice test · 2016 College Board AP U.S. History sample MCQ':
         'https://www.scribd.com/document/754427637/Multiple-Choice-Practice-Periods-6-9',
   },
   'ap_euro': {
-    'Practice test · 2015 College Board AP European History practice exam (Scribd mirror)':
+    'Practice test · 2015 College Board AP European History practice exam':
         'https://www.scribd.com/document/915472331/AP-Euro-2015',
   },
   'ap_world': {
-    'Practice questions · 2024 AP Daily World History MCQ session (Scribd mirror)':
+    'Practice test · 2024 AP Daily World History MCQ session':
         'https://www.scribd.com/document/915479134/AP-World-History-MCQ-Worksheet-2',
-    'Practice test · College Board AP World History: Modern practice exam (Scribd mirror)':
+    'Practice test · College Board AP World History: Modern practice exam':
         'https://www.scribd.com/document/717093782/Practice-Exam-MCQ',
   },
 };
@@ -8516,7 +8696,7 @@ List<String> linksForResource(Resource resource) {
     if (_apsWithReferenceSheets.contains(resource.id))
       _officialReferenceSheetLabel,
     ..._providerLinksFor(resource).keys,
-    ...?_recentOfficialApMirrors[resource.id]?.keys,
+    ...?_recentOfficialApTests[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
     ...?_driveApFileLinks[resource.id]?.keys.where(
       (label) => !isOldCommercialBook(label),
@@ -8594,7 +8774,7 @@ String? resolveUrl(String linkLabel, Resource resource) {
   return kLinkUrls[linkLabel] ??
       _commonApLinks[linkLabel] ??
       _providerLinksFor(resource)[linkLabel] ??
-      _recentOfficialApMirrors[resource.id]?[linkLabel] ??
+      _recentOfficialApTests[resource.id]?[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??
       _apBookLinks[resource.id]?[linkLabel] ??
