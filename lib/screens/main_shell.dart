@@ -591,7 +591,7 @@ class _SidebarFooter extends StatelessWidget {
             backgroundColor: kGold.withValues(alpha: 0.2),
 
             child: Text(
-              provider.isGuest ? 'G' : provider.displayName[0].toUpperCase(),
+              provider.displayName[0].toUpperCase(),
 
               style: const TextStyle(
                 fontSize: 12,
@@ -613,7 +613,7 @@ class _SidebarFooter extends StatelessWidget {
 
               children: [
                 Text(
-                  provider.isGuest ? 'Guest' : provider.displayName,
+                  provider.displayName,
 
                   style: const TextStyle(
                     fontSize: 12,
@@ -625,17 +625,6 @@ class _SidebarFooter extends StatelessWidget {
 
                   overflow: TextOverflow.ellipsis,
                 ),
-
-                if (provider.isGuest)
-                  Text(
-                    'Browsing only',
-
-                    style: TextStyle(
-                      fontSize: 10,
-
-                      color: Colors.white.withValues(alpha: 0.45),
-                    ),
-                  ),
               ],
             ),
           ),

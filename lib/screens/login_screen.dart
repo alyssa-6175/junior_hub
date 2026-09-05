@@ -44,8 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _guest() => context.read<AppProvider>().continueAsGuest();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   error: _error,
                   onGoogleSignIn: _signInWithGoogle,
                   onMicrosoftSignIn: _signInWithMicrosoft,
-                  onGuest: _guest,
                 ),
               ),
             ),
@@ -89,14 +86,12 @@ class _LoginCard extends StatelessWidget {
   final String? error;
   final VoidCallback onGoogleSignIn;
   final VoidCallback onMicrosoftSignIn;
-  final VoidCallback onGuest;
 
   const _LoginCard({
     required this.loading,
     this.error,
     required this.onGoogleSignIn,
     required this.onMicrosoftSignIn,
-    required this.onGuest,
   });
 
   @override
@@ -186,15 +181,15 @@ class _LoginCard extends StatelessWidget {
                   )
                 else ...[
                   _OAuthButton(
-                    logo: 'assets/google_logo.png',
-                    label: 'Sign in with Google',
-                    onTap: onGoogleSignIn,
-                  ),
-                  const SizedBox(height: 10),
-                  _OAuthButton(
                     logo: 'assets/microsoft_logo.png',
                     label: 'Sign in with Microsoft',
                     onTap: onMicrosoftSignIn,
+                  ),
+                  const SizedBox(height: 10),
+                  _OAuthButton(
+                    logo: 'assets/google_logo.png',
+                    label: 'Sign in with Google',
+                    onTap: onGoogleSignIn,
                   ),
                 ],
 
@@ -210,51 +205,6 @@ class _LoginCard extends StatelessWidget {
                     ),
                   ),
                 ],
-
-                const SizedBox(height: 24),
-
-                // Divider
-                const Row(
-                  children: [
-                    Expanded(child: Divider(color: kBorderLight, thickness: 1)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 14),
-                      child: Text(
-                        'or',
-                        style: TextStyle(fontSize: 12, color: kTextTertiary),
-                      ),
-                    ),
-                    Expanded(child: Divider(color: kBorderLight, thickness: 1)),
-                  ],
-                ),
-
-                const SizedBox(height: 18),
-
-                // Guest Button
-                OutlinedButton(
-                  onPressed: onGuest,
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: kNavy,
-                    side: const BorderSide(color: kGold, width: 1.5),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    'Continue as Guest',
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Guests can browse but cannot save, pin, or flag resources.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 11, color: kTextTertiary),
-                ),
               ],
             ),
           ),

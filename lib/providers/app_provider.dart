@@ -34,8 +34,6 @@ class AppProvider extends ChangeNotifier {
 
   // ── Auth State ───────────────────────────────────────────────────────────
 
-  bool _isGuest = false;
-
   // admin priv
 
   bool get isAdmin {
@@ -44,18 +42,16 @@ class AppProvider extends ChangeNotifier {
 
   User? get firebaseUser => _auth.currentUser;
 
-  bool get isGuest => _isGuest;
+  bool get isAuthenticated => firebaseUser != null;
 
-  bool get isAuthenticated => firebaseUser != null || _isGuest;
-
-  bool get isLoggedIn => firebaseUser != null && !_isGuest;
+  bool get isLoggedIn => firebaseUser != null;
 
   String? get userEmail => firebaseUser?.email;
 
   String get displayName =>
       firebaseUser?.displayName ??
       firebaseUser?.email?.split('@').first ??
-      'Guest';
+      'User';
 
   // Helper for desktop platform checking
 
@@ -278,19 +274,11 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> _postSignIn() async {
-    _isGuest = false;
-
     await _loadFromFirestore();
 
     await _analytics.logLogin(
       loginMethod: firebaseUser?.providerData.first.providerId ?? 'unknown',
     );
-
-    notifyListeners();
-  }
-
-  void continueAsGuest() {
-    _isGuest = true;
 
     notifyListeners();
   }
@@ -307,8 +295,6 @@ class AppProvider extends ChangeNotifier {
     }
 
     await _auth.signOut();
-
-    _isGuest = false;
 
     _saved.clear();
 
@@ -686,7 +672,7 @@ class AppProvider extends ChangeNotifier {
   /// Records total views + unique accounts. No UI — for analytics only.
 
   Future<void> trackResourceView(String resourceId) async {
-    if (!isLoggedIn) return; // guests are not tracked
+    if (!isLoggedIn) return;
 
     final uid = firebaseUser!.uid;
 

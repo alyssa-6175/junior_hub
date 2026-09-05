@@ -22,11 +22,6 @@ class _SavedScreenState extends State<SavedScreen> {
     final provider = context.watch<AppProvider>();
     final filter = provider.savedCategoryFilter;
 
-    // Guests can't save anything — show a prompt.
-    if (provider.isGuest) {
-      return _GuestEmptyState();
-    }
-
     // Build the list of saved resources.
     final savedIds = provider.saved;
     if (savedIds.isEmpty) {
@@ -266,41 +261,6 @@ class _EmptyState extends StatelessWidget {
             'Browse any section and tap the bookmark icon\nto save resources here.',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(fontSize: 13, color: kTextSecondary),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _GuestEmptyState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.lock_outline, size: 40, color: kTextTertiary),
-          const SizedBox(height: 12),
-          Text(
-            'Browsing as guest',
-            style: GoogleFonts.inter(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: kTextPrimary,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Log in to save resources, mark favorites,\nand track what you\'ve reviewed.',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(fontSize: 13, color: kTextSecondary),
-          ),
-          const SizedBox(height: 18),
-          FilledButton(
-            onPressed: () => context.read<AppProvider>().logout(),
-            style: FilledButton.styleFrom(backgroundColor: kNavy),
-            child: const Text('Log in'),
           ),
         ],
       ),

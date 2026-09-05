@@ -20,9 +20,6 @@ class _BoardScreenState extends State<BoardScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
 
-    if (provider.isGuest) {
-      return _GuestState();
-    }
     if (provider.pinned.isEmpty) {
       return _EmptyState();
     }
@@ -200,33 +197,6 @@ class _EmptyState extends StatelessWidget {
         Text(
           'Tap the pin icon on any resource to add it here.',
           style: GoogleFonts.inter(fontSize: 13, color: kTextSecondary),
-        ),
-      ],
-    ),
-  );
-}
-
-class _GuestState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Icon(Icons.lock_outline, size: 40, color: kTextTertiary),
-        const SizedBox(height: 12),
-        Text(
-          'Log in to use the Board',
-          style: GoogleFonts.inter(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: kTextPrimary,
-          ),
-        ),
-        const SizedBox(height: 18),
-        FilledButton(
-          onPressed: () => context.read<AppProvider>().logout(),
-          style: FilledButton.styleFrom(backgroundColor: kNavy),
-          child: const Text('Log in'),
         ),
       ],
     ),
