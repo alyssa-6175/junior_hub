@@ -24,7 +24,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   void initState() {
     super.initState();
     _tabs = TabController(
-      length: _hasReferenceSheet(widget.resource) ? 6 : 5,
+      length: _hasReferenceInformation(widget.resource) ? 6 : 5,
       vsync: this,
     );
     // Track this view (runs after the frame is built so context is valid)
@@ -60,11 +60,11 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     }
 
     int compare(String a, String b) {
+      final byYear = year(b).compareTo(year(a));
+      if (byYear != 0) return byYear;
       final aOfficial = a.toLowerCase().contains('official college board');
       final bOfficial = b.toLowerCase().contains('official college board');
       if (aOfficial != bOfficial) return aOfficial ? -1 : 1;
-      final byYear = year(b).compareTo(year(a));
-      if (byYear != 0) return byYear;
       final aPinned = provider.isLinkPinned(widget.resource.id, a);
       final bPinned = provider.isLinkPinned(widget.resource.id, b);
       if (aPinned != bPinned) return aPinned ? -1 : 1;
@@ -74,7 +74,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     return [...links]..sort(compare);
   }
 
-  bool _hasReferenceSheet(Resource resource) => const {
+  bool _hasReferenceInformation(Resource resource) => const {
     'ap_stats',
     'ap_chem',
     'ap_csa',
@@ -416,7 +416,8 @@ class _ApDetailScreenState extends State<ApDetailScreen>
             isScrollable: true,
             tabs: [
               const Tab(text: 'Course Material'),
-              if (_hasReferenceSheet(res)) const Tab(text: 'Reference Sheet'),
+              if (_hasReferenceInformation(res))
+                const Tab(text: 'Reference Information'),
               const Tab(text: 'Videos'),
               const Tab(text: 'Practice Tests'),
               const Tab(text: 'Practice Questions & Banks'),
@@ -435,11 +436,11 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                 items: _sortedLinks(_courseMaterial(res), provider),
                 emptyText: 'No course material added yet.',
               ),
-              if (_hasReferenceSheet(res))
+              if (_hasReferenceInformation(res))
                 _ApTab(
                   icon: Icons.description_outlined,
-                  items: _sortedLinks(_referenceSheets(res), provider),
-                  emptyText: 'No official reference sheet added yet.',
+                  items: _sortedLinks(_referenceInformation(res), provider),
+                  emptyText: 'No official reference information added yet.',
                 ),
               _ApTab(
                 icon: Icons.smart_display_outlined,
@@ -511,10 +512,14 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .toList();
   }
 
-  List<String> _referenceSheets(Resource r) {
-    return linksForResource(
-      r,
-    ).where((l) => l.toLowerCase().startsWith('reference sheet ·')).toList();
+  List<String> _referenceInformation(Resource r) {
+    return linksForResource(r)
+        .where(
+          (l) =>
+              l.toLowerCase().startsWith('reference information ·') ||
+              l.toLowerCase().startsWith('reference sheet ·'),
+        )
+        .toList();
   }
 
   List<String> _practiceTests(Resource r) {
@@ -537,7 +542,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     // Anything that didn't get caught by the filters above goes here
     final matched = [
       ..._courseMaterial(r),
-      ..._referenceSheets(r),
+      ..._referenceInformation(r),
       ..._videos(r),
       ..._practiceTests(r),
     ];

@@ -7626,73 +7626,111 @@ const Map<String, String> _commonApLinks = {
 
 const Map<String, Map<String, String>> _recentOfficialApTests = {
   'ap_bio': {
-    'Practice test · 2024 AP Daily Biology MCQ set-based questions':
+    'Practice test · Scribd · 2024 AP Daily Biology MCQ set-based questions':
         'https://www.scribd.com/document/745791326/AP-Biology-Session2-Worksheet',
+    'Practice test · Scribd · 2023 AP Daily Biology MCQ session 5':
+        'https://www.scribd.com/document/673979708/Session-5-AP-Biology-2023-AP-Daily-Practice-Sessions',
+    'Practice test · Scribd · 2020 College Board AP Biology practice exam 1 MCQ':
+        'https://www.scribd.com/document/643218468/ap-biology-2020-practice-exam-1-mcq-1-pdf',
+    'Practice test · Scribd · 2020 AP Biology practice exam 2 MCQ answers and rationales':
+        'https://www.scribd.com/document/534995543/ap-biology-2020-practice-exam-2-mcq-answers',
   },
   'ap_calc_bc': {
-    'Practice test · 2023 College Board AP Calculus BC MCQ':
+    'Practice test · Scribd · 2024 AP Daily Calculus BC MCQ session 1':
+        'https://www.scribd.com/document/745791330/AP-CalculusBC-Session1-Worksheet',
+    'Practice test · Scribd · 2023 College Board AP Calculus BC MCQ':
         'https://www.scribd.com/document/915289457/2023-Calculus-Bc-MC',
-    'Practice test · 2023 AP Daily Calculus BC MCQ sessions':
+    'Practice test · Scribd · 2023 AP Daily Calculus BC MCQ sessions':
         'https://www.scribd.com/document/729973869/Calc-2',
-    'Practice test · 2019 College Board AP Calculus BC MCQ and answer key':
+    'Practice test · Scribd · 2019 College Board AP Calculus BC MCQ and answer key':
         'https://www.scribd.com/document/904476304/AP-Calculus-BC-Practice-Exam-2019',
   },
   'ap_chem': {
-    'Practice test · 2023 College Board AP Chemistry MCQ':
-        'https://www.scribd.com/document/860278058/Practice-Mc-2024-AP-Chem-2023-Mcq-Iep',
-    'Practice test · 2024 AP Daily Chemistry MCQ session':
+    'Practice test · Scribd · 2024 College Board AP Chemistry practice exam 2':
+        'https://www.scribd.com/document/849716161/2024-Chemistry-Practice-Exam-2',
+    'Practice test · Scribd · 2024 AP Daily Chemistry MCQ session':
         'https://www.scribd.com/document/727295839/2024-AP-DAILY-PRACTICE-SESSIONS-AP-Chemistry-Session-1-MCQ-Individual-Questions',
-    'Practice test · 2024 AP Daily Chemistry MCQ session 2':
+    'Practice test · Scribd · 2024 AP Daily Chemistry MCQ session 2':
         'https://www.scribd.com/document/851694546/AP-Chemistry-Session2-Worksheet',
+    'Practice test · Scribd · 2023 College Board AP Chemistry MCQ':
+        'https://www.scribd.com/document/860278058/Practice-Mc-2024-AP-Chem-2023-Mcq-Iep',
+    'Practice test · Scribd · 2022 AP Chemistry international Form I exam and answers':
+        'https://www.scribd.com/document/1016818122/2022-ap-chemistry-form-i-exam-questions-and-answers',
+    'Practice test · Scribd · 2021 AP Chemistry international exam and answers':
+        'https://www.scribd.com/document/861558215/ap-chemistry-2021',
   },
   'ap_csp': {
-    'Practice test · 2024 AP Daily Computer Science Principles MCQ session':
+    'Practice test · Scribd · 2024 AP Daily Computer Science Principles MCQ session':
         'https://www.scribd.com/document/838565641/AP-Computer-Science-Principles-Session3-MCQ',
-    'Practice test · 2024 AP Daily Computer Science Principles MCQ session 4':
+    'Practice test · Scribd · 2024 AP Daily Computer Science Principles MCQ session 4':
         'https://www.scribd.com/document/838565644/AP-Computer-Science-Principles-Session4-MC',
   },
+  'ap_english_lang': {
+    'Practice test · Scribd · 2020 College Board AP English Language practice exam 2':
+        'https://www.scribd.com/document/832344026/AP-Lang-2020-Practice-2-PDF',
+  },
+  'ap_english_lit': {
+    'Practice test · Scribd · 2024 College Board AP English Literature practice exam 1':
+        'https://www.scribd.com/document/913586526/AP-English-Lit-PE1',
+  },
   'ap_physics_1': {
-    'Practice test · 2023 College Board AP Physics 1 international MCQ':
+    'Practice test · Scribd · 2023 College Board AP Physics 1 international MCQ':
         'https://www.scribd.com/document/816426789/TB-InternationalExam2023MCQ-1',
-    'Practice test · 2022 College Board AP Physics 1 practice exam 3':
+    'Practice test · Scribd · 2022 College Board AP Physics 1 practice exam 3':
         'https://www.scribd.com/document/663073737/AP-Physics-1-Practice-Exam-3-for-the-2022-Exam-1-1',
   },
+  'ap_physics_c_mech': {
+    'Practice test · Scribd · 2025 College Board AP Physics C: Mechanics practice exam 1':
+        'https://www.scribd.com/document/833160670/2024-AP-Physics-Mech-Practice-Exam-1',
+  },
   'ap_macro': {
-    'Practice test · 2024 AP Daily Macroeconomics MCQ session':
+    'Practice test · Scribd · 2024 AP Daily Macroeconomics MCQ session':
         'https://www.scribd.com/document/945914036/AP-Macroeconomics-Session1-Worksheet',
-    'Practice test · 2023 College Board AP Macroeconomics MCQ':
+    'Practice test · Scribd · 2023 College Board AP Macroeconomics MCQ':
         'https://www.scribd.com/document/999443575/AP-2023%E7%9C%9F%E9%A2%981',
   },
   'ap_micro': {
-    'Practice test · 2013 College Board AP Microeconomics released exam':
+    'Practice test · Scribd · AP Microeconomics practice exam 1 MCQ':
+        'https://www.scribd.com/document/632026512/AP-micro-practice-exam-1',
+    'Practice test · Scribd · 2013 College Board AP Microeconomics released exam':
         'https://www.scribd.com/document/864545546/2013-ap-micro-past-exam',
   },
   'ap_precalc': {
-    'Practice test · 2024 AP Daily Precalculus Unit 3 MCQ review':
+    'Practice test · Scribd · 2024 AP Daily Precalculus Unit 3 MCQ review':
         'https://www.scribd.com/document/823113749/Unit-3-Worksheet',
-    'Practice test · 2024 AP Daily Precalculus Unit 1 MCQ review':
+    'Practice test · Scribd · 2024 AP Daily Precalculus Unit 1 MCQ review':
         'https://www.scribd.com/document/823148063/APPrecalc-Unit-1-Practice',
   },
   'ap_psych': {
-    'Practice test · 2024 College Board AP Psychology sample exam questions':
+    'Practice test · Scribd · 2024 College Board AP Psychology sample exam questions':
         'https://www.scribd.com/document/950728586/Psychology',
   },
   'ap_stats': {
-    'Practice test · 2024 AP Daily Statistics MCQ session':
+    'Practice test · Scribd · 2025 AP Statistics mock-exam FRQ and scoring guide':
+        'https://www.scribd.com/document/991608009/AP-Statistics-Mock-Exam-FRQ',
+    'Practice test · Scribd · 2024 Iowa State AP Statistics practice exam':
+        'https://www.scribd.com/document/857471431/AP-Mock-Exam-2024',
+    'Practice test · Scribd · 2024 AP Daily Statistics MCQ session':
         'https://www.scribd.com/document/909267275/AP-Statistics-Session1-Worksheet',
+    'Practice test · Scribd · 2019 College Board AP Statistics practice exam':
+        'https://www.scribd.com/document/713456975/AP-Stat-2019-Practice',
   },
   'ap_us_history': {
-    'Practice test · 2016 College Board AP U.S. History sample MCQ':
+    'Practice test · Scribd · 2016 College Board AP U.S. History sample MCQ':
         'https://www.scribd.com/document/754427637/Multiple-Choice-Practice-Periods-6-9',
   },
+  'ap_us_gov': {
+    'Practice test · Scribd · 2023–2024 Heimler’s History AP U.S. Government practice exam 1':
+        'https://www.scribd.com/document/862637243/AP-GOV-HRG-Practice-Exam',
+  },
   'ap_euro': {
-    'Practice test · 2015 College Board AP European History practice exam':
+    'Practice test · Scribd · 2015 College Board AP European History practice exam':
         'https://www.scribd.com/document/915472331/AP-Euro-2015',
   },
   'ap_world': {
-    'Practice test · 2024 AP Daily World History MCQ session':
+    'Practice test · Scribd · 2024 AP Daily World History MCQ session':
         'https://www.scribd.com/document/915479134/AP-World-History-MCQ-Worksheet-2',
-    'Practice test · College Board AP World History: Modern practice exam':
+    'Practice test · Scribd · College Board AP World History: Modern practice exam':
         'https://www.scribd.com/document/717093782/Practice-Exam-MCQ',
   },
 };
@@ -7723,7 +7761,7 @@ Map<String, String> _providerLinksFor(Resource resource) {
   return result;
 }
 
-const Set<String> _apsWithReferenceSheets = {
+const Set<String> _apsWithReferenceInformation = {
   'ap_stats',
   'ap_chem',
   'ap_csa',
@@ -7850,8 +7888,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
   'ap_bio': {
     'Practice test · 5 Steps to a 5 AP Biology 2024':
         'https://drive.google.com/file/d/1xo6joZDoCt1rmg7ZD22msWlHUZDKWvpc/view',
-    'Practice test · Barron\'s AP Biology Practice Tests 2024':
-        'https://drive.google.com/file/d/17K0kXk7uGUs_w4l5lmnPdj-PEEd2eT2Y/view',
     'Practice test · The Princeton Review AP Biology Prep 2024':
         'https://drive.google.com/file/d/1wAA6bZop-MMst_Ghy9YBk2L9oPI0WMMr/view',
   },
@@ -7940,16 +7976,12 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
         'https://drive.google.com/file/d/1ZdG9sQRqNhtqyf0gJ9vAw0o2nFFvatEW/view',
   },
   'ap_chem': {
-    'Practice test · Barron\'s AP Chemistry Practice Tests 2025':
-        'https://drive.google.com/file/d/17siRtMFEif3SIqaiUSyJVM9KPCGgxd-X/view',
     'Practice test · The Princeton review - AP Chemistry Premium Prep 2023':
         'https://drive.google.com/file/d/1DWxTuwidpHQx1MKD1QiwKdMzit1iWCd9/view',
   },
   'ap_chinese': {
     'Practice test · AP Chinese 2016':
         'https://drive.google.com/file/d/1CAJ9JfyrDcAO37uaR1416GaV9LVAy9Ce/view',
-    'Practice test · Barron\'s AP Chinese Language and Culture Practice Tests 2023':
-        'https://drive.google.com/file/d/1boEfdBENGdEGikJJ09RukIFz_Gv2xoqD/view',
   },
   'ap_comp_gov': {
     'Practice test · AP Comp Gov 2008':
@@ -7964,8 +7996,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
   'ap_csa': {
     'Practice test · 5 Steps to a 5 AP Computer Science A 2024':
         'https://drive.google.com/file/d/1OPunMhNVwZEiMZEZMUh88srM3_Zfn8ym/view',
-    'Practice test · Barron\'s AP Computer Science A Practice Tests 2024':
-        'https://drive.google.com/file/d/10TsrLVLlmZf70HNTj8ENkNkAWQdFP3XB/view',
     'Practice test · The Princeton Review AP Computer Science A Prep 2024':
         'https://drive.google.com/file/d/1vyFq7qgHiVSmiN98lVUYR__M6FdZt-se/view',
   },
@@ -8032,8 +8062,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
         'https://drive.google.com/file/d/1xcm7lGt9SdIt4IPARqwG4xtmqo_RsS29/view',
     'Practice test · AP French Lang 2017':
         'https://drive.google.com/file/d/1dAdk2hWYZu5XNe7hqTvUEJ-GZ7PVbgRL/view',
-    'Practice test · Barron\'s AP French Language and Culture Practice Tests 2022':
-        'https://drive.google.com/file/d/1kyC41pu_Wenqq05s9tc4be0XxUaeUFZu/view',
   },
   'ap_german': {
     'Practice test · AP German Practice 2017':
@@ -8044,8 +8072,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
         'https://drive.google.com/file/d/1tfCxCAoY90OH0be9MIVifxx4vMfbuTr3/view',
     'Practice test · AP Human Geography Practice Test':
         'https://drive.google.com/file/d/1tzlSDCOZvBf5j9gyZys-JHIr5kCS6Kb6/view',
-    'Practice test · Barron\'s AP Human Geography Practice Tests 2024':
-        'https://drive.google.com/file/d/1DYg-YJE5cu-ZPO1P0idms14Wj5O4vJE5/view',
     'Practice test · The Princeton Review AP Human Geography Premium Prep 2023':
         'https://drive.google.com/file/d/1H7lKYRADSJvWEgzYImHPo22fY-X9b-Ty/view',
   },
@@ -8114,8 +8140,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
   'ap_physics_c_mech': {
     'Practice test · 5 Steps to a 5 AP Physics C 2024':
         'https://drive.google.com/file/d/1zXKvJvI3rgw_-OQY4sS9jLeFkEL_TLgz/view',
-    'Practice test · Barron\'s AP Physics C Practice Tests 2024':
-        'https://drive.google.com/file/d/1bm9-Z9k72dUeK3lAax0R5oKLhAm2rSSE/view',
     'Practice test · The Princeton Review AP Physics C Mechanics Prep 2020':
         'https://drive.google.com/file/d/1L_K-FPtK4px6fH3holIkRRoCQhOIcm5g/view',
   },
@@ -8142,10 +8166,6 @@ const Map<String, Map<String, String>> _driveApFileLinks = {
         'https://drive.google.com/file/d/19g5Fg4Q9w5JVKfgu4RCfGJX4g8y7HEGm/view',
     'Practice test · AP Psychology 2018':
         'https://drive.google.com/file/d/1b38R0QRrA5Dpd25nR1APSJoqN5Bd_6BL/view',
-    'Practice test · Barron\'s - AP Psychology 2022-2023 Practice Tests':
-        'https://drive.google.com/file/d/10I7CVC5B9NDy7bJINbtPDjXVgMU_hsJi/view',
-    'Practice test · Barron\'s - AP Psychology Practice Tests 2025':
-        'https://drive.google.com/file/d/17vBE5VVtylih-xsvT3zA3gHqmgm6ouYL/view',
     'Practice test · The Princeton Review-AP Psychology Premium Prep 2022':
         'https://drive.google.com/file/d/1cQSUIk3bsmTHLOFcUQUXh89Kn7zlyecu/view',
   },
@@ -8667,14 +8687,12 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
 
 const String _officialFrqLabel =
     'Practice test · Official College Board FRQs (latest and past)';
-const String _officialBluebookLabel =
-    'Practice test · Official College Board Bluebook test preview';
 const String _officialApClassroomLabel =
     'Practice questions · Official AP Classroom MCQ and FRQ bank';
 const String _officialCourseSamplesLabel =
     'Practice questions · Official College Board course sample questions';
-const String _officialReferenceSheetLabel =
-    'Reference sheet · Official College Board exam reference information';
+const String _officialReferenceInformationLabel =
+    'Reference information · Official College Board exam reference information';
 
 /// Every link displayed for a resource, including verified AP supplements.
 List<String> linksForResource(Resource resource) {
@@ -8690,11 +8708,10 @@ List<String> linksForResource(Resource resource) {
   return <String>{
     ...resource.links,
     _officialFrqLabel,
-    _officialBluebookLabel,
     _officialApClassroomLabel,
     _officialCourseSamplesLabel,
-    if (_apsWithReferenceSheets.contains(resource.id))
-      _officialReferenceSheetLabel,
+    if (_apsWithReferenceInformation.contains(resource.id))
+      _officialReferenceInformationLabel,
     ..._providerLinksFor(resource).keys,
     ...?_recentOfficialApTests[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
@@ -8758,14 +8775,11 @@ String? resolveUrl(String linkLabel, Resource resource) {
           ? 'https://apcentral.collegeboard.org/courses/past-exam-questions'
           : 'https://apcentral.collegeboard.org/courses/$slug/exam/past-exam-questions';
     }
-    if (linkLabel == _officialBluebookLabel) {
-      return 'https://apstudents.collegeboard.org/ap-exams-what-to-know/practice-for-exams';
-    }
     if (linkLabel == _officialApClassroomLabel) {
       return 'https://myap.collegeboard.org/';
     }
     if (linkLabel == _officialCourseSamplesLabel ||
-        linkLabel == _officialReferenceSheetLabel) {
+        linkLabel == _officialReferenceInformationLabel) {
       return slug == null
           ? resource.url
           : 'https://apcentral.collegeboard.org/courses/$slug/exam';
