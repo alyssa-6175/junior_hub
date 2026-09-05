@@ -44,6 +44,7 @@ final List<MajorGroup> majorGroups = [
       SubMajor(id: 'biology', label: 'Biology', groupId: 'stem'),
       SubMajor(id: 'chemistry', label: 'Chemistry', groupId: 'stem'),
       SubMajor(id: 'physics', label: 'Physics', groupId: 'stem'),
+      SubMajor(id: 'astronomy', label: 'Astronomy', groupId: 'stem'),
       SubMajor(
         id: 'environmental_science',
         label: 'Environmental Science',
@@ -177,6 +178,7 @@ const Map<String, Set<String>> _majorFields = {
   'biology': {'biology'},
   'chemistry': {'chemistry'},
   'physics': {'physics'},
+  'astronomy': {'astronomy'},
   'environmental_science': {'env_sci', 'science'},
   'pre_med': {'biology', 'chemistry'},
   'nursing': {'biology'},
@@ -215,6 +217,7 @@ const Map<String, Set<String>> _majorTagAliases = {
   'biology': {'biology', 'genetics', 'anatomy', 'ecology'},
   'chemistry': {'chemistry', 'lab_science'},
   'physics': {'physics', 'mechanics', 'space'},
+  'astronomy': {'astronomy', 'astrophysics', 'space', 'space_science'},
   'environmental_science': {'env_sci', 'earth_science'},
   'pre_med': {'medicine', 'biology', 'chemistry'},
   'nursing': {'nursing', 'medicine', 'biology'},

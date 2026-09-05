@@ -7735,6 +7735,25 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
   },
 };
 
+const Map<String, Map<String, String>> _examTexApPdfLinks = {
+  'ap_calc_ab': {
+    'Practice test · ExamTex Practice Exam — 2026':
+        'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-calculus-ab-practice-exam.pdf',
+  },
+  'ap_macro': {
+    'Practice test · ExamTex Practice Exam — 2026':
+        'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-macroeconomics-practice-exam.pdf',
+  },
+  'ap_micro': {
+    'Practice test · ExamTex Practice Exam — 2026':
+        'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-microeconomics-practice-exam.pdf',
+  },
+  'ap_stats': {
+    'Practice test · ExamTex Practice Exam — 2026':
+        'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-statistics-practice-exam.pdf',
+  },
+};
+
 Map<String, String> _providerLinksFor(Resource resource) {
   final result = <String, String>{};
   for (final label in resource.links) {
@@ -8714,6 +8733,7 @@ List<String> linksForResource(Resource resource) {
       _officialReferenceInformationLabel,
     ..._providerLinksFor(resource).keys,
     ...?_recentOfficialApTests[resource.id]?.keys,
+    ...?_examTexApPdfLinks[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
     ...?_driveApFileLinks[resource.id]?.keys.where(
       (label) => !isOldCommercialBook(label),
@@ -8789,6 +8809,7 @@ String? resolveUrl(String linkLabel, Resource resource) {
       _commonApLinks[linkLabel] ??
       _providerLinksFor(resource)[linkLabel] ??
       _recentOfficialApTests[resource.id]?[linkLabel] ??
+      _examTexApPdfLinks[resource.id]?[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??
       _apBookLinks[resource.id]?[linkLabel] ??
