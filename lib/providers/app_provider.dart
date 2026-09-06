@@ -664,6 +664,26 @@ class AppProvider extends ChangeNotifier {
   // ── Analytics & Tracking ─────────────────────────────────────────────────
 
   Future<void> logFeedbackOpened() async {
+    final user = firebaseUser;
+
+    if (user != null) {
+      final feedbackFields = <String, dynamic>{
+        'feedbackFormClickCount': FieldValue.increment(1),
+        'feedbackFormLastClickedAt': FieldValue.serverTimestamp(),
+        'feedbackFormLastClickedByUid': user.uid,
+        'feedbackFormLastClickedByName': displayName,
+      };
+
+      if (user.email != null) {
+        feedbackFields['feedbackFormLastClickedByEmail'] = user.email;
+      }
+
+      await _db
+          .collection('users')
+          .doc(user.uid)
+          .set(feedbackFields, SetOptions(merge: true));
+    }
+
     await _analytics.logEvent(name: 'feedback_opened');
   }
 

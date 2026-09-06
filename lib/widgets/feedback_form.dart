@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../app_colors.dart';
+import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
 
 const String _formUrl =
@@ -9,6 +11,18 @@ const String _formUrl =
 /// Compact bar shown at the very bottom of every content screen.
 class FeedbackBar extends StatelessWidget {
   const FeedbackBar({super.key});
+
+  Future<void> _openFeedbackForm(BuildContext context) async {
+    try {
+      await context.read<AppProvider>().logFeedbackOpened();
+    } catch (error) {
+      debugPrint('Feedback click tracking failed: $error');
+    }
+
+    if (context.mounted) {
+      await openUrl(context, _formUrl);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +47,7 @@ class FeedbackBar extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () => openUrl(context, _formUrl),
+              onTap: () => _openFeedbackForm(context),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
