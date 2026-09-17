@@ -27,10 +27,9 @@ class _ApDetailScreenState extends State<ApDetailScreen>
       length: _hasReferenceInformation(widget.resource) ? 6 : 5,
       vsync: this,
     );
-    // Track this view (runs after the frame is built so context is valid)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        context.read<AppProvider>().trackResourceView(widget.resource.id);
+        context.read<AppProvider>().trackResourceOpen(widget.resource.id);
       }
     });
   }

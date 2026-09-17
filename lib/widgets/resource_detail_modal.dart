@@ -12,9 +12,7 @@ import '../widgets/resource_tile.dart';
 /// Call this to open the full-screen detail card for a competition,
 /// research program, or internship.
 void showResourceDetail(BuildContext context, Resource resource) {
-  // Track the view before showing the modal
-  context.read<AppProvider>().trackResourceView(resource.id);
-
+  context.read<AppProvider>().trackResourceOpen(resource.id);
   showDialog(
     context: context,
     builder: (_) => ResourceDetailModal(resource: resource),

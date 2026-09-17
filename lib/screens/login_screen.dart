@@ -165,7 +165,7 @@ class _LoginCard extends StatelessWidget {
 
                 // Instructions
                 const Text(
-                  'Sign in with your @eastsideprep.org account',
+                  'Sign in with your Google or Microsoft account',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, color: kTextTertiary),
                 ),

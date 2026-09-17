@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Junior Hub is public to signed-in Google and Microsoft accounts.
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwnUserDocument(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // This claim is issued only with the Firebase Admin SDK, never from the
+    // client app. Firebase Console / IAM administrators already bypass rules.
+    function isEastsidePrepAdmin() {
+      return isSignedIn()
+          && request.auth.token.email is string
+          && request.auth.token.email_verified == true
+          && request.auth.token.email.matches('^[^@]+@eastsideprep\\.org$')
+          && request.auth.token.admin == true;
+    }
+
+    function isValidStudyData() {
+      return request.resource.data.keys().hasOnly([
+               'saved', 'pinned', 'seen', 'linkPinned', 'linkSeen',
+               'completedTests', 'personalDeadlines', 'checkedMajors',
+               'checkedMajorOrder', 'checkedSubMajorOrder'
+             ])
+          && (!('saved' in request.resource.data) ||
+              (request.resource.data.saved is list && request.resource.data.saved.size() <= 500))
+          && (!('pinned' in request.resource.data) ||
+              (request.resource.data.pinned is list && request.resource.data.pinned.size() <= 500))
+          && (!('seen' in request.resource.data) ||
+              (request.resource.data.seen is list && request.resource.data.seen.size() <= 1000))
+          && (!('linkPinned' in request.resource.data) ||
+              (request.resource.data.linkPinned is list && request.resource.data.linkPinned.size() <= 500))
+          && (!('linkSeen' in request.resource.data) ||
+              (request.resource.data.linkSeen is list && request.resource.data.linkSeen.size() <= 1000))
+          && (!('completedTests' in request.resource.data) || request.resource.data.completedTests is map)
+          && (!('personalDeadlines' in request.resource.data) ||
+              (request.resource.data.personalDeadlines is list && request.resource.data.personalDeadlines.size() <= 100))
+          && (!('checkedMajors' in request.resource.data) ||
+              (request.resource.data.checkedMajors is list && request.resource.data.checkedMajors.size() <= 100))
+          && (!('checkedMajorOrder' in request.resource.data) ||
+              (request.resource.data.checkedMajorOrder is list && request.resource.data.checkedMajorOrder.size() <= 100))
+          && (!('checkedSubMajorOrder' in request.resource.data) ||
+              (request.resource.data.checkedSubMajorOrder is list && request.resource.data.checkedSubMajorOrder.size() <= 500));
+    }
+
+    // Students can access only their own study-preference document. No other
+    // collections, including historical resourceStats documents, are exposed.
+    match /users/{userId} {
+      allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
+      allow create, update: if isOwnUserDocument(userId) && isValidStudyData();
+      allow delete: if isOwnUserDocument(userId);
+    }
+
+    match /users/{userId}/resourceActivity/{resourceId} {
+      allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
+      allow create, update: if isOwnUserDocument(userId)
+          && resourceId.size() <= 120
+          && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
+          && request.resource.data.lastOpenedAt is timestamp
+          && request.resource.data.openCount is int
+          && request.resource.data.openCount >= 0
+          && request.resource.data.openCount <= 10000;
+    }
+  }
+}

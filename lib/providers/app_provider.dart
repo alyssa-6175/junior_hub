@@ -6,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:flutter_appauth/flutter_appauth.dart';
@@ -15,8 +13,6 @@ import 'package:flutter_appauth/flutter_appauth.dart';
 import '../models/personal_deadline.dart';
 
 import '../data/majors_data.dart';
-
-// Add this constant — replace with your actual Desktop client ID from Step 2:
 
 const _googleDesktopClientId =
     '76869443049-g4kjalna8kbptr9aosb94caqv70grsg2.apps.googleusercontent.com';
@@ -28,23 +24,16 @@ class AppProvider extends ChangeNotifier {
 
   final _db = FirebaseFirestore.instance;
 
-  final _analytics = FirebaseAnalytics.instance;
-
   final _appAuth = const FlutterAppAuth();
 
   // ── Auth State ───────────────────────────────────────────────────────────
 
-  // admin priv
-
-  bool get isAdmin {
-    return userEmail == 'alyssa.pannn@gmail.com';
-  }
-
   User? get firebaseUser => _auth.currentUser;
 
+  /// Junior Hub is available to every authenticated Google or Microsoft user.
   bool get isAuthenticated => firebaseUser != null;
 
-  bool get isLoggedIn => firebaseUser != null;
+  bool get isLoggedIn => isAuthenticated;
 
   String? get userEmail => firebaseUser?.email;
 
@@ -52,8 +41,6 @@ class AppProvider extends ChangeNotifier {
       firebaseUser?.displayName ??
       firebaseUser?.email?.split('@').first ??
       'User';
-
-  // Helper for desktop platform checking
 
   bool get _isDesktop =>
       !kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
@@ -160,6 +147,7 @@ class AppProvider extends ChangeNotifier {
   Future<void> init() async {
     if (firebaseUser != null) {
       await _loadFromFirestore();
+      await _removeLegacyFeedbackMetadata();
     }
 
     notifyListeners();
@@ -175,33 +163,27 @@ class AppProvider extends ChangeNotifier {
         final provider = GoogleAuthProvider();
 
         await _auth.signInWithPopup(provider);
-      } else if (!kIsWeb && _isDesktop) {
-        // Windows/Linux: use flutter_appauth to open system browser
-
+      } else if (_isDesktop) {
+        // Desktop uses the system browser, then exchanges the Google identity
+        // token with Firebase. Only basic identity scopes are requested.
         final result = await _appAuth.authorizeAndExchangeCode(
           AuthorizationTokenRequest(
             _googleDesktopClientId,
-
             'http://localhost',
-
             discoveryUrl:
                 'https://accounts.google.com/.well-known/openid-configuration',
-
             scopes: ['openid', 'email', 'profile'],
-
             preferEphemeralSession: false,
           ),
         );
 
         final credential = GoogleAuthProvider.credential(
           idToken: result.idToken,
-
           accessToken: result.accessToken,
         );
-
         await _auth.signInWithCredential(credential);
       } else {
-        // macOS / Android / iOS: google_sign_in works here
+        // Android and iOS use the Google Sign-In SDK.
 
         final googleUser = await GoogleSignIn().signIn();
 
@@ -226,72 +208,35 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
+  /// Microsoft sign-in is a web flow. Its Azure application registration and
+  /// Firebase provider configuration are managed outside this codebase.
   Future<String?> signInWithMicrosoft() async {
+    if (!kIsWeb) {
+      return 'Microsoft sign-in is available on the Junior Hub web app.';
+    }
+
     try {
-      if (kIsWeb) {
-        // Web: Firebase popup works natively
-
-        final provider = MicrosoftAuthProvider();
-
-        await _auth.signInWithPopup(provider);
-      } else if (_isDesktop) {
-        // Windows: use flutter_appauth with Microsoft OAuth endpoint
-
-        final result = await _appAuth.authorizeAndExchangeCode(
-          AuthorizationTokenRequest(
-            'YOUR_AZURE_CLIENT_ID', // from your Azure app registration
-
-            'http://localhost',
-
-            discoveryUrl:
-                'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-
-            scopes: ['openid', 'email', 'profile'],
-
-            preferEphemeralSession: false,
-          ),
-        );
-
-        final oauthCredential = OAuthProvider(
-          'microsoft.com',
-        ).credential(idToken: result.idToken, accessToken: result.accessToken);
-
-        await _auth.signInWithCredential(oauthCredential);
-      } else {
-        // macOS / iOS: signInWithProvider works on Apple platforms
-
-        final provider = MicrosoftAuthProvider();
-
-        await _auth.signInWithProvider(provider);
-      }
+      await _auth.signInWithPopup(MicrosoftAuthProvider());
 
       await _postSignIn();
-
       return null;
     } catch (e) {
-      return 'Sign-in failed: $e';
+      return 'Microsoft sign-in failed: $e';
     }
   }
 
   Future<void> _postSignIn() async {
     await _loadFromFirestore();
-
-    await _analytics.logLogin(
-      loginMethod: firebaseUser?.providerData.first.providerId ?? 'unknown',
-    );
+    await _removeLegacyFeedbackMetadata();
 
     notifyListeners();
   }
 
   Future<void> logout() async {
-    // Only attempt Google Sign Out on supported platforms (Web, macOS, iOS, Android)
-
-    if (kIsWeb || !_isDesktop) {
-      try {
-        await GoogleSignIn().signOut();
-      } catch (e) {
-        // Silently handle if the user wasn't signed in via Google
-      }
+    try {
+      await GoogleSignIn().signOut();
+    } catch (_) {
+      // Firebase sign-out below is the authoritative session cleanup.
     }
 
     await _auth.signOut();
@@ -390,6 +335,46 @@ class AppProvider extends ChangeNotifier {
     }, SetOptions(merge: true));
   }
 
+  /// Removes identifiers written by pre-privacy-review app versions. This runs
+  /// only against the signed-in user's own document.
+  Future<void> _removeLegacyFeedbackMetadata() async {
+    final uid = firebaseUser?.uid;
+    if (uid == null) return;
+
+    final ref = _db.collection('users').doc(uid);
+    final existing = await ref.get();
+    if (!existing.exists) return;
+
+    await ref.set({
+      'feedbackFormClickCount': FieldValue.delete(),
+      'feedbackFormLastClickedAt': FieldValue.delete(),
+      'feedbackFormLastClickedByUid': FieldValue.delete(),
+      'feedbackFormLastClickedByName': FieldValue.delete(),
+      'feedbackFormLastClickedByEmail': FieldValue.delete(),
+    }, SetOptions(merge: true));
+  }
+
+  /// Stores a student's most recent opening of each Junior Hub resource. This
+  /// supports administrator reporting on resource usage, not audit-grade logs.
+  Future<void> trackResourceOpen(String resourceId) async {
+    final uid = firebaseUser?.uid;
+    if (uid == null || !isLoggedIn) return;
+
+    try {
+      await _db
+          .collection('users')
+          .doc(uid)
+          .collection('resourceActivity')
+          .doc(resourceId)
+          .set({
+            'lastOpenedAt': FieldValue.serverTimestamp(),
+            'openCount': FieldValue.increment(1),
+          }, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('Resource activity tracking failed: $e');
+    }
+  }
+
   // ── Toggles & State Updates (Persisted to Firestore) ─────────────────────
 
   // NEW: Test Tracker Toggle
@@ -422,11 +407,6 @@ class AppProvider extends ChangeNotifier {
     } else {
       _saved.add(id);
 
-      await _analytics.logEvent(
-        name: 'resource_flagged',
-
-        parameters: {'resource_id': id},
-      );
     }
 
     await _save('saved', _saved.toList());
@@ -442,11 +422,6 @@ class AppProvider extends ChangeNotifier {
     } else {
       _pinned.add(id);
 
-      await _analytics.logEvent(
-        name: 'resource_pinned',
-
-        parameters: {'resource_id': id},
-      );
     }
 
     await _save('pinned', _pinned.toList());
@@ -512,8 +487,6 @@ class AppProvider extends ChangeNotifier {
     if (alreadySaved) return;
 
     _personalDeadlines.add(deadline);
-
-    await _analytics.logEvent(name: 'personal_deadline_added');
 
     await _save(
       'personalDeadlines',
@@ -644,14 +617,6 @@ class AppProvider extends ChangeNotifier {
       }
     }
 
-    if (wasAdded) {
-      await _analytics.logEvent(
-        name: 'major_checked',
-
-        parameters: {'major_id': id},
-      );
-    }
-
     await _save('checkedMajors', _checkedMajors.toList());
 
     await _save('checkedMajorOrder', _checkedMajorOrder);
@@ -659,86 +624,6 @@ class AppProvider extends ChangeNotifier {
     await _save('checkedSubMajorOrder', _checkedSubMajorOrder);
 
     notifyListeners();
-  }
-
-  // ── Analytics & Tracking ─────────────────────────────────────────────────
-
-  Future<void> logFeedbackOpened() async {
-    final user = firebaseUser;
-
-    if (user != null) {
-      final feedbackFields = <String, dynamic>{
-        'feedbackFormClickCount': FieldValue.increment(1),
-        'feedbackFormLastClickedAt': FieldValue.serverTimestamp(),
-        'feedbackFormLastClickedByUid': user.uid,
-        'feedbackFormLastClickedByName': displayName,
-      };
-
-      if (user.email != null) {
-        feedbackFields['feedbackFormLastClickedByEmail'] = user.email;
-      }
-
-      await _db
-          .collection('users')
-          .doc(user.uid)
-          .set(feedbackFields, SetOptions(merge: true));
-    }
-
-    await _analytics.logEvent(name: 'feedback_opened');
-  }
-
-  /// Tracks a resource view in Firestore.
-
-  /// Records total views + unique accounts. No UI — for analytics only.
-
-  Future<void> trackResourceView(String resourceId) async {
-    if (!isLoggedIn) return;
-
-    final uid = firebaseUser!.uid;
-
-    final docRef = _db.collection('resourceStats').doc(resourceId);
-
-    try {
-      await _db.runTransaction((tx) async {
-        final snap = await tx.get(docRef);
-
-        if (!snap.exists) {
-          tx.set(docRef, {
-            'totalViews': 1,
-
-            'uniqueViewerCount': 1,
-
-            'viewerUids': [uid],
-
-            'lastViewed': FieldValue.serverTimestamp(),
-          });
-        } else {
-          final data = snap.data()!;
-
-          final viewers = List<String>.from(data['viewerUids'] ?? []);
-
-          final isNew = !viewers.contains(uid);
-
-          final updates = <String, dynamic>{
-            'totalViews': FieldValue.increment(1),
-
-            'lastViewed': FieldValue.serverTimestamp(),
-          };
-
-          if (isNew) {
-            updates['uniqueViewerCount'] = FieldValue.increment(1);
-
-            updates['viewerUids'] = FieldValue.arrayUnion([uid]);
-          }
-
-          tx.update(docRef, updates);
-        }
-      });
-    } catch (e) {
-      debugPrint(
-        'trackResourceView error: $e',
-      ); // never crash the app for analytics
-    }
   }
 
   // ── Navigation & Search Actions ──────────────────────────────────────────
@@ -763,14 +648,6 @@ class AppProvider extends ChangeNotifier {
     _currentView = view;
 
     _detailResourceId = detailId;
-
-    if (detailId != null) {
-      _analytics.logEvent(
-        name: 'ap_course_viewed',
-
-        parameters: {'course_id': detailId},
-      );
-    }
 
     notifyListeners();
   }
