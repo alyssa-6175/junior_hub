@@ -1832,6 +1832,138 @@ final List<Resource> allResources = [
     icon: Icons.code,
   ),
   _competition(
+    id: 'harker_programming_invitational',
+    title: 'Harker Programming Invitational',
+    field: 'cs',
+    scope: 'regional',
+    format: 'in_person',
+    locationNote: 'The Harker School, San Jose, California',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Middle and high school students register in teams of up to three when annual registration opens.',
+    description:
+        'Work with a team on USACO-style algorithmic programming problems in novice or advanced divisions, with panels and industry booths alongside the contest.',
+    url:
+        'https://sites.google.com/students.harker.org/harkerprogrammingclub/harker-programming-invitational',
+    timeCommitment: 'One in-person contest day',
+    detailNote:
+        'HPI is usually held each March. The organizer asks prospective teams to check its site for the next registration cycle.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'girls_programming_league',
+    title: 'Girls Programming League',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Female-identifying pre-college students register in teams of one to three and select the novice or advanced division.',
+    description:
+        'Compete in a welcoming virtual programming challenge, then join a panel discussion and awards program run by the Harker Programming Club.',
+    url:
+        'https://sites.google.com/students.harker.org/harkerprogrammingclub/upcoming-events',
+    deadline: 'September 26, 2026 (event)',
+    deadlineIso: '2026-09-26T09:00:00-07:00',
+    timeCommitment: 'Half-day virtual event',
+    detailNote:
+        'The 2026 challenge is September 26, 9:00 AM–1:00 PM Pacific Time. Confirm registration availability with the organizer.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'lexington_informatics_tournament',
+    title: 'Lexington Informatics Tournament',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online worldwide',
+    majorTags: ['cs', 'algorithms', 'cybersecurity', 'problem_solving'],
+    applicationInfo:
+        'Form a team of up to three and register through the tournament site; middle and high school teams are eligible for prizes.',
+    description:
+        'Choose a three-hour USACO-style programming round during the contest window and optionally tackle a separate cybersecurity capture-the-flag round.',
+    url: 'https://lit.lhsmathcs.org/',
+    timeCommitment: 'Three-hour standard round plus optional CTF round',
+    detailNote:
+        'The 2026 standard-round window was July 31–August 4, with the CTF round August 1–3. Watch the official site for the next cycle.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'andover_computing_open',
+    title: 'The Andover Computing Open',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Students register through the event site; the contest is designed to welcome beginners to competitive programming.',
+    description:
+        'Solve two rounds of approachable algorithmic programming problems and explore workshops and speaker events between contest sessions.',
+    url: 'https://www.andovercomputingopen.org/',
+    timeCommitment: 'One online contest day',
+    detailNote:
+        'The 2026 event ran August 29. Check the official site for future registration and schedule details.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'calico_informatics_competition',
+    title: 'CALICO Informatics Competition',
+    field: 'cs',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Students through grade 12 register in teams when a fall or spring contest opens.',
+    description:
+        'Join a team-based programming contest written by UC Berkeley students, with problems that build algorithmic thinking and collaborative problem solving.',
+    url: 'https://calico.cs.berkeley.edu/',
+    timeCommitment: 'One contest per fall or spring cycle',
+    detailNote:
+        'CALICO runs biannual contests. Join its official email list for registration announcements.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'stanford_proco',
+    title: 'Stanford High School Programming Contest',
+    field: 'cs',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Stanford University, California',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'High school students form a team and register through the Stanford University Mathematics Organization when the contest is announced.',
+    description:
+        'Solve collegiate ACM-ICPC-style programming problems with a high school team in Stanford’s long-running programming contest.',
+    url: 'https://sumo.stanford.edu/proco/',
+    timeCommitment: 'One contest day',
+    detailNote:
+        'Visit the organizer’s contest-information page for the current schedule, team rules, and registration details.',
+    icon: Icons.code,
+  ),
+  _competition(
+    id: 'mit_informatics_tournament',
+    title: 'MIT Informatics Tournament',
+    field: 'cs',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'MIT campus, Cambridge, Massachusetts, and online',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo:
+        'Anyone may enter in a team of up to three and choose a beginner or advanced division during registration.',
+    description:
+        'Take on a full day of collaborative, algorithmic programming with partial-credit problems for teams ranging from newcomers to experienced competitors.',
+    url: 'https://mitit.org/',
+    deadline: 'December 6, 2026 (Winter Tournament)',
+    deadlineIso: '2026-12-06T00:00:00-05:00',
+    timeCommitment: 'Full-day hybrid tournament',
+    detailNote:
+        'The Winter 2026–27 tournament is scheduled for December 6, 2026; see the official logistics and registration pages for current details.',
+    icon: Icons.code,
+  ),
+  _competition(
     id: 'banana_hacks_2026',
     title: 'Banana Hacks 2026',
     field: 'cs',
