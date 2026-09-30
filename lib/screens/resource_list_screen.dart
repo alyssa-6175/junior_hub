@@ -96,11 +96,21 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
     }
 
-    final starred = items.where((r) => pinned.contains(r.id)).toList()
+    List<Resource> group(bool isSeen, bool isPinned) => items
+        .where(
+          (resource) =>
+              seen.contains(resource.id) == isSeen &&
+              pinned.contains(resource.id) == isPinned,
+        )
+        .toList()
       ..sort(compareResources);
-    final remaining = items.where((r) => !pinned.contains(r.id)).toList()
-      ..sort(compareResources);
-    return [...starred, ...remaining];
+
+    return [
+      ...group(false, true),
+      ...group(false, false),
+      ...group(true, true),
+      ...group(true, false),
+    ];
   }
 
   int _scopeRank(Resource resource) {

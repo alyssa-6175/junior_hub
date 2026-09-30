@@ -42,14 +42,30 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     List<Resource> items,
     Set<String> pinned,
     Set<String> seen,
+    {List<String> priorityIds = const []}
   ) {
-    int byTitle(Resource a, Resource b) =>
-        a.title.toLowerCase().compareTo(b.title.toLowerCase());
-    final starred = items.where((r) => pinned.contains(r.id)).toList()
-      ..sort(byTitle);
-    final remaining = items.where((r) => !pinned.contains(r.id)).toList()
-      ..sort(byTitle);
-    return [...starred, ...remaining];
+    int compare(Resource a, Resource b) {
+      final aPriority = priorityIds.indexOf(a.id);
+      final bPriority = priorityIds.indexOf(b.id);
+      if (aPriority != bPriority) return aPriority.compareTo(bPriority);
+      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+    }
+
+    List<Resource> group(bool isSeen, bool isPinned) => items
+        .where(
+          (resource) =>
+              seen.contains(resource.id) == isSeen &&
+              pinned.contains(resource.id) == isPinned,
+        )
+        .toList()
+      ..sort(compare);
+
+    return [
+      ...group(false, true),
+      ...group(false, false),
+      ...group(true, true),
+      ...group(true, false),
+    ];
   }
 
   @override
@@ -84,6 +100,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       _applySection(_all.where((r) => officialIds.contains(r.id)).toList()),
       pinned,
       seen,
+      priorityIds: ['bluebook_tests', 'cb_question_bank'],
     );
 
     final videos = _sort(

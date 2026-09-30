@@ -42,11 +42,21 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _sortedLinks(List<String> links, AppProvider provider) {
     final id = widget.resource.id;
-    final starred = links.where((l) => provider.isLinkPinned(id, l)).toList()
+    List<String> group(bool isSeen, bool isPinned) => links
+        .where(
+          (label) =>
+              provider.isLinkSeen(id, label) == isSeen &&
+              provider.isLinkPinned(id, label) == isPinned,
+        )
+        .toList()
       ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
-    final remaining = links.where((l) => !provider.isLinkPinned(id, l)).toList()
-      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
-    return [...starred, ...remaining];
+
+    return [
+      ...group(false, true),
+      ...group(false, false),
+      ...group(true, true),
+      ...group(true, false),
+    ];
   }
 
   List<String> _sortedPracticeTests(List<String> links, AppProvider provider) {
@@ -59,6 +69,9 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     }
 
     int compare(String a, String b) {
+      final aSeen = provider.isLinkSeen(widget.resource.id, a);
+      final bSeen = provider.isLinkSeen(widget.resource.id, b);
+      if (aSeen != bSeen) return aSeen ? 1 : -1;
       final byYear = year(b).compareTo(year(a));
       if (byYear != 0) return byYear;
       final aOfficial = a.toLowerCase().contains('official college board');

@@ -40,6 +40,9 @@ class _SavedScreenState extends State<SavedScreen> {
         )
         .toList();
     items.sort((a, b) {
+      final aSeen = provider.isSeen(a.id);
+      final bSeen = provider.isSeen(b.id);
+      if (aSeen != bSeen) return aSeen ? 1 : -1;
       final aStarred = provider.isPinned(a.id);
       final bStarred = provider.isPinned(b.id);
       if (aStarred != bStarred) return aStarred ? -1 : 1;
