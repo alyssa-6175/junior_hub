@@ -46,6 +46,22 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     ('humanities', 'Humanities & Social Sciences'),
   ];
 
+  @override
+  void didUpdateWidget(covariant ResourceListScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // ResourceListScreen is reused while navigating between sidebar categories.
+    // The Research and Internship views have a third tab (Journals/Local), but
+    // most categories do not. Keeping that tab selected left the next category
+    // with an out-of-range IndexedStack index and an apparently broken filter.
+    if (oldWidget.category != widget.category) {
+      _tab = 1;
+      _majorFilter = null;
+      _collegeCourseType = 'independent';
+      _collegeCourseTermFilter = null;
+    }
+  }
+
   bool _isEssayWritingCompetition(Resource resource) {
     final title = resource.title.toLowerCase();
     return title.contains('essay') ||

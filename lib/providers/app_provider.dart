@@ -17,6 +17,10 @@ import '../data/majors_data.dart';
 const _googleDesktopClientId =
     '76869443049-g4kjalna8kbptr9aosb94caqv70grsg2.apps.googleusercontent.com';
 
+// Eastside Preparatory School's Microsoft Entra tenant. Keeping sign-in in
+// this tenant prevents personal Microsoft accounts from entering the app.
+const _microsoftTenantId = 'b2681e8b-dd20-46cf-b163-371a2d7c6014';
+
 class AppProvider extends ChangeNotifier {
   // ── Firebase & Auth Instances ────────────────────────────────────────────
 
@@ -216,7 +220,12 @@ class AppProvider extends ChangeNotifier {
     }
 
     try {
-      await _auth.signInWithPopup(MicrosoftAuthProvider());
+      final provider = MicrosoftAuthProvider()
+        ..setCustomParameters({
+          'tenant': _microsoftTenantId,
+          'prompt': 'select_account',
+        });
+      await _auth.signInWithPopup(provider);
 
       await _postSignIn();
       return null;
