@@ -224,7 +224,7 @@ class _PersonalDeadlineRow extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        deadline.dateIso,
+                        deadline.displayDate,
                         style: GoogleFonts.inter(
                           fontSize: 10,
                           color: kTextSecondary,

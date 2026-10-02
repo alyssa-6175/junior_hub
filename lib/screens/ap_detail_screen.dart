@@ -24,7 +24,11 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   void initState() {
     super.initState();
     _tabs = TabController(
-      length: _hasReferenceInformation(widget.resource) ? 6 : 5,
+      length: _isArtPortfolio(widget.resource)
+          ? 3
+          : _hasReferenceInformation(widget.resource)
+          ? 5
+          : 4,
       vsync: this,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -100,6 +104,9 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     'ap_physics_c_mech',
   }.contains(resource.id);
 
+  bool _isArtPortfolio(Resource resource) =>
+      artPortfolioResourceIds.contains(resource.id);
+
   String? _firstLabelContaining(Resource resource, String needle) {
     return resource.links.cast<String?>().firstWhere(
       (label) => label!.toLowerCase().contains(needle),
@@ -117,7 +124,6 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   bool _isHeaderLink(String label) {
     final lower = label.toLowerCase();
     return lower.contains('official course page') ||
-        lower.contains('official ap seminar course page') ||
         lower.contains('ap classroom') ||
         lower.contains('official exam page');
   }
@@ -207,8 +213,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         examDeadline != null &&
         provider.hasPersonalDeadline(res.id, examDeadline.dateIso);
     final officialCourseLabel =
-        _firstLabelContaining(res, 'official course page') ??
-        _firstLabelContaining(res, 'official ap seminar course page');
+        _firstLabelContaining(res, 'official course page');
     final officialCourseUrl = officialCourseLabel == null
         ? res.url
         : resolveUrl(officialCourseLabel, res);
@@ -426,55 +431,78 @@ class _ApDetailScreenState extends State<ApDetailScreen>
             indicatorWeight: 2,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             isScrollable: true,
-            tabs: [
-              const Tab(text: 'Course Material'),
-              if (_hasReferenceInformation(res))
-                const Tab(text: 'Reference Information'),
-              const Tab(text: 'Videos'),
-              const Tab(text: 'Practice Tests'),
-              const Tab(text: 'Practice Questions & Banks'),
-              const Tab(text: 'General Study Hubs'),
-            ],
+            tabs: _isArtPortfolio(res)
+                ? const [
+                    Tab(text: 'Instructions & FAQ'),
+                    Tab(text: 'Sample Work'),
+                    Tab(text: 'Idea Generator'),
+                  ]
+                : [
+                    const Tab(text: 'Course Material'),
+                    if (_hasReferenceInformation(res))
+                      const Tab(text: 'Reference Information'),
+                    const Tab(text: 'Videos'),
+                    const Tab(text: 'Practice Tests'),
+                    const Tab(text: 'Practice Questions & Banks'),
+                  ],
           ),
         ),
         // Tab content
         Expanded(
           child: TabBarView(
             controller: _tabs,
-            children: [
-              _ApTab(
-                icon: Icons.menu_book_outlined,
-                // Wrap the filtered items in the sorter
-                items: _sortedLinks(_courseMaterial(res), provider),
-                emptyText: 'No course material added yet.',
-              ),
-              if (_hasReferenceInformation(res))
-                _ApTab(
-                  icon: Icons.description_outlined,
-                  items: _sortedLinks(_referenceInformation(res), provider),
-                  emptyText: 'No official reference information added yet.',
-                ),
-              _ApTab(
-                icon: Icons.smart_display_outlined,
-                items: _sortedLinks(_videos(res), provider),
-                emptyText: 'No videos added yet.',
-              ),
-              _ApTab(
-                icon: Icons.assignment_outlined,
-                items: _sortedPracticeTests(_practiceTests(res), provider),
-                emptyText: 'No practice tests added yet.',
-              ),
-              _ApTab(
-                icon: Icons.quiz_outlined,
-                items: _sortedLinks(_practiceQuestionsAndBanks(res), provider),
-                emptyText: 'No practice questions or question banks added yet.',
-              ),
-              _ApTab(
-                icon: Icons.auto_awesome_mosaic_outlined,
-                items: _sortedLinks(_generalStudyHubs(res), provider),
-                emptyText: 'No general study hubs added yet.',
-              ),
-            ],
+            children: _isArtPortfolio(res)
+                ? [
+                    _ArtPortfolioInfoTab(
+                      resource: res,
+                      title: 'Build, document, and submit your portfolio',
+                      intro:
+                          'AP Art and Design has no sit-down test. Your score comes from the digital portfolio components you submit as final. Follow your teacher’s earlier deadline whenever they set one.',
+                      links: _artPortfolioLinks(res, 'Instructions'),
+                      showFaq: true,
+                    ),
+                    _ArtPortfolioInfoTab(
+                      resource: res,
+                      title: 'Learn from real, scored portfolios',
+                      intro:
+                          'Use the official College Board sample pages below to find released Score 5 selected works and read the scoring context. Study the investigation, sequencing, craft, and written evidence—do not copy another student’s idea or images.',
+                      links: _artPortfolioLinks(res, 'Sample work'),
+                    ),
+                    _ArtIdeaGeneratorTab(resource: res),
+                  ]
+                : [
+                    _ApTab(
+                      icon: Icons.menu_book_outlined,
+                      items: _sortedLinks(_courseMaterial(res), provider),
+                      emptyText: 'No course material added yet.',
+                    ),
+                    if (_hasReferenceInformation(res))
+                      _ApTab(
+                        icon: Icons.description_outlined,
+                        items: _sortedLinks(_referenceInformation(res), provider),
+                        emptyText:
+                            'No official reference information added yet.',
+                      ),
+                    _ApTab(
+                      icon: Icons.smart_display_outlined,
+                      items: _sortedLinks(_videos(res), provider),
+                      emptyText: 'No videos added yet.',
+                    ),
+                    _ApTab(
+                      icon: Icons.assignment_outlined,
+                      items: _sortedPracticeTests(_practiceTests(res), provider),
+                      emptyText: 'No practice tests added yet.',
+                    ),
+                    _ApTab(
+                      icon: Icons.quiz_outlined,
+                      items: _sortedLinks(
+                        _practiceQuestionsAndBanks(res),
+                        provider,
+                      ),
+                      emptyText:
+                          'No practice questions or question banks added yet.',
+                    ),
+                  ],
           ),
         ),
       ],
@@ -485,13 +513,16 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   bool _isQuestionBank(String label) => apQuestionBankHubs.containsKey(label);
 
-  bool _isGeneralStudyHub(String label) =>
-      apGeneralStudyHubs.containsKey(label) || label == 'APCS Exam Prep';
+  List<String> _artPortfolioLinks(Resource resource, String prefix) =>
+      artPortfolioLinks[resource.id]?.keys
+          .where((label) => label.startsWith(prefix))
+          .toList() ??
+      const [];
 
   List<String> _courseMaterial(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
-        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
+        .where((l) => !_isQuestionBank(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -513,7 +544,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   List<String> _videos(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
-        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
+        .where((l) => !_isQuestionBank(l))
         .where((l) => !_isCommunityNotes(l))
         .where(
           (l) =>
@@ -537,7 +568,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   List<String> _practiceTests(Resource r) {
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
-        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
+        .where((l) => !_isQuestionBank(l))
         .where((l) => !_isCommunityNotes(l))
         .where((l) {
           final lower = l.toLowerCase();
@@ -560,7 +591,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     ];
     return linksForResource(r)
         .where((l) => !_isHeaderLink(l))
-        .where((l) => !_isQuestionBank(l) && !_isGeneralStudyHub(l))
+        .where((l) => !_isQuestionBank(l))
         .where((l) => !matched.contains(l))
         .toList();
   }
@@ -570,8 +601,247 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     ...linksForResource(r).where(_isQuestionBank),
   }.toList();
 
-  List<String> _generalStudyHubs(Resource r) =>
-      linksForResource(r).where(_isGeneralStudyHub).toList();
+}
+
+class _ArtPortfolioInfoTab extends StatelessWidget {
+  final Resource resource;
+  final String title;
+  final String intro;
+  final List<String> links;
+  final bool showFaq;
+
+  const _ArtPortfolioInfoTab({
+    required this.resource,
+    required this.title,
+    required this.intro,
+    required this.links,
+    this.showFaq = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.inter(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: kTextPrimary,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          intro,
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            height: 1.45,
+            color: kTextSecondary,
+          ),
+        ),
+        if (showFaq) ...[
+          const SizedBox(height: 14),
+          _ArtFaqCard(
+            question: 'How do I submit?',
+            answer:
+                'Upload your required portfolio components in the AP Digital Portfolio and mark every component “Submit as Final.” For 2027, College Board’s final deadline is 05/07/2027 at 11:59 PM ET; your teacher or coordinator may require an earlier date.',
+          ),
+          _ArtFaqCard(
+            question: 'What does a strong topic look like?',
+            answer:
+                'Start with a question you can revisit and deepen—not a broad theme alone. “How can repeated grocery receipts map my family’s changing routines?” gives you more room to investigate than “identity.”',
+          ),
+          _ArtFaqCard(
+            question: 'What should I document?',
+            answer:
+                'Photograph work as you make it, save experiments and revisions, and note the material, decision, and next question. Clear process evidence makes your written explanation much easier.',
+          ),
+          _ArtFaqCard(
+            question: 'Can I use AI tools?',
+            answer:
+                'Read College Board’s current AP Art and Design policy before using any AI-enabled tool. Your submitted portfolio must accurately represent your own authorship and process.',
+          ),
+        ],
+        const SizedBox(height: 14),
+        Text(
+          showFaq ? 'Official instructions' : 'Official examples',
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: kTextPrimary,
+          ),
+        ),
+        const SizedBox(height: 5),
+        ...links.map((label) => _LinkItem(label: label, resource: resource)),
+      ],
+    );
+  }
+}
+
+class _ArtFaqCard extends StatelessWidget {
+  final String question;
+  final String answer;
+
+  const _ArtFaqCard({required this.question, required this.answer});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(11),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7F7FB),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: kBorderLight),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            question,
+            style: GoogleFonts.inter(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w600,
+              color: kTextPrimary,
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            answer,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              height: 1.4,
+              color: kTextSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ArtIdeaGeneratorTab extends StatelessWidget {
+  final Resource resource;
+  const _ArtIdeaGeneratorTab({required this.resource});
+
+  String _mediumPrompt(String drawing, String twoD, String threeD) {
+    if (resource.id == 'ap_drawing') return drawing;
+    if (resource.id == 'ap_2d_art') return twoD;
+    if (resource.id == 'ap_3d_art') return threeD;
+    return 'Drawing: $drawing\n2-D: $twoD\n3-D: $threeD';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ideas = <(String, String)>[
+      (
+        'Memory and family archives',
+        _mediumPrompt(
+          'Layer portraits, handwriting, or inherited objects to ask how memory changes with retelling.',
+          'Build a photo-and-collage series from receipts, letters, maps, or family snapshots.',
+          'Create cast, stitched, or assembled objects that preserve and distort a family artifact.',
+        ),
+      ),
+      (
+        'Place, home, and belonging',
+        _mediumPrompt(
+          'Use shifting viewpoints, windows, thresholds, or repeated routes to explore where you feel seen.',
+          'Make a zine, map series, poster system, or photo essay about a neighborhood and who shapes it.',
+          'Model a room, shelter, or site-specific form that changes as viewers move around it.',
+        ),
+      ),
+      (
+        'Body, motion, and care',
+        _mediumPrompt(
+          'Study hands, posture, or athletic/repetitive movement through sequence and close observation.',
+          'Combine diagrams, textiles, typography, and self-portraiture to visualize care or recovery.',
+          'Use wearable sculpture, ceramics, or kinetic forms to make movement or limitation physical.',
+        ),
+      ),
+      (
+        'Environment and consumption',
+        _mediumPrompt(
+          'Observe a local watershed, discarded packaging, or seasonal change through repeated field sketches.',
+          'Create an infographic, print series, or photo-collage tracking one material from use to waste.',
+          'Transform collected materials into an object that reveals its environmental footprint.',
+        ),
+      ),
+      (
+        'Systems, rules, and routines',
+        _mediumPrompt(
+          'Turn calendars, school schedules, game rules, or data into a visual score and then disrupt it.',
+          'Design a sequence of posters, interfaces, or book pages that exposes an invisible system.',
+          'Build modular forms that viewers can reorganize to test who has control.',
+        ),
+      ),
+      (
+        'Identity, language, and code-switching',
+        _mediumPrompt(
+          'Explore gesture, costume, and facial expression across contexts without reducing identity to a symbol.',
+          'Pair bilingual text, found imagery, and pattern to show how meaning shifts between audiences.',
+          'Use materials, scale, and interaction to make a viewer negotiate public versus private selves.',
+        ),
+      ),
+    ];
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      children: [
+        Text(
+          'Turn a broad theme into an investigation',
+          style: GoogleFonts.inter(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: kTextPrimary,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          'Pick a prompt that matters to you, then write a question, try two materials, and make a small first study. Your strongest direction is the one that creates new questions after each piece.',
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            height: 1.45,
+            color: kTextSecondary,
+          ),
+        ),
+        const SizedBox(height: 14),
+        ...ideas.map(
+          (idea) => Container(
+            margin: const EdgeInsets.only(bottom: 9),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: kSurface,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: kBorderLight),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  idea.$1,
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: kTextPrimary,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  idea.$2,
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    height: 1.42,
+                    color: kTextSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class _HeaderActionButton extends StatelessWidget {

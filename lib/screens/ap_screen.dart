@@ -22,7 +22,6 @@ class _ApScreenState extends State<ApScreen> {
     ('math', 'Mathematics'),
     ('history', 'History & Social Sciences'),
     ('cs', 'Computer Science'),
-    ('capstone', 'AP Capstone'),
     ('lang', 'English, World Languages & Literature'),
     ('arts', 'Arts'),
   ];

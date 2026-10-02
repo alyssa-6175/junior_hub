@@ -99,7 +99,8 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
 
   bool _isResearchJournal(Resource resource) =>
       resource.category == 'research' &&
-      resource.majorTags.contains('publication');
+      (resource.majorTags.contains('publication') ||
+          resource.majorTags.contains('research_fair'));
 
   List<Resource> _sorted(
     List<Resource> items,
@@ -107,6 +108,12 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
     Set<String> seen,
   ) {
     int compareResources(Resource a, Resource b) {
+      // Coursera is the broadest starting point for independent exploration,
+      // so keep it first in College Courses regardless of geographic scope.
+      if (widget.category == 'dual_credit') {
+        if (a.id == 'coursera') return -1;
+        if (b.id == 'coursera') return 1;
+      }
       final scopeCompare = _scopeRank(a).compareTo(_scopeRank(b));
       if (scopeCompare != 0) return scopeCompare;
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
@@ -413,7 +420,7 @@ Alyssa''',
                     const SizedBox(width: 2),
                     _InlineTab(
                       icon: Icons.menu_book_outlined,
-                      label: 'Journals',
+                      label: 'Journals & Fairs',
                       count: journalItems.length,
                       active: _tab == 2,
                       onTap: () => setState(() => _tab = 2),

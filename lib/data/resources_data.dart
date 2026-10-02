@@ -201,9 +201,6 @@ const Map<String, String> kLinkUrls = {
       'https://knowt.com/exams/AP/AP-Computer-Science-A',
   'AP Computer Science A CrackAP Practice Questions':
       'https://www.crackap.com/ap/computer-science-a/',
-  'AP Computer Science A AP CS Exam Prep: Test and Course Content':
-      'https://www.apcsexamprep.com/',
-  'APCS Exam Prep': 'https://www.apcsexamprep.com/',
   'AP Computer Science A CodingBat Java Practice': 'https://codingbat.com/java',
   'AP Computer Science Principles Official Course Page':
       'https://apstudents.collegeboard.org/courses/ap-computer-science-principles',
@@ -658,6 +655,12 @@ const Map<String, String> kLinkUrls = {
       'https://drive.google.com/file/d/1VNzA2aye5jkxWJvr2Y_EIcRoy7bkTl03/view',
   'AP Macro Exam 2012':
       'https://drive.google.com/file/d/1XmmYhQMstfz1eeuHiTSmdgHVtP9MH48c/view',
+  'AP Art and Design Program Overview':
+      'https://apstudents.collegeboard.org/art-and-design-program',
+  'WSSEF registration': 'https://wssef.org/registration/',
+  'WSSEF regional-fair finder': 'https://wssef.org/state-fair-regional-fairs/',
+  'WSSEF logbook and scientific journal requirements':
+      'https://wssef.org/registration/',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -734,7 +737,7 @@ Resource _researchJournal({
   detailNote: detailNote,
 );
 
-final List<Resource> allResources = [
+final List<Resource> _catalogResources = [
   // ===========================================================================
   // COMPETITIONS
   // ===========================================================================
@@ -2622,10 +2625,10 @@ final List<Resource> allResources = [
     description:
         'Share original art or writing across a wide range of categories, from poetry and journalism to photography and design',
     url: 'https://www.artandwriting.org/',
-    deadline: 'December 1, 2026–January 6, 2027 (varies by region)',
+    deadline: 'December 1, 2026–January 4, 2027 (varies by region)',
     deadlineIso: '2026-12-01T23:59:00-05:00',
     detailNote:
-        'Regional programs set their own deadlines. The first close December 1, 2026, while some remain open through January 6, 2027',
+        'Regional programs set their own deadlines. The first close December 1, 2026, while some remain open through January 4, 2027. Use the official Region Locator to confirm your art deadline.',
     icon: Icons.edit_note,
   ),
   _competition(
@@ -3437,7 +3440,7 @@ final List<Resource> allResources = [
       'AP Psychology Knowt Study Guides',
       'AP Psychology CrackAP Practice Questions',
     ],
-    apSubCategory: 'history',
+    apSubCategory: 'science',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
   ),
@@ -3604,7 +3607,6 @@ final List<Resource> allResources = [
       'AP Computer Science A Fiveable Study Guides',
       'AP Computer Science A Knowt Study Guides',
       'AP Computer Science A CrackAP Practice Questions',
-      'APCS Exam Prep',
       'AP Computer Science A CodingBat Java Practice',
       'AP CSA Exam 2015',
       'AP CSA Exam 2014',
@@ -3634,7 +3636,6 @@ final List<Resource> allResources = [
       'AP Computer Science Principles Fiveable Study Guides',
       'AP Computer Science Principles Knowt Study Guides',
       'AP Computer Science Principles CrackAP Practice Questions',
-      'APCS Exam Prep',
       'AP Computer Science Principles Code.org Curriculum',
       'AP CSP Exam 2018',
       'AP CSP Exam 2016',
@@ -4094,6 +4095,23 @@ final List<Resource> allResources = [
   ),
 
   const Resource(
+    id: 'ap_studio_art',
+    title: 'AP Studio Art (Art and Design Overview)',
+    category: 'ap',
+    field: 'art_history',
+    majorTags: ['art', 'art_design', 'design', 'humanities'],
+    description:
+        'Use this overview to choose the AP Drawing, AP 2-D Art and Design, or AP 3-D Art and Design portfolio that fits your work.',
+    deadline: 'TODO',
+    deadlineIso: '',
+    icon: Icons.palette_outlined,
+    url: 'https://apstudents.collegeboard.org/art-and-design-program',
+    links: ['AP Art and Design Program Overview'],
+    apSubCategory: 'arts',
+    detailNote:
+        '“AP Studio Art” is the older umbrella name. College Board now scores separate Drawing, 2-D Art and Design, and 3-D Art and Design portfolios—there is no sit-down Studio Art test.',
+  ),
+  const Resource(
     id: 'ap_2d_art',
     title: 'AP 2-D Art and Design',
     category: 'ap',
@@ -4138,36 +4156,9 @@ final List<Resource> allResources = [
     links: ['AP Drawing Official Course Page'],
     apSubCategory: 'arts',
   ),
-  const Resource(
-    id: 'ap_research',
-    title: 'AP Research',
-    category: 'ap',
-    field: 'all',
-    majorTags: ['research', 'all_subjects'],
-    description:
-        'Design a yearlong investigation, analyze evidence, write an academic paper, and defend the work in a presentation',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.school,
-    url: 'https://apstudents.collegeboard.org/courses/ap-research',
-    links: ['AP Research Official Course Page'],
-    apSubCategory: 'capstone',
-  ),
-
-  const Resource(
-    id: 'ap_seminar',
-    title: 'AP Seminar',
-    category: 'ap',
-    field: 'english',
-    description:
-        'Interdisciplinary inquiry, source analysis, argument, and collaboration.',
-    deadline: 'TODO',
-    deadlineIso: '',
-    icon: Icons.school,
-    url: 'https://apstudents.collegeboard.org/courses/ap-seminar',
-    links: ['Official AP Seminar course page'],
-    apSubCategory: 'capstone',
-  ),
+  // AP Capstone was intentionally removed from the student-facing catalog.
+  // Keep the old resource definitions in Git history rather than presenting a
+  // course group the hub no longer supports.
   const Resource(
     id: 'ap_business_finance',
     title: 'AP Business with Personal Finance',
@@ -4204,7 +4195,6 @@ final List<Resource> allResources = [
       'AP Cybersecurity Official Course Page',
       'AP Cybersecurity AP Classroom',
       'AP Cybersecurity Official Exam Page',
-      'APCS Exam Prep',
     ],
     apSubCategory: 'cs',
     detailNote:
@@ -4951,6 +4941,38 @@ final List<Resource> allResources = [
   // ===========================================================================
   // INDEPENDENT COLLEGE COURSES FOR HIGH SCHOOL STUDENTS
   // ===========================================================================
+  const Resource(
+    id: 'coursera',
+    title: 'Coursera',
+    category: 'dual_credit',
+    collegeCourseType: 'independent',
+    courseTermTags: ['summer', 'school_year', 'self_paced'],
+    field: 'all',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online, available worldwide',
+    timeCommitment: 'Self-paced; course lengths vary from short projects to multi-course programs',
+    majorTags: ['all_subjects'],
+    courseOfferings: [
+      'Arts, humanities, languages, and personal development',
+      'Business, economics, and entrepreneurship',
+      'Computer science, data science, and information technology',
+      'Health, psychology, and social sciences',
+      'Mathematics, logic, physical science, and engineering',
+      'Guided projects, Specializations, and Professional Certificates',
+    ],
+    applicationInfo:
+        'Create a Coursera account, browse by subject or skill, and enroll in a course. Many courses offer a free audit option; certificates and some programs require payment or financial aid approval.',
+    instructions:
+        'Start with a skill or subject you want to explore, filter by beginner level and course type, read the workload and syllabus, then enroll or audit. Check the individual course page before assuming it earns academic credit.',
+    description:
+        'A huge online catalog for almost any subject you can think of—from art history and languages to coding, health, math, business, science, and hands-on career skills.',
+    icon: Icons.school_outlined,
+    url: 'https://www.coursera.org/browse',
+    links: ['Coursera course catalog', 'Browse Coursera subjects'],
+    detailNote:
+        'Coursera is ideal for exploration because it offers courses across nearly every subject area. Most individual courses are not transferable college credit, so verify the credential and transfer policy for each course before paying.',
+  ),
   const Resource(
     id: 'uw_summer_sessions_high_school',
     title: 'UW Summer Sessions',
@@ -5920,6 +5942,38 @@ final List<Resource> allResources = [
     url: 'https://youthmedicaljournal.com/publish/',
     detailNote:
         'The journal says there are no submission, publication, or editorial fees. Its submission page was last updated in 2024, so confirm the form is still active before investing substantial time',
+  ),
+  const Resource(
+    id: 'wssef_2027',
+    title: 'Washington State Science & Engineering Fair (WSSEF)',
+    category: 'research',
+    field: 'science',
+    scope: 'state',
+    format: 'in_person',
+    locationNote: 'Bremerton High School & Performing Arts Center, Bremerton, Washington',
+    timeCommitment: 'Independent project, required forms, and live judging',
+    majorTags: [
+      'research_fair',
+      'science',
+      'engineering',
+      'research',
+      'biology',
+      'chemistry',
+      'physics',
+      'environmental_science',
+      'cs',
+    ],
+    applicationInfo:
+        'Washington students in grades 1–12 register online. If your county has an affiliated regional fair for your grade, qualify there first; otherwise, register directly with WSSEF.',
+    description:
+        'Present an original science or engineering project at Washington’s statewide fair, with a path to affiliated higher-level science fairs.',
+    deadline: 'March 15, 2027 (registration, fees, and forms)',
+    deadlineIso: '2027-03-15T23:59:00-07:00',
+    icon: Icons.science_outlined,
+    url: 'https://wssef.org/registration/',
+    links: ['WSSEF registration', 'WSSEF regional-fair finder', 'WSSEF logbook and scientific journal requirements'],
+    detailNote:
+        'WSSEF 2027 is April 2–3 in Bremerton (grades 9–12 compete April 3). Central Sound’s grades 9–12 regional fair is March 6, so check the regional route before registering directly.',
   ),
   const Resource(
     id: 'rsi',
@@ -6976,6 +7030,17 @@ final List<Resource> allResources = [
   ),
 ];
 
+/// Running Start listings were retired from the College Courses surface. Keep
+/// the catalog entries out of every screen, search result, saved list, and
+/// deadline lookup without deleting historical records from the source file.
+final List<Resource> allResources = List.unmodifiable(
+  _catalogResources.where(
+    (resource) =>
+        !resource.title.toLowerCase().contains('running start') &&
+        resource.id != 'wa_running_start_directory',
+  ),
+);
+
 // ===========================================================================
 // DEADLINE MODEL
 // ===========================================================================
@@ -7036,7 +7101,8 @@ class DeadlineItem {
 // ===========================================================================
 // GROUPED UPCOMING DEADLINE ITEMS
 // ===========================================================================
-const List<DeadlineItem> upcomingDeadlines = [
+/// All dated records, including prior cycles retained for future renewal.
+const List<DeadlineItem> allDeadlineItems = [
   // ===========================================================================
   // AP ASSESSMENTS
   // Official 2027 College Board exam schedule.
@@ -7046,6 +7112,30 @@ const List<DeadlineItem> upcomingDeadlines = [
     date: 'May 12, 2027, Session 2',
     dateIso: '2027-05-12T12:00:00-07:00',
     resourceId: 'ap_art_history',
+  ),
+  DeadlineItem(
+    title: 'AP Art and Design portfolio submission',
+    date: 'May 7, 2027 at 11:59 PM ET',
+    dateIso: '2027-05-07T23:59:00-04:00',
+    resourceId: 'ap_studio_art',
+  ),
+  DeadlineItem(
+    title: 'AP 2-D Art and Design portfolio submission',
+    date: 'May 7, 2027 at 11:59 PM ET',
+    dateIso: '2027-05-07T23:59:00-04:00',
+    resourceId: 'ap_2d_art',
+  ),
+  DeadlineItem(
+    title: 'AP 3-D Art and Design portfolio submission',
+    date: 'May 7, 2027 at 11:59 PM ET',
+    dateIso: '2027-05-07T23:59:00-04:00',
+    resourceId: 'ap_3d_art',
+  ),
+  DeadlineItem(
+    title: 'AP Drawing portfolio submission',
+    date: 'May 7, 2027 at 11:59 PM ET',
+    dateIso: '2027-05-07T23:59:00-04:00',
+    resourceId: 'ap_drawing',
   ),
   DeadlineItem(
     title: 'AP Music Theory assessment',
@@ -7250,12 +7340,6 @@ const List<DeadlineItem> upcomingDeadlines = [
     date: 'May 14, 2027, Session 1',
     dateIso: '2027-05-14T08:00:00-07:00',
     resourceId: 'ap_spanish_lit',
-  ),
-  DeadlineItem(
-    title: 'AP Seminar assessment',
-    date: 'May 10, 2027, Session 2',
-    dateIso: '2027-05-10T12:00:00-07:00',
-    resourceId: 'ap_seminar',
   ),
   DeadlineItem(
     title: 'AP Business with Personal Finance assessment',
@@ -7663,10 +7747,17 @@ const List<DeadlineItem> upcomingDeadlines = [
   ),
   DeadlineItem(
     title: 'Scholastic Art & Writing Awards',
-    date: 'December 1, 2026–January 6, 2027 (varies by region)',
+    date: 'December 1, 2026–January 4, 2027 (varies by region)',
     dateIso: '2026-12-01T23:59:00-05:00',
     resourceId: 'scholastic_awards',
     majorTags: ['creative_writing', 'art', 'journalism_media'],
+  ),
+  DeadlineItem(
+    title: 'YoungArts National Competition 2027',
+    date: 'October 6, 2026 at 8:00 PM ET',
+    dateIso: '2026-10-06T20:00:00-04:00',
+    resourceId: 'youngarts',
+    majorTags: ['art', 'creative_writing', 'film_prod', 'performing_arts'],
   ),
   DeadlineItem(
     title: 'NASA International Space Apps Challenge',
@@ -7721,13 +7812,25 @@ const List<DeadlineItem> upcomingDeadlines = [
   // ===========================================================================
   // RESEARCH DEADLINES
   // ===========================================================================
-  // No verified upcoming research deadline is currently available.
+  DeadlineItem(
+    title: 'WSSEF 2027 registration, fees, and forms',
+    date: 'March 15, 2027',
+    dateIso: '2027-03-15T23:59:00-07:00',
+    resourceId: 'wssef_2027',
+    majorTags: ['science', 'engineering', 'research'],
+  ),
 
   // ===========================================================================
   // INTERNSHIP DEADLINES
   // ===========================================================================
   // No verified upcoming internship deadline is currently available.
 ];
+
+/// A deadline's past date is deliberately retained above for next year's
+/// renewal, but it is suppressed everywhere users can see or save deadlines.
+List<DeadlineItem> get upcomingDeadlines => allDeadlineItems
+    .where((deadline) => !deadline.isExpired && !deadline.isTodo)
+    .toList(growable: false);
 
 // ===========================================================================
 // HELPER FUNCTIONS
@@ -7742,18 +7845,66 @@ const Map<String, String> apQuestionBankHubs = {
   'Varsity Tutors': 'https://www.varsitytutors.com/practice',
 };
 
-const Map<String, String> apGeneralStudyHubs = {
-  'AP Daily': 'https://apstudents.collegeboard.org/ap-daily-archived',
-  'APStudy': 'https://apstudy.org/',
-  'Kaplan (paid)': 'https://www.kaptest.com/ap',
-  'Marco Learning': 'https://marcolearning.com/students/ap-study-guides/',
-  'Prep Den (paid)': 'https://prepden.com/',
-  'Save My Exams (paid)': 'https://www.savemyexams.com/ap/',
+/// The three AP Art and Design portfolios are evaluated as digital portfolios,
+/// not a sit-down test. These links power their portfolio-specific pages.
+const Set<String> artPortfolioResourceIds = {
+  'ap_studio_art',
+  'ap_2d_art',
+  'ap_3d_art',
+  'ap_drawing',
+};
+
+const Map<String, Map<String, String>> artPortfolioLinks = {
+  'ap_studio_art': {
+    'Instructions · AP Art and Design program overview':
+        'https://apstudents.collegeboard.org/art-and-design-program',
+    'Instructions · 2027 portfolio timeline and submission deadline':
+        'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
+    'Instructions · AP Digital Portfolio student guide':
+        'https://apstudents.collegeboard.org/digital-portfolios',
+    'Sample work · 2025 AP Art and Design exhibit':
+        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
+  },
+  'ap_2d_art': {
+    'Instructions · 2027 portfolio timeline and submission deadline':
+        'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
+    'Instructions · Digital submission guide for students':
+        'https://apstudents.collegeboard.org/digital-portfolios',
+    'Instructions · AP 2-D portfolio requirements and scoring':
+        'https://apcentral.collegeboard.org/courses/ap-2-d-art-and-design/portfolio',
+    'Sample work · Official 2-D samples, including Score 5 selected works':
+        'https://apcentral.collegeboard.org/courses/ap-2-d-art-and-design/portfolio/past-exam-questions',
+    'Sample work · 2025 AP Art and Design exhibit':
+        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
+  },
+  'ap_3d_art': {
+    'Instructions · 2027 portfolio timeline and submission deadline':
+        'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
+    'Instructions · Digital submission guide for students':
+        'https://apstudents.collegeboard.org/digital-portfolios',
+    'Instructions · AP 3-D portfolio requirements and scoring':
+        'https://apcentral.collegeboard.org/courses/ap-3-d-art-and-design/portfolio',
+    'Sample work · Official 3-D samples, including Score 5 selected works':
+        'https://apcentral.collegeboard.org/courses/ap-3-d-art-and-design/portfolio/past-exam-questions',
+    'Sample work · 2025 AP Art and Design exhibit':
+        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
+  },
+  'ap_drawing': {
+    'Instructions · 2027 portfolio timeline and submission deadline':
+        'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
+    'Instructions · Digital submission guide for students':
+        'https://apstudents.collegeboard.org/digital-portfolios',
+    'Instructions · AP Drawing portfolio requirements and scoring':
+        'https://apcentral.collegeboard.org/courses/ap-drawing/portfolio',
+    'Sample work · Official Drawing samples, including Score 5 selected works':
+        'https://apcentral.collegeboard.org/courses/ap-drawing/portfolio/past-exam-questions',
+    'Sample work · 2025 AP Art and Design exhibit':
+        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
+  },
 };
 
 const Map<String, String> _commonApLinks = {
   ...apQuestionBankHubs,
-  ...apGeneralStudyHubs,
 };
 
 const Map<String, Map<String, String>> _recentOfficialApTests = {
@@ -7864,6 +8015,24 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
         'https://www.scribd.com/document/915479134/AP-World-History-MCQ-Worksheet-2',
     'Practice test · Scribd · College Board AP World History: Modern practice exam':
         'https://www.scribd.com/document/717093782/Practice-Exam-MCQ',
+  },
+};
+
+/// Recent public PDFs from College Board. These are released FRQs rather than
+/// leaked or paywalled full exams, so students can practice with a source that
+/// matches the current public materials and remains appropriate to share.
+const Map<String, Map<String, String>> _officialReleasedApPracticePdfs = {
+  'ap_csa': {
+    'Practice test · Official College Board · 2025 AP Computer Science A FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-computer-science-a.pdf',
+  },
+  'ap_env_sci': {
+    'Practice test · Official College Board · 2025 AP Environmental Science FRQs, Set 1 (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-environmental-science-set-1.pdf',
+  },
+  'ap_psych': {
+    'Practice test · Official College Board · 2025 AP Psychology FRQs, Set 2 (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-psychology-set-2.pdf',
   },
 };
 
@@ -8800,18 +8969,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
     'Course material · SpanishDict grammar and vocabulary':
         'https://www.spanishdict.com/guide',
   },
-  'ap_research': {
-    'Course material · Purdue OWL research guidance':
-        'https://owl.purdue.edu/owl/research_and_citation/index.html',
-    'Course material · Zotero citation and source organizer':
-        'https://www.zotero.org/',
-  },
-  'ap_seminar': {
-    'Course material · Purdue OWL research guidance':
-        'https://owl.purdue.edu/owl/research_and_citation/index.html',
-    'Course material · Zotero citation and source organizer':
-        'https://www.zotero.org/',
-  },
   'ap_cybersecurity': {
     'Course material · APCS Exam Prep complete AP Cybersecurity course':
         'https://www.apcsexamprep.com/pages/ap-cybersecurity-complete-course-guide',
@@ -8864,7 +9021,9 @@ List<String> linksForResource(Resource resource) {
     if (_apsWithReferenceInformation.contains(resource.id))
       _officialReferenceInformationLabel,
     ..._providerLinksFor(resource).keys,
+    ...?artPortfolioLinks[resource.id]?.keys,
     ...?_recentOfficialApTests[resource.id]?.keys,
+    ...?_officialReleasedApPracticePdfs[resource.id]?.keys,
     ...?_examTexApPdfLinks[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
     ...?_driveApFileLinks[resource.id]?.keys.where(
@@ -8940,7 +9099,9 @@ String? resolveUrl(String linkLabel, Resource resource) {
   return kLinkUrls[linkLabel] ??
       _commonApLinks[linkLabel] ??
       _providerLinksFor(resource)[linkLabel] ??
+      artPortfolioLinks[resource.id]?[linkLabel] ??
       _recentOfficialApTests[resource.id]?[linkLabel] ??
+      _officialReleasedApPracticePdfs[resource.id]?[linkLabel] ??
       _examTexApPdfLinks[resource.id]?[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??

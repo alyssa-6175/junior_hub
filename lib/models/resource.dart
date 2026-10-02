@@ -93,7 +93,24 @@ class Resource {
   }
 
   /// Placeholder dates are internal data markers, never user-facing deadlines.
-  bool get hasDeadline => deadline != null && deadline != 'TODO';
+  /// Passed dates stay in the data file for the next cycle, but never appear
+  /// as a current deadline on resource cards or as an item users can save.
+  bool get hasDeadline =>
+      deadline != null && deadline != 'TODO' && !isDeadlineExpired;
+
+  bool get isDeadlineExpired {
+    if (deadlineIso == null || deadlineIso!.isEmpty) return false;
+    try {
+      final deadlineDate = DateTime.parse(deadlineIso!);
+      final today = DateTime(DateTime.now().year, DateTime.now().month,
+          DateTime.now().day);
+      final target =
+          DateTime(deadlineDate.year, deadlineDate.month, deadlineDate.day);
+      return target.isBefore(today);
+    } catch (_) {
+      return false;
+    }
+  }
 
   String get displayDescription => description.endsWith('.')
       ? description.substring(0, description.length - 1)
@@ -141,7 +158,6 @@ class Resource {
       'history': 'History + Social Science',
       'lang': 'Language + Lit',
       'arts': 'Arts',
-      'capstone': 'AP Capstone',
       'career': 'Career Kickstart',
     };
     return labels[apSubCategory ?? ''] ?? '';

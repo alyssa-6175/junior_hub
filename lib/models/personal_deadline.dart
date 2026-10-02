@@ -50,24 +50,10 @@ class PersonalDeadline {
     return 'later';
   }
 
-  /// Human-readable date: "Dec 15, 2025"
+  /// Human-readable date for the UI. ISO stays in storage for reliable math.
   String get displayDate {
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
     final d = _parsed;
-    return '${months[d.month - 1]} ${d.day}, ${d.year}';
+    return '${d.month.toString().padLeft(2, '0')}/${d.day.toString().padLeft(2, '0')}/${d.year}';
   }
 
   // ── Serialisation ─────────────────────────────────────────────────────────
