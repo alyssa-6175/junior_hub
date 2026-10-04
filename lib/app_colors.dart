@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // ─── School Spirit Colors ────────────────────────────────────────────────────
 // Change these two to match your exact school colors.
-const Color kNavy = Color(0xFF1B2A6B); // dark navy — sidebar, buttons
-const Color kGold = Color(0xFFCFA92C); // gold — accents, active states
-const Color kGoldLight = Color(0xFFFDF4D0); // pale gold — hover backgrounds
+const Color kNavy = Color(0xFF1B2A6B); // dark navy, sidebar and buttons
+const Color kGold = Color(0xFFCFA92C); // gold, accents and active states
+const Color kGoldLight = Color(0xFFFDF4D0); // pale gold, hover backgrounds
 
 // ─── App Neutrals ────────────────────────────────────────────────────────────
 const Color kBackground = Color(0xFFF7F8FC); // page background

@@ -38,7 +38,7 @@ List<SearchHit> buildSearchHits(String query) {
     for (final link in linksForResource(r)) {
       if (link.toLowerCase().contains(q)) {
         hits.add(SearchHit(resource: r, matchedLink: link));
-        // Don't add `seen` — same resource can appear multiple times for diff links
+        // Don't add `seen`; the same resource can appear multiple times for diff links.
       }
     }
   }
@@ -158,7 +158,7 @@ class _LinkHitTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Source label — shows which resource this link belongs to
+            // Source label shows which resource this link belongs to.
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
               child: Row(
@@ -206,7 +206,7 @@ class _LinkHitTile extends StatelessWidget {
                 ],
               ),
             ),
-            // The actual matching link — tappable, opens the URL
+            // The actual matching link is tappable and opens the URL.
             MouseRegion(
               cursor: url != null
                   ? SystemMouseCursors.click

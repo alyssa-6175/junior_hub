@@ -5,7 +5,7 @@ class PersonalDeadline {
   final String title;
 
   /// Date stored as ISO-8601: "2025-12-15".
-  /// Always use this format — it's the only way to do date math reliably.
+  /// Always use this format; it is the only way to do date math reliably.
   final String dateIso;
 
   /// Optional link back to a Resource so tapping it opens the resource card.
@@ -41,7 +41,7 @@ class PersonalDeadline {
 
   bool get isExpired => daysUntil < 0;
 
-  /// Urgency is auto-calculated — never stored.
+  /// Urgency is auto-calculated and never stored.
   String get urgency {
     final d = daysUntil;
     if (d < 0) return 'past';
@@ -67,13 +67,13 @@ class PersonalDeadline {
 
   factory PersonalDeadline.fromJson(Map<String, dynamic> j) {
     // Handle old format where date was stored as a human-readable string
-    // and urgency was a separate field — gracefully fall back.
+    // and urgency was a separate field, gracefully fall back.
     final rawDate = j['dateIso'] as String?;
     String iso;
     if (rawDate != null && rawDate.contains('-')) {
       iso = rawDate; // already ISO
     } else {
-      // Old format or missing — default 30 days from now
+      // Old format or missing, default 30 days from now
       final fallback = DateTime.now().add(const Duration(days: 30));
       iso =
           '${fallback.year}-${fallback.month.toString().padLeft(2, '0')}-${fallback.day.toString().padLeft(2, '0')}';

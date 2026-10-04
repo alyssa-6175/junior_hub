@@ -285,7 +285,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
           ),
         ),
 
-        // ── Content — all tabs are now identical plain ListViews ─────────
+        // Content: all tabs are now identical plain ListViews.
         Expanded(
           child: IndexedStack(
             index: _tab,

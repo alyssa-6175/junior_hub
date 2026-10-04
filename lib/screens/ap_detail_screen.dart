@@ -46,16 +46,26 @@ class _ApDetailScreenState extends State<ApDetailScreen>
 
   List<String> _sortedLinks(List<String> links, AppProvider provider) {
     final id = widget.resource.id;
+    const khanPhysicsCMechanics =
+        'Course material · Khan Academy AP Physics C: Mechanics';
+    final preferred = id == 'ap_physics_c_mech'
+        ? links.where((label) => label == khanPhysicsCMechanics).toList()
+        : <String>[];
+    final remaining = links
+        .where((label) => label != khanPhysicsCMechanics)
+        .toList();
     List<String> group(bool isSeen, bool isPinned) => links
         .where(
           (label) =>
               provider.isLinkSeen(id, label) == isSeen &&
               provider.isLinkPinned(id, label) == isPinned,
         )
+        .where((label) => remaining.contains(label))
         .toList()
       ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
 
     return [
+      ...preferred,
       ...group(false, true),
       ...group(false, false),
       ...group(true, true),
@@ -465,7 +475,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                       resource: res,
                       title: 'Learn from real, scored portfolios',
                       intro:
-                          'Use the official College Board sample pages below to find released Score 5 selected works and read the scoring context. Study the investigation, sequencing, craft, and written evidence—do not copy another student’s idea or images.',
+                          'Use the official College Board sample pages below to find released Score 5 selected works and read the scoring context. Look at the investigation, sequence, craft, and written evidence. Do not copy another student’s idea or images.',
                       links: _artPortfolioLinks(res, 'Sample work'),
                     ),
                     _ArtIdeaGeneratorTab(resource: res),
@@ -645,22 +655,22 @@ class _ArtPortfolioInfoTab extends StatelessWidget {
           _ArtFaqCard(
             question: 'How do I submit?',
             answer:
-                'Upload your required portfolio components in the AP Digital Portfolio and mark every component “Submit as Final.” For 2027, College Board’s final deadline is 05/07/2027 at 11:59 PM ET; your teacher or coordinator may require an earlier date.',
+                'Take clear photos, upload every required image and written response to the AP Digital Portfolio, then click “Submit as Final.” The 2027 College Board deadline is 05/07/2027 at 11:59 PM ET. Your teacher may set an earlier deadline, so follow that one.',
           ),
           _ArtFaqCard(
             question: 'What does a strong topic look like?',
             answer:
-                'Start with a question you can revisit and deepen—not a broad theme alone. “How can repeated grocery receipts map my family’s changing routines?” gives you more room to investigate than “identity.”',
+                'Pick something you want to keep looking at for weeks. A good idea is narrow enough to explore in different pieces, like how your family saves receipts or how a bus route changes through the day. “Identity” by itself is too broad.',
           ),
           _ArtFaqCard(
             question: 'What should I document?',
             answer:
-                'Photograph work as you make it, save experiments and revisions, and note the material, decision, and next question. Clear process evidence makes your written explanation much easier.',
+                'Save photos as you go. Keep rough drafts, material tests, and notes about what you changed. You will be glad you did when it is time to write about your process.',
           ),
           _ArtFaqCard(
             question: 'Can I use AI tools?',
             answer:
-                'Read College Board’s current AP Art and Design policy before using any AI-enabled tool. Your submitted portfolio must accurately represent your own authorship and process.',
+                'Check College Board’s current policy before using AI. You need to be able to explain what you made and how you made it. Do not submit work that is not yours.',
           ),
         ],
         const SizedBox(height: 14),

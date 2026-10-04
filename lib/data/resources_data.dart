@@ -421,7 +421,8 @@ const Map<String, String> kLinkUrls = {
       'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/act-exam-sections-and-structure.html',
   'ACT free practice and prep':
       'https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html',
-  'USA AI Olympiad': 'https://www.usaaio.org/2026-usa-na-aio',
+  'USA AI Olympiad': 'https://www.usaaio.org/',
+  'USAAIO 2027 registration and rules': 'https://www.usaaio.org/',
   'National Science Bowl': 'https://science.osti.gov/wdts/nsb',
   'NACLO': 'https://www.naclo.org/',
   'USNCO': 'https://www.acs.org/education/olympiad.html',
@@ -436,8 +437,12 @@ const Map<String, String> kLinkUrls = {
   'USACO': 'https://usaco.org/',
   'USACO Guide': 'https://usaco.guide/',
   'MAA AMC registration': 'https://maa.org/amcreg/',
+  'MAA AMC official preparation resources':
+      'https://maa.org/student-programs/amc/information-for-students-and-parents/',
   'AoPS AMC archive':
       'https://artofproblemsolving.com/wiki/index.php/AMC_Problems_and_Solutions',
+  'AAPT F=ma past exams and solutions':
+      'https://aapt.org/physicsteam/PT-exams.cfm',
   'Congressional App Challenge': 'https://www.congressionalappchallenge.us/',
   'CyberPatriot registration':
       'https://www.uscyberpatriot.org/competition/Competition-Overview/join-the-competition',
@@ -760,7 +765,29 @@ final List<Resource> _catalogResources = [
     url: 'https://usaco.org/',
     links: ['USACO', 'USACO Guide'],
     detailNote:
-        'The next official contest date was not posted when checked; no estimated date is shown.',
+        'Prepare with the free USACO Guide: its Bronze-to-Platinum roadmap includes topic lessons, curated problems, and solutions. It is community-built, not an official USACO syllabus. The next official contest date was not posted when checked.',
+  ),
+  const Resource(
+    id: 'usaaio',
+    title: 'USA-North America AI Olympiad (USAAIO)',
+    category: 'competition',
+    field: 'cs',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online Round 1; later selection activities vary by round',
+    timeCommitment: 'Three-round AI competition plus selection camp for top qualifiers',
+    majorTags: ['ai', 'cs', 'machine_learning', 'data_sci', 'problem_solving'],
+    applicationInfo:
+        'K–12 students in the United States and Canada register individually and should review the current rules, required software, and proctoring requirements.',
+    description:
+        'Compete in artificial-intelligence problem solving through the U.S. and Canada selection pathway to international AI Olympiads.',
+    deadline: 'January 31, 2027 at 11:59 PM ET',
+    deadlineIso: '2027-01-31T23:59:00-05:00',
+    icon: Icons.psychology_alt_outlined,
+    url: 'https://www.usaaio.org/',
+    links: ['USA AI Olympiad', 'USAAIO 2027 registration and rules'],
+    detailNote:
+        'Round 1 is February 19, 2027 from 12:00–3:00 PM ET. USAAIO is the Team USA pathway for IOAI, IAIO, and IAI²O; review the round rules before registering.',
   ),
   const Resource(
     id: 'amc',
@@ -780,9 +807,13 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-09-30T23:59:00-04:00',
     icon: Icons.emoji_events,
     url: 'https://maa.org/amcreg/',
-    links: ['MAA AMC registration', 'AoPS AMC archive'],
+    links: [
+      'MAA AMC registration',
+      'MAA AMC official preparation resources',
+      'AoPS AMC archive',
+    ],
     detailNote:
-        'Regular registration: October 15; late registration: October 28. AMC A: November 5; AMC B: November 13, 2026.',
+        'Prepare with MAA’s official materials and timed past problems in the AoPS archive. Regular registration: October 15; late registration: October 28. AMC A: November 5; AMC B: November 13, 2026.',
   ),
   const Resource(
     id: 'cac',
@@ -1115,9 +1146,9 @@ final List<Resource> _catalogResources = [
     deadlineIso: '',
     icon: Icons.calculate,
     url: 'https://www.aapt.org/physicsteam/',
-    links: ['AAPT U.S. Physics Team'],
+    links: ['AAPT U.S. Physics Team', 'AAPT F=ma past exams and solutions'],
     detailNote:
-        'The 2026 cycle has passed, and the next registration deadline is not yet published.',
+        'The 2026 cycle has passed, and the next registration deadline is not yet published. Use AAPT’s released F=ma exams and solutions, including the 2025 materials, for timed practice.',
   ),
   _competition(
     id: 'usaaao',
@@ -4109,7 +4140,7 @@ final List<Resource> _catalogResources = [
     links: ['AP Art and Design Program Overview'],
     apSubCategory: 'arts',
     detailNote:
-        '“AP Studio Art” is the older umbrella name. College Board now scores separate Drawing, 2-D Art and Design, and 3-D Art and Design portfolios—there is no sit-down Studio Art test.',
+        '“AP Studio Art” is the older umbrella name. College Board now scores separate Drawing, 2-D Art and Design, and 3-D Art and Design portfolios. There is no sit-down Studio Art test.',
   ),
   const Resource(
     id: 'ap_2d_art',
@@ -4966,7 +4997,7 @@ final List<Resource> _catalogResources = [
     instructions:
         'Start with a skill or subject you want to explore, filter by beginner level and course type, read the workload and syllabus, then enroll or audit. Check the individual course page before assuming it earns academic credit.',
     description:
-        'A huge online catalog for almost any subject you can think of—from art history and languages to coding, health, math, business, science, and hands-on career skills.',
+        'A huge online catalog for almost any subject you can think of, from art history and languages to coding, health, math, business, science, and hands-on career skills.',
     icon: Icons.school_outlined,
     url: 'https://www.coursera.org/browse',
     links: ['Coursera course catalog', 'Browse Coursera subjects'],
@@ -7725,6 +7756,13 @@ const List<DeadlineItem> allDeadlineItems = [
     majorTags: ['film_prod', 'documentary', 'civics', 'journalism_media'],
   ),
   DeadlineItem(
+    title: 'USA-North America AI Olympiad 2027 registration',
+    date: 'January 31, 2027 at 11:59 PM ET',
+    dateIso: '2027-01-31T23:59:00-05:00',
+    resourceId: 'usaaio',
+    majorTags: ['ai', 'cs', 'machine_learning', 'data_sci'],
+  ),
+  DeadlineItem(
     title: 'Regeneron Science Talent Search 2027',
     date: 'November 5, 2026 at 8:00 PM ET',
     dateIso: '2026-11-05T20:00:00-05:00',
@@ -7909,6 +7947,8 @@ const Map<String, String> _commonApLinks = {
 
 const Map<String, Map<String, String>> _recentOfficialApTests = {
   'ap_bio': {
+    'Practice test · Official College Board · 2025 AP Biology FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-biology.pdf',
     'Practice test · Scribd · 2024 AP Daily Biology MCQ set-based questions':
         'https://www.scribd.com/document/745791326/AP-Biology-Session2-Worksheet',
     'Practice test · Scribd · 2023 AP Daily Biology MCQ session 5':
@@ -7928,7 +7968,13 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
     'Practice test · Scribd · 2019 College Board AP Calculus BC MCQ and answer key':
         'https://www.scribd.com/document/904476304/AP-Calculus-BC-Practice-Exam-2019',
   },
+  'ap_calc_ab': {
+    'Practice test · Official College Board · 2025 AP Calculus AB FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-calculus-ab.pdf',
+  },
   'ap_chem': {
+    'Practice test · Official College Board · 2025 AP Chemistry FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-chemistry.pdf',
     'Practice test · Scribd · 2024 College Board AP Chemistry practice exam 2':
         'https://www.scribd.com/document/849716161/2024-Chemistry-Practice-Exam-2',
     'Practice test · Scribd · 2024 AP Daily Chemistry MCQ session':
@@ -7988,6 +8034,10 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
     'Practice test · Scribd · 2024 College Board AP Psychology sample exam questions':
         'https://www.scribd.com/document/950728586/Psychology',
   },
+  'ap_physics_c_mech': {
+    'Practice test · Official College Board · 2025 AP Physics C: Mechanics FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-physics-c-mech.pdf',
+  },
   'ap_stats': {
     'Practice test · Scribd · 2025 AP Statistics mock-exam FRQ and scoring guide':
         'https://www.scribd.com/document/991608009/AP-Statistics-Mock-Exam-FRQ',
@@ -8038,19 +8088,19 @@ const Map<String, Map<String, String>> _officialReleasedApPracticePdfs = {
 
 const Map<String, Map<String, String>> _examTexApPdfLinks = {
   'ap_calc_ab': {
-    'Practice test · ExamTex Practice Exam — 2026':
+    'Practice test · ExamTex Practice Exam - 2026':
         'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-calculus-ab-practice-exam.pdf',
   },
   'ap_macro': {
-    'Practice test · ExamTex Practice Exam — 2026':
+    'Practice test · ExamTex Practice Exam - 2026':
         'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-macroeconomics-practice-exam.pdf',
   },
   'ap_micro': {
-    'Practice test · ExamTex Practice Exam — 2026':
+    'Practice test · ExamTex Practice Exam - 2026':
         'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-microeconomics-practice-exam.pdf',
   },
   'ap_stats': {
-    'Practice test · ExamTex Practice Exam — 2026':
+    'Practice test · ExamTex Practice Exam - 2026':
         'https://juniorhub-bd73d.web.app/resources/ap-practice/ap-statistics-practice-exam.pdf',
   },
 };
@@ -8896,6 +8946,8 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.worldwisetutoring.com/wp-content/uploads/2022/05/AP-Physics-C-EM-Test-1.pdf',
   },
   'ap_physics_c_mech': {
+    'Course material · Khan Academy AP Physics C: Mechanics':
+        'https://www.khanacademy.org/science/ap-physics-c-mechanics',
     'Video · Flipping Physics Mechanics playlist and review':
         'https://www.flippingphysics.com/ap-physics-c-review.html',
     'Notes · Flipping Physics complete Mechanics notes':

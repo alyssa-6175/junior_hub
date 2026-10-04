@@ -259,7 +259,7 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
-// ─── Public test tracker widget — used by resource_detail_modal.dart ──────────
+// Public test tracker widget, used by resource_detail_modal.dart.
 //
 // This is PUBLIC (no underscore) so it can be imported and called from
 // resource_detail_modal.dart inside the modal's expanded content section.
