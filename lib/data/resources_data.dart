@@ -8009,6 +8009,8 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
         'https://www.scribd.com/document/663073737/AP-Physics-1-Practice-Exam-3-for-the-2022-Exam-1-1',
   },
   'ap_physics_c_mech': {
+    'Practice test · Official College Board · 2025 AP Physics C: Mechanics FRQs (PDF)':
+        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-physics-c-mech.pdf',
     'Practice test · Scribd · 2025 College Board AP Physics C: Mechanics practice exam 1':
         'https://www.scribd.com/document/833160670/2024-AP-Physics-Mech-Practice-Exam-1',
   },
@@ -8033,10 +8035,6 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
   'ap_psych': {
     'Practice test · Scribd · 2024 College Board AP Psychology sample exam questions':
         'https://www.scribd.com/document/950728586/Psychology',
-  },
-  'ap_physics_c_mech': {
-    'Practice test · Official College Board · 2025 AP Physics C: Mechanics FRQs (PDF)':
-        'https://apcentral.collegeboard.org/media/pdf/ap25-frq-physics-c-mech.pdf',
   },
   'ap_stats': {
     'Practice test · Scribd · 2025 AP Statistics mock-exam FRQ and scoring guide':

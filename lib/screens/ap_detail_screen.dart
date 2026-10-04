@@ -652,22 +652,22 @@ class _ArtPortfolioInfoTab extends StatelessWidget {
         ),
         if (showFaq) ...[
           const SizedBox(height: 14),
-          _ArtFaqCard(
+          const _ArtFaqCard(
             question: 'How do I submit?',
             answer:
                 'Take clear photos, upload every required image and written response to the AP Digital Portfolio, then click “Submit as Final.” The 2027 College Board deadline is 05/07/2027 at 11:59 PM ET. Your teacher may set an earlier deadline, so follow that one.',
           ),
-          _ArtFaqCard(
+          const _ArtFaqCard(
             question: 'What does a strong topic look like?',
             answer:
                 'Pick something you want to keep looking at for weeks. A good idea is narrow enough to explore in different pieces, like how your family saves receipts or how a bus route changes through the day. “Identity” by itself is too broad.',
           ),
-          _ArtFaqCard(
+          const _ArtFaqCard(
             question: 'What should I document?',
             answer:
                 'Save photos as you go. Keep rough drafts, material tests, and notes about what you changed. You will be glad you did when it is time to write about your process.',
           ),
-          _ArtFaqCard(
+          const _ArtFaqCard(
             question: 'Can I use AI tools?',
             answer:
                 'Check College Board’s current policy before using AI. You need to be able to explain what you made and how you made it. Do not submit work that is not yours.',
