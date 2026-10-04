@@ -8,7 +8,9 @@ import '../widgets/resource_detail_modal.dart';
 import '../data/resources_data.dart';
 
 class DeadlinePanel extends StatefulWidget {
-  const DeadlinePanel({super.key});
+  final double width;
+
+  const DeadlinePanel({super.key, this.width = 210});
   @override
   State<DeadlinePanel> createState() => _DeadlinePanelState();
 }
@@ -24,7 +26,7 @@ class _DeadlinePanelState extends State<DeadlinePanel> {
     });
 
     return Container(
-      width: 210,
+      width: widget.width,
       color: kSurface,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

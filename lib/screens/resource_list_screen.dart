@@ -342,90 +342,97 @@ Alyssa''',
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Title row + Starred/All selector inline on the right
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              Wrap(
+                spacing: 12,
+                runSpacing: 8,
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Icon(
-                    widget.icon,
-                    size: 18,
-                    color: CategoryColors.textFor(widget.category),
-                  ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        widget.title,
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: kTextPrimary,
-                        ),
+                      Icon(
+                        widget.icon,
+                        size: 18,
+                        color: CategoryColors.textFor(widget.category),
                       ),
-                      Text(
-                        '${allSorted.length} resources',
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          color: kTextSecondary,
-                        ),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: kTextPrimary,
+                            ),
+                          ),
+                          Text(
+                            '${allSorted.length} resources',
+                            style: GoogleFonts.inter(
+                              fontSize: 11,
+                              color: kTextSecondary,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const Spacer(),
-                  if (widget.category == 'dual_credit') ...[
-                    _InlineTab(
-                      label: 'Independent',
-                      active: _collegeCourseType == 'independent',
-                      onTap: () => setState(() {
-                        _collegeCourseType = 'independent';
-                        _collegeCourseTermFilter = null;
-                      }),
-                    ),
-                    const SizedBox(width: 2),
-                    _InlineTab(
-                      label: 'Counselor',
-                      active: _collegeCourseType == 'counselor',
-                      onTap: () => setState(() {
-                        _collegeCourseType = 'counselor';
-                        _collegeCourseTermFilter = null;
-                      }),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                  // Inline tab selector (Starred | All resources)
-                  _InlineTab(
-                    icon: Icons.star_border,
-                    label: 'Starred',
-                    count: boardItems.length,
-                    active: _tab == 0,
-                    onTap: () => setState(() => _tab = 0),
+                  Wrap(
+                    spacing: 2,
+                    runSpacing: 4,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      if (widget.category == 'dual_credit') ...[
+                        _InlineTab(
+                          label: 'Independent',
+                          active: _collegeCourseType == 'independent',
+                          onTap: () => setState(() {
+                            _collegeCourseType = 'independent';
+                            _collegeCourseTermFilter = null;
+                          }),
+                        ),
+                        _InlineTab(
+                          label: 'Counselor',
+                          active: _collegeCourseType == 'counselor',
+                          onTap: () => setState(() {
+                            _collegeCourseType = 'counselor';
+                            _collegeCourseTermFilter = null;
+                          }),
+                        ),
+                        const SizedBox(width: 6),
+                      ],
+                      _InlineTab(
+                        icon: Icons.star_border,
+                        label: 'Starred',
+                        count: boardItems.length,
+                        active: _tab == 0,
+                        onTap: () => setState(() => _tab = 0),
+                      ),
+                      _InlineTab(
+                        label: 'All',
+                        active: _tab == 1,
+                        onTap: () => setState(() => _tab = 1),
+                      ),
+                      if (widget.category == 'internship')
+                        _InlineTab(
+                          icon: Icons.location_on_outlined,
+                          label: 'Local',
+                          count: localItems.length,
+                          active: _tab == 2,
+                          onTap: () => setState(() => _tab = 2),
+                        ),
+                      if (widget.category == 'research')
+                        _InlineTab(
+                          icon: Icons.menu_book_outlined,
+                          label: 'Journals & Fairs',
+                          count: journalItems.length,
+                          active: _tab == 2,
+                          onTap: () => setState(() => _tab = 2),
+                        ),
+                    ],
                   ),
-                  const SizedBox(width: 2),
-                  _InlineTab(
-                    label: 'All',
-                    active: _tab == 1,
-                    onTap: () => setState(() => _tab = 1),
-                  ),
-                  if (widget.category == 'internship') ...[
-                    const SizedBox(width: 2),
-                    _InlineTab(
-                      icon: Icons.location_on_outlined,
-                      label: 'Local',
-                      count: localItems.length,
-                      active: _tab == 2,
-                      onTap: () => setState(() => _tab = 2),
-                    ),
-                  ],
-                  if (widget.category == 'research') ...[
-                    const SizedBox(width: 2),
-                    _InlineTab(
-                      icon: Icons.menu_book_outlined,
-                      label: 'Journals & Fairs',
-                      count: journalItems.length,
-                      active: _tab == 2,
-                      onTap: () => setState(() => _tab = 2),
-                    ),
-                  ],
                 ],
               ),
               const SizedBox(height: 10),

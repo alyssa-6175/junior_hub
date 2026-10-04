@@ -39,39 +39,90 @@ class MainShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const compactBreakpoint = 1080.0;
     return Scaffold(
       backgroundColor: kBackground,
+      drawer: const Drawer(
+        child: SafeArea(child: _AppSidebar(width: 304)),
+      ),
+      endDrawer: const Drawer(
+        child: SafeArea(child: DeadlinePanel(width: double.infinity)),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final compact = constraints.maxWidth < compactBreakpoint;
+          return Column(
+            children: [
+              Container(
+                height: 3,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [kGold, kGold, kGold]),
+                ),
+              ),
+              if (compact) const _CompactTopBar(),
+              Expanded(
+                child: compact
+                    ? const _ContentAreaWithSearch()
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const _AppSidebar(),
+                          Container(width: 1, color: kBorderLight),
+                          const Expanded(child: _ContentAreaWithSearch()),
+                          Container(width: 1, color: kBorderLight),
+                          const DeadlinePanel(),
+                        ],
+                      ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
 
-      body: Column(
-        children: [
-          // Gold accent strip at the top
-          Container(
-            height: 3,
+class _CompactTopBar extends StatelessWidget {
+  const _CompactTopBar();
 
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [kGold, kGold, kGold]),
-            ),
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: kSurface,
+      child: SafeArea(
+        bottom: false,
+        child: Container(
+          height: 52,
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: kBorderLight)),
           ),
-
-          // Main layout row: sidebar | content | deadline panel
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-
-              children: [
-                const _AppSidebar(),
-
-                Container(width: 1, color: kBorderLight),
-
-                const Expanded(child: _ContentAreaWithSearch()),
-
-                Container(width: 1, color: kBorderLight),
-
-                const DeadlinePanel(),
-              ],
-            ),
+          child: Row(
+            children: [
+              IconButton(
+                tooltip: 'Open navigation',
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(Icons.menu, color: kNavy),
+              ),
+              Image.asset('assets/logo.png', width: 28, height: 28),
+              const SizedBox(width: 8),
+              Text(
+                'Junior Hub',
+                style: GoogleFonts.inter(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: kNavy,
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                tooltip: 'Open my deadlines',
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                icon: const Icon(Icons.calendar_month_outlined, color: kNavy),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -177,7 +228,9 @@ class _ContentArea extends StatelessWidget {
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 
 class _AppSidebar extends StatelessWidget {
-  const _AppSidebar();
+  final double width;
+
+  const _AppSidebar({this.width = 200});
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +262,7 @@ class _AppSidebar extends StatelessWidget {
     });
 
     return Container(
-      width: 200,
+      width: width,
 
       color: kNavy,
 

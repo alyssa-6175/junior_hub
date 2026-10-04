@@ -25,6 +25,7 @@ class ResourceDetailModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
     final provider = context.watch<AppProvider>();
     final isSaved = provider.isSaved(resource.id);
     final isPinned = provider.isPinned(resource.id);
@@ -33,7 +34,10 @@ class ResourceDetailModal extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 560, maxHeight: 640),
+        constraints: BoxConstraints(
+          maxWidth: 560,
+          maxHeight: (screenHeight - 48).clamp(280, 640).toDouble(),
+        ),
         decoration: BoxDecoration(
           color: kSurface,
           borderRadius: BorderRadius.circular(16),
