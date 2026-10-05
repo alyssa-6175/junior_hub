@@ -24,7 +24,10 @@ service cloud.firestore {
       return isSignedIn()
           && request.auth.token.email is string
           && request.auth.token.email_verified == true
-          && (request.auth.token.email == 'apan@eastsideprep.org'
+          && (request.auth.token.email in [
+                'apan@eastsideprep.org',
+                'alyssa.pannn@gmail.com'
+              ]
               || (request.auth.token.email.matches('^[^@]+@eastsideprep\\.org$')
                   && request.auth.token.admin == true));
     }
