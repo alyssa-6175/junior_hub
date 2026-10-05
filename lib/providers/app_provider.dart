@@ -370,9 +370,12 @@ class AppProvider extends ChangeNotifier {
     }
 
     final token = await user.getIdTokenResult();
-    final email = user.email?.toLowerCase() ?? '';
+    final tokenEmail = token.claims?['email'];
+    final email = (tokenEmail is String ? tokenEmail : user.email ?? '')
+        .toLowerCase();
+    final emailVerified = token.claims?['email_verified'] == true;
     _isAdmin =
-        user.emailVerified &&
+        emailVerified &&
         (email == _activityDashboardOwnerEmail ||
             (token.claims?['admin'] == true &&
                 email.endsWith('@eastsideprep.org')));
