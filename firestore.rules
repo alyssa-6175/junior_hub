@@ -18,13 +18,15 @@ service cloud.firestore {
     }
 
     // This claim is issued only with the Firebase Admin SDK, never from the
-    // client app. Firebase Console / IAM administrators already bypass rules.
+    // client app. The dashboard owner is bootstrapped with a verified identity;
+    // Firebase Console / IAM administrators already bypass rules.
     function isEastsidePrepAdmin() {
       return isSignedIn()
           && request.auth.token.email is string
           && request.auth.token.email_verified == true
-          && request.auth.token.email.matches('^[^@]+@eastsideprep\\.org$')
-          && request.auth.token.admin == true;
+          && (request.auth.token.email == 'apan@eastsideprep.org'
+              || (request.auth.token.email.matches('^[^@]+@eastsideprep\\.org$')
+                  && request.auth.token.admin == true));
     }
 
     function hasVerifiedMatchingEmail() {

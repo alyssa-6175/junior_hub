@@ -20,6 +20,7 @@ const _googleDesktopClientId =
 // Eastside Preparatory School's Microsoft Entra tenant. Keeping sign-in in
 // this tenant prevents personal Microsoft accounts from entering the app.
 const _microsoftTenantId = 'b2681e8b-dd20-46cf-b163-371a2d7c6014';
+const _activityDashboardOwnerEmail = 'apan@eastsideprep.org';
 
 class AppProvider extends ChangeNotifier {
   // ── Firebase & Auth Instances ────────────────────────────────────────────
@@ -371,9 +372,10 @@ class AppProvider extends ChangeNotifier {
     final token = await user.getIdTokenResult();
     final email = user.email?.toLowerCase() ?? '';
     _isAdmin =
-        token.claims?['admin'] == true &&
         user.emailVerified &&
-        email.endsWith('@eastsideprep.org');
+        (email == _activityDashboardOwnerEmail ||
+            (token.claims?['admin'] == true &&
+                email.endsWith('@eastsideprep.org')));
   }
 
   Map<String, dynamic> _activitySummary(String action) {
