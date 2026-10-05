@@ -30,6 +30,8 @@ class AppProvider extends ChangeNotifier {
 
   final _appAuth = const FlutterAppAuth();
 
+  bool _isAdmin = false;
+
   // ── Auth State ───────────────────────────────────────────────────────────
 
   User? get firebaseUser => _auth.currentUser;
@@ -45,6 +47,8 @@ class AppProvider extends ChangeNotifier {
       firebaseUser?.displayName ??
       firebaseUser?.email?.split('@').first ??
       'User';
+
+  bool get isAdmin => _isAdmin;
 
   bool get _isDesktop =>
       !kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
@@ -150,8 +154,10 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> init() async {
     if (firebaseUser != null) {
+      await _refreshAdminStatus();
       await _loadFromFirestore();
       await _removeLegacyFeedbackMetadata();
+      await _recordActivity('Signed in');
     }
 
     notifyListeners();
@@ -235,8 +241,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> _postSignIn() async {
+    await _refreshAdminStatus();
     await _loadFromFirestore();
     await _removeLegacyFeedbackMetadata();
+    await _recordActivity('Signed in');
 
     notifyListeners();
   }
@@ -249,6 +257,8 @@ class AppProvider extends ChangeNotifier {
     }
 
     await _auth.signOut();
+
+    _isAdmin = false;
 
     _saved.clear();
 
@@ -334,14 +344,91 @@ class AppProvider extends ChangeNotifier {
     await removeExpiredDeadlines();
   }
 
-  Future<void> _save(String field, dynamic value) async {
+  Future<void> _save(String field, dynamic value, {String? activity}) async {
     final uid = firebaseUser?.uid;
 
     if (uid == null) return;
 
-    await _db.collection('users').doc(uid).set({
-      field: value,
-    }, SetOptions(merge: true));
+    final update = <String, dynamic>{field: value};
+    if (activity != null) {
+      update.addAll(_activitySummary(activity));
+    }
+
+    await _db.collection('users').doc(uid).set(update, SetOptions(merge: true));
+
+    if (activity != null) {
+      await _saveDailyActivity(activity);
+    }
+  }
+
+  Future<void> _refreshAdminStatus() async {
+    final user = firebaseUser;
+    if (user == null) {
+      _isAdmin = false;
+      return;
+    }
+
+    final token = await user.getIdTokenResult();
+    final email = user.email?.toLowerCase() ?? '';
+    _isAdmin =
+        token.claims?['admin'] == true &&
+        user.emailVerified &&
+        email.endsWith('@eastsideprep.org');
+  }
+
+  Map<String, dynamic> _activitySummary(String action) {
+    final email = firebaseUser?.email?.trim();
+    if (email == null || email.isEmpty) return {};
+
+    return {
+      'email': email,
+      'lastActiveAt': FieldValue.serverTimestamp(),
+      'lastAction': action,
+      'lastActionAt': FieldValue.serverTimestamp(),
+    };
+  }
+
+  String _activityDay(DateTime date) {
+    final month = date.month.toString().padLeft(2, '0');
+    final day = date.day.toString().padLeft(2, '0');
+    return '${date.year}-$month-$day';
+  }
+
+  Future<void> _recordActivity(String action) async {
+    final uid = firebaseUser?.uid;
+    if (uid == null) return;
+
+    final summary = _activitySummary(action);
+    if (summary.isEmpty) return;
+
+    try {
+      await _db
+          .collection('users')
+          .doc(uid)
+          .set(summary, SetOptions(merge: true));
+      await _saveDailyActivity(action);
+    } catch (e) {
+      debugPrint('Activity summary tracking failed: $e');
+    }
+  }
+
+  Future<void> _saveDailyActivity(String action) async {
+    final user = firebaseUser;
+    final email = user?.email?.trim();
+    if (user == null || email == null || email.isEmpty) return;
+
+    final day = _activityDay(DateTime.now());
+    try {
+      await _db.collection('dailyActivity').doc('$day-${user.uid}').set({
+        'uid': user.uid,
+        'email': email,
+        'day': day,
+        'lastAction': action,
+        'lastActionAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('Daily activity tracking failed: $e');
+    }
   }
 
   /// Removes identifiers written by pre-privacy-review app versions. This runs
@@ -379,6 +466,7 @@ class AppProvider extends ChangeNotifier {
             'lastOpenedAt': FieldValue.serverTimestamp(),
             'openCount': FieldValue.increment(1),
           }, SetOptions(merge: true));
+      await _recordActivity('Opened a resource');
     } catch (e) {
       debugPrint('Resource activity tracking failed: $e');
     }
@@ -405,7 +493,11 @@ class AppProvider extends ChangeNotifier {
   // NEW: Save Test Tracker State
   Future<void> _saveCompletedTests() async {
     final map = _completedTests.map((k, v) => MapEntry(k, v.toList()));
-    await _save('completedTests', map);
+    await _save(
+      'completedTests',
+      map,
+      activity: 'Updated practice-test progress',
+    );
   }
 
   Future<void> toggleSaved(String id) async {
@@ -415,10 +507,9 @@ class AppProvider extends ChangeNotifier {
       _saved.remove(id);
     } else {
       _saved.add(id);
-
     }
 
-    await _save('saved', _saved.toList());
+    await _save('saved', _saved.toList(), activity: 'Updated saved resources');
 
     notifyListeners();
   }
@@ -430,10 +521,13 @@ class AppProvider extends ChangeNotifier {
       _pinned.remove(id);
     } else {
       _pinned.add(id);
-
     }
 
-    await _save('pinned', _pinned.toList());
+    await _save(
+      'pinned',
+      _pinned.toList(),
+      activity: 'Updated pinned resources',
+    );
 
     notifyListeners();
   }
@@ -447,7 +541,7 @@ class AppProvider extends ChangeNotifier {
       _seen.add(id);
     }
 
-    await _save('seen', _seen.toList());
+    await _save('seen', _seen.toList(), activity: 'Marked a resource as seen');
 
     notifyListeners();
   }
@@ -463,7 +557,11 @@ class AppProvider extends ChangeNotifier {
       _linkPinned.add(key);
     }
 
-    await _save('linkPinned', _linkPinned.toList());
+    await _save(
+      'linkPinned',
+      _linkPinned.toList(),
+      activity: 'Updated pinned links',
+    );
 
     notifyListeners();
   }
@@ -479,7 +577,11 @@ class AppProvider extends ChangeNotifier {
       _linkSeen.add(key);
     }
 
-    await _save('linkSeen', _linkSeen.toList());
+    await _save(
+      'linkSeen',
+      _linkSeen.toList(),
+      activity: 'Marked a link as seen',
+    );
 
     notifyListeners();
   }
@@ -501,6 +603,7 @@ class AppProvider extends ChangeNotifier {
       'personalDeadlines',
 
       _personalDeadlines.map((d) => d.toJson()).toList(),
+      activity: 'Added a personal deadline',
     );
 
     notifyListeners();
@@ -521,6 +624,7 @@ class AppProvider extends ChangeNotifier {
       'personalDeadlines',
 
       _personalDeadlines.map((d) => d.toJson()).toList(),
+      activity: 'Removed a personal deadline',
     );
 
     notifyListeners();
@@ -630,7 +734,11 @@ class AppProvider extends ChangeNotifier {
 
     await _save('checkedMajorOrder', _checkedMajorOrder);
 
-    await _save('checkedSubMajorOrder', _checkedSubMajorOrder);
+    await _save(
+      'checkedSubMajorOrder',
+      _checkedSubMajorOrder,
+      activity: 'Updated selected majors',
+    );
 
     notifyListeners();
   }

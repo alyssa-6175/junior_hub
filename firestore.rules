@@ -2,6 +2,12 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Data model:
+    // - users/{uid}: private study preferences with optional, Auth-verified
+    //   email and latest-activity fields.
+    // - users/{uid}/resourceActivity/{resourceId}: private resource-open data.
+    // - dailyActivity/{YYYY-MM-DD}-{uid}: an administrator-only, daily activity
+    //   summary. This is an engagement indicator, not an immutable audit log.
     // Junior Hub is public to signed-in Google and Microsoft accounts.
     function isSignedIn() {
       return request.auth != null;
@@ -21,11 +27,67 @@ service cloud.firestore {
           && request.auth.token.admin == true;
     }
 
+    function hasVerifiedMatchingEmail() {
+      return request.auth.token.email is string
+          && request.resource.data.email is string
+          && request.resource.data.email == request.auth.token.email
+          && request.resource.data.email.size() <= 254;
+    }
+
+    function isAllowedActivityAction() {
+      return request.resource.data.lastAction in [
+        'Signed in',
+        'Opened a resource',
+        'Updated practice-test progress',
+        'Updated saved resources',
+        'Updated pinned resources',
+        'Marked a resource as seen',
+        'Updated pinned links',
+        'Marked a link as seen',
+        'Added a personal deadline',
+        'Removed a personal deadline',
+        'Updated selected majors'
+      ];
+    }
+
+    function hasValidActivityFields() {
+      let hasAnyActivityField = 'lastAction' in request.resource.data
+          || 'lastActiveAt' in request.resource.data
+          || 'lastActionAt' in request.resource.data;
+      return !hasAnyActivityField || (
+          request.resource.data.keys().hasAll([
+            'lastAction', 'lastActiveAt', 'lastActionAt'
+          ])
+          && request.resource.data.lastAction is string
+          && request.resource.data.lastAction.size() <= 80
+          && isAllowedActivityAction()
+          && request.resource.data.lastActiveAt is timestamp
+          && request.resource.data.lastActionAt is timestamp
+        );
+    }
+
+    function hasCurrentActivityTimestamps() {
+      return !('lastAction' in request.resource.data) || (
+        request.resource.data.lastActiveAt == request.time
+        && request.resource.data.lastActionAt == request.time
+      );
+    }
+
+    function hasUnchangedOrCurrentActivityTimestamps() {
+      return !('lastAction' in request.resource.data) || (
+        (request.resource.data.lastActiveAt == resource.data.lastActiveAt
+            || request.resource.data.lastActiveAt == request.time)
+        && (request.resource.data.lastActionAt == resource.data.lastActionAt
+            || request.resource.data.lastActionAt == request.time)
+      );
+    }
+
     function isValidStudyData() {
       return request.resource.data.keys().hasOnly([
                'saved', 'pinned', 'seen', 'linkPinned', 'linkSeen',
                'completedTests', 'personalDeadlines', 'checkedMajors',
-               'checkedMajorOrder', 'checkedSubMajorOrder'
+               'checkedMajorOrder', 'checkedSubMajorOrder', 'email',
+               'lastActiveAt', 'lastAction', 'lastActionAt'
              ])
           && (!('saved' in request.resource.data) ||
               (request.resource.data.saved is list && request.resource.data.saved.size() <= 500))
@@ -45,26 +107,71 @@ service cloud.firestore {
           && (!('checkedMajorOrder' in request.resource.data) ||
               (request.resource.data.checkedMajorOrder is list && request.resource.data.checkedMajorOrder.size() <= 100))
           && (!('checkedSubMajorOrder' in request.resource.data) ||
-              (request.resource.data.checkedSubMajorOrder is list && request.resource.data.checkedSubMajorOrder.size() <= 500));
+              (request.resource.data.checkedSubMajorOrder is list && request.resource.data.checkedSubMajorOrder.size() <= 500))
+          && (!('email' in request.resource.data) || hasVerifiedMatchingEmail())
+          && hasValidActivityFields();
     }
 
     // Students can access only their own study-preference document. No other
     // collections, including historical resourceStats documents, are exposed.
     match /users/{userId} {
       allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
-      allow create, update: if isOwnUserDocument(userId) && isValidStudyData();
+      allow create: if isOwnUserDocument(userId)
+          && isValidStudyData()
+          && hasCurrentActivityTimestamps();
+      allow update: if isOwnUserDocument(userId)
+          && isValidStudyData()
+          && hasUnchangedOrCurrentActivityTimestamps();
       allow delete: if isOwnUserDocument(userId);
     }
 
     match /users/{userId}/resourceActivity/{resourceId} {
       allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
-      allow create, update: if isOwnUserDocument(userId)
+      allow create: if isOwnUserDocument(userId)
           && resourceId.size() <= 120
           && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
           && request.resource.data.lastOpenedAt is timestamp
+          && request.resource.data.lastOpenedAt == request.time
           && request.resource.data.openCount is int
-          && request.resource.data.openCount >= 0
+          && request.resource.data.openCount == 1;
+      allow update: if isOwnUserDocument(userId)
+          && resourceId.size() <= 120
+          && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
+          && request.resource.data.lastOpenedAt is timestamp
+          && request.resource.data.lastOpenedAt == request.time
+          && request.resource.data.openCount is int
+          && request.resource.data.openCount == resource.data.openCount + 1
           && request.resource.data.openCount <= 10000;
+    }
+
+    function isValidDailyActivity(activityId) {
+      return request.resource.data.keys().hasOnly([
+               'uid', 'email', 'day', 'lastAction', 'lastActionAt'
+             ])
+          && request.resource.data.keys().hasAll([
+               'uid', 'email', 'day', 'lastAction', 'lastActionAt'
+             ])
+          && request.resource.data.uid is string
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.email is string
+          && request.resource.data.email == request.auth.token.email
+          && request.resource.data.email.size() <= 254
+          && request.resource.data.day is string
+          && request.resource.data.day.matches(
+               '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'
+             )
+          && activityId == request.resource.data.day + '-' + request.auth.uid
+          && request.resource.data.lastAction is string
+          && request.resource.data.lastAction.size() <= 80
+          && isAllowedActivityAction()
+          && request.resource.data.lastActionAt is timestamp
+          && request.resource.data.lastActionAt == request.time;
+    }
+
+    match /dailyActivity/{activityId} {
+      allow read: if isEastsidePrepAdmin();
+      allow create, update: if isSignedIn()
+          && isValidDailyActivity(activityId);
     }
   }
 }

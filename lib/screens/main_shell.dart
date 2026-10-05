@@ -32,6 +32,8 @@ import 'my_majors_screen.dart';
 
 import 'search_results_screen.dart';
 
+import 'activity_dashboard_screen.dart';
+
 import '../widgets/feedback_form.dart';
 
 class MainShell extends StatelessWidget {
@@ -42,9 +44,7 @@ class MainShell extends StatelessWidget {
     const compactBreakpoint = 1080.0;
     return Scaffold(
       backgroundColor: kBackground,
-      drawer: const Drawer(
-        child: SafeArea(child: _AppSidebar(width: 304)),
-      ),
+      drawer: const Drawer(child: SafeArea(child: _AppSidebar(width: 304))),
       endDrawer: const Drawer(
         child: SafeArea(child: DeadlinePanel(width: double.infinity)),
       ),
@@ -219,6 +219,9 @@ class _ContentArea extends StatelessWidget {
       case 'my_majors':
         return const MyMajorsScreen();
 
+      case 'activity':
+        return const ActivityDashboardScreen();
+
       default:
         return const SavedScreen();
     }
@@ -371,6 +374,14 @@ class _AppSidebar extends StatelessWidget {
 
                     current: provider.currentView,
                   ),
+
+                  if (provider.isAdmin)
+                    _NavItem(
+                      icon: Icons.insights_outlined,
+                      label: 'Activity',
+                      view: 'activity',
+                      current: provider.currentView,
+                    ),
 
                   const _SectionLabel('By major'),
 
