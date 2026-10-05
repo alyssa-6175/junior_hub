@@ -7900,8 +7900,6 @@ const Map<String, Map<String, String>> artPortfolioLinks = {
         'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
     'Instructions · AP Digital Portfolio student guide':
         'https://apstudents.collegeboard.org/digital-portfolios',
-    'Sample work · 2025 AP Art and Design exhibit':
-        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
   },
   'ap_2d_art': {
     'Instructions · 2027 portfolio timeline and submission deadline':
@@ -7912,8 +7910,6 @@ const Map<String, Map<String, String>> artPortfolioLinks = {
         'https://apcentral.collegeboard.org/courses/ap-2-d-art-and-design/portfolio',
     'Sample work · Official 2-D samples, including Score 5 selected works':
         'https://apcentral.collegeboard.org/courses/ap-2-d-art-and-design/portfolio/past-exam-questions',
-    'Sample work · 2025 AP Art and Design exhibit':
-        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
   },
   'ap_3d_art': {
     'Instructions · 2027 portfolio timeline and submission deadline':
@@ -7924,8 +7920,6 @@ const Map<String, Map<String, String>> artPortfolioLinks = {
         'https://apcentral.collegeboard.org/courses/ap-3-d-art-and-design/portfolio',
     'Sample work · Official 3-D samples, including Score 5 selected works':
         'https://apcentral.collegeboard.org/courses/ap-3-d-art-and-design/portfolio/past-exam-questions',
-    'Sample work · 2025 AP Art and Design exhibit':
-        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
   },
   'ap_drawing': {
     'Instructions · 2027 portfolio timeline and submission deadline':
@@ -7936,8 +7930,6 @@ const Map<String, Map<String, String>> artPortfolioLinks = {
         'https://apcentral.collegeboard.org/courses/ap-drawing/portfolio',
     'Sample work · Official Drawing samples, including Score 5 selected works':
         'https://apcentral.collegeboard.org/courses/ap-drawing/portfolio/past-exam-questions',
-    'Sample work · 2025 AP Art and Design exhibit':
-        'https://apcentral.collegeboard.org/courses/ap-art-and-design-program/portfolio',
   },
 };
 
