@@ -8963,6 +8963,8 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_calc_ab': {
     'Course material · Math Medic AP Calculus lessons':
         'https://mathmedic.com/',
+    'Video · Mr. Felling AP Calculus playlists':
+        'https://www.youtube.com/@mrfelling6560/playlists',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
     'Course material · Paul’s Online Calculus I notes':
@@ -8979,12 +8981,12 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_calc_bc': {
     'Course material · Math Medic AP Calculus lessons':
         'https://mathmedic.com/',
+    'Video · Mr. Felling AP Calculus playlists':
+        'https://www.youtube.com/@mrfelling6560/playlists',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
     'Course material · Paul’s Online Calculus II notes':
         'https://tutorial.math.lamar.edu/Classes/CalcII/CalcII.aspx',
-    'Course material · Mr. Felling AP Calculus BC':
-        'https://www.mrfelling.com/apcalcbc.html',
     'Course material · Mr. Tiger AP Calculus AB and BC':
         'https://mrtigercalculus.weebly.com/new-ap-calculus-abbc.html',
     'Notes · Paul’s complete calculus cheat sheet':
@@ -9001,6 +9003,8 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_stats': {
     'Course material · Math Medic AP Statistics lessons':
         'https://mathmedic.com/',
+    'Video · Mr. Felling AP Statistics playlists':
+        'https://www.youtube.com/@mrfelling6560/playlists',
     'Video · Math Medic exam review course (paid)':
         'https://mathmedic.com/blog/sneak-peek-of-the-math-medic-ap-exam-review-courses/',
     'Notes · Statistics Handbook':
