@@ -54,15 +54,16 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     final remaining = links
         .where((label) => label != khanPhysicsCMechanics)
         .toList();
-    List<String> group(bool isSeen, bool isPinned) => links
-        .where(
-          (label) =>
-              provider.isLinkSeen(id, label) == isSeen &&
-              provider.isLinkPinned(id, label) == isPinned,
-        )
-        .where((label) => remaining.contains(label))
-        .toList()
-      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    List<String> group(bool isSeen, bool isPinned) =>
+        links
+            .where(
+              (label) =>
+                  provider.isLinkSeen(id, label) == isSeen &&
+                  provider.isLinkPinned(id, label) == isPinned,
+            )
+            .where((label) => remaining.contains(label))
+            .toList()
+          ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
 
     return [
       ...preferred,
@@ -98,6 +99,22 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     }
 
     return [...links]..sort(compare);
+  }
+
+  List<String> _sortedPracticeQuestions(
+    Resource resource,
+    AppProvider provider,
+  ) {
+    final links = _practiceQuestionsAndBanks(resource);
+    final featured =
+        apPracticeQuestionLinks[resource.id]?.keys ?? const <String>[];
+    return [
+      ...featured.where(links.contains),
+      ..._sortedLinks(
+        links.where((label) => !featured.contains(label)).toList(),
+        provider,
+      ),
+    ];
   }
 
   bool _hasReferenceInformation(Resource resource) => const {
@@ -222,8 +239,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     final isExamDateSaved =
         examDeadline != null &&
         provider.hasPersonalDeadline(res.id, examDeadline.dateIso);
-    final officialCourseLabel =
-        _firstLabelContaining(res, 'official course page');
+    final officialCourseLabel = _firstLabelContaining(
+      res,
+      'official course page',
+    );
     final officialCourseUrl = officialCourseLabel == null
         ? res.url
         : resolveUrl(officialCourseLabel, res);
@@ -489,7 +508,10 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                     if (_hasReferenceInformation(res))
                       _ApTab(
                         icon: Icons.description_outlined,
-                        items: _sortedLinks(_referenceInformation(res), provider),
+                        items: _sortedLinks(
+                          _referenceInformation(res),
+                          provider,
+                        ),
                         emptyText:
                             'No official reference information added yet.',
                       ),
@@ -500,15 +522,15 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                     ),
                     _ApTab(
                       icon: Icons.assignment_outlined,
-                      items: _sortedPracticeTests(_practiceTests(res), provider),
+                      items: _sortedPracticeTests(
+                        _practiceTests(res),
+                        provider,
+                      ),
                       emptyText: 'No practice tests added yet.',
                     ),
                     _ApTab(
                       icon: Icons.quiz_outlined,
-                      items: _sortedLinks(
-                        _practiceQuestionsAndBanks(res),
-                        provider,
-                      ),
+                      items: _sortedPracticeQuestions(res, provider),
                       emptyText:
                           'No practice questions or question banks added yet.',
                     ),
@@ -580,6 +602,7 @@ class _ApDetailScreenState extends State<ApDetailScreen>
         .where((l) => !_isHeaderLink(l))
         .where((l) => !_isQuestionBank(l))
         .where((l) => !_isCommunityNotes(l))
+        .where((l) => apPracticeQuestionLinks[r.id]?.containsKey(l) != true)
         .where((l) {
           final lower = l.toLowerCase();
           if (lower.startsWith('practice test ·')) return true;
@@ -592,25 +615,24 @@ class _ApDetailScreenState extends State<ApDetailScreen>
   }
 
   List<String> _practiceQuestions(Resource r) {
-    // Anything that didn't get caught by the filters above goes here
-    final matched = [
-      ..._courseMaterial(r),
-      ..._referenceInformation(r),
-      ..._videos(r),
-      ..._practiceTests(r),
-    ];
-    return linksForResource(r)
-        .where((l) => !_isHeaderLink(l))
-        .where((l) => !_isQuestionBank(l))
-        .where((l) => !matched.contains(l))
-        .toList();
+    return linksForResource(r).where((l) => !_isQuestionBank(l)).where((l) {
+      final lower = l.toLowerCase();
+      if (lower.contains('mcq-answers') ||
+          lower.contains('mcqs-answers') ||
+          lower.contains('vocabulary review') ||
+          lower.contains('vocabulary and writing tools')) {
+        return false;
+      }
+      return apPracticeQuestionLinks[r.id]?.containsKey(l) == true ||
+          lower.startsWith('practice questions ·') ||
+          lower.endsWith('crackap practice questions');
+    }).toList();
   }
 
   List<String> _practiceQuestionsAndBanks(Resource r) => <String>{
     ..._practiceQuestions(r),
-    ...linksForResource(r).where(_isQuestionBank),
+    ...linksForResource(r).where((label) => label == 'PracticeAP'),
   }.toList();
-
 }
 
 class _ArtPortfolioInfoTab extends StatelessWidget {

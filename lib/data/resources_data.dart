@@ -775,7 +775,8 @@ final List<Resource> _catalogResources = [
     scope: 'national',
     format: 'hybrid',
     locationNote: 'Online Round 1; later selection activities vary by round',
-    timeCommitment: 'Three-round AI competition plus selection camp for top qualifiers',
+    timeCommitment:
+        'Three-round AI competition plus selection camp for top qualifiers',
     majorTags: ['ai', 'cs', 'machine_learning', 'data_sci', 'problem_solving'],
     applicationInfo:
         'K–12 students in the United States and Canada register individually and should review the current rules, required software, and proctoring requirements.',
@@ -4982,7 +4983,8 @@ final List<Resource> _catalogResources = [
     scope: 'international',
     format: 'virtual',
     locationNote: 'Online, available worldwide',
-    timeCommitment: 'Self-paced; course lengths vary from short projects to multi-course programs',
+    timeCommitment:
+        'Self-paced; course lengths vary from short projects to multi-course programs',
     majorTags: ['all_subjects'],
     courseOfferings: [
       'Arts, humanities, languages, and personal development',
@@ -5981,7 +5983,8 @@ final List<Resource> _catalogResources = [
     field: 'science',
     scope: 'state',
     format: 'in_person',
-    locationNote: 'Bremerton High School & Performing Arts Center, Bremerton, Washington',
+    locationNote:
+        'Bremerton High School & Performing Arts Center, Bremerton, Washington',
     timeCommitment: 'Independent project, required forms, and live judging',
     majorTags: [
       'research_fair',
@@ -6002,7 +6005,11 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-03-15T23:59:00-07:00',
     icon: Icons.science_outlined,
     url: 'https://wssef.org/registration/',
-    links: ['WSSEF registration', 'WSSEF regional-fair finder', 'WSSEF logbook and scientific journal requirements'],
+    links: [
+      'WSSEF registration',
+      'WSSEF regional-fair finder',
+      'WSSEF logbook and scientific journal requirements',
+    ],
     detailNote:
         'WSSEF 2027 is April 2–3 in Bremerton (grades 9–12 compete April 3). Central Sound’s grades 9–12 regional fair is March 6, so check the regional route before registering directly.',
   ),
@@ -7883,6 +7890,208 @@ const Map<String, String> apQuestionBankHubs = {
   'Varsity Tutors': 'https://www.varsitytutors.com/practice',
 };
 
+/// Course pages checked against each provider's AP directory. Keep these
+/// separate from general study-guide and exam links so the question tab can
+/// show them first.
+const Map<String, Map<String, String>> apPracticeQuestionLinks = {
+  'ap_art_history': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-art-history',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/art-history',
+  },
+  'ap_music_theory': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-music-theory',
+  },
+  'ap_english_lang': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-english-language',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/english-language-and-composition',
+  },
+  'ap_english_lit': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-english-literature',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/english-literature-and-composition',
+  },
+  'ap_african_american': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-african-american-studies',
+  },
+  'ap_comp_gov': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-gov-comparative',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/comparative-government-and-politics',
+  },
+  'ap_euro': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-european-history',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/european-history',
+  },
+  'ap_human_geo': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-human-geography',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/human-geography',
+  },
+  'ap_macro': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-macroeconomics',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/macroeconomics',
+  },
+  'ap_micro': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-microeconomics',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/microeconomics',
+  },
+  'ap_psych': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-psychology',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/psychology',
+  },
+  'ap_us_gov': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-gov-us',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/us-government-and-politics',
+  },
+  'ap_us_history': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-us-history',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/us-history',
+  },
+  'ap_world': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-world-history',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/world-history',
+  },
+  'ap_calc_ab': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-calculus-ab',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/calculus-ab',
+  },
+  'ap_calc_bc': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-calculus-bc',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/calculus-bc',
+  },
+  'ap_csa': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-computer-science-a',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/computer-science-a',
+  },
+  'ap_csp': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-computer-science-principles',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/computer-science-principles',
+  },
+  'ap_precalc': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-precalculus',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/precalculus',
+  },
+  'ap_stats': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-statistics',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/statistics',
+  },
+  'ap_bio': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-biology',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/biology',
+  },
+  'ap_chem': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-chemistry',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/chemistry',
+  },
+  'ap_env_sci': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-environmental-science',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/environmental-science',
+  },
+  'ap_physics_1': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-physics-1',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/physics-1',
+  },
+  'ap_physics_2': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-physics-2',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/physics-2',
+  },
+  'ap_physics_c_em': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-physics-c-em',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/physics-c-electricity-and-magnetism',
+    'PrepGo practice generator':
+        'https://prepgo.com/ap-practice-generator/physics-c-electricity-and-magnetism',
+    'Study Mondo practice exam':
+        'https://www.studymondo.com/ap-physics-c-em-practice',
+  },
+  'ap_physics_c_mech': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-physics-c-mech',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/physics-c-mechanics',
+  },
+  'ap_chinese': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-chinese-language',
+  },
+  'ap_french': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-french-language',
+  },
+  'ap_german': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-german-language',
+  },
+  'ap_italian': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-italian-language',
+  },
+  'ap_japanese': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-japanese-language',
+  },
+  'ap_latin': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-latin',
+  },
+  'ap_spanish_lang': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-spanish-language',
+    'Test Practice Hub practice questions':
+        'https://testpracticehub.com/ap/spanish-language-and-culture',
+  },
+  'ap_spanish_lit': {
+    'OpenExamPrep practice questions':
+        'https://open-exam-prep.com/practice/ap-spanish-literature',
+  },
+};
+
 /// The three AP Art and Design portfolios are evaluated as digital portfolios,
 /// not a sit-down test. These links power their portfolio-specific pages.
 const Set<String> artPortfolioResourceIds = {
@@ -7933,9 +8142,7 @@ const Map<String, Map<String, String>> artPortfolioLinks = {
   },
 };
 
-const Map<String, String> _commonApLinks = {
-  ...apQuestionBankHubs,
-};
+const Map<String, String> _commonApLinks = {...apQuestionBankHubs};
 
 const Map<String, Map<String, String>> _recentOfficialApTests = {
   'ap_bio': {
@@ -9067,6 +9274,7 @@ List<String> linksForResource(Resource resource) {
     ...?_recentOfficialApTests[resource.id]?.keys,
     ...?_officialReleasedApPracticePdfs[resource.id]?.keys,
     ...?_examTexApPdfLinks[resource.id]?.keys,
+    ...?apPracticeQuestionLinks[resource.id]?.keys,
     ...?_supplementalApLinks[resource.id]?.keys,
     ...?_driveApFileLinks[resource.id]?.keys.where(
       (label) => !isOldCommercialBook(label),
@@ -9145,6 +9353,7 @@ String? resolveUrl(String linkLabel, Resource resource) {
       _recentOfficialApTests[resource.id]?[linkLabel] ??
       _officialReleasedApPracticePdfs[resource.id]?[linkLabel] ??
       _examTexApPdfLinks[resource.id]?[linkLabel] ??
+      apPracticeQuestionLinks[resource.id]?[linkLabel] ??
       _supplementalApLinks[resource.id]?[linkLabel] ??
       _driveApFileLinks[resource.id]?[linkLabel] ??
       _apBookLinks[resource.id]?[linkLabel] ??
