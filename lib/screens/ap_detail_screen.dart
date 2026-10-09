@@ -7,6 +7,7 @@ import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
 import '../data/resources_data.dart';
+import '../data/ap_videos_data.dart';
 
 class ApDetailScreen extends StatefulWidget {
   final Resource resource;
@@ -515,10 +516,9 @@ class _ApDetailScreenState extends State<ApDetailScreen>
                         emptyText:
                             'No official reference information added yet.',
                       ),
-                    _ApTab(
-                      icon: Icons.smart_display_outlined,
-                      items: _sortedLinks(_videos(res), provider),
-                      emptyText: 'No videos added yet.',
+                    _ApVideosTab(
+                      resource: res,
+                      looseLinks: _sortedLinks(_videos(res), provider),
                     ),
                     _ApTab(
                       icon: Icons.assignment_outlined,
@@ -984,17 +984,31 @@ class _ApTab extends StatelessWidget {
 class _LinkItem extends StatelessWidget {
   final String label;
   final Resource resource;
-  const _LinkItem({required this.label, required this.resource});
+
+  /// Used by rows (such as YouTube playlists) whose URL and visible title do
+  /// not come from the label-based link tables.
+  final String? urlOverride;
+  final String? titleOverride;
+  final bool compact;
+  const _LinkItem({
+    required this.label,
+    required this.resource,
+    this.urlOverride,
+    this.titleOverride,
+    this.compact = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
     final isPinned = provider.isLinkPinned(resource.id, label);
     final isSeen = provider.isLinkSeen(resource.id, label);
-    final url = resolveUrl(label, resource);
-    final rawDisplayLabel = label.contains(' · ')
-        ? label.substring(label.indexOf(' · ') + 3)
-        : label;
+    final url = urlOverride ?? resolveUrl(label, resource);
+    final rawDisplayLabel =
+        titleOverride ??
+        (label.contains(' · ')
+            ? label.substring(label.indexOf(' · ') + 3)
+            : label);
     final displayLabel = rawDisplayLabel.contains('2027 (Amazon)')
         ? rawDisplayLabel.replaceFirst(
             '2027 (Amazon)',
@@ -1008,7 +1022,7 @@ class _LinkItem extends StatelessWidget {
       child: AnimatedContainer(
         // 1. Change Container to AnimatedContainer
         duration: const Duration(milliseconds: 200), // 2. Add a duration here
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: EdgeInsets.only(bottom: compact ? 6 : 8),
         decoration: BoxDecoration(
           color: isPinned
               ? kGoldLight
@@ -1125,6 +1139,252 @@ class _MiniAction extends StatelessWidget {
             child: Icon(icon, size: 15, color: color),
           ),
         ),
+      ),
+    );
+  }
+}
+
+
+/// Videos tab: YouTube channels with several course playlists collapse into a
+/// single expandable row (for example "Khan Academy · Calculus BC"), and any
+/// remaining individual video links are listed underneath.
+class _ApVideosTab extends StatelessWidget {
+  final Resource resource;
+  final List<String> looseLinks;
+
+  const _ApVideosTab({required this.resource, required this.looseLinks});
+
+  @override
+  Widget build(BuildContext context) {
+    final channels = apVideoChannels[resource.id] ?? const <ApVideoChannel>[];
+    if (channels.isEmpty && looseLinks.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.smart_display_outlined,
+              size: 28,
+              color: kTextTertiary,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'No videos added yet.',
+              style: GoogleFonts.inter(fontSize: 13, color: kTextTertiary),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final multi = channels.where((c) => c.playlists.length > 1).toList();
+    final single = channels.where((c) => c.playlists.length == 1).toList();
+
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        if (multi.isNotEmpty) ...[
+          const _VideoSectionLabel('Full course playlists by unit'),
+          ...multi.map(
+            (channel) =>
+                _VideoChannelGroup(resource: resource, channel: channel),
+          ),
+        ],
+        if (single.isNotEmpty || looseLinks.isNotEmpty) ...[
+          const SizedBox(height: 6),
+          const _VideoSectionLabel('More playlists and channels'),
+          ...single.map((channel) {
+            final playlist = channel.playlists.first;
+            return _LinkItem(
+              label: 'Video · ${channel.name} · ${playlist.title}',
+              resource: resource,
+              urlOverride: playlist.url,
+              titleOverride: '${channel.name}: ${playlist.title}',
+            );
+          }),
+          ...looseLinks.map(
+            (label) => _LinkItem(label: label, resource: resource),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _VideoSectionLabel extends StatelessWidget {
+  final String text;
+  const _VideoSectionLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2, 0, 2, 8),
+      child: Text(
+        text.toUpperCase(),
+        style: GoogleFonts.inter(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.6,
+          color: kTextTertiary,
+        ),
+      ),
+    );
+  }
+}
+
+class _VideoChannelGroup extends StatefulWidget {
+  final Resource resource;
+  final ApVideoChannel channel;
+
+  const _VideoChannelGroup({required this.resource, required this.channel});
+
+  @override
+  State<_VideoChannelGroup> createState() => _VideoChannelGroupState();
+}
+
+class _VideoChannelGroupState extends State<_VideoChannelGroup> {
+  bool _expanded = false;
+
+  String get _courseShortName {
+    const overrides = {
+      'ap_calc_ab': 'Calc AB',
+      'ap_calc_bc': 'Calc BC',
+      'ap_us_history': 'APUSH',
+      'ap_world': 'World History',
+      'ap_euro': 'Euro',
+      'ap_us_gov': 'US Gov',
+      'ap_comp_gov': 'Comp Gov',
+      'ap_human_geo': 'Human Geo',
+      'ap_env_sci': 'APES',
+      'ap_english_lang': 'Lang',
+      'ap_english_lit': 'Lit',
+      'ap_physics_c_mech': 'Physics C: Mech',
+      'ap_physics_c_em': 'Physics C: E&M',
+      'ap_physics_1': 'Physics 1',
+      'ap_physics_2': 'Physics 2',
+      'ap_macro': 'Macro',
+      'ap_micro': 'Micro',
+      'ap_psych': 'Psych',
+      'ap_stats': 'Stats',
+      'ap_precalc': 'Precalc',
+      'ap_bio': 'Bio',
+      'ap_chem': 'Chem',
+      'ap_csa': 'CSA',
+      'ap_csp': 'CSP',
+    };
+    return overrides[widget.resource.id] ??
+        widget.resource.title.replaceFirst('AP ', '');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = context.watch<AppProvider>();
+    final channel = widget.channel;
+    final labels = [
+      for (final playlist in channel.playlists)
+        'Video · ${channel.name} · ${playlist.title}',
+    ];
+    final seenCount = labels
+        .where((label) => provider.isLinkSeen(widget.resource.id, label))
+        .length;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: kSurface,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: _expanded ? kNavy.withValues(alpha: 0.35) : kBorderLight,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(8),
+            mouseCursor: SystemMouseCursors.click,
+            onTap: () => setState(() => _expanded = !_expanded),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 10, 8, 10),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.smart_display_outlined,
+                    size: 15,
+                    color: Color(0xFFCC0000),
+                  ),
+                  const SizedBox(width: 9),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${channel.name} · $_courseShortName',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: kTextPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          '${channel.playlists.length} playlists'
+                          '${seenCount > 0 ? ' · $seenCount seen' : ''}',
+                          style: GoogleFonts.inter(
+                            fontSize: 10.5,
+                            color: kTextSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (channel.channelUrl != null)
+                    Tooltip(
+                      message: 'Open channel on YouTube',
+                      child: IconButton(
+                        visualDensity: VisualDensity.compact,
+                        iconSize: 15,
+                        color: kTextTertiary,
+                        icon: const Icon(Icons.open_in_new),
+                        onPressed: () => openUrl(context, channel.channelUrl!),
+                      ),
+                    ),
+                  AnimatedRotation(
+                    turns: _expanded ? 0.5 : 0,
+                    duration: const Duration(milliseconds: 180),
+                    child: const Icon(
+                      Icons.expand_more,
+                      size: 20,
+                      color: kTextSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            alignment: Alignment.topCenter,
+            child: _expanded
+                ? Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
+                    child: Column(
+                      children: [
+                        for (var i = 0; i < channel.playlists.length; i++)
+                          _LinkItem(
+                            label: labels[i],
+                            resource: widget.resource,
+                            urlOverride: channel.playlists[i].url,
+                            titleOverride: channel.playlists[i].title,
+                            compact: true,
+                          ),
+                      ],
+                    ),
+                  )
+                : const SizedBox(width: double.infinity),
+          ),
+        ],
       ),
     );
   }

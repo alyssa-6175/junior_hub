@@ -19,6 +19,17 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
   String? _section;
   bool _guideExpanded = false;
 
+  @override
+  void didUpdateWidget(covariant TestDetailScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // SAT has an extra Vocab tab; reset when switching between SAT and ACT
+    // so the selected tab index is always valid.
+    if (oldWidget.category != widget.category) {
+      _tab = 1;
+      _section = null;
+    }
+  }
+
   bool get _isSat => widget.category == 'sat';
   String get _title => _isSat ? 'SAT Prep' : 'ACT Prep';
 
@@ -143,6 +154,15 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       seen,
     );
 
+    // Vocabulary builders get their own SAT tab so students can find word
+    // games and flashcards without scrolling through full practice tests.
+    bool isVocab(Resource r) => r.majorTags.contains('vocab');
+    final vocab = _sort(
+      _applySection(_all.where(isVocab).toList()),
+      pinned,
+      seen,
+    );
+
     final practiceQIds = {
       'khan_academy_sat',
       'knowt_sat_hub',
@@ -155,7 +175,8 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
         _all
             .where(
               (r) =>
-                  practiceQIds.contains(r.id) ||
+                  !isVocab(r) &&
+                  (practiceQIds.contains(r.id) ||
                   (!officialIds.contains(r.id) &&
                       !bookIds.contains(r.id) &&
                       (r.icon == Icons.quiz ||
@@ -167,7 +188,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                                 l.toLowerCase().contains('knowt') ||
                                 l.toLowerCase().contains('question') ||
                                 l.toLowerCase().contains('mcq'),
-                          ))),
+                          )))),
             )
             .toList(),
       ),
@@ -181,8 +202,16 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       'Videos',
       'Books & Courses',
       'Practice',
+      if (vocab.isNotEmpty || _isSat) 'Vocab',
     ];
-    final bodies = [board, official, videos, books, qs];
+    final bodies = [
+      board,
+      official,
+      videos,
+      books,
+      qs,
+      if (vocab.isNotEmpty || _isSat) vocab,
+    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

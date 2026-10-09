@@ -64,7 +64,8 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
 
   bool _isEssayWritingCompetition(Resource resource) {
     final title = resource.title.toLowerCase();
-    return title.contains('essay') ||
+    return resource.alsoFields.contains('essay_writing') ||
+        title.contains('essay') ||
         title.contains('writing') ||
         title.contains('writer') ||
         title.contains('poet') ||
@@ -73,24 +74,44 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   }
 
   bool _matchesCompetitionSubject(Resource resource, String subject) {
+    bool inAny(Set<String> fields) =>
+        fields.contains(resource.field) ||
+        resource.alsoFields.any(fields.contains);
+
     switch (subject) {
       case 'cs_eng':
-        return resource.field == 'cs' || resource.field == 'engineering';
+        return inAny(const {'cs', 'engineering'});
       case 'math':
-        return resource.field == 'math';
+        return inAny(const {'math', 'statistics'});
       case 'science':
-        return const {
+        return inAny(const {
           'science',
           'biology',
           'chemistry',
           'physics',
-        }.contains(resource.field);
+          'env_sci',
+          'psychology',
+          'astronomy',
+        });
       case 'business':
-        return resource.field == 'business';
+        return inAny(const {'business', 'economics'});
       case 'essay_writing':
         return _isEssayWritingCompetition(resource);
       case 'humanities':
-        return resource.field == 'humanities' &&
+        // Writing contests have their own chip. They also show here when they
+        // are explicitly cross-listed as humanities.
+        const humanitiesFields = {
+          'humanities',
+          'history',
+          'polisci',
+          'languages',
+          'music',
+          'art_history',
+          'geography',
+          'english',
+        };
+        if (resource.alsoFields.contains('humanities')) return true;
+        return humanitiesFields.contains(resource.field) &&
             !_isEssayWritingCompetition(resource);
       default:
         return false;

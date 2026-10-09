@@ -26,6 +26,15 @@ class Resource {
   final List<String> courseOfferings;
   final List<String> courseTermTags;
 
+  /// Extra subject areas a resource also belongs to. A resource keeps one
+  /// primary [field] for its label, but filters and major pages also match
+  /// these, so cross-disciplinary items (for example AP Psychology, or an
+  /// essay contest about history) are listed under every relevant subject.
+  final List<String> alsoFields;
+
+  /// Extra AP sections (see [apSubCategory]) a course should also appear in.
+  final List<String> alsoApSubCategories;
+
   const Resource({
     required this.id,
     required this.title,
@@ -50,7 +59,14 @@ class Resource {
     this.collegeCourseType,
     this.courseOfferings = const [],
     this.courseTermTags = const [],
+    this.alsoFields = const [],
+    this.alsoApSubCategories = const [],
   });
+
+  bool inField(String value) => field == value || alsoFields.contains(value);
+
+  bool inApSubCategory(String value) =>
+      apSubCategory == value || alsoApSubCategories.contains(value);
 
   // ─── Urgency Calculation ──────────────────────────────────────────────────
   /// Uses the same 30-day and 90-day windows as saved deadlines.
@@ -150,6 +166,17 @@ class Resource {
   }
 
   String get apSubCategoryLabel {
+    final ids = [
+      if (apSubCategory != null) apSubCategory!,
+      ...alsoApSubCategories,
+    ];
+    return ids
+        .map(_apSubCategoryLabelFor)
+        .where((label) => label.isNotEmpty)
+        .join(' · ');
+  }
+
+  static String _apSubCategoryLabelFor(String id) {
     const labels = {
       'math': 'Math',
       'cs': 'Computer Science',
@@ -160,7 +187,7 @@ class Resource {
       'arts': 'Arts',
       'career': 'Career Kickstart',
     };
-    return labels[apSubCategory ?? ''] ?? '';
+    return labels[id] ?? '';
   }
 
   String get scopeLabel {

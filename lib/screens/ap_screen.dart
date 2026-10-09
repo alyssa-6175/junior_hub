@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../app_colors.dart';
+import '../data/ap_videos_data.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
@@ -24,19 +25,23 @@ class _ApScreenState extends State<ApScreen> {
     ('cs', 'Computer Science'),
     ('lang', 'English, World Languages & Literature'),
     ('arts', 'Arts'),
+    ('career', 'Career Kickstart'),
   ];
 
   @override
   Widget build(BuildContext context) {
     final allItems = apResources();
-    final items = <Resource>[
+    // A course can belong to more than one section (for example AP
+    // Psychology is both a science and a social science). It is listed under
+    // every matching filter, but only once in the All view.
+    final items = <Resource>{
       for (final section in _sections)
         ...allItems.where(
           (item) =>
-              item.apSubCategory == section.$1 &&
+              item.inApSubCategory(section.$1) &&
               (_filter == 'all' || _filter == section.$1),
         ),
-    ];
+    }.toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +184,7 @@ class _ApCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              '${linksForResource(resource).length} resources',
+              '${linksForResource(resource).length + apVideoPlaylistCount(resource.id)} resources',
               style: GoogleFonts.inter(fontSize: 11, color: kTextSecondary),
             ),
             const SizedBox(height: 6),
@@ -191,6 +196,8 @@ class _ApCard extends StatelessWidget {
               ),
               child: Text(
                 resource.apSubCategoryLabel,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,

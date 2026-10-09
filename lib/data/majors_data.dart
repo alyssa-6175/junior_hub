@@ -276,6 +276,7 @@ bool _resourceMatchesSubMajor(Resource resource, String subMajorId) {
   final fields = _majorFields[subMajorId] ?? const <String>{};
   final aliases = _majorTagAliases[subMajorId] ?? const <String>{};
   return fields.contains(resource.field) ||
+      resource.alsoFields.any(fields.contains) ||
       resource.majorTags.contains(subMajorId) ||
       resource.majorTags.any(aliases.contains);
 }

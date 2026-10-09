@@ -686,6 +686,7 @@ Resource _competition({
   String? detailNote,
   String timeCommitment = 'Check the current competition cycle',
   IconData icon = Icons.emoji_events,
+  List<String> alsoFields = const [],
 }) => Resource(
   id: id,
   title: title,
@@ -706,6 +707,7 @@ Resource _competition({
   detailNote:
       detailNote ??
       'Dates and eligibility can change between cycles, so confirm the current rules on the official site',
+  alsoFields: alsoFields,
 );
 
 Resource _researchJournal({
@@ -721,6 +723,7 @@ Resource _researchJournal({
   String? deadline,
   String? deadlineIso,
   String timeCommitment = 'Rolling or issue-based review',
+  List<String> alsoFields = const [],
 }) => Resource(
   id: id,
   title: title,
@@ -739,6 +742,46 @@ Resource _researchJournal({
   url: url,
   links: ['Submission guidelines'],
   detailNote: detailNote,
+  alsoFields: alsoFields,
+);
+
+/// Student research conferences and symposia. They appear in the Research
+/// page's Journals & Fairs view alongside science fairs.
+Resource _researchConference({
+  required String id,
+  required String title,
+  required String field,
+  required String scope,
+  required List<String> majorTags,
+  required String applicationInfo,
+  required String description,
+  required String url,
+  required String detailNote,
+  String format = 'virtual',
+  String locationNote = 'Online',
+  String? deadline,
+  String? deadlineIso,
+  String timeCommitment = 'Abstract or paper submission, then a presentation',
+  List<String> alsoFields = const [],
+}) => Resource(
+  id: id,
+  title: title,
+  category: 'research',
+  field: field,
+  scope: scope,
+  format: format,
+  locationNote: locationNote,
+  timeCommitment: timeCommitment,
+  majorTags: ['research_fair', 'research', ...majorTags],
+  applicationInfo: applicationInfo,
+  description: description,
+  deadline: deadline,
+  deadlineIso: deadlineIso,
+  icon: Icons.co_present_outlined,
+  url: url,
+  links: [title],
+  detailNote: detailNote,
+  alsoFields: alsoFields,
 );
 
 final List<Resource> _catalogResources = [
@@ -803,8 +846,8 @@ final List<Resource> _catalogResources = [
         'Students register through an approved school or competition manager.',
     description:
         'Take on 25 inventive math problems in 75 minutes, with strong scores opening the path to AIME and the USA mathematical olympiads',
-    deadline: 'September 30, 2026 (early registration)',
-    deadlineIso: '2026-09-30T23:59:00-04:00',
+    deadline: 'October 15, 2026 at 11:59 PM ET (regular registration)',
+    deadlineIso: '2026-10-15T23:59:00-04:00',
     icon: Icons.emoji_events,
     url: 'https://maa.org/amcreg/',
     links: [
@@ -812,8 +855,7 @@ final List<Resource> _catalogResources = [
       'MAA AMC official preparation resources',
       'AoPS AMC archive',
     ],
-    detailNote:
-        'Prepare with MAA’s official materials and timed past problems in the AoPS archive. Regular registration: October 15; late registration: October 28. AMC A: November 5; AMC B: November 13, 2026.',
+    detailNote: 'Schools or competition managers register students. Late registration (returning managers only) closes October 28. AMC 10/12 A: November 5, 2026; AMC 10/12 B: November 13, 2026. Prepare with MAA’s official materials and timed past problems in the AoPS archive',
   ),
   const Resource(
     id: 'cac',
@@ -877,8 +919,7 @@ final List<Resource> _catalogResources = [
     url:
         'https://globalyouth.wharton.upenn.edu/competitions/investment-competition/register-now/',
     links: ['Wharton registration'],
-    detailNote:
-        'Registration for the 2026–27 competition closes at 5:00 PM Eastern Time',
+    detailNote: 'Registration for the 2026–2027 season closed September 11, 2026. Registered teams submit their Trading Notes Analysis by October 23 and Investment Policy Statement by November 6; the next season’s registration normally opens in August',
   ),
   const Resource(
     id: 'breakthrough_junior',
@@ -1044,12 +1085,13 @@ final List<Resource> _catalogResources = [
         'Teams develop and pitch an innovation; consult the current student guide.',
     description:
         'Innovation and entrepreneurship challenge for students ages 13–18.',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'October 30, 2026 (Activation Stage submission)',
+    deadlineIso: '2026-10-30T23:59:00-05:00',
     icon: Icons.lightbulb,
     url: 'https://conrad.spacecenter.org/',
     links: ['Conrad Challenge'],
-    detailNote: 'A reliable 2026–27 deadline was not posted when checked.',
+    detailNote: 'The 2026–2027 Activation Stage closes October 30; the next stage runs October 30, 2026 to January 7, 2027',
+    alsoFields: ['business'],
   ),
   const Resource(
     id: 'national_science_bowl',
@@ -1097,12 +1139,13 @@ final List<Resource> _catalogResources = [
         'Student registration is free through the official NACLO site.',
     description:
         'Crack unfamiliar language patterns using logic and careful observation, with no prior linguistics or second-language experience required',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'January 28, 2027 (Open Round)',
+    deadlineIso: '2027-01-28T09:00:00-05:00',
     icon: Icons.translate,
     url: 'https://www.naclo.org/',
     links: ['NACLO'],
-    detailNote: 'The next competition cycle date was not posted when checked.',
+    detailNote: 'Student registration opens October 12, 2026. The Open Round is Thursday, January 28, 2027 and the Invitational Round is March 18, 2027. Last cycle, student registration closed a few days before the Open Round',
+    alsoFields: ['humanities'],
   ),
   const Resource(
     id: 'usnco',
@@ -1234,6 +1277,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Qualifying dates depend on the participating IAC tournament and the international championship cycle',
     icon: Icons.public,
+    alsoFields: ['science'],
   ),
   _competition(
     id: 'usacyo',
@@ -1290,6 +1334,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2027 registration details will be posted closer to the February or March competition window',
     icon: Icons.psychology_alt_outlined,
+    alsoFields: ['essay_writing'],
   ),
 
   const Resource(
@@ -1333,6 +1378,7 @@ final List<Resource> _catalogResources = [
     links: ['National History Day contest', 'Find a local affiliate'],
     detailNote:
         'Local deadlines vary because students advance through affiliate contests before nationals',
+    alsoFields: ['essay_writing', 'history'],
   ),
   const Resource(
     id: 'regeneron_isef',
@@ -1437,6 +1483,7 @@ final List<Resource> _catalogResources = [
     links: ['Technovation Girls student page', '2026–2027 season updates'],
     detailNote:
         'Student registration for the new season was not open when checked, so use the official notification form for updates',
+    alsoFields: ['business'],
   ),
 
   // ORIGINAL COMMENTED-OUT SUMMER AND SEASONAL COMPETITIONS
@@ -1845,6 +1892,8 @@ final List<Resource> _catalogResources = [
     url: 'https://hacktj.org/',
     timeCommitment: '24-hour hackathon',
     icon: Icons.code,
+    deadline: 'March 6–7, 2027 (event at Cvent HQ, Tysons, VA)',
+    deadlineIso: '2027-03-06T09:00:00-05:00',
   ),
   _competition(
     id: 'hack_club_hackathons',
@@ -1957,6 +2006,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'CALICO runs biannual contests. Join its official email list for registration announcements.',
     icon: Icons.code,
+    deadline: 'November 8, 2026 (CALICO Fall ’26 contest)',
+    deadlineIso: '2026-11-08T12:00:00-08:00',
   ),
   _competition(
     id: 'stanford_proco',
@@ -2047,6 +2098,7 @@ final List<Resource> _catalogResources = [
     url: 'https://picoctf.org/',
     timeCommitment: 'Multi-day online capture-the-flag',
     icon: Icons.security,
+    detailNote: 'picoCTF.org is now part of CMU’s CyLab Security Academy; existing picoCTF logins still work. The practice gym is always open, and the annual competition is usually held in spring',
   ),
   _competition(
     id: 'national_cyber_league',
@@ -2118,6 +2170,8 @@ final List<Resource> _catalogResources = [
     url: 'https://www.purplecomet.org/',
     timeCommitment: '90-minute team contest',
     icon: Icons.calculate,
+    deadline: 'April 6–15, 2027 (contest window)',
+    deadlineIso: '2027-04-06T00:00:00-04:00',
   ),
   _competition(
     id: 'hmmt',
@@ -2132,10 +2186,11 @@ final List<Resource> _catalogResources = [
     description:
         'Take on demanding individual, team, and guts-round problems at one of the largest student-run high school math tournaments',
     url: 'https://www.hmmt.org/',
-    deadline: 'September 20, 2026 (registration)',
-    deadlineIso: '2026-09-20T23:59:00-04:00',
+    deadline: 'November 7, 2026 (HMMT November at Harvard)',
+    deadlineIso: '2026-11-07T08:00:00-05:00',
     timeCommitment: 'One-day tournament',
     icon: Icons.calculate,
+    detailNote: 'HMMT February 2027 is February 13, 2027 at MIT. Teams register through their school or coach; check the registration page for each tournament’s cutoff',
   ),
   _competition(
     id: 'arml',
@@ -2251,10 +2306,11 @@ final List<Resource> _catalogResources = [
     description:
         'Solve a mix of short-answer and full-solution problems where clear mathematical communication matters',
     url: 'https://cemc.uwaterloo.ca/contests/csimc',
-    deadline: 'October 22, 2026 (school ordering)',
+    deadline: 'October 22, 2026 (school ordering deadline)',
     deadlineIso: '2026-10-22T23:59:00-04:00',
     timeCommitment: 'Two-hour contest',
     icon: Icons.calculate,
+    detailNote: 'Contest date: Wednesday, November 18, 2026 in North and South America. A teacher or school contact orders the contest by October 22',
   ),
   _competition(
     id: 'stanford_math_tournament',
@@ -2283,8 +2339,11 @@ final List<Resource> _catalogResources = [
         'High school students register in teams when applications open',
     description:
         'Work through individual and collaborative rounds written and run by UC Berkeley students',
-    url: 'https://bmt.berkeley.edu/',
+    url: 'https://berkeley.mt/',
     icon: Icons.calculate,
+    deadline: 'November 14, 2026 (BMT 2026)',
+    deadlineIso: '2026-11-14T08:00:00-08:00',
+    detailNote: 'Berkeley Math Tournament moved to berkeley.mt. Sign up for the mailing list on the official site for registration cutoffs',
   ),
   _competition(
     id: 'pumac',
@@ -2300,6 +2359,9 @@ final List<Resource> _catalogResources = [
         'Test advanced problem solving through individual subject rounds, team events, and a fast-paced power competition',
     url: 'https://pumac.princeton.edu/',
     icon: Icons.calculate,
+    deadline: 'October 11, 2026 (rolling registration closes)',
+    deadlineIso: '2026-10-11T23:59:00-04:00',
+    detailNote: 'PUMaC 2026 takes place Saturday, November 21, 2026 at Princeton. Registration is rolling until October 11',
   ),
   _competition(
     id: 'caribou_math',
@@ -2362,6 +2424,9 @@ final List<Resource> _catalogResources = [
         'Apply field knowledge in ecology, forestry, soils, wildlife, and current environmental issues with a five-person team',
     url: 'https://envirothon.org/',
     icon: Icons.eco,
+    deadline: 'July 24–30, 2027 (NCF-Envirothon at Mount St. Mary’s University)',
+    deadlineIso: '2027-07-24T09:00:00-04:00',
+    detailNote: 'Teams advance through their state or provincial Envirothon in spring before the North American championship',
   ),
   _competition(
     id: 'stockholm_junior_water_prize',
@@ -2376,8 +2441,9 @@ final List<Resource> _catalogResources = [
         'Submit original water-related research through the official national organizer',
     description:
         'Turn original research on water quality, conservation, treatment, or access into a concise scientific competition project',
-    url: 'https://siwi.org/stockholm-junior-water-prize/',
+    url: 'https://www.wef.org/community/u-s-stockholm-junior-water-prize/',
     icon: Icons.water_drop,
+    detailNote: 'U.S. students who are at least 15 by August 1 enter through their state’s SJWP competition, usually in spring. The U.S. program is run by the Water Environment Federation',
   ),
   _competition(
     id: 'physicsbowl',
@@ -2394,6 +2460,7 @@ final List<Resource> _catalogResources = [
     url: 'https://www.aapt.org/programs/physicsbowl/',
     timeCommitment: '45-minute contest',
     icon: Icons.science,
+    detailNote: 'Registration for PhysicsBowl 2027 opens in December 2026. Last year’s registration deadline was late February',
   ),
   _competition(
     id: 'national_ocean_sciences_bowl',
@@ -2409,6 +2476,9 @@ final List<Resource> _catalogResources = [
         'Race through ocean science questions and work as a team on topics spanning biology, chemistry, geology, policy, and technology',
     url: 'https://nosb.org/',
     icon: Icons.water,
+    deadline: 'January 15, 2027 (Virtual Sponge Bowl team intent form)',
+    deadlineIso: '2027-01-15T23:59:00-05:00',
+    detailNote: 'The Virtual Sponge Bowl is March 20–21, 2027 on Zoom. Regional NOSB bowls run in winter and spring; contact your regional coordinator',
   ),
   _competition(
     id: 'biogeneius',
@@ -2466,6 +2536,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2026 cycle is complete and the next registration dates have not been published; check the official timeline before applying',
     icon: Icons.science,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'hs3mt',
@@ -2484,6 +2555,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-12-01T00:00:00-05:00',
     timeCommitment: 'Research summary, single-slide design, and recorded pitch',
     icon: Icons.record_voice_over,
+    alsoFields: ['humanities'],
   ),
 
   _competition(
@@ -2562,6 +2634,8 @@ final List<Resource> _catalogResources = [
         'Design an actionable idea around a global challenge and shape it into a clear entrepreneurial solution',
     url: 'https://innovation.nfte.com/',
     icon: Icons.lightbulb,
+    deadline: 'December 13, 2026 (entry submission)',
+    deadlineIso: '2026-12-13T23:59:00-05:00',
   ),
   _competition(
     id: 'harvard_crimson_case',
@@ -2608,7 +2682,7 @@ final List<Resource> _catalogResources = [
         'Apply through a participating local TiE Young Entrepreneurs program',
     description:
         'Learn the basics of launching a company, build a team plan, and pitch to experienced entrepreneurs and investors',
-    url: 'https://tie.org/tye/',
+    url: 'https://tyeglobal.org/',
     icon: Icons.lightbulb,
   ),
   _competition(
@@ -2660,6 +2734,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Regional programs set their own deadlines. The first close December 1, 2026, while some remain open through January 4, 2027. Use the official Region Locator to confirm your art deadline.',
     icon: Icons.edit_note,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'bennington_young_writers',
@@ -2673,8 +2748,11 @@ final List<Resource> _catalogResources = [
         'High school students submit poetry, fiction, or nonfiction with a teacher sponsor',
     description:
         'Send your strongest poetry, fiction, or nonfiction to a focused college-run competition for young writers',
-    url: 'https://www.bennington.edu/events/young-writers-awards',
+    url: 'https://www.bennington.edu/events/bennington-young-creators-awards/bennington-young-writers-awards',
     icon: Icons.edit_note,
+    deadline: 'November 1, 2026 at 11:59 PM ET (submission deadline)',
+    deadlineIso: '2026-11-01T23:59:00-04:00',
+    detailNote: 'Submissions opened September 1 for poetry, fiction, and nonfiction',
   ),
   _competition(
     id: 'poetry_out_loud',
@@ -2705,6 +2783,9 @@ final List<Resource> _catalogResources = [
         'Develop arguments, performances, and speaking skills across debate, interpretation, oratory, and extemporaneous events',
     url: 'https://www.speechanddebate.org/nationals/',
     icon: Icons.record_voice_over,
+    deadline: 'June 13–18, 2027 (Nationals in Phoenix, AZ)',
+    deadlineIso: '2027-06-13T08:00:00-07:00',
+    detailNote: 'Students qualify through NSDA district tournaments during the school year; ask your coach for your district’s qualifier date',
   ),
   _competition(
     id: 'we_the_people',
@@ -2751,6 +2832,10 @@ final List<Resource> _catalogResources = [
     url:
         'https://www.jfklibrary.org/learn/education/profile-in-courage-essay-contest',
     icon: Icons.edit_note,
+    deadline: 'January 11, 2027 at 11:59 PM ET (submission deadline)',
+    deadlineIso: '2027-01-11T23:59:00-05:00',
+    detailNote: 'The 2027 contest opened September 1, 2026',
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'foyle_young_poets_active',
@@ -2782,6 +2867,7 @@ final List<Resource> _catalogResources = [
         'Explore diplomacy and international affairs through a research-based essay tied to a new foreign-service question each year',
     url: 'https://afsa.org/essay-contest',
     icon: Icons.public,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'national_high_school_ethics_bowl',
@@ -2797,6 +2883,7 @@ final List<Resource> _catalogResources = [
         'Discuss difficult ethical cases with clarity and empathy, responding to another team without treating the round like a shouting match',
     url: 'https://nhseb.org/home',
     icon: Icons.forum,
+    detailNote: 'The 2026–2027 season launched September 18, 2026. Teams compete in regional bowls during the winter before the national championship in April',
   ),
   _competition(
     id: 'youngarts',
@@ -2814,6 +2901,7 @@ final List<Resource> _catalogResources = [
     deadline: 'October 6, 2026 at 8:00 PM ET',
     deadlineIso: '2026-10-06T20:00:00-04:00',
     icon: Icons.palette,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'john_locke_essay',
@@ -2829,6 +2917,7 @@ final List<Resource> _catalogResources = [
         'Build a careful argument around a challenging question in philosophy, politics, economics, history, psychology, theology, or law',
     url: 'https://www.johnlockeinstitute.com/essay-competition',
     icon: Icons.edit_note,
+    alsoFields: ['humanities', 'economics'],
   ),
   _competition(
     id: 'congressional_art_competition',
@@ -2861,6 +2950,8 @@ final List<Resource> _catalogResources = [
     url: 'https://www.davidsongifted.org/gifted-programs/fellows-scholarship/',
     timeCommitment: 'Major completed project plus a detailed application',
     icon: Icons.workspace_premium,
+    detailNote: 'The 2027 Davidson Fellows application opens in fall 2026. Students 18 or younger submit a significant piece of work in STEM, literature, music, philosophy, or Outside the Box',
+    alsoFields: ['humanities', 'math', 'cs'],
   ),
   _competition(
     id: 'nasa_herc',
@@ -2914,6 +3005,7 @@ final List<Resource> _catalogResources = [
     url: 'https://think.mit.edu/',
     timeCommitment: 'Proposal followed by one semester of work for finalists',
     icon: Icons.science_outlined,
+    detailNote: 'The last cycle’s proposals were due January 1. Expect the 2027 application to close around January 1, 2027; check think.mit.edu for the official date',
   ),
   _competition(
     id: 'igem_high_school',
@@ -2968,6 +3060,7 @@ final List<Resource> _catalogResources = [
     url: 'https://www.essaycomp.org/',
     timeCommitment: 'Registration, optional workshops, and one polished essay',
     icon: Icons.edit_note,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'harvard_crimson_business',
@@ -3047,6 +3140,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2026–27 scenario response and project proposal are due December 7, 2026; semifinalist project reports are due March 1, 2027',
     icon: Icons.analytics_outlined,
+    alsoFields: ['business'],
   ),
   _competition(
     id: 'the_earth_prize',
@@ -3068,9 +3162,10 @@ final List<Resource> _catalogResources = [
         'Develop a practical, innovative response to an environmental challenge for mentorship, international recognition, and a share of \$100,000 in awards',
     url: 'https://www.theearthprize.org/competition',
     timeCommitment: 'Research-and-design project with several judging phases',
-    detailNote:
-        'The 2027 competition is open, but the official timeline page still displays the prior cycle dates; confirm the new submission deadline before planning',
+    detailNote: 'Registration is open until January 10, 2027, and Earth Prize Blueprint submissions are due January 31, 2027. Teens ages 13–19 may enter individually or in teams',
     icon: Icons.eco,
+    deadline: 'January 10, 2027 (registration for The Earth Prize 2027)',
+    deadlineIso: '2027-01-10T23:59:00+01:00',
   ),
   _competition(
     id: 'genius_olympiad',
@@ -3099,6 +3194,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2027 portal is scheduled to open in December 2026. Affiliated fairs and some regions use separate selection deadlines',
     icon: Icons.science_outlined,
+    alsoFields: ['humanities'],
   ),
   _competition(
     id: 'samsung_solve_for_tomorrow',
@@ -3146,6 +3242,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2026–27 theme is Journeys of Transformation. State programs set their own entry and qualifying deadlines',
     icon: Icons.school_outlined,
+    alsoFields: ['science', 'math'],
   ),
   _competition(
     id: 'iac_history_bee_bowl',
@@ -3169,7 +3266,7 @@ final List<Resource> _catalogResources = [
   ),
   _competition(
     id: 'bow_seat_ocean_awareness',
-    title: 'Ocean Awareness Contest',
+    title: 'Bow Seat Blue Planet Awareness Contest (formerly Ocean Awareness)',
     field: 'science',
     scope: 'international',
     format: 'virtual',
@@ -3185,12 +3282,1023 @@ final List<Resource> _catalogResources = [
         'Students ages 11–18 submit one original work in visual art, writing, poetry, film, multimedia, music, or dance with an adult sponsor',
     description:
         'Combine environmental understanding with creative work that explores an annual ocean theme',
-    url:
-        'https://bowseat.org/programs/ocean-awareness-contest/contest-overview/',
+    url: 'https://bowseat.org/programs/blue-planet-awareness-contest/contest-overview/',
     timeCommitment: 'One researched creative submission',
-    detailNote:
-        'The 2027 theme and deadline are announced in September; the prior cycle closed June 8, 2026',
+    detailNote: 'The contest has been renamed the Blue Planet Awareness Contest. The 2027 theme is “Nature of Truth: Environmentalism in an Age of Disinformation,” with entries in art, writing, performance, film, or multimedia',
     icon: Icons.water,
+    deadline: 'June 7, 2027 (2027 Blue Planet Awareness Contest)',
+    deadlineIso: '2027-06-07T23:59:00-04:00',
+    alsoFields: ['essay_writing', 'humanities'],
+  ),
+
+  // ===========================================================================
+  // COMPETITIONS ADDED OCTOBER 2026 (official sites checked October 9, 2026)
+  // ===========================================================================
+  _competition(
+    id: 'usamts',
+    title: 'USA Mathematical Talent Search (USAMTS)',
+    field: 'math',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online; solutions submitted from home',
+    majorTags: ['math', 'proof', 'problem_solving'],
+    applicationInfo: 'Free for U.S. middle and high school students; create an account on the official site and submit typed or handwritten solutions each round.',
+    description: 'Spend about a month on each round of proof-based problems and write full solutions, a great bridge from short-answer contests to olympiad-style writing',
+    url: 'https://www.usamts.org/',
+    deadline: 'October 13, 2026 at 10:00 PM ET (Round 1 solutions)',
+    deadlineIso: '2026-10-13T22:00:00-04:00',
+    detailNote: 'Each round has one puzzle and four proof problems. Web submissions are due at 10 PM Eastern; graders return written feedback on every solution',
+    timeCommitment: 'Three month-long rounds during the school year',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'cemc_pcf',
+    title: 'Pascal, Cayley and Fermat Contests (CEMC)',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Your school, as a registered CEMC contest site',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo: 'Grades 9–11 (Pascal = grade 9, Cayley = 10, Fermat = 11); a teacher or school contact orders the contest.',
+    description: 'Take the University of Waterloo’s 60-minute multiple-choice contests for grades 9, 10, and 11, one of the most widely written math contests in North America',
+    url: 'https://cemc.uwaterloo.ca/contests',
+    deadline: 'February 2, 2027 (ordering deadline for U.S. schools)',
+    deadlineIso: '2027-02-02T23:59:00-05:00',
+    detailNote: 'Contest dates in North and South America: February 23 or 24, 2027. Schools in Canada may order until February 9',
+    timeCommitment: '60-minute contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'cemc_euclid',
+    title: 'Euclid Mathematics Contest (CEMC)',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Your school, as a registered CEMC contest site',
+    majorTags: ['math', 'proof', 'problem_solving'],
+    applicationInfo: 'Designed for grade 12 students (younger students may write it); a teacher orders the contest.',
+    description: 'Solve some of the University of Waterloo’s hardest short-answer and full-solution problems in a 2.5-hour senior contest that many universities recognize',
+    url: 'https://cemc.uwaterloo.ca/contests',
+    deadline: 'March 11, 2027 (school ordering deadline)',
+    deadlineIso: '2027-03-11T23:59:00-05:00',
+    detailNote: 'Contest date in North and South America: Tuesday, April 6, 2027',
+    timeCommitment: '2.5-hour contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'cemc_fgh',
+    title: 'Fryer, Galois and Hypatia Contests (CEMC)',
+    field: 'math',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Your school, as a registered CEMC contest site',
+    majorTags: ['math', 'proof', 'problem_solving'],
+    applicationInfo: 'Grades 9–11 (Fryer = 9, Galois = 10, Hypatia = 11); a teacher orders the contest.',
+    description: 'Practice explaining your reasoning in full-solution answers on a 75-minute University of Waterloo math contest built for grades 9 through 11',
+    url: 'https://cemc.uwaterloo.ca/contests',
+    deadline: 'March 11, 2027 (school ordering deadline)',
+    deadlineIso: '2027-03-11T23:59:00-05:00',
+    detailNote: 'Contest date in North and South America: Wednesday, April 7, 2027',
+    timeCommitment: '75-minute contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'cemc_ccc',
+    title: 'Canadian Computing Competition (CCC)',
+    field: 'cs',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Online, supervised at your school',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo: 'Grades 9–12 at schools in any country; a teacher registers students and supervises the contest.',
+    description: 'Write programs to solve algorithmic problems in the Junior or Senior division of the University of Waterloo’s computing contest, the first step toward Canada’s IOI team',
+    url: 'https://cemc.uwaterloo.ca/contests',
+    deadline: 'February 11, 2027 (ordering deadline)',
+    deadlineIso: '2027-02-11T23:59:00-05:00',
+    detailNote: 'Contest date in North and South America: Wednesday, February 17, 2027',
+    timeCommitment: 'Three-hour contest',
+    icon: Icons.computer,
+  ),
+  _competition(
+    id: 'beaver_computing',
+    title: 'Beaver Computing Challenge (CEMC)',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online, supervised at your school',
+    majorTags: ['cs', 'logic', 'problem_solving'],
+    applicationInfo: 'Grades 5–10; a teacher orders the contest for the school.',
+    description: 'Solve short computational-thinking puzzles with no programming experience required, a friendly first computing contest for grades 9 and 10',
+    url: 'https://cemc.uwaterloo.ca/contests',
+    deadline: 'October 26, 2026 (school ordering deadline)',
+    deadlineIso: '2026-10-26T23:59:00-04:00',
+    detailNote: 'Contest window in North and South America: November 9–20, 2026',
+    timeCommitment: '45-minute online contest',
+    icon: Icons.computer,
+  ),
+  _competition(
+    id: 'acsl',
+    title: 'American Computer Science League (ACSL)',
+    field: 'cs',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Administered at your school; finals invitations for top students',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo: 'Schools register a team through an advisor; students compete in divisions matched to experience.',
+    description: 'Take four short contests across the year covering computer-science theory and a programming problem, with top scorers invited to the ACSL Finals',
+    url: 'https://www.acsl.org/',
+    deadline: 'October 19, 2026 (Contest #1 opens)',
+    deadlineIso: '2026-10-19T08:00:00-04:00',
+    detailNote: 'Registration for 2026–27 is open now. Each contest has short written problems plus a take-home programming problem',
+    timeCommitment: 'Four contests from fall through spring',
+    icon: Icons.computer,
+  ),
+  _competition(
+    id: 'math_prize_for_girls',
+    title: 'Math Prize for Girls',
+    field: 'math',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'MIT, Cambridge, Massachusetts',
+    majorTags: ['math', 'problem_solving'],
+    applicationInfo: 'Girls in grade 11 or below who qualify through AMC 10/12 scores apply during the summer.',
+    description: 'Compete in a 2.5-hour, 20-question contest at MIT for one of the largest math prizes for high school girls',
+    url: 'https://mathprize.atfoundation.org/',
+    detailNote: 'Math Prize for Girls 2026 takes place on Sunday, October 11, 2026 at MIT. Applications for the next contest usually open in late spring using AMC scores',
+    timeCommitment: 'One-day contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'cmimc',
+    title: 'Carnegie Mellon Informatics and Mathematics Competition (CMIMC)',
+    field: 'math',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Carnegie Mellon University (math); online (programming)',
+    majorTags: ['math', 'cs', 'algorithms', 'problem_solving'],
+    applicationInfo: 'High school teams of up to six register on the official site.',
+    description: 'Bring a team to Carnegie Mellon for an individual and team math tournament, or join the separate online team programming contest',
+    url: 'https://cmimc.math.cmu.edu/',
+    detailNote: 'The 2027 dates are not posted yet. In 2026, CMIMC Math was held March 28 in Pittsburgh and CMIMC Programming ran online April 18–20',
+    timeCommitment: 'One-day tournament or weekend online contest',
+    icon: Icons.calculate,
+  ),
+  _competition(
+    id: 'naqt_hsnct',
+    title: 'NAQT High School National Championship Tournament (Quiz Bowl)',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Atlanta Marriott Marquis and Hilton Atlanta, Georgia',
+    majorTags: ['history', 'literature', 'science', 'quiz_bowl'],
+    applicationInfo: 'School teams qualify by placing well at NAQT-sanctioned regular-season quiz bowl tournaments.',
+    description: 'Buzz in on questions across literature, history, science, fine arts, and current events with your school’s quiz bowl team at the largest national championship',
+    url: 'https://www.naqt.com/hsnct/',
+    deadline: 'May 28–30, 2027 (national championship)',
+    deadlineIso: '2027-05-28T08:00:00-04:00',
+    detailNote: 'Earn a qualification at a regular-season NAQT tournament during the school year. Coaches register qualified teams on NAQT’s site',
+    timeCommitment: 'Season of weekend tournaments plus a three-day national championship',
+    icon: Icons.lightbulb_outline,
+  ),
+  _competition(
+    id: 'national_latin_exam',
+    title: 'National Latin Exam',
+    field: 'languages',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Your school (paper or online)',
+    majorTags: ['languages', 'history', 'linguistics'],
+    applicationInfo: 'A Latin teacher registers students; homeschool and independent students can register through a sponsor.',
+    description: 'Test your Latin grammar, reading, mythology, and Roman history knowledge on the 40-question exam taken by more than 100,000 students',
+    url: 'https://www.nle.org/',
+    deadline: 'January 29, 2027 (paper test registration)',
+    deadlineIso: '2027-01-29T23:59:00-05:00',
+    detailNote: 'Online test registration closes February 20, 2027. The 2027 testing window is March 1–19',
+    timeCommitment: '45-minute exam',
+    icon: Icons.translate,
+  ),
+  _competition(
+    id: 'national_spanish_exam',
+    title: 'National Spanish Exam (AATSP)',
+    field: 'languages',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online at your school',
+    majorTags: ['languages', 'spanish'],
+    applicationInfo: 'A Spanish teacher who is an AATSP member registers students; levels match years of study and background.',
+    description: 'Measure your Spanish reading, listening, and grammar against students across the country on the national contest exam',
+    url: 'https://nationalspanishexam.org/',
+    deadline: 'February 1, 2027 (regular registration closes)',
+    deadlineIso: '2027-02-01T23:59:00-05:00',
+    detailNote: 'Registration opens October 15, 2026 (early registration unlocks the built-in practice section). Late registration runs February 2–21; exams are given February 22–April 2, 2027',
+    timeCommitment: 'Online exam during the spring window',
+    icon: Icons.translate,
+  ),
+  _competition(
+    id: 'le_grand_concours',
+    title: 'Le Grand Concours (National French Contest)',
+    field: 'languages',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online at your school',
+    majorTags: ['languages', 'french'],
+    applicationInfo: 'A French teacher who is an AATF member registers students in the level that matches their study.',
+    description: 'Show your French listening and reading comprehension on the AATF national contest and earn national and chapter awards',
+    url: 'https://www.frenchteachers.org/nfc-home',
+    deadline: 'February 11–April 9, 2027 (grades 7–12 contest window)',
+    deadlineIso: '2027-02-11T08:00:00-05:00',
+    detailNote: 'Ask your French teacher to register you before the window opens; make-up days are April 8 and 9, 2027',
+    timeCommitment: 'Online exam during the spring window',
+    icon: Icons.translate,
+  ),
+  _competition(
+    id: 'vfw_voice_of_democracy',
+    title: 'VFW Voice of Democracy Audio-Essay Contest',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Submit through a local VFW Post',
+    majorTags: ['writing', 'public_speaking', 'civics', 'history'],
+    applicationInfo: 'Grades 9–12 students submit a recorded essay (3–5 minutes) to a participating local VFW Post.',
+    description: 'Write and record a 3–5 minute audio essay on the year’s patriotic theme for a share of more than $1.6 million in scholarships',
+    url: 'https://www.vfw.org/community/youth-and-education/youth-scholarships',
+    deadline: 'October 31, 2026 at midnight (entry to your local VFW Post)',
+    deadlineIso: '2026-10-31T23:59:00-04:00',
+    detailNote: 'Download the 2026–27 entry form and find your sponsoring local VFW Post on the official page. The national winner receives a $35,000 scholarship',
+    timeCommitment: 'One recorded essay',
+    icon: Icons.mic_none_outlined,
+    alsoFields: ['essay_writing'],
+  ),
+  _competition(
+    id: 'american_legion_oratorical',
+    title: 'American Legion National Oratorical Contest',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Local, state, and national rounds; finals at Hillsdale College, Michigan',
+    majorTags: ['public_speaking', 'civics', 'constitutional_law', 'history'],
+    applicationInfo: 'High school students under 20 enter through a local American Legion post or their state’s department.',
+    description: 'Deliver a memorized 8–10 minute oration on the U.S. Constitution, then an extemporaneous speech, advancing from local contests to the national finals',
+    url: 'https://www.legion.org/get-involved/youth-programs/oratorical-contest',
+    detailNote: 'Local and state contests run in winter, and the national finals are held in May. Contact your state American Legion department for its entry date',
+    timeCommitment: 'Prepared oration plus an assigned topic speech',
+    icon: Icons.mic_none_outlined,
+  ),
+  _competition(
+    id: 'princeton_prize_race_relations',
+    title: 'Princeton Prize in Race Relations',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online application; regional award events',
+    majorTags: ['social_impact', 'civics', 'sociology', 'advocacy'],
+    applicationInfo: 'High school students who have led an initiative that advances racial equity in their school or community apply online.',
+    description: 'Earn recognition and a cash award for leading a project that improves race relations in your school or community',
+    url: 'https://pprize.princeton.edu/apply',
+    detailNote: 'The online application usually closes in early January. Check the apply page for the current cycle’s deadline and regional eligibility',
+    timeCommitment: 'Online application about your initiative',
+    icon: Icons.volunteer_activism_outlined,
+  ),
+  _competition(
+    id: 'aahsff',
+    title: 'All American High School Film Festival',
+    field: 'humanities',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Online submission; festival in New York City',
+    majorTags: ['film_prod', 'digital_media', 'documentary'],
+    applicationInfo: 'High school filmmakers submit short films online in the festival’s categories.',
+    description: 'Submit your short film to the largest high school film festival in the country and compete for scholarships and awards',
+    url: 'https://www.hsfilmfest.com/',
+    detailNote: 'Film submissions typically close in late spring or summer before the fall festival in New York City',
+    timeCommitment: 'Short film submission',
+    icon: Icons.movie_creation_outlined,
+  ),
+  _competition(
+    id: 'jshs',
+    title: 'Junior Science and Humanities Symposium (JSHS)',
+    field: 'science',
+    scope: 'national',
+    format: 'hybrid',
+    locationNote: 'Regional symposia, then the national symposium',
+    majorTags: ['research', 'science', 'engineering', 'science_communication'],
+    applicationInfo: 'High school students submit an original research paper to their regional JSHS; top presenters advance to nationals.',
+    description: 'Present original STEM research as a paper and talk at a regional symposium for scholarships and a chance at the national JSHS',
+    url: 'https://www.jshs.org/',
+    detailNote: 'Each regional symposium sets its own paper deadline, usually in January or February. Use the official site to find your region',
+    timeCommitment: 'Research paper and oral or poster presentation',
+    icon: Icons.science_outlined,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'first_tech_challenge',
+    title: 'FIRST Tech Challenge',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'League meets and qualifiers near you',
+    majorTags: ['engineering', 'robotics', 'cs', 'design'],
+    applicationInfo: 'Teams of up to 15 students in grades 7–12 register through a coach or mentor.',
+    description: 'Design, build, and code a mid-sized robot with your team to compete in alliance matches at league and championship events',
+    url: 'https://www.firstinspires.org/programs/ftc/',
+    detailNote: 'The season game is released in September and qualifying events run through the winter. Use FIRST’s event finder for local dates',
+    timeCommitment: 'Season-long team program',
+    icon: Icons.precision_manufacturing_outlined,
+  ),
+  _competition(
+    id: 'vex_robotics_competition',
+    title: 'VEX Robotics Competition (V5RC)',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Local tournaments, state championships, and VEX Worlds',
+    majorTags: ['engineering', 'robotics', 'cs', 'design'],
+    applicationInfo: 'School or community teams register with the REC Foundation and enter local tournaments.',
+    description: 'Build and program a robot for the season’s game and compete at tournaments that qualify teams to state championships and VEX Worlds',
+    url: 'https://recf.org/',
+    detailNote: 'The game is revealed each spring; local events run from fall through early spring. Find events on RobotEvents',
+    timeCommitment: 'Season-long team program',
+    icon: Icons.precision_manufacturing_outlined,
+  ),
+  _competition(
+    id: 'national_mock_trial',
+    title: 'National High School Mock Trial Championship',
+    field: 'humanities',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'State competitions; 2027 nationals in St. Louis, Missouri',
+    majorTags: ['prelaw', 'law_general', 'public_speaking', 'civics'],
+    applicationInfo: 'School teams compete in their state’s mock trial program; each state champion advances to nationals.',
+    description: 'Play attorneys and witnesses in a full courtroom trial against other schools, from local rounds to the national championship',
+    url: 'https://www.nationalmocktrial.org/',
+    deadline: 'May 13–15, 2027 (national championship)',
+    deadlineIso: '2027-05-13T08:00:00-05:00',
+    detailNote: 'Teams qualify by winning their state mock trial competition, which usually runs from January through March. Courtroom artist and journalist contests are also offered',
+    timeCommitment: 'Season of practice and trials',
+    icon: Icons.gavel,
+    alsoFields: ['polisci'],
+  ),
+  _competition(
+    id: 'world_scholars_cup',
+    title: 'World Scholar’s Cup',
+    field: 'humanities',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Regional rounds worldwide, then Global Rounds and the Tournament of Champions',
+    majorTags: ['debate', 'writing', 'history', 'science', 'art'],
+    applicationInfo: 'Teams of three students aged 10–18 register for the nearest regional round.',
+    description: 'Debate, write, and quiz with a team of three across a yearly interdisciplinary theme, advancing from regional rounds to Global Rounds and Yale',
+    url: 'https://www.scholarscup.org/',
+    detailNote: 'Regional rounds run throughout the year; each round has its own registration page. Senior division is for students born in or before the cutoff year listed on the site',
+    timeCommitment: 'Weekend regional round; optional global events',
+    icon: Icons.groups_outlined,
+    alsoFields: ['science', 'essay_writing'],
+  ),
+  _competition(
+    id: 'nasa_techrise',
+    title: 'NASA TechRise Student Challenge',
+    field: 'engineering',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online proposal; winning experiments fly on a high-altitude balloon',
+    majorTags: ['aerospace', 'engineering', 'space', 'cs'],
+    applicationInfo: 'Teams of grades 6–12 students at U.S. schools; a teacher or school employee submits the proposal.',
+    description: 'Design an experiment to fly on a NASA-sponsored high-altitude balloon; 60 winning teams get $1,500 and a flight kit to build it',
+    url: 'https://www.futureengineers.org/nasatechrise',
+    deadline: 'November 2, 2026 at 11:59 PM PT (team proposals)',
+    deadlineIso: '2026-11-02T23:59:00-08:00',
+    detailNote: 'Winners are announced January 19, 2027 and build their experiments through summer 2027',
+    timeCommitment: 'Proposal now; build period if selected',
+    icon: Icons.rocket_launch_outlined,
+    alsoFields: ['science'],
+  ),
+  _competition(
+    id: 'world_series_paradigm',
+    title: 'Paradigm Challenge (Project Paradigm)',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['innovation', 'social_impact', 'public_health', 'design'],
+    applicationInfo: 'Students ages 4–18 enter individually or in teams with an original idea for the year’s challenge topic.',
+    description: 'Propose an original solution to the year’s challenge (currently improving personal health through wellness and healing) for prizes up to $100,000',
+    url: 'https://www.projectparadigm.org/',
+    detailNote: 'The entry deadline is posted on the official challenge page; recent cycles closed in early spring',
+    timeCommitment: 'Self-paced project',
+    icon: Icons.lightbulb_outline,
+    alsoFields: ['engineering'],
+  ),
+  _competition(
+    id: 'peya',
+    title: 'President’s Environmental Youth Award (PEYA)',
+    field: 'env_sci',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online application through the EPA',
+    majorTags: ['environmental_science', 'sustainability', 'social_impact'],
+    applicationInfo: 'K–12 students (individuals or groups) who completed an environmental project apply with an adult sponsor.',
+    description: 'Earn national EPA recognition for an environmental stewardship project you designed and led in your community',
+    url: 'https://www.epa.gov/education/presidents-environmental-youth-award',
+    detailNote: 'The most recent application deadline was January 16, 2026; the next cycle’s date will be posted on the EPA page',
+    timeCommitment: 'Project you have already completed',
+    icon: Icons.eco_outlined,
+    alsoFields: ['science'],
+  ),
+  _competition(
+    id: 'destination_imagination',
+    title: 'Destination Imagination',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Regional and state tournaments, then Global Finals',
+    majorTags: ['engineering', 'innovation', 'design', 'performing_arts'],
+    applicationInfo: 'Teams of up to seven students register through a school or community team manager in their DI affiliate.',
+    description: 'Solve an open-ended technical, scientific, fine-arts, or engineering challenge as a team and present it at tournaments, plus a surprise instant challenge',
+    url: 'https://www.destinationimagination.org/',
+    detailNote: 'Challenges are released in the fall; affiliate tournaments run from February to April before Global Finals in May',
+    timeCommitment: 'Season-long team project',
+    icon: Icons.lightbulb_outline,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'future_problem_solving',
+    title: 'Future Problem Solving Program International',
+    field: 'humanities',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Affiliate competitions, then the International Conference',
+    majorTags: ['public_policy', 'social_impact', 'writing', 'logic'],
+    applicationInfo: 'Students join through a school coach and their state or national FPS affiliate.',
+    description: 'Use a six-step creative problem-solving process to analyze future scenarios on global issues, individually or in teams',
+    url: 'https://www.fpspi.org/',
+    detailNote: 'Practice problems run during the fall and winter; qualifying problems lead to affiliate bowls in spring and the International Conference in June',
+    timeCommitment: 'Season of practice and qualifying problems',
+    icon: Icons.psychology_alt_outlined,
+  ),
+  _competition(
+    id: 'sigma_xi_srs',
+    title: 'Sigma Xi Student Research Showcase',
+    field: 'science',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['research', 'science_communication', 'science', 'engineering'],
+    applicationInfo: 'High school, undergraduate, and graduate students register to present completed or in-progress research.',
+    description: 'Present your research online through a website, abstract, and video, and get feedback and awards from scientist judges in a dedicated high school division',
+    url: 'https://www.sigmaxi.org/meetings-events/student-research-showcase',
+    detailNote: 'The 2026 showcase ran online April 12–26, 2026; registration for the next showcase usually opens in winter',
+    timeCommitment: 'Online presentation over two weeks',
+    icon: Icons.science_outlined,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'seaperch_challenge',
+    title: 'International SeaPerch Challenge',
+    field: 'engineering',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Regional qualifiers, then the international challenge',
+    majorTags: ['engineering', 'robotics', 'marine_science'],
+    applicationInfo: 'Middle and high school teams build a SeaPerch ROV kit and qualify at a regional event.',
+    description: 'Build an underwater remotely operated vehicle from a kit and compete in obstacle and mission courses at regional and international events',
+    url: 'https://seaperch.org/',
+    deadline: 'June 5–6, 2027 (International SeaPerch Challenge)',
+    deadlineIso: '2027-06-05T08:00:00-04:00',
+    detailNote: 'Teams must qualify at a regional SeaPerch competition during the spring',
+    timeCommitment: 'Season-long team build',
+    icon: Icons.waves,
+  ),
+  _competition(
+    id: 'kenyon_grodd_prize',
+    title: 'Kenyon Review Patricia Grodd Poetry Prize for Young Writers',
+    field: 'english',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['poetry', 'creative_writing', 'english'],
+    applicationInfo: 'High school sophomores and juniors anywhere in the world; one poem per student, free to enter.',
+    description: 'Submit one poem to The Kenyon Review’s free contest; the winner is published in the magazine and receives a full scholarship to a Young Writers workshop',
+    url: 'https://kenyonreview.org/submit/patricia-grodd/',
+    deadline: 'November 30, 2026 at 11:59 PM ET (submissions open November 1)',
+    deadlineIso: '2026-11-30T23:59:00-05:00',
+    detailNote: 'Submissions are accepted only from November 1 through November 30 each year. Winners are announced in March',
+    timeCommitment: 'One poem',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'adroit_prizes',
+    title: 'Adroit Prizes for Poetry and Prose',
+    field: 'english',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['poetry', 'creative_writing', 'english'],
+    applicationInfo: 'Secondary and undergraduate students submit up to five poems or prose pieces.',
+    description: 'Send poetry or fiction and creative nonfiction to The Adroit Journal’s student prizes, judged by acclaimed writers, for publication and a cash award',
+    url: 'https://theadroitjournal.org/adroit-prizes/',
+    detailNote: 'The 2026 window ran April 1 to May 12. Expect the 2027 window to open in early spring',
+    timeCommitment: 'Up to five poems or 3,500 words of prose',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'ayn_rand_essay_contests',
+    title: 'Ayn Rand Institute Essay Contests',
+    field: 'english',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['philosophy', 'writing', 'english', 'literature'],
+    applicationInfo: 'Anthem and The Fountainhead contests are open to students 13 and older; Atlas Shrugged is open to high school through graduate students.',
+    description: 'Write an essay responding to prompts on one of Ayn Rand’s novels for scholarship prizes of up to $25,000',
+    url: 'https://aynrand.org/students/essay-contests/',
+    detailNote: 'Each contest posts its own prompts and deadline on the official page; read the novel before choosing a prompt',
+    timeCommitment: 'One essay per contest',
+    icon: Icons.edit_note,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'sejong_sijo_competition',
+    title: 'Sejong Writing Competition (Sijo Poetry)',
+    field: 'english',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online submission (United States and Canada)',
+    majorTags: ['poetry', 'creative_writing', 'languages'],
+    applicationInfo: 'Students in the United States and Canada write an original sijo, a traditional Korean poetic form, in English.',
+    description: 'Learn the three-line Korean sijo form and submit an original English sijo for cash prizes from the Sejong Cultural Society',
+    url: 'https://www.sejongculturalsociety.org/writing/',
+    detailNote: 'The 2026 deadline was February 28, 2026 at 11:59 PM CT. The essay category was discontinued in 2026; the sijo category continues',
+    timeCommitment: 'One short poem',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'dna_day_essay',
+    title: 'ASHG DNA Day Essay Contest',
+    field: 'biology',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['genetics', 'biology', 'writing', 'medicine'],
+    applicationInfo: 'Students in grades 9–12 worldwide submit an essay through a teacher.',
+    description: 'Write a well-reasoned essay answering the American Society of Human Genetics’ yearly genetics question, scored by geneticists over three rounds',
+    url: 'https://www.ashg.org/dna-day/',
+    detailNote: 'The 2027 question and deadline will be posted on the ASHG page; recent contests closed in early March ahead of DNA Day (April 25)',
+    timeCommitment: 'One 750-word essay',
+    icon: Icons.biotech_outlined,
+    alsoFields: ['essay_writing'],
+  ),
+  _competition(
+    id: 'young_composers_challenge',
+    title: 'National Young Composers Challenge',
+    field: 'music',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online submission; winning works performed by a professional orchestra',
+    majorTags: ['music', 'composition', 'art'],
+    applicationInfo: 'Composers ages 13–18 submit an original orchestral or ensemble score.',
+    description: 'Submit an original composition for orchestra or ensemble; winners hear their piece performed and recorded by professional musicians',
+    url: 'https://www.youngcomposerschallenge.org/',
+    detailNote: 'Check the official site for this year’s submission window and instrumentation rules',
+    timeCommitment: 'One original composition',
+    icon: Icons.music_note_outlined,
+  ),
+  _competition(
+    id: 'lowell_milken_unsung_heroes',
+    title: 'Lowell Milken Center Unsung Heroes Competitions (Discovery Award and ARTEFFECT)',
+    field: 'humanities',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['history', 'art', 'writing', 'social_impact'],
+    applicationInfo: 'Students research an unsung hero from history and submit a project (Discovery Award) or an original artwork with an artist statement (ARTEFFECT).',
+    description: 'Research an overlooked historical figure who made a positive difference and present them through a project, documentary, website, or artwork',
+    url: 'https://www.lowellmilkencenter.org/',
+    detailNote: 'The 2026–27 ARTEFFECT competition is open now. Each competition posts its own entry deadline, usually in late winter or early spring',
+    timeCommitment: 'Self-paced research project',
+    icon: Icons.history_edu_outlined,
+    alsoFields: ['essay_writing', 'history'],
+  ),
+  _competition(
+    id: 'solar_car_challenge',
+    title: 'Solar Car Challenge',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Texas Motor Speedway area (annual cross-country or track event)',
+    majorTags: ['engineering', 'physics', 'sustainability', 'design'],
+    applicationInfo: 'High school teams register through their school and build a road-worthy solar car over one or more years.',
+    description: 'Design, build, and race a solar-powered car with your high school team in a multi-day endurance event',
+    url: 'https://www.solarcarchallenge.org/challenge/',
+    detailNote: 'The event is held each July; teams register and pass inspection requirements during the school year',
+    timeCommitment: 'Multi-year team build',
+    icon: Icons.solar_power_outlined,
+  ),
+  _competition(
+    id: 'invention_convention_worldwide',
+    title: 'Invention Convention Worldwide',
+    field: 'engineering',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Local, regional, and national invention conventions (The Henry Ford)',
+    majorTags: ['engineering', 'innovation', 'entrepreneurship', 'design'],
+    applicationInfo: 'K–12 students enter an invention at a local or affiliate convention; winners advance to nationals.',
+    description: 'Identify a real problem, invent a solution, build a prototype, and pitch it at local and national invention conventions',
+    url: 'https://inhub.thehenryford.org/icw/home',
+    detailNote: 'Affiliate competitions run from winter through spring, and the national event is held in early summer. Find your affiliate on the official site',
+    timeCommitment: 'Self-paced invention project',
+    icon: Icons.lightbulb_outline,
+  ),
+  _competition(
+    id: 'im2c',
+    title: 'International Mathematical Modeling Challenge (IM²C)',
+    field: 'math',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online; teams work at school',
+    majorTags: ['math', 'modeling', 'statistics', 'applied_math'],
+    applicationInfo: 'Teams of up to four high school students with a faculty advisor register through COMAP for the U.S. round.',
+    description: 'Spend five consecutive days modeling an open-ended real-world problem with your team and write a full solution report',
+    url: 'https://immchallenge.org/',
+    deadline: 'February 1, 2027 (contest season begins)',
+    deadlineIso: '2027-02-01T00:00:00-05:00',
+    detailNote: 'Teams choose any five consecutive days in the contest window to complete their report. Top U.S. papers advance to the international round',
+    timeCommitment: 'Five consecutive days',
+    icon: Icons.functions,
+  ),
+  _competition(
+    id: 'investwrite',
+    title: 'SIFMA Foundation InvestWrite Essay Competition',
+    field: 'business',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online submission through a Stock Market Game advisor',
+    majorTags: ['finance', 'economics', 'writing', 'investment'],
+    applicationInfo: 'Grades 4–12 students participating in The Stock Market Game write an essay; advisors submit the best entries.',
+    description: 'Write an essay applying what you learned in The Stock Market Game to a real-world investing scenario for national recognition',
+    url: 'https://sifmafoundation.org/investwrite/',
+    detailNote: 'Fall and spring essay rounds are tied to Stock Market Game sessions; check the official rules for this session’s due date',
+    timeCommitment: 'One essay',
+    icon: Icons.trending_up,
+    alsoFields: ['essay_writing'],
+  ),
+  _competition(
+    id: 'nffty',
+    title: 'NFFTY (National Film Festival for Talented Youth)',
+    field: 'humanities',
+    scope: 'international',
+    format: 'hybrid',
+    locationNote: 'Seattle, Washington (festival); online submission',
+    majorTags: ['film_prod', 'digital_media', 'documentary', 'art'],
+    applicationInfo: 'Filmmakers age 24 and under (including high school students) submit films through FilmFreeway.',
+    description: 'Submit your short film or screenplay to the world’s largest youth film festival, held right here in Seattle',
+    url: 'https://www.nffty.org/submit',
+    deadline: 'October 30, 2026 (regular submission deadline)',
+    deadlineIso: '2026-10-30T23:59:00-07:00',
+    detailNote: 'Final deadline: December 11, 2026 (higher fee). NFFTY’s 20th festival runs April 1–4, 2027 in Seattle',
+    timeCommitment: 'Short film or screenplay submission',
+    icon: Icons.movie_creation_outlined,
+  ),
+  _competition(
+    id: 'codeday',
+    title: 'CodeDay',
+    field: 'cs',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Weekend events in cities including Seattle',
+    majorTags: ['cs', 'app_dev', 'design', 'game_dev'],
+    applicationInfo: 'Students of any experience level sign up for an event in their city; beginners are welcome.',
+    description: 'Spend 24 hours building an app or game with a team at a beginner-friendly student hackathon, with mentors and demos at the end',
+    url: 'https://www.codeday.org/',
+    detailNote: 'CodeDay was founded in Seattle and runs seasonal weekend events; check the site for the next event near you',
+    timeCommitment: '24-hour weekend event',
+    icon: Icons.computer,
+  ),
+  _competition(
+    id: 'national_german_exam',
+    title: 'National German Exam (AATG)',
+    field: 'languages',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online at your school',
+    majorTags: ['languages', 'german'],
+    applicationInfo: 'High school German students are registered by an AATG-member teacher.',
+    description: 'Take the online National German Exam to measure your reading and listening skills and compete for awards and a study trip to Germany',
+    url: 'https://www.aatg.org/',
+    detailNote: 'Teachers register students during the winter for a testing window that usually runs from December to January',
+    timeCommitment: 'Online exam',
+    icon: Icons.translate,
+  ),
+  _competition(
+    id: 'optimist_essay_contest',
+    title: 'Optimist International Essay Contest',
+    field: 'english',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Submit through a local Optimist Club',
+    majorTags: ['writing', 'english', 'creative_writing'],
+    applicationInfo: 'Students under 19 who have not graduated high school write a 700–800 word essay for a local Optimist Club.',
+    description: 'Write an essay on the 2026–27 topic, “Finding My Voice in a World Full of Noise,” and compete for district scholarships of $2,500',
+    url: 'https://www.optimist.org/member/scholarships3.cfm',
+    detailNote: 'Each sponsoring Optimist Club sets its own deadline, and all club contests finish by early February. Contact your local club',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'jasna_essay_contest',
+    title: 'JASNA Jane Austen Essay Contest',
+    field: 'english',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['english', 'literature', 'writing'],
+    applicationInfo: 'High school, college, and graduate students enter in separate divisions; membership is not required.',
+    description: 'Write a literary essay on the year’s Jane Austen topic for scholarship prizes from the Jane Austen Society of North America',
+    url: 'https://jasna.org/programs/essay-contest/',
+    detailNote: 'The 2027 topic will be posted in November 2026 and submissions open February 2027. The 2026 deadline was June 1',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'ncwit_aic_award',
+    title: 'NCWIT Aspirations in Computing High School Award',
+    field: 'cs',
+    scope: 'national',
+    format: 'virtual',
+    locationNote: 'Online application',
+    majorTags: ['cs', 'technology', 'leadership', 'social_impact'],
+    applicationInfo: 'Students in grades 9–12 who identify as women, genderqueer, or non-binary apply with an online application.',
+    description: 'Get recognized for your computing interests and achievements, join a national community of technologists, and compete for national and affiliate awards',
+    url: 'https://www.aspirations.org/award-programs/aic-high-school-award',
+    deadline: 'October 27, 2026 at 10:00 PM ET (application)',
+    deadlineIso: '2026-10-27T22:00:00-04:00',
+    detailNote: 'Optional educator endorsements are due November 5, 2026 at 10:00 PM ET',
+    timeCommitment: 'Online application',
+    icon: Icons.computer,
+    alsoFields: ['engineering'],
+  ),
+  _competition(
+    id: 'cubes_in_space',
+    title: 'Cubes in Space',
+    field: 'engineering',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online proposal; experiments fly with NASA',
+    majorTags: ['space', 'engineering', 'science', 'research'],
+    applicationInfo: 'Students ages 11–18 design an experiment in a small cube; an educator submits it.',
+    description: 'Design an experiment that fits in a 4 cm or 10 cm cube to launch on a NASA sounding rocket or scientific balloon',
+    url: 'https://www.cubesinspace.com/',
+    deadline: 'November 9, 2026 (registration and enrollment opens)',
+    deadlineIso: '2026-11-09T09:00:00-05:00',
+    detailNote: 'Selected experiments launch from NASA facilities in summer 2027 and are returned to students for analysis',
+    timeCommitment: 'Design and proposal during the school year',
+    icon: Icons.rocket_launch_outlined,
+    alsoFields: ['science'],
+  ),
+  _competition(
+    id: 'skillsusa_championships',
+    title: 'SkillsUSA Championships',
+    field: 'engineering',
+    scope: 'national',
+    format: 'in_person',
+    locationNote: 'Local, state, and national championships',
+    majorTags: ['engineering', 'cs', 'design', 'business'],
+    applicationInfo: 'Members of a school SkillsUSA chapter compete in career and technical contests.',
+    description: 'Compete in more than 100 hands-on contests, from robotics and cybersecurity to architectural drafting, video production, and job interviews',
+    url: 'https://www.skillsusa.org/competitions/',
+    detailNote: 'Students advance from regional and state contests in spring to the national championships in June',
+    timeCommitment: 'Season of local and state contests',
+    icon: Icons.handyman_outlined,
+  ),
+  _competition(
+    id: 'swift_student_challenge',
+    title: 'Apple Swift Student Challenge',
+    field: 'cs',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['cs', 'app_dev', 'design'],
+    applicationInfo: 'Students 13 or older (or the minimum age in their region) who are enrolled in school or an Apple developer program submit an app playground.',
+    description: 'Build an interactive app playground in Swift that can be experienced in three minutes; winners receive Apple prizes and recognition',
+    url: 'https://developer.apple.com/swift-student-challenge/',
+    detailNote: 'The submission window is usually announced in the fall and closes in late February; check Apple’s page for the 2027 dates',
+    timeCommitment: 'Self-paced app project',
+    icon: Icons.phone_iphone,
+  ),
+  _competition(
+    id: 'lockheed_codequest',
+    title: 'Lockheed Martin Code Quest',
+    field: 'cs',
+    scope: 'international',
+    format: 'in_person',
+    locationNote: 'Lockheed Martin sites and virtual events',
+    majorTags: ['cs', 'algorithms', 'problem_solving'],
+    applicationInfo: 'High school teams of two or three students register through a teacher for a nearby event.',
+    description: 'Solve timed programming problems as a team at a Lockheed Martin coding competition, meeting engineers along the way',
+    url: 'https://www.lockheedmartin.com/en-us/who-we-are/communities/codequest.html',
+    detailNote: 'Events run in spring at multiple sites; registration opens on the official page',
+    timeCommitment: 'One competition day',
+    icon: Icons.computer,
+  ),
+  _competition(
+    id: 'pulitzer_local_letters',
+    title: 'Pulitzer Center Local Letters for Global Change',
+    field: 'english',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['writing', 'journalism_media', 'civics', 'social_impact'],
+    applicationInfo: 'K–12 students write a letter to a decision-maker about a local issue connected to a global one.',
+    description: 'Write a persuasive letter to a public official or community leader about an issue in your community, informed by Pulitzer Center journalism',
+    url: 'https://pulitzercenter.org/builder/lesson/local-letters-global-change-pulitzer-center-writing-contest',
+    deadline: 'November 1, 2026 at 11:59 PM ET',
+    deadlineIso: '2026-11-01T23:59:00-05:00',
+    detailNote: 'Winners are invited to a virtual Pulitzer Center town hall in November to share their solutions',
+    timeCommitment: 'One letter',
+    icon: Icons.edit_note,
+    alsoFields: ['humanities'],
+  ),
+  _competition(
+    id: 'hieec',
+    title: 'Harvard International Economics Essay Contest (HIEEC)',
+    field: 'business',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['economics', 'writing', 'public_policy', 'finance'],
+    applicationInfo: 'High school students worldwide respond to one of the year’s economics prompts.',
+    description: 'Write an economics essay responding to prompts set by the Harvard Undergraduate Economics Association, with top essays published online',
+    url: 'https://www.thehuea.org/competitions/hieec',
+    detailNote: 'The 2026–27 prompts will be released in October–November, with the submission deadline in January and results in spring. Join the mailing list on the official page',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+    alsoFields: ['essay_writing'],
+  ),
+  _competition(
+    id: 'yris_essay_contest',
+    title: 'Yale Review of International Studies High School Essay Contest',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['international_relations', 'political_science', 'writing', 'history'],
+    applicationInfo: 'High school students worldwide respond to the annual international-affairs prompt.',
+    description: 'Write an essay on a current international-affairs question for Yale’s undergraduate international studies journal',
+    url: 'https://yris.yira.org/submission-guidelines/',
+    deadline: 'June 30, 2027 at 11:59 PM ET',
+    deadlineIso: '2027-06-30T23:59:00-04:00',
+    detailNote: 'The 2027 prompt will be posted in April 2027',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'princeton_legal_journal_essay',
+    title: 'Princeton Legal Journal High School Essay Contest',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['prelaw', 'constitutional_law', 'writing', 'public_policy'],
+    applicationInfo: 'High school students worldwide submit an essay on the year’s legal theme ($15 submission fee).',
+    description: 'Write a legal essay on the year’s theme for a chance to be published in the Princeton Legal Journal',
+    url: 'https://legaljournal.princeton.edu/high-school-essay-contest/',
+    detailNote: 'The 2026 theme was religious liberty in American law, with essays due May 15, 2026. Expect the 2027 theme in spring',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'columbia_political_review_essay',
+    title: 'Columbia Political Review High School Essay Contest',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['political_science', 'public_policy', 'writing', 'international_relations'],
+    applicationInfo: 'High school students submit an essay responding to the annual prompt.',
+    description: 'Propose bold solutions to a pressing political question in an essay judged by Columbia’s undergraduate political magazine',
+    url: 'https://www.cpreview.org/essay-contest',
+    detailNote: 'Check the contest page for the current prompt and deadline',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'gjia_essay_contest',
+    title: 'Georgetown Journal of International Affairs High School Essay Contest',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['international_relations', 'political_science', 'writing'],
+    applicationInfo: 'High school students submit an essay on the year’s international-affairs topic.',
+    description: 'Analyze a global political issue in an essay for Georgetown’s Walsh School of Foreign Service journal, with winners published online',
+    url: 'https://gjia.georgetown.edu/homepage/high-school-essay-contest/',
+    detailNote: 'Past contests have closed around March 1; the 2026–27 prompt will be posted on the official page',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'hir_writing_contest',
+    title: 'Harvard International Review Academic Writing Contest',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['international_relations', 'political_science', 'economics', 'writing'],
+    applicationInfo: 'High school students submit an essay on one of the contest’s international-affairs prompts (entry fee applies).',
+    description: 'Write a research-backed essay on global affairs for Harvard International Review’s seasonal contest, with gold, silver, and bronze medals',
+    url: 'https://hir.harvard.edu/contest',
+    detailNote: 'The contest runs in several seasonal rounds each year; check the official page for the current round’s deadline',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+  ),
+  _competition(
+    id: 'think_essay_prize',
+    title: 'Royal Institute of Philosophy Think Essay Prize',
+    field: 'humanities',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['philosophy', 'writing', 'ethics'],
+    applicationInfo: 'Students aged 16–18 (and school students in the final years) write on one of the set philosophy questions.',
+    description: 'Answer a set philosophy question in a short essay; the winner is published in the journal Think',
+    url: 'https://royalinstitutephilosophy.org/think-essay-prize/',
+    detailNote: 'The 2025/26 prize has closed; new questions are usually announced in the autumn',
+    timeCommitment: 'One essay',
+    icon: Icons.edit_note,
+    alsoFields: ['essay_writing'],
+  ),
+  _competition(
+    id: 'natgeo_slingshot',
+    title: 'National Geographic Slingshot Challenge',
+    field: 'env_sci',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online video submission',
+    majorTags: ['environmental_science', 'sustainability', 'innovation', 'film_prod'],
+    applicationInfo: 'Young people ages 13–18 worldwide submit individually or in teams.',
+    description: 'Record a 90-second video pitching your idea to solve an environmental problem for a chance at up to $10,000',
+    url: 'https://www.nationalgeographic.org/explore/programs/slingshot/',
+    deadline: 'February 5, 2027 (video submissions)',
+    deadlineIso: '2027-02-05T23:59:00-05:00',
+    detailNote: 'Free info sessions and office hours run through January 2027; see the Challenge Materials page for the schedule',
+    timeCommitment: 'Short video pitch',
+    icon: Icons.eco_outlined,
+    alsoFields: ['science'],
+  ),
+  _competition(
+    id: 'science_without_borders',
+    title: 'Science Without Borders Challenge (Living Oceans Foundation)',
+    field: 'env_sci',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['marine_science', 'art', 'environmental_science', 'ecology'],
+    applicationInfo: 'Students ages 11–19 worldwide submit original two-dimensional artwork on the year’s ocean-conservation theme.',
+    description: 'Create original art that inspires people to protect the ocean, competing for scholarships in the international student art contest',
+    url: 'https://www.livingoceansfoundation.org/science-without-borders-challenge/',
+    deadline: 'March 1, 2027 at 11:59 PM ET',
+    deadlineIso: '2027-03-01T23:59:00-05:00',
+    detailNote: 'New this year: upload two in-progress photos of yourself creating the artwork to verify it is your own work',
+    timeCommitment: 'One original artwork',
+    icon: Icons.palette_outlined,
+    alsoFields: ['science', 'humanities'],
+  ),
+  _competition(
+    id: 'world_of_8_billion',
+    title: 'World of 8 Billion Student Video Contest',
+    field: 'env_sci',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online submission',
+    majorTags: ['environmental_science', 'public_policy', 'film_prod', 'sociology'],
+    applicationInfo: 'Middle and high school students worldwide create a short video individually or in teams of up to three.',
+    description: 'Make a 60-second, solution-focused video linking population growth to city planning, extreme weather, or fresh water use',
+    url: 'https://populationeducation.org/curriculum-and-resources/world-of-8-billion-student-video-contest/',
+    deadline: 'March 3, 2027 (video submissions)',
+    deadlineIso: '2027-03-03T23:59:00-05:00',
+    detailNote: 'Submissions opened September 2, 2026. Full rules are on worldof8billion.org',
+    timeCommitment: '60-second video',
+    icon: Icons.movie_creation_outlined,
+    alsoFields: ['science', 'humanities'],
+  ),
+  _competition(
+    id: 'project_green_challenge',
+    title: 'Project Green Challenge (Turning Green)',
+    field: 'env_sci',
+    scope: 'international',
+    format: 'virtual',
+    locationNote: 'Online',
+    majorTags: ['environmental_science', 'sustainability', 'social_impact'],
+    applicationInfo: 'High school through graduate students worldwide sign up and complete daily challenges.',
+    description: 'Complete 30 days of environmental-action challenges in October, with finalists invited to an eco-summit and prizes for the top projects',
+    url: 'https://projectgreenchallenge.com/',
+    deadline: 'October 30, 2026 (final daily challenge)',
+    deadlineIso: '2026-10-30T23:59:00-07:00',
+    detailNote: 'PGC runs October 1–30, 2026; a new challenge is posted every day at 8 AM PT, so you can still join partway through',
+    timeCommitment: 'Daily challenges for one month',
+    icon: Icons.eco_outlined,
+    alsoFields: ['science'],
   ),
 
   // ===========================================================================
@@ -3219,6 +4327,7 @@ final List<Resource> _catalogResources = [
     apSubCategory: 'arts',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
+    alsoApSubCategories: ['history'],
   ),
   const Resource(
     id: 'ap_music_theory',
@@ -3381,6 +4490,7 @@ final List<Resource> _catalogResources = [
     apSubCategory: 'history',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
+    alsoApSubCategories: ['science'],
   ),
   const Resource(
     id: 'ap_macro',
@@ -3473,6 +4583,7 @@ final List<Resource> _catalogResources = [
     apSubCategory: 'science',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
+    alsoApSubCategories: ['history'],
   ),
   const Resource(
     id: 'ap_us_gov',
@@ -4209,6 +5320,7 @@ final List<Resource> _catalogResources = [
     apSubCategory: 'career',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
+    alsoApSubCategories: ['history'],
   ),
   const Resource(
     id: 'ap_cybersecurity',
@@ -4229,6 +5341,7 @@ final List<Resource> _catalogResources = [
     apSubCategory: 'cs',
     detailNote:
         'The 2027 assessment date was not published when checked. Confirm the date on College Board before planning travel or testing.',
+    alsoApSubCategories: ['career'],
   ),
 
   // ===========================================================================
@@ -4519,6 +5632,45 @@ final List<Resource> _catalogResources = [
     icon: Icons.psychology_outlined,
     url: 'https://www.larrylearns.com/',
     links: ['Larry Learns SAT'],
+  ),
+  const Resource(
+    id: 'satvocab_site',
+    title: 'SATVocab',
+    category: 'sat',
+    field: 'english',
+    testSection: 'reading_writing',
+    majorTags: ['vocab', 'english'],
+    description:
+        'Free daily 10-word rounds, games, and a searchable dictionary of SAT vocabulary with spaced review',
+    icon: Icons.abc,
+    url: 'https://www.satvocab.com/',
+    links: ['SATVocab'],
+  ),
+  const Resource(
+    id: 'scholarhack_vocab',
+    title: 'ScholarHack SAT Vocabulary',
+    category: 'sat',
+    field: 'english',
+    testSection: 'reading_writing',
+    majorTags: ['vocab', 'english'],
+    description:
+        'Free SAT vocabulary quizzes, word challenges, head-to-head duels, and prefix-and-root word building, with an iPhone app',
+    icon: Icons.abc,
+    url: 'https://scholarhack.com/',
+    links: ['ScholarHack'],
+  ),
+  const Resource(
+    id: 'studyarcade_app',
+    title: 'StudyArcade (iPhone app)',
+    category: 'sat',
+    field: 'english',
+    testSection: 'reading_writing',
+    majorTags: ['vocab', 'english'],
+    description:
+        'Paste any SAT vocab list and turn it into word hunts, memory games, and quizzes; free on iPhone and iPad',
+    icon: Icons.sports_esports_outlined,
+    url: 'https://www.studyarcade.app/',
+    links: ['StudyArcade'],
   ),
   const Resource(
     id: 'critical_reader_sat',
@@ -5975,6 +7127,86 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The journal says there are no submission, publication, or editorial fees. Its submission page was last updated in 2024, so confirm the form is still active before investing substantial time',
   ),
+  // Journals, magazines, and research conferences added October 2026
+  _researchJournal(
+    id: 'curieux_academic_journal',
+    title: 'Curieux Academic Journal',
+    field: 'all',
+    scope: 'national',
+    majorTags: ['science', 'humanities', 'social_science', 'english', 'history', 'biology', 'cs', 'economics'],
+    applicationInfo: 'Middle and high school students submit original research papers or essays in any academic subject.',
+    description: 'Publish an original research paper or essay in any subject, from biology to history, and work with student editors to revise it',
+    url: 'https://www.curieuxacademicjournal.com/',
+    detailNote: 'Curieux is a student-run journal that accepts work from the sciences and humanities and publishes on a rolling basis',
+    alsoFields: ['humanities', 'science'],
+  ),
+  _researchJournal(
+    id: 'the_schola',
+    title: 'The Schola',
+    field: 'humanities',
+    scope: 'international',
+    majorTags: ['humanities', 'history', 'philosophy', 'english', 'social_science', 'political_science', 'economics'],
+    applicationInfo: 'High school students submit long-form essays in the humanities and social sciences; review the fee policy on the site.',
+    description: 'Submit a rigorous humanities or social-science essay to a quarterly journal that rewards clear argument and independent thinking',
+    url: 'https://theschola.org/',
+    detailNote: 'Volume 10, Issue III was published in September 2026. Read the submission guidelines and fee policy before submitting',
+  ),
+  _researchJournal(
+    id: 'teen_ink',
+    title: 'Teen Ink',
+    field: 'english',
+    scope: 'national',
+    majorTags: ['creative_writing', 'poetry', 'journalism_media', 'art', 'english'],
+    applicationInfo: 'Teens ages 13–19 submit writing, art, and photos online for free.',
+    description: 'Publish poetry, fiction, nonfiction, reviews, and art in a long-running magazine written entirely by teens, and enter its monthly contests',
+    url: 'https://www.teenink.com/',
+    detailNote: 'Current contests include a National Essay Contest (“If I Were Mayor of My Town…”) and a cover art contest; see the Contests page',
+  ),
+  _researchJournal(
+    id: 'polyphony_lit',
+    title: 'Polyphony Lit',
+    field: 'english',
+    scope: 'international',
+    majorTags: ['creative_writing', 'poetry', 'english'],
+    applicationInfo: 'High school students worldwide submit poetry, fiction, and creative nonfiction, or apply to join the editorial staff.',
+    description: 'Submit creative writing to a global literary magazine run by high school editors, and get written feedback on every submission',
+    url: 'https://www.polyphonylit.org/',
+    detailNote: 'Polyphony also offers editing apprenticeships and the Claudia Ann Seaman Awards for young writers',
+  ),
+  _researchJournal(
+    id: 'blue_marble_review',
+    title: 'Blue Marble Review',
+    field: 'english',
+    scope: 'international',
+    majorTags: ['creative_writing', 'poetry', 'art', 'english'],
+    applicationInfo: 'Young writers and artists (roughly ages 13–20) submit fiction, nonfiction, poetry, or art online.',
+    description: 'Send flash fiction, essays, opinion pieces, up to three poems, or artwork to a quarterly literary journal for young writers',
+    url: 'https://bluemarblereview.com/',
+    detailNote: 'Submissions are currently open; prose pieces are up to 1,500 words',
+  ),
+  _researchJournal(
+    id: 'parabola_math_journal',
+    title: 'Parabola (UNSW Mathematics Journal)',
+    field: 'math',
+    scope: 'international',
+    majorTags: ['math', 'problem_solving', 'research'],
+    applicationInfo: 'Students and anyone who enjoys mathematics submit articles, problems, and solutions.',
+    description: 'Write up an original mathematical exploration or solve published problems in an open-access math journal for and by students, published since 1964',
+    url: 'https://www.parabola.unsw.edu.au/',
+    detailNote: 'Parabola is a free, open-access journal from UNSW Sydney; see the Contribute page for article guidelines',
+  ),
+  _researchConference(
+    id: 'polygence_symposium',
+    title: 'Polygence Symposium of Rising Scholars',
+    field: 'all',
+    scope: 'national',
+    majorTags: ['research', 'science', 'humanities', 'science_communication'],
+    applicationInfo: 'High school researchers apply to present a completed research project; check eligibility on the official page.',
+    description: 'Present your research to an audience at a free virtual academic conference for high school students across the sciences and humanities',
+    url: 'https://www.polygence.org/symposium',
+    detailNote: 'The fall 2026 symposium was held online September 26, 2026; applications for the next symposium open several months ahead',
+    alsoFields: ['humanities', 'science'],
+  ),
   const Resource(
     id: 'wssef_2027',
     title: 'Washington State Science & Engineering Fair (WSSEF)',
@@ -7097,6 +8329,8 @@ final List<Resource> allResources = List.unmodifiable(
         !resource.title.toLowerCase().contains('running start') &&
         resource.id != 'wa_running_start_directory' &&
         resource.id != 'young_researcher_journal',
+        resource.id != 'andover_computing_open',
+        resource.id != 'npr_student_podcast',
   ),
 );
 
@@ -8285,6 +9519,146 @@ const Map<String, Map<String, String>> _recentOfficialApTests = {
   },
 };
 
+/// Newer (2019 and later) full or multiple-choice practice exams found on
+/// Scribd in October 2026. Each was checked for page count and description so
+/// only MCQ or MCQ + FRQ exams are listed (FRQ-only files are excluded).
+const Map<String, Map<String, String>> _newerScribdApTests = {
+  'ap_calc_bc': {
+    'Practice test · Scribd · 2022 AP Calculus AB/BC international exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/1012511240/2022-Calculus-BC',
+    'Practice test · Scribd · 2019 AP Calculus BC MCQ, Part A':
+        'https://www.scribd.com/document/856424266/AP-CALCULUS-BC-2019-MCQ-PART-A',
+  },
+  'ap_calc_ab': {
+    'Practice test · Scribd · 2022 AP Calculus AB/BC international exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/1012511240/2022-Calculus-BC',
+    'Practice test · Scribd · 2019 College Board AP Calculus AB practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/1034103805/AP-Calculus-Ab-2019-Practice-Exam-Released-Version-for-Prep',
+    'Practice test · Scribd · 2020 College Board AP Calculus AB practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/859724863/AP-Calculus-AB-Practice-Exam-2',
+    'Practice test · Scribd · 2020 AP Calculus AB exam booklet (MCQ + FRQ)':
+        'https://www.scribd.com/document/953335721/AP-Calculus-AB-2020-1',
+  },
+  'ap_bio': {
+    'Practice test · Scribd · 2020 College Board AP Biology practice exam 1 (MCQ + FRQ)':
+        'https://www.scribd.com/document/853636797/ap-biology-2020-practice-exam-1',
+    'Practice test · Scribd · 2020 College Board AP Biology practice exam 2 (MCQ + FRQ)':
+        'https://www.scribd.com/document/853637011/ap-biology-2020-practice-exam-2',
+    'Practice test · Scribd · 2020 College Board AP Biology practice exam 3 (MCQ + FRQ)':
+        'https://www.scribd.com/document/871877007/AP-2020-Biology-Practice-Exam-3',
+    'Practice test · Scribd · 2021 AP Biology international exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/1020102847/AP-Biology-2021-International-Examination-2',
+  },
+  'ap_chem': {
+    'Practice test · Scribd · 2026 AP Chemistry Section I multiple-choice booklet (60 MCQ)':
+        'https://www.scribd.com/document/1028210709/AP-Chem-Exam-2026-Mcq-s',
+    'Practice test · Scribd · 2023 AP Chemistry international exam, Section I MCQ':
+        'https://www.scribd.com/document/992270723/2023-AP-Chem-International-Mock',
+  },
+  'ap_physics_1': {
+    'Practice test · Scribd · 2022 College Board AP Physics 1 practice exam 1 (MCQ + FRQ)':
+        'https://www.scribd.com/document/1027023229/AP-Physics-1-Practice-Exam-1-for-the-2022-Exam',
+    'Practice test · Scribd · 2019 College Board AP Physics 1 practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/776479288/ap-physics-1-2019-practice-exam',
+  },
+  'ap_physics_2': {
+    'Practice test · Scribd · 2024 AP Physics 2 exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/1031367897/2024-AP-Physics-2-Original-Exam',
+    'Practice test · Scribd · 2019 College Board AP Physics 2 practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/776479291/ap-physics-2-2019-practice-exam',
+  },
+  'ap_physics_c_em': {
+    'Practice test · Scribd · 2019 College Board AP Physics C: E&M practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/755819328/AP-EM-2019',
+  },
+  'ap_physics_c_mech': {
+    'Practice test · Scribd · 2019 AP Physics C: Mechanics exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/860344799/AP-Physics-C-Mechanics-2019-3',
+  },
+  'ap_psych': {
+    'Practice test · Scribd · 2024 College Board AP Psychology practice exam 1 (new course, MCQ + FRQ)':
+        'https://www.scribd.com/document/1034014848/AP-Psychology-Practice-Exam-1',
+  },
+  'ap_macro': {
+    'Practice test · Scribd · 2019 College Board AP Macroeconomics practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/831228657/AP-Macroeconomics-2019-Practice-Exam',
+  },
+  'ap_micro': {
+    'Practice test · Scribd · 2022 AP Microeconomics international exam with answers (MCQ + FRQ)':
+        'https://www.scribd.com/document/1039474087/AP-Microeconomics-2022-International-Exam-Questions-Answers',
+    'Practice test · Scribd · 2019 College Board AP Microeconomics practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/793857130/AP-Microeconomics-2019-Practice-Exam',
+    'Practice test · Scribd · 2023 AP Microeconomics exam':
+        'https://www.scribd.com/document/860776999/AP-Microeconomics-2023-Exam-converted',
+  },
+  'ap_csa': {
+    'Practice test · Scribd · 2020 College Board AP Computer Science A practice exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/875227464/AP-Comp-Sci-a-2020-Practice-1-PDF',
+    'Practice test · Scribd · 2019 College Board AP Computer Science A practice exam 1 (MCQ + FRQ)':
+        'https://www.scribd.com/document/773746653/2019-AP-Computer-Science-A-Practice-Exam-1-and-Notes',
+    'Practice test · Scribd · 2021 AP Computer Science A practice exam, multiple choice':
+        'https://www.scribd.com/document/991710023/AP-Computer-Science-A-Practice-Exam',
+  },
+  'ap_csp': {
+    'Practice test · Scribd · 2021 College Board AP Computer Science Principles practice exam (MCQ)':
+        'https://www.scribd.com/document/580599226/ap-computer-science-principles-practice-exam-and-notes-2021',
+    'Practice test · Scribd · 2020 College Board AP Computer Science Principles practice exam 1 (67 MCQ)':
+        'https://www.scribd.com/document/861681010/AP-Computer-Science-Principles-2020-Practice-Exam-1-Mcq-3',
+  },
+  'ap_us_history': {
+    'Practice test · Scribd · 2019 College Board APUSH practice exam':
+        'https://www.scribd.com/document/974283804/apush-practice-exam-2019',
+    'Practice test · Scribd · 2020 AP U.S. History practice exam':
+        'https://www.scribd.com/document/744358180/AP-US-History-2020',
+  },
+  'ap_world': {
+    'Practice test · Scribd · 2020 College Board AP World History practice exam 1 (MCQ)':
+        'https://www.scribd.com/document/683513524/ap-world-history-2020-practice-exam-1-mcq-preview-1',
+    'Practice test · Scribd · 2020 College Board AP World History practice exam 2 (MCQ)':
+        'https://www.scribd.com/document/694421771/ap-world-history-2020-practice-exam-2-mcq-preview-2-pdf',
+    'Practice test · Scribd · 2019 AP World History: Modern practice exam':
+        'https://www.scribd.com/document/831244381/AP-World-2019',
+  },
+  'ap_us_gov': {
+    'Practice test · Scribd · 2019 College Board AP U.S. Government practice exam (MCQ)':
+        'https://www.scribd.com/document/810164095/ap-us-government-and-politics-2019-released-exam-mcq-1',
+  },
+  'ap_comp_gov': {
+    'Practice test · Scribd · 2020 College Board AP Comparative Government practice exam 1 (MCQ)':
+        'https://www.scribd.com/document/826411039/AP-Comparative-Government-and-Politics-2020-Practice-Exam-1-Mcq',
+  },
+  'ap_human_geo': {
+    'Practice test · Scribd · 2020 College Board AP Human Geography practice exam (60 MCQ)':
+        'https://www.scribd.com/document/846084726/727945099-AP-Human-Geography-2020-Practice-Exam-and-Notes-Mcq',
+    'Practice test · Scribd · 2023 AP Daily Human Geography practice session (MCQ + FRQ)':
+        'https://www.scribd.com/document/947342322/AP-Daily-Practice-1',
+  },
+  'ap_english_lang': {
+    'Practice test · Scribd · 2020 College Board AP English Language practice exam 1 (MCQ section)':
+        'https://www.scribd.com/document/585353544/2020-Practice-Exam-1-pdf',
+  },
+  'ap_english_lit': {
+    'Practice test · Scribd · 2019 College Board AP English Literature practice exam 2 (MCQ + FRQ)':
+        'https://www.scribd.com/document/1042126905/AP-English-Literature-and-Composition-2019-Practice-Exam-2',
+  },
+  'ap_precalc': {
+    'Practice test · Scribd · 2024 AP Precalculus exam, Section I multiple choice':
+        'https://www.scribd.com/document/1031554457/AP-Precalculus-Exam-2024-Section-i-Multiple-Choice-Guide-2024',
+  },
+  'ap_env_sci': {
+    'Practice test · Scribd · 2020 College Board AP Environmental Science practice exam 3 (MCQ)':
+        'https://www.scribd.com/document/540297851/Practice-Exam-3',
+  },
+  'ap_chinese': {
+    'Practice test · Scribd · 2020 College Board AP Chinese practice exam':
+        'https://www.scribd.com/document/1018598039/2020-AP-Chinese-1',
+  },
+  'ap_stats': {
+    'Practice test · Scribd · 2023 Iowa State AP Statistics mock exam (MCQ + FRQ)':
+        'https://www.scribd.com/document/857471428/AP-Mock-Exam-2023',
+  },
+};
+
 /// Recent public PDFs from College Board. These are released FRQs rather than
 /// leaked or paywalled full exams, so students can practice with a source that
 /// matches the current public materials and remains appropriate to share.
@@ -8823,8 +10197,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.poetryfoundation.org/',
   },
   'ap_euro': {
-    'Video · Heimler’s History AP European History':
-        'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
     'Course material · Tom Richey AP European History':
@@ -8839,8 +10211,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.varsitytutors.com/ap_european_history-flashcards',
   },
   'ap_human_geo': {
-    'Video · Heimler’s History AP Human Geography':
-        'https://www.youtube.com/@heimlershistory',
     'Notes · Lumisource Human Geography unit reviews':
         'https://www.lumisource.io/ap/human-geography/unit1/review',
     'Practice test · High School Test Prep Human Geography':
@@ -8851,10 +10221,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.varsitytutors.com/ap_human_geography-flashcards',
   },
   'ap_macro': {
-    'Video · Heimler’s History AP Macroeconomics':
-        'https://www.youtube.com/@heimlershistory',
-    'Video · ACDC Economics macroeconomics playlists':
-        'https://www.youtube.com/user/ACDCLeadership/playlists',
     'Notes · AP Macroeconomics exam review sheet':
         'http://jsher.myclassupdates.com/sitebuildercontent/sitebuilderfiles/apmacroexamreviewsheet.pdf',
     'Practice test · Lumisource AP Macroeconomics':
@@ -8865,8 +10231,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://sites.google.com/hamilton.k12.wi.us/ap-macroeconomics/home/ap-exam-review/practice-problems',
   },
   'ap_micro': {
-    'Video · ACDC Economics microeconomics playlists':
-        'https://www.youtube.com/user/ACDCLeadership/playlists',
     'Video · Jason Welker economics lessons':
         'https://www.youtube.com/@JasonWelker',
     'Notes · Lumisource complete AP Micro review':
@@ -8895,12 +10259,8 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://sites.google.com/view/c-spanclassroom-featured/home',
     'Notes · Comparative Government country comparison chart':
         'https://uploads-ssl.webflow.com/632be2995229ca0bd3715246/640a3e46ba2b9b0dac096585_AP_Comp_Gov_Cram_Chart.pdf',
-    'Video · Comparative Government complete playlist':
-        'https://www.youtube.com/playlist?list=PL0TCFkN2cK4eLzdttDpcCcjealYzf8LuG',
   },
   'ap_us_gov': {
-    'Video · Heimler’s History AP Government':
-        'https://www.youtube.com/@heimlershistory',
     'Course material · C-SPAN Classroom AP Government':
         'https://sites.google.com/view/c-spanclassroom-featured/u-s-government-and-civics/ap-u-s-government-and-politics',
     'Notes · EBSCO AP Government study guide':
@@ -8913,8 +10273,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.lumisource.io/ap/us-government/unit1-1/practice-test',
   },
   'ap_us_history': {
-    'Video · Heimler’s History AP United States History':
-        'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
     'Course material · Gilder Lehrman AP US History':
@@ -8929,8 +10287,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.gilderlehrman.org/ap-us-history/practice-questions',
   },
   'ap_world': {
-    'Video · Heimler’s History AP World History':
-        'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
     'Course material · AP Worldipedia': 'http://www.apworldipedia.com',
@@ -9240,6 +10596,7 @@ List<String> linksForResource(Resource resource) {
     ..._providerLinksFor(resource).keys,
     ...?artPortfolioLinks[resource.id]?.keys,
     ...?_recentOfficialApTests[resource.id]?.keys,
+    ...?_newerScribdApTests[resource.id]?.keys,
     ...?_officialReleasedApPracticePdfs[resource.id]?.keys,
     ...?_examTexApPdfLinks[resource.id]?.keys,
     ...?apPracticeQuestionLinks[resource.id]?.keys,
@@ -9261,14 +10618,14 @@ List<Resource> resourcesByCategory(String category) =>
 
 /// All resources relevant to a field (exact match + 'all' field resources).
 List<Resource> resourcesByField(String field) =>
-    allResources.where((r) => r.field == field || r.field == 'all').toList();
+    allResources.where((r) => r.inField(field) || r.field == 'all').toList();
 
 /// Resources for a field filtered by category type.
 List<Resource> resourcesByFieldAndCategory(String field, String category) =>
     allResources
         .where(
           (r) =>
-              (r.field == field || r.field == 'all') && r.category == category,
+              (r.inField(field) || r.field == 'all') && r.category == category,
         )
         .toList();
 
@@ -9277,7 +10634,7 @@ List<Resource> apResources({String? subCategory}) {
   final aps = allResources.where((r) => r.category == 'ap').toList();
   final filtered = subCategory == null || subCategory == 'all'
       ? aps
-      : aps.where((r) => r.apSubCategory == subCategory).toList();
+      : aps.where((r) => r.inApSubCategory(subCategory)).toList();
   return filtered..sort((a, b) => a.title.compareTo(b.title));
 }
 
@@ -9319,6 +10676,7 @@ String? resolveUrl(String linkLabel, Resource resource) {
       _providerLinksFor(resource)[linkLabel] ??
       artPortfolioLinks[resource.id]?[linkLabel] ??
       _recentOfficialApTests[resource.id]?[linkLabel] ??
+      _newerScribdApTests[resource.id]?[linkLabel] ??
       _officialReleasedApPracticePdfs[resource.id]?[linkLabel] ??
       _examTexApPdfLinks[resource.id]?[linkLabel] ??
       apPracticeQuestionLinks[resource.id]?[linkLabel] ??
