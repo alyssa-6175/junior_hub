@@ -243,9 +243,10 @@ class _AppSidebar extends StatelessWidget {
     final originalMajorIndexes = {
       for (var i = 0; i < majorGroups.length; i++) majorGroups[i].id: i,
     };
+    // A submajor being checked should not rearrange its entire major group.
+    // Only a direct, top-level-major selection is recorded in this order.
     bool groupIsChecked(MajorGroup group) =>
-        provider.isMajorChecked(group.id) ||
-        group.subcategories.any((sub) => provider.isMajorChecked(sub.id));
+        provider.checkedMajorOrder.contains(group.id);
     orderedMajorGroups.sort((a, b) {
       final aChecked = groupIsChecked(a);
       final bChecked = groupIsChecked(b);
@@ -748,30 +749,9 @@ class _ExpandableMajorGroupState extends State<_ExpandableMajorGroup> {
         widget.group.subcategories.any(
           (sub) => provider.isMajorChecked(sub.id),
         );
-    final orderedSubcategories = [...widget.group.subcategories];
-    final originalSubcategoryIndexes = {
-      for (var i = 0; i < widget.group.subcategories.length; i++)
-        widget.group.subcategories[i].id: i,
-    };
-    orderedSubcategories.sort((a, b) {
-      final aChecked = provider.isMajorChecked(a.id);
-      final bChecked = provider.isMajorChecked(b.id);
-      if (aChecked != bChecked) return aChecked ? -1 : 1;
-
-      if (aChecked) {
-        final aOrder = provider.checkedSubMajorOrder.indexOf(a.id);
-        final bOrder = provider.checkedSubMajorOrder.indexOf(b.id);
-        if (aOrder >= 0 || bOrder >= 0) {
-          if (aOrder < 0) return 1;
-          if (bOrder < 0) return -1;
-          if (aOrder != bOrder) return aOrder.compareTo(bOrder);
-        }
-      }
-
-      return originalSubcategoryIndexes[a.id]!.compareTo(
-        originalSubcategoryIndexes[b.id]!,
-      );
-    });
+    // Preserve the curated submajor order; selecting one only changes its
+    // checkbox state, not its position in the list.
+    final orderedSubcategories = widget.group.subcategories;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

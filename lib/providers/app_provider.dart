@@ -342,6 +342,7 @@ class AppProvider extends ChangeNotifier {
     _personalDeadlines.addAll(
       pdList.map((data) => PersonalDeadline.fromJson(data)),
     );
+    _sortPersonalDeadlines();
 
     // Clean up expired deadlines after loading from Firestore
 
@@ -606,6 +607,7 @@ class AppProvider extends ChangeNotifier {
     if (alreadySaved) return;
 
     _personalDeadlines.add(deadline);
+    _sortPersonalDeadlines();
 
     await _save(
       'personalDeadlines',
@@ -638,6 +640,23 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Keeps the deadline panel in soonest-first order, including after a
+  /// persisted list is restored or a user adds a new personal deadline.
+  void _sortPersonalDeadlines() {
+    _personalDeadlines.sort((a, b) {
+      final aDate = DateTime.tryParse(a.dateIso);
+      final bDate = DateTime.tryParse(b.dateIso);
+      if (aDate == null && bDate == null) {
+        return a.title.compareTo(b.title);
+      }
+      if (aDate == null) return 1;
+      if (bDate == null) return -1;
+
+      final dateCompare = aDate.compareTo(bDate);
+      return dateCompare != 0 ? dateCompare : a.title.compareTo(b.title);
+    });
+  }
+
   /// Removes any personal deadlines whose date has already passed.
 
   /// Called on app init and whenever the deadline panel opens.
@@ -667,8 +686,6 @@ class AppProvider extends ChangeNotifier {
 
     final group = majorGroups.where((g) => g.id == id).firstOrNull;
 
-    bool wasAdded = false;
-
     if (group != null) {
       final allSubsChecked = group.subcategories.every(
         (s) => _checkedMajors.contains(s.id),
@@ -695,7 +712,6 @@ class AppProvider extends ChangeNotifier {
           _checkedMajors.add(sub.id);
         }
 
-        wasAdded = true;
       }
     } else {
       if (_checkedMajors.contains(id)) {
@@ -709,7 +725,6 @@ class AppProvider extends ChangeNotifier {
           ..remove(id)
           ..insert(0, id);
 
-        wasAdded = true;
       }
 
       final parentGroup = groupForSubMajor(id);
@@ -728,11 +743,7 @@ class AppProvider extends ChangeNotifier {
         final anyChecked = parentGroup.subcategories.any(
           (sub) => _checkedMajors.contains(sub.id),
         );
-        if (anyChecked && wasAdded) {
-          _checkedMajorOrder
-            ..remove(parentGroup.id)
-            ..insert(0, parentGroup.id);
-        } else if (!anyChecked) {
+        if (!anyChecked) {
           _checkedMajorOrder.remove(parentGroup.id);
         }
       }

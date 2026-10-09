@@ -102,6 +102,21 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       (resource.majorTags.contains('publication') ||
           resource.majorTags.contains('research_fair'));
 
+  bool _matchesMajorFilter(Resource resource, String filterId) {
+    return widget.category == 'competition'
+        ? _matchesCompetitionSubject(resource, filterId)
+        : resourceMatchesMajor(resource, filterId);
+  }
+
+  void _setMajorFilter(String? filterId) {
+    setState(() {
+      _majorFilter = _majorFilter == filterId ? null : filterId;
+      // A newly selected major can make the currently selected special view
+      // empty. Returning to All avoids a blank-looking content area.
+      _tab = 1;
+    });
+  }
+
   List<Resource> _sorted(
     List<Resource> items,
     Set<String> pinned,
@@ -305,23 +320,23 @@ Alyssa''',
     final seen = provider.seen;
 
     var items = resourcesByCategory(widget.category);
+    late final List<Resource> filterOptionItems;
     if (widget.category == 'dual_credit') {
       items = items
           .where((r) => r.collegeCourseType == _collegeCourseType)
           .toList();
+      filterOptionItems = items;
       if (_collegeCourseTermFilter != null) {
         items = items
             .where((r) => r.courseTermTags.contains(_collegeCourseTermFilter))
             .toList();
       }
+    } else {
+      filterOptionItems = items;
     }
-    if (_majorFilter != null && widget.category == 'competition') {
+    if (_majorFilter != null && widget.category != 'dual_credit') {
       items = items
-          .where((r) => _matchesCompetitionSubject(r, _majorFilter!))
-          .toList();
-    } else if (_majorFilter != null && widget.category != 'dual_credit') {
-      items = items
-          .where((r) => resourceMatchesMajor(r, _majorFilter!))
+          .where((r) => _matchesMajorFilter(r, _majorFilter!))
           .toList();
     }
     final allSorted = _sorted(items, pinned, seen);
@@ -415,7 +430,8 @@ Alyssa''',
                         active: _tab == 1,
                         onTap: () => setState(() => _tab = 1),
                       ),
-                      if (widget.category == 'internship')
+                      if (widget.category == 'internship' &&
+                          localItems.isNotEmpty)
                         _InlineTab(
                           icon: Icons.location_on_outlined,
                           label: 'Local',
@@ -423,7 +439,8 @@ Alyssa''',
                           active: _tab == 2,
                           onTap: () => setState(() => _tab = 2),
                         ),
-                      if (widget.category == 'research')
+                      if (widget.category == 'research' &&
+                          journalItems.isNotEmpty)
                         _InlineTab(
                           icon: Icons.menu_book_outlined,
                           label: 'Journals & Fairs',
@@ -477,6 +494,20 @@ Alyssa''',
                                 ),
                               )
                             : majorGroups)
+                        // Do not offer a filter which cannot show any item in
+                        // the current category. This also keeps valid filters
+                        // such as Business + Economics visible for internships.
+                        .where(
+                          (group) => widget.category == 'dual_credit'
+                              ? filterOptionItems.any(
+                                  (resource) => resource.courseTermTags
+                                      .contains(group.id),
+                                )
+                              : filterOptionItems.any(
+                                  (resource) =>
+                                      _matchesMajorFilter(resource, group.id),
+                                ),
+                        )
                         .map(
                           (g) => _MajorChip(
                             label: g.label,
@@ -484,18 +515,19 @@ Alyssa''',
                                 ? _collegeCourseTermFilter == g.id
                                 : _majorFilter == g.id,
                             color: g.color,
-                            onTap: () => setState(() {
+                            onTap: () {
                               if (widget.category == 'dual_credit') {
-                                _collegeCourseTermFilter =
-                                    _collegeCourseTermFilter == g.id
-                                    ? null
-                                    : g.id;
+                                setState(() {
+                                  _collegeCourseTermFilter =
+                                      _collegeCourseTermFilter == g.id
+                                      ? null
+                                      : g.id;
+                                  _tab = 1;
+                                });
                               } else {
-                                _majorFilter = _majorFilter == g.id
-                                    ? null
-                                    : g.id;
+                                _setMajorFilter(g.id);
                               }
-                            }),
+                            },
                           ),
                         ),
                   ],
@@ -546,9 +578,10 @@ Alyssa''',
                   : _ListView(items: boardItems),
               // All
               _ListView(items: allSorted),
-              if (widget.category == 'research')
+              if (widget.category == 'research' && journalItems.isNotEmpty)
                 _ListView(items: journalItems),
-              if (widget.category == 'internship') _ListView(items: localItems),
+              if (widget.category == 'internship' && localItems.isNotEmpty)
+                _ListView(items: localItems),
             ],
           ),
         ),
