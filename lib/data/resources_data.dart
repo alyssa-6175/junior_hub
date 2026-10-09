@@ -401,7 +401,7 @@ const Map<String, String> kLinkUrls = {
   'AP Spanish Literature and Culture Knowt Study Guides':
       'https://knowt.com/exams/AP/AP-Spanish-Literature-and-Culture',
   'AP Business with Personal Finance Official Course Page':
-      'https://apstudents.collegeboard.org/courses/ap-business-with-personal-finance',
+      'https://apstudents.collegeboard.org/courses/ap-business-personal-finance',
   'AP Business with Personal Finance AP Classroom':
       'https://myap.collegeboard.org/',
   'AP Business with Personal Finance Official Exam Page':
@@ -445,9 +445,8 @@ const Map<String, String> kLinkUrls = {
       'https://aapt.org/physicsteam/PT-exams.cfm',
   'Congressional App Challenge': 'https://www.congressionalappchallenge.us/',
   'CyberPatriot registration':
-      'https://www.uscyberpatriot.org/competition/Competition-Overview/join-the-competition',
-  'CyberPatriot schedule':
-      'https://www.uscyberpatriot.org/competition/current-competition/competition-schedule',
+      'https://www.uscyberpatriot.org/competition-overview/',
+  'CyberPatriot schedule': 'https://www.uscyberpatriot.org/competition/',
   'Wharton registration':
       'https://globalyouth.wharton.upenn.edu/competitions/investment-competition/register-now/',
   'Breakthrough Junior Challenge': 'https://breakthroughjuniorchallenge.org/',
@@ -460,7 +459,7 @@ const Map<String, String> kLinkUrls = {
       'https://councilforeconed.org/national-economics-challenge/',
   'High School Fed Challenge':
       'https://www.newyorkfed.org/outreach-and-education/high-school/fed-challenge',
-  'Conrad Challenge': 'https://www.conradchallenge.org/',
+  'Conrad Challenge': 'https://conrad.spacecenter.org/',
   'College Board SAT practice': 'https://satsuite.collegeboard.org/practice',
   'Bluebook': 'https://bluebook.collegeboard.org/',
   'Khan Academy SAT': 'https://www.khanacademy.org/test-prep/digital-sat',
@@ -661,7 +660,7 @@ const Map<String, String> kLinkUrls = {
   'AP Macro Exam 2012':
       'https://drive.google.com/file/d/1XmmYhQMstfz1eeuHiTSmdgHVtP9MH48c/view',
   'AP Art and Design Program Overview':
-      'https://apstudents.collegeboard.org/art-and-design-program',
+      'https://apstudents.collegeboard.org/art-design-program',
   'WSSEF registration': 'https://wssef.org/registration/',
   'WSSEF regional-fair finder': 'https://wssef.org/state-fair-regional-fairs/',
   'WSSEF logbook and scientific journal requirements':
@@ -854,8 +853,7 @@ final List<Resource> _catalogResources = [
     deadline: 'October 1, 2026 (team registration)',
     deadlineIso: '2026-10-01T23:59:00-04:00',
     icon: Icons.security,
-    url:
-        'https://www.uscyberpatriot.org/competition/Competition-Overview/join-the-competition',
+    url: 'https://www.uscyberpatriot.org/competition-overview/',
     links: ['CyberPatriot registration', 'CyberPatriot schedule'],
     detailNote:
         'Student rosters are due October 21. Round 1 runs October 22–25, 2026.',
@@ -1049,7 +1047,7 @@ final List<Resource> _catalogResources = [
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.lightbulb,
-    url: 'https://www.conradchallenge.org/',
+    url: 'https://conrad.spacecenter.org/',
     links: ['Conrad Challenge'],
     detailNote: 'A reliable 2026–27 deadline was not posted when checked.',
   ),
@@ -2378,7 +2376,7 @@ final List<Resource> _catalogResources = [
         'Submit original water-related research through the official national organizer',
     description:
         'Turn original research on water quality, conservation, treatment, or access into a concise scientific competition project',
-    url: 'https://www.siwi.org/prizes/stockholm-junior-water-prize/',
+    url: 'https://siwi.org/stockholm-junior-water-prize/',
     icon: Icons.water_drop,
   ),
   _competition(
@@ -2705,7 +2703,7 @@ final List<Resource> _catalogResources = [
         'Compete through an NSDA member school and qualify through your district',
     description:
         'Develop arguments, performances, and speaking skills across debate, interpretation, oratory, and extemporaneous events',
-    url: 'https://www.speechanddebate.org/national-tournament/',
+    url: 'https://www.speechanddebate.org/nationals/',
     icon: Icons.record_voice_over,
   ),
   _competition(
@@ -2797,7 +2795,7 @@ final List<Resource> _catalogResources = [
         'Form a school team and register with the nearest recognized regional competition',
     description:
         'Discuss difficult ethical cases with clarity and empathy, responding to another team without treating the round like a shouting match',
-    url: 'https://nhseb.unc.edu/',
+    url: 'https://nhseb.org/home',
     icon: Icons.forum,
   ),
   _competition(
@@ -4137,7 +4135,7 @@ final List<Resource> _catalogResources = [
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.palette_outlined,
-    url: 'https://apstudents.collegeboard.org/art-and-design-program',
+    url: 'https://apstudents.collegeboard.org/art-design-program',
     links: ['AP Art and Design Program Overview'],
     apSubCategory: 'arts',
     detailNote:
@@ -4202,7 +4200,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '',
     icon: Icons.school,
     url:
-        'https://apstudents.collegeboard.org/courses/ap-business-with-personal-finance',
+        'https://apstudents.collegeboard.org/courses/ap-business-personal-finance',
     links: [
       'AP Business with Personal Finance Official Course Page',
       'AP Business with Personal Finance AP Classroom',
@@ -4382,8 +4380,8 @@ final List<Resource> _catalogResources = [
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.menu_book,
-    url: 'https://www.amazon.com/s?k=princeton+review+sat',
-    links: ['Find on Amazon'],
+    url: 'https://www.princetonreview.com/college/sat-test-prep',
+    links: ['Official prep site'],
   ),
   const Resource(
     id: 'kaplan_sat',
@@ -4394,8 +4392,8 @@ final List<Resource> _catalogResources = [
     deadline: 'TODO',
     deadlineIso: '',
     icon: Icons.menu_book,
-    url: 'https://www.amazon.com/s?k=kaplan+sat+prep',
-    links: ['Find on Amazon'],
+    url: 'https://www.kaptest.com/sat',
+    links: ['Kaplan SAT'],
   ),
   const Resource(
     id: 'desmos_sat_calculator',
@@ -4543,7 +4541,7 @@ final List<Resource> _catalogResources = [
     description:
         'A rigorous SAT math guide with topic lessons and exam-style problem sets',
     icon: Icons.calculate_outlined,
-    url: 'https://thecollegepanda.com/books/sat-math/',
+    url: 'https://thecollegepanda.com/books/',
     links: ['College Panda SAT Math'],
   ),
   const Resource(
@@ -4827,7 +4825,8 @@ final List<Resource> _catalogResources = [
     description:
         'A full-length practice option with scoring and a performance breakdown',
     icon: Icons.fact_check_outlined,
-    url: 'https://www.princetonreview.com/college/free-act-practice-test',
+    url:
+        'https://www.princetonreview.com/college/free-act-practice-test?semkey=K000152',
     links: ['Princeton Review free ACT test'],
   ),
   const Resource(
@@ -4852,7 +4851,7 @@ final List<Resource> _catalogResources = [
     description:
         'Advanced ACT math instruction with focused exercises and mixed review',
     icon: Icons.calculate_outlined,
-    url: 'https://thecollegepanda.com/books/act-math/',
+    url: 'https://thecollegepanda.com/books/',
     links: ['College Panda ACT Math'],
   ),
   const Resource(
@@ -5936,7 +5935,7 @@ final List<Resource> _catalogResources = [
         'Secondary school students may submit original research of up to 5,000 words, plus a short abstract and four to six keywords',
     description:
         'An open-access, blind peer-reviewed journal for original secondary-school research across the sciences, humanities, and social sciences',
-    url: 'https://theyoungresearcher.com/index.html',
+    url: 'https://www.theyoungresearcher.com/',
     detailNote:
         'The public guidelines are older and do not clearly publish a current cycle date, so confirm that submissions are active before preparing a paper',
   ),
@@ -6614,6 +6613,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Princeton University laboratories in Princeton, New Jersey',
     timeCommitment: 'At least 5 weeks of weekday laboratory research',
+    majorTags: ['science', 'engineering', 'research'],
     applicationInfo:
         'For local New Jersey students who are at least 16 and can commute daily; projects change each year',
     description:
@@ -6631,6 +6631,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'NYU Tandon School of Engineering in Brooklyn, New York',
     timeCommitment: 'Seven weeks of full-time summer research and training',
+    majorTags: ['stem', 'engineering', 'research'],
     applicationInfo:
         'For eligible New York City high school students with an interest in STEM research',
     description:
@@ -6648,12 +6649,14 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Residential or commuter program at UC Santa Barbara',
     timeCommitment: 'Six weeks of intensive summer research',
+    majorTags: ['science', 'engineering', 'research', 'humanities'],
     applicationInfo:
         'A tuition-based program for high school students with financial aid options listed by UCSB',
     description:
         'Develop an original interdisciplinary project with a university research mentor and present the results',
     icon: Icons.science,
-    url: 'https://summer.ucsb.edu/programs/research-mentorship-program',
+    url:
+        'https://summer.ucsb.edu/programs/research-mentorship-program/overview',
     links: ['UCSB RMP', 'RMP admissions'],
   ),
   const Resource(
@@ -6665,6 +6668,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Brookhaven National Laboratory in Upton, New York',
     timeCommitment: 'Six weeks full-time in summer',
+    majorTags: ['science', 'engineering', 'physics', 'research'],
     applicationInfo:
         'Recommended for students who completed 11th grade, are at least 16, and meet citizenship or residency requirements',
     description:
@@ -6682,6 +6686,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'The Jackson Laboratory in Bar Harbor, Maine',
     timeCommitment: 'Ten-week full-time research fellowship',
+    majorTags: ['biology', 'genetics', 'research'],
     applicationInfo:
         'High school applicants must be current seniors and meet the age and work authorization requirements',
     description:
@@ -6700,6 +6705,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'JAX campuses in Maine, Connecticut, and New York City',
     timeCommitment: 'At least 180 hours across a full academic year',
+    majorTags: ['biology', 'genetics', 'research'],
     applicationInfo:
         'For high school juniors and seniors age 16 or older who can earn school credit for the research',
     description:
@@ -6718,6 +6724,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Salk Institute in La Jolla, California',
     timeCommitment: 'Eight weeks of summer laboratory research',
+    majorTags: ['biology', 'medicine', 'neuroscience', 'research'],
     applicationInfo:
         'For students age 16 or older who live and attend school in San Diego County',
     description:
@@ -6736,6 +6743,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Jefferson Lab in Newport News, Virginia',
     timeCommitment: 'Six weeks full-time in summer',
+    majorTags: ['physics', 'engineering', 'cs', 'research'],
     applicationInfo:
         'For students within the local commuting radius who are at least 16 and meet the academic requirements',
     description:
@@ -6753,6 +6761,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Seattle Children’s Research Institute in downtown Seattle',
     timeCommitment: 'Four weeks on weekdays in summer',
+    majorTags: ['biology', 'medicine', 'public_health', 'research'],
     applicationInfo:
         'For local students in grades 10 and 11 who can commute; the program is free and provides a stipend',
     description:
@@ -6771,6 +6780,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Institute for Systems Biology in Seattle, Washington',
     timeCommitment: 'About 40 hours per week during the summer placement',
+    majorTags: ['biology', 'data_sci', 'research'],
     applicationInfo:
         'One application is used for several ISB internships and ambassador opportunities; eligibility varies by program',
     description:
@@ -6790,6 +6800,7 @@ final List<Resource> _catalogResources = [
     locationNote:
         'Employers and Seattle Public Schools departments across Seattle',
     timeCommitment: 'Four-week paid summer internship with a weekly class',
+    majorTags: ['all_subjects'],
     applicationInfo:
         'For eligible Seattle Public Schools students; most paid placements require students to be at least 16',
     description:
@@ -6808,6 +6819,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'Allen Institute in South Lake Union, Seattle',
     timeCommitment: 'Three-week summer science intensive',
+    majorTags: ['biology', 'neuroscience', 'medicine', 'research'],
     applicationInfo:
         'Offered through Seattle Public Schools for students who have completed biology; current details appear with summer internships',
     description:
@@ -6827,6 +6839,7 @@ final List<Resource> _catalogResources = [
     locationNote:
         'Microsoft offices near Redmond, Washington, or Atlanta, Georgia',
     timeCommitment: 'Four-week summer internship',
+    majorTags: ['cs', 'engineering', 'technology'],
     applicationInfo:
         'For graduating high school seniors entering college who live near an eligible office and are interested in technology',
     description:
@@ -6844,6 +6857,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'University of Washington Seattle campus',
     timeCommitment: 'Temporary paid position from mid-June through July',
+    majorTags: ['education', 'social_work'],
     applicationInfo:
         'Current high school and college students may apply; hiring dates and openings are updated each year',
     description:
@@ -6862,6 +6876,7 @@ final List<Resource> _catalogResources = [
     locationNote:
         'Johns Hopkins Applied Physics Laboratory in Laurel, Maryland',
     timeCommitment: 'About 30 to 40 hours per week throughout the summer',
+    majorTags: ['engineering', 'physics', 'cs', 'research'],
     applicationInfo:
         'An unpaid competitive program for eligible local high school juniors and seniors',
     description:
@@ -6879,6 +6894,7 @@ final List<Resource> _catalogResources = [
     format: 'in_person',
     locationNote: 'National Museum of Natural History in Washington, D.C.',
     timeCommitment: 'About eight weeks, Tuesday through Friday',
+    majorTags: ['science', 'biology', 'environmental_science', 'research'],
     applicationInfo:
         'For current high school students ages 15 to 18; project areas include both science and museum work',
     description:
@@ -6898,6 +6914,7 @@ final List<Resource> _catalogResources = [
     locationNote:
         'NSA headquarters and selected field sites around the United States',
     timeCommitment: 'Part-time paid work during senior year',
+    majorTags: ['cs', 'engineering', 'languages', 'business'],
     applicationInfo:
         'For high school juniors entering a school-sponsored work experience near an eligible NSA location',
     description:
@@ -6916,6 +6933,7 @@ final List<Resource> _catalogResources = [
     locationNote:
         'Participating university and Army research sites across the United States',
     timeCommitment: 'Summer research schedule varies by host site',
+    majorTags: ['science', 'engineering', 'research'],
     applicationInfo:
         'Eligibility, age, citizenship, stipend, and commuting requirements differ across placement sites',
     description:
@@ -7071,11 +7089,14 @@ final List<Resource> _catalogResources = [
 /// Running Start listings were retired from the College Courses surface. Keep
 /// the catalog entries out of every screen, search result, saved list, and
 /// deadline lookup without deleting historical records from the source file.
+/// The Young Researcher is also hidden while its submissions are on hiatus and
+/// its public site has an invalid certificate.
 final List<Resource> allResources = List.unmodifiable(
   _catalogResources.where(
     (resource) =>
         !resource.title.toLowerCase().contains('running start') &&
-        resource.id != 'wa_running_start_directory',
+        resource.id != 'wa_running_start_directory' &&
+        resource.id != 'young_researcher_journal',
   ),
 );
 
@@ -7882,10 +7903,9 @@ List<DeadlineItem> get upcomingDeadlines => allDeadlineItems
 // ===========================================================================
 const Map<String, String> apQuestionBankHubs = {
   'Albert (paid)': 'https://www.albert.io/subjects/high-school/ap',
-  'Fiveable': 'https://fiveable.me/ap',
+  'Fiveable': 'https://fiveable.me/',
   'Knowt': 'https://knowt.com/ap',
   'CrackAP': 'https://www.crackap.com/',
-  'PracticeAP': 'https://practiceap.com/',
   'UWorld (paid)': 'https://collegeprep.uworld.com/ap/',
   'Varsity Tutors': 'https://www.varsitytutors.com/practice',
 };
@@ -8104,7 +8124,7 @@ const Set<String> artPortfolioResourceIds = {
 const Map<String, Map<String, String>> artPortfolioLinks = {
   'ap_studio_art': {
     'Instructions · AP Art and Design program overview':
-        'https://apstudents.collegeboard.org/art-and-design-program',
+        'https://apstudents.collegeboard.org/art-design-program',
     'Instructions · 2027 portfolio timeline and submission deadline':
         'https://apstudents.collegeboard.org/art-design-program/ap-art-design-portfolio-timeline',
     'Instructions · AP Digital Portfolio student guide':
@@ -8317,14 +8337,6 @@ Map<String, String> _providerLinksFor(Resource resource) {
     }
   }
 
-  // PracticeAP organizes released FRQs for established AP exams. New pilot
-  // courses do not yet have a released-question archive.
-  if (!const {
-    'ap_business_finance',
-    'ap_cybersecurity',
-  }.contains(resource.id)) {
-    result['PracticeAP'] = apQuestionBankHubs['PracticeAP']!;
-  }
   return result;
 }
 
@@ -8342,100 +8354,101 @@ const Set<String> _apsWithReferenceInformation = {
   'ap_physics_c_mech',
 };
 
+const _mcGrawHillApBooks =
+    'https://www.mheducation.com/prek-12/subject/ap-honors-electives/browse/5-steps.html';
+const _barronsApBooks = 'https://www.barronseduc.com/';
+const _princetonReviewApBooks = 'https://princetonreviewbooks.com/ap';
+const _pearsonThomasCalculus =
+    'https://www.pearson.com/en-gb/subject-catalog/p/thomas-calculus-si-units/P200000010762/9781292727912';
+
 const Map<String, Map<String, String>> _apBookLinks = {
   'ap_bio': {
-    'Course material · 5 Steps to a 5 AP Biology 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Biology+2027',
-    'Course material · Barron’s AP Biology Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Biology+Premium+2027',
-    'Course material · Princeton Review AP Biology Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Biology+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Biology (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP Biology Premium': _barronsApBooks,
+    'Course material · Princeton Review AP Biology Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_calc_ab': {
-    'Course material · 5 Steps to a 5 AP Calculus AB 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+AB+2027',
-    'Course material · Princeton Review AP Calculus AB Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Calculus+AB+Premium+Prep+2027',
-    'Course material · Pearson Calculus in SI Units (Amazon)':
-        'https://www.amazon.com/s?k=Pearson+Calculus+SI+Units+textbook',
+    'Course material · 5 Steps to a 5 AP Calculus AB (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Princeton Review AP Calculus AB Premium Prep':
+        _princetonReviewApBooks,
+    'Course material · Pearson Thomas’ Calculus in SI Units':
+        _pearsonThomasCalculus,
   },
   'ap_calc_bc': {
-    'Course material · 5 Steps to a 5 AP Calculus BC 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Calculus+BC+2027',
+    'Course material · 5 Steps to a 5 AP Calculus BC (McGraw Hill)':
+        _mcGrawHillApBooks,
   },
   'ap_chem': {
-    'Course material · Barron’s AP Chemistry Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Chemistry+Premium+2027',
-    'Course material · Princeton Review AP Chemistry Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Chemistry+Premium+Prep+2027',
+    'Course material · Barron’s AP Chemistry Premium': _barronsApBooks,
+    'Course material · Princeton Review AP Chemistry Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_chinese': {
-    'Course material · Barron’s AP Chinese Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Chinese+Language+and+Culture+2027',
+    'Course material · Barron’s AP Chinese Language and Culture':
+        _barronsApBooks,
   },
   'ap_csa': {
-    'Course material · 5 Steps to a 5 AP Computer Science A 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+A+2027',
-    'Course material · Barron’s AP Computer Science A 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Computer+Science+A+2027',
-    'Course material · Princeton Review AP Computer Science A Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Computer+Science+A+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Computer Science A (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP Computer Science A': _barronsApBooks,
+    'Course material · Princeton Review AP Computer Science A Prep':
+        _princetonReviewApBooks,
   },
   'ap_csp': {
-    'Course material · 5 Steps to a 5 AP Computer Science Principles 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Computer+Science+Principles+2027',
+    'Course material · 5 Steps to a 5 AP Computer Science Principles (McGraw Hill)':
+        _mcGrawHillApBooks,
   },
   'ap_env_sci': {
-    'Course material · 5 Steps to a 5 AP Environmental Science 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Environmental+Science+2027',
-    'Course material · Princeton Review AP Environmental Science Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Environmental+Science+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Environmental Science (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Princeton Review AP Environmental Science Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_french': {
-    'Course material · 5 Steps to a 5 AP French Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+French+Language+and+Culture+2027',
-    'Course material · Barron’s AP French Language and Culture 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+French+Language+and+Culture+2027',
+    'Course material · 5 Steps to a 5 AP French Language and Culture (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP French Language and Culture':
+        _barronsApBooks,
   },
   'ap_human_geo': {
-    'Course material · 5 Steps to a 5 AP Human Geography 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Human+Geography+2027',
-    'Course material · Barron’s AP Human Geography Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Human+Geography+Premium+2027',
-    'Course material · Princeton Review AP Human Geography Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Human+Geography+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Human Geography (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP Human Geography Premium': _barronsApBooks,
+    'Course material · Princeton Review AP Human Geography Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_macro': {
-    'Course material · 5 Steps to a 5 AP Macroeconomics 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Macroeconomics+2027',
+    'Course material · 5 Steps to a 5 AP Macroeconomics (McGraw Hill)':
+        _mcGrawHillApBooks,
   },
   'ap_micro': {
-    'Course material · 5 Steps to a 5 AP Microeconomics 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Microeconomics+2027',
+    'Course material · 5 Steps to a 5 AP Microeconomics (McGraw Hill)':
+        _mcGrawHillApBooks,
   },
   'ap_physics_c_mech': {
-    'Course material · 5 Steps to a 5 AP Physics C 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Physics+C+2027',
-    'Course material · Barron’s AP Physics C Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Physics+C+Premium+2027',
-    'Course material · Princeton Review AP Physics C Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Physics+C+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Physics C (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP Physics C Premium': _barronsApBooks,
+    'Course material · Princeton Review AP Physics C Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_psych': {
-    'Course material · 5 Steps to a 5 AP Psychology 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+Psychology+2027',
-    'Course material · Barron’s AP Psychology Premium 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Barron%27s+AP+Psychology+Premium+2027',
-    'Course material · Princeton Review AP Psychology Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+Psychology+Premium+Prep+2027',
+    'Course material · 5 Steps to a 5 AP Psychology (McGraw Hill)':
+        _mcGrawHillApBooks,
+    'Course material · Barron’s AP Psychology Premium': _barronsApBooks,
+    'Course material · Princeton Review AP Psychology Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_us_history': {
-    'Course material · Princeton Review AP U.S. History Premium Prep 2027 (Amazon)':
-        'https://www.amazon.com/s?k=Princeton+Review+AP+US+History+Premium+Prep+2027',
+    'Course material · Princeton Review AP U.S. History Premium Prep':
+        _princetonReviewApBooks,
   },
   'ap_world': {
-    'Course material · 5 Steps to a 5 AP World History: Modern 2027 (Amazon)':
-        'https://www.amazon.com/s?k=5+Steps+to+a+5+AP+World+History+Modern+2027',
+    'Course material · 5 Steps to a 5 AP World History: Modern (McGraw Hill)':
+        _mcGrawHillApBooks,
   },
 };
 
@@ -8790,8 +8803,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.teoria.com/en/exercises/',
   },
   'ap_english_lang': {
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Purdue OWL writing and rhetoric':
         'https://owl.purdue.edu/owl/general_writing/academic_writing/index.html',
     'Notes · AP English Language study guide':
@@ -8804,8 +8815,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.varsitytutors.com/ap_english_language-flashcards',
   },
   'ap_english_lit': {
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Purdue OWL writing and literature':
         'https://owl.purdue.edu/owl/subject_specific_writing/writing_in_literature/index.html',
     'Video · Crash Course Literature playlists':
@@ -8818,8 +8827,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Tom Richey AP European History':
         'https://www.tomrichey.net/ap-european-history.html',
     'Notes · Volke AP European History lecture notes':
@@ -8834,10 +8841,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_human_geo': {
     'Video · Heimler’s History AP Human Geography':
         'https://www.youtube.com/@heimlershistory',
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
-    'Notes · AP Human Geography Big Ideas review packet':
-        'http://apgeographymhs.files.wordpress.com/2012/04/sbigideaspacket2012.pdf',
     'Notes · Lumisource Human Geography unit reviews':
         'https://www.lumisource.io/ap/human-geography/unit1/review',
     'Practice test · High School Test Prep Human Geography':
@@ -8854,8 +8857,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.youtube.com/user/ACDCLeadership/playlists',
     'Notes · AP Macroeconomics exam review sheet':
         'http://jsher.myclassupdates.com/sitebuildercontent/sitebuilderfiles/apmacroexamreviewsheet.pdf',
-    'Notes · Macroeconomics course outlines':
-        'http://www.course-notes.org/Economics/Macro_Economics/Outlines/Macroeconomics_15th_Edition_Textbook',
     'Practice test · Lumisource AP Macroeconomics':
         'https://www.lumisource.io/ap/macroeconomics/practice/all',
     'Practice questions · Varsity Tutors AP Macroeconomics':
@@ -8880,8 +8881,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.varsitytutors.com/ap_microeconomics-flashcards',
   },
   'ap_psych': {
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Notes · WikiNotes AP Psychology chapter notes':
         'http://wikinotes.wikidot.com/psychology-index',
     'Notes · AP Psychology complete review document':
@@ -8893,27 +8892,19 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   },
   'ap_comp_gov': {
     'Course material · C-SPAN Classroom Comparative Government':
-        'https://sites.google.com/view/c-spanclassroom-featured/world-history-and-governments/ap-comparative-government-and-politics',
-    'Course material · Mr. Tredinnick Comparative Government':
-        'http://www.mrtredinnick.com/ap-comparative-government.html',
+        'https://sites.google.com/view/c-spanclassroom-featured/home',
     'Notes · Comparative Government country comparison chart':
         'https://uploads-ssl.webflow.com/632be2995229ca0bd3715246/640a3e46ba2b9b0dac096585_AP_Comp_Gov_Cram_Chart.pdf',
-    'Notes · Athens Academy Comparative Government notes':
-        'http://athensdesantis.com/apcpsnotes.html',
     'Video · Comparative Government complete playlist':
         'https://www.youtube.com/playlist?list=PL0TCFkN2cK4eLzdttDpcCcjealYzf8LuG',
   },
   'ap_us_gov': {
     'Video · Heimler’s History AP Government':
         'https://www.youtube.com/@heimlershistory',
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · C-SPAN Classroom AP Government':
         'https://sites.google.com/view/c-spanclassroom-featured/u-s-government-and-civics/ap-u-s-government-and-politics',
     'Notes · EBSCO AP Government study guide':
         'https://support.ebsco.com/LEX/AP-US-Government-and-Politics-Study-Guide.pdf',
-    'Notes · Social Studies Help AP Government notes':
-        'http://www.socialstudieshelp.com/APGOV_Class_Page.htm',
     'Practice test · High School Test Prep AP Government':
         'https://highschooltestprep.com/ap/us-government/',
     'Practice questions · US Government Quiz':
@@ -8926,8 +8917,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · Gilder Lehrman AP US History':
         'https://www.gilderlehrman.org/ap-us-history',
     'Course material · American History Central APUSH guide':
@@ -8944,15 +8933,11 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.youtube.com/@heimlershistory',
     'Course material · Heimler review guide (paid)':
         'https://resources.heimlershistory.com/store',
-    'Course material · Marco Learning free study guides':
-        'https://marcolearning.com/students/ap-study-guides/',
     'Course material · AP Worldipedia': 'http://www.apworldipedia.com',
     'Notes · AP World History complete study guide':
         'https://uploads-ssl.webflow.com/605fe570e5454a357d1e1811/609f602ab8c522d2fbb74495_SS-AP-World-History.pdf',
     'Notes · Lumisource AP World History review':
         'https://www.lumisource.io/ap/world-history/review/all',
-    'Notes · Teacher Oz AP World exam review':
-        'http://www.teacheroz.com/apexamreview.html',
     'Practice test · High School Test Prep AP World History':
         'https://highschooltestprep.com/ap/world-history/',
     'Practice test · Lumisource AP World History':
@@ -8973,8 +8958,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf',
     'Notes · IITian Academy AP Calculus summaries':
         'https://www.iitianacademy.com/ap-calculus-ab-and-bc-concise-summary-notes/',
-    'Notes · AP Calculus when-you-see reference sheet':
-        'https://www.gpschools.org/cms/lib/MI01000971/Centricity/Domain/429/WhenYouSeeWAnswers.pdf',
     'Notes · Elaine Cheong AP Calculus review book':
         'http://www.elainetron.com/apcalc/apcalc.pdf',
   },
@@ -8991,8 +8974,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://mrtigercalculus.weebly.com/new-ap-calculus-abbc.html',
     'Notes · Paul’s complete calculus cheat sheet':
         'https://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf',
-    'Notes · AP Calculus BC final notes':
-        'http://staff.orecity.k12.or.us/steven.becker/Final%20Notes%20for%20AB%20and%20BC.pdf',
   },
   'ap_precalc': {
     'Course material · Math Medic AP Precalculus lessons':
@@ -9013,8 +8994,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://support.ebsco.com/LEX/AP-Statistics_Study-Guide.pdf',
     'Course material · Dan Shuster AP Statistics chapters':
         'http://www.danshuster.com/apstat/apstat_chapters.htm',
-    'Notes · AP Statistics review notes':
-        'https://www.ilearnacademy.net/uploads/3/9/2/2/3922443/stat_review_notes.pdf',
   },
   'ap_csa': {
     'Course material · APCS Exam Prep complete AP CSA course':
@@ -9075,26 +9054,16 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://highschooltestprep.com/ap/biology/',
     'Practice test · AP Bio Penguins full practice exam':
         'https://apbiopenguins.weebly.com/2025-2026-exam-review.html',
-    'Practice questions · AP Biology vocabulary review':
-        'https://quizlet.com/22315269/ultimate-ap-biology-vocabulary-review-flash-cards/',
   },
   'ap_chem': {
-    'Video · Jeremy Krug complete AP Chemistry course':
-        'https://jeremykrug.com/',
-    'Course material · Jeremy Krug review packet (paid)':
-        'https://jeremykrug.com/',
     'Video · Bozeman Science AP Chemistry':
         'https://www.bozemanscience.com/ap-chemistry',
-    'Course material · ScienceGeek AP Chemistry':
-        'https://www.sciencegeek.net/APchemistry/Powerpoints.shtml',
     'Notes · Simple Studies AP Chemistry':
         'https://www.simplestudies.org/groups/ap-chemistry',
     'Notes · AP Chemistry quick review':
         'http://smicchem.weebly.com/uploads/1/0/0/2/10026459/apquickreview.pdf',
     'Notes · EBSCO AP Chemistry study guide':
         'https://support.ebsco.com/LEX/AP-Chemistry_Study-Guide.pdf',
-    'Practice questions · ScienceGeek interactive review':
-        'http://www.sciencegeek.net/APchemistry/APtaters/directory.shtml',
     'Practice questions · Varsity Tutors AP Chemistry':
         'https://www.varsitytutors.com/ap_chemistry-flashcards',
     'Practice test · AP Chemistry midterm exam':
@@ -9113,8 +9082,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_physics_1': {
     'Video · Flipping Physics AP Physics 1 playlists':
         'https://www.flippingphysics.com/playlists.html',
-    'Video · Bozeman Science AP Physics 1':
-        'https://www.bozemanscience.com/ap-physics-1',
     'Notes · Flipping Physics complete Physics 1 notes':
         'https://www.flippingphysics.com/uploads/2/1/1/0/21103672/ap_physics_1_review_lecture_notes_-_all.pdf',
     'Notes · Mr. Bigler AP Physics 1 notes':
@@ -9127,8 +9094,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
   'ap_physics_2': {
     'Video · Flipping Physics AP Physics 2 library':
         'https://www.flippingphysics.com/physics-videos.html',
-    'Video · Bozeman Science AP Physics 2':
-        'https://www.bozemanscience.com/ap-physics-2',
     'Notes · Mr. Bigler AP Physics 2 notes':
         'https://www.mrbigler.com/AP-Physics-2/Notes-AP-Physics-2.pdf',
     'Course material · Bluhm AP Physics 2 documents':
@@ -9153,8 +9118,6 @@ const Map<String, Map<String, String>> _supplementalApLinks = {
         'https://www.flippingphysics.com/ap-physics-c-review.html',
     'Notes · Flipping Physics complete Mechanics notes':
         'https://www.flippingphysics.com/uploads/2/1/1/0/21103672/ap_physics_c_mechanics_review_lecture_notes_-_all.pdf',
-    'Notes · Barlow Academy AP Physics C notes':
-        'https://barlowacademy.com/ap-physics-c-notes/',
     'Course material · Milligan AP Physics C':
         'https://www.milliganphysics.com/ap_physics_c.html',
     'Practice test · AP Physics C revision guide':
@@ -9268,9 +9231,10 @@ List<String> linksForResource(Resource resource) {
 
   return <String>{
     ...resource.links,
-    _officialFrqLabel,
+    if (!artPortfolioResourceIds.contains(resource.id)) _officialFrqLabel,
     _officialApClassroomLabel,
-    _officialCourseSamplesLabel,
+    if (!artPortfolioResourceIds.contains(resource.id))
+      _officialCourseSamplesLabel,
     if (_apsWithReferenceInformation.contains(resource.id))
       _officialReferenceInformationLabel,
     ..._providerLinksFor(resource).keys,

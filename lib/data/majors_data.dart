@@ -258,20 +258,24 @@ bool resourceMatchesMajor(Resource resource, String majorOrGroupId) {
   if (group != null) {
     if (resource.majorTags.contains(group.id)) return true;
     return group.subcategories.any(
-      (major) => resourceMatchesMajor(resource, major.id),
+      (major) => _resourceMatchesSubMajor(resource, major.id),
     );
   }
 
-  final parentGroup = groupForSubMajor(majorOrGroupId);
+  return _resourceMatchesSubMajor(resource, majorOrGroupId);
+}
+
+bool _resourceMatchesSubMajor(Resource resource, String subMajorId) {
+  final parentGroup = groupForSubMajor(subMajorId);
   if (resource.field == 'all' &&
       parentGroup != null &&
       resource.majorTags.contains(parentGroup.id)) {
     return true;
   }
 
-  final fields = _majorFields[majorOrGroupId] ?? const <String>{};
-  final aliases = _majorTagAliases[majorOrGroupId] ?? const <String>{};
+  final fields = _majorFields[subMajorId] ?? const <String>{};
+  final aliases = _majorTagAliases[subMajorId] ?? const <String>{};
   return fields.contains(resource.field) ||
-      resource.majorTags.contains(majorOrGroupId) ||
+      resource.majorTags.contains(subMajorId) ||
       resource.majorTags.any(aliases.contains);
 }
