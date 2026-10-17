@@ -118,10 +118,16 @@ class Resource {
     if (deadlineIso == null || deadlineIso!.isEmpty) return false;
     try {
       final deadlineDate = DateTime.parse(deadlineIso!);
-      final today = DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day);
-      final target =
-          DateTime(deadlineDate.year, deadlineDate.month, deadlineDate.day);
+      final today = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+      );
+      final target = DateTime(
+        deadlineDate.year,
+        deadlineDate.month,
+        deadlineDate.day,
+      );
       return target.isBefore(today);
     } catch (_) {
       return false;
@@ -150,6 +156,9 @@ class Resource {
   String get fieldLabel => FieldColors.labelFor(field);
 
   String get categoryLabel {
+    if (category == 'research' && majorTags.contains('research_fair')) {
+      return 'Research Fair';
+    }
     if (category == 'research' && majorTags.contains('publication')) {
       return 'Research Journal';
     }

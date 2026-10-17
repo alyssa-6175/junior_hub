@@ -124,37 +124,13 @@ class _LoginCard extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      Container(
-                        width: 72,
-                        height: 72,
-                        decoration: BoxDecoration(
-                          color:
-                              kNavy, // You can remove this line if your logo already has a background color
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        clipBehavior: Clip
-                            .antiAlias, // This ensures your image respects the rounded corners
+                      SizedBox(
+                        width: 240,
+                        height: 180,
                         child: Image.asset(
                           'assets/logo.png',
-                          fit: BoxFit
-                              .cover, // Use BoxFit.contain if the logo gets cut off
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Junior Hub',
-                        style: GoogleFonts.inter(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
-                          color: kNavy,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Eastside Preparatory School',
-                        style: GoogleFonts.inter(
-                          fontSize: 13,
-                          color: kTextSecondary,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center,
                         ),
                       ),
                     ],

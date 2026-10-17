@@ -104,7 +104,13 @@ class _CompactTopBar extends StatelessWidget {
                 onPressed: () => Scaffold.of(context).openDrawer(),
                 icon: const Icon(Icons.menu, color: kNavy),
               ),
-              Image.asset('assets/logo.png', width: 28, height: 28),
+              Image.asset(
+                'assets/logo_mark.png',
+                width: 28,
+                height: 28,
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+              ),
               const SizedBox(width: 8),
               Text(
                 'Junior Hub',
@@ -424,17 +430,17 @@ class _SidebarLogo extends StatelessWidget {
 
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-
-            child: Image.asset(
-              'assets/logo.png',
-
-              width: 64,
-
-              height: 64,
-
-              fit: BoxFit.cover,
+          SizedBox(
+            width: 64,
+            height: 64,
+            child: Center(
+              child: Image.asset(
+                'assets/logo_mark.png',
+                width: 58,
+                height: 58,
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+              ),
             ),
           ),
 

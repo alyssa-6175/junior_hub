@@ -30,6 +30,7 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   String? _majorFilter;
   String _collegeCourseType = 'independent';
   String? _collegeCourseTermFilter;
+  String _journalFairFilter = 'all';
 
   static const _collegeCourseTerms = [
     ('summer', 'Summer'),
@@ -59,6 +60,7 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       _majorFilter = null;
       _collegeCourseType = 'independent';
       _collegeCourseTermFilter = null;
+      _journalFairFilter = 'all';
     }
   }
 
@@ -155,14 +157,15 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
     }
 
-    List<Resource> group(bool isSeen, bool isPinned) => items
-        .where(
-          (resource) =>
-              seen.contains(resource.id) == isSeen &&
-              pinned.contains(resource.id) == isPinned,
-        )
-        .toList()
-      ..sort(compareResources);
+    List<Resource> group(bool isSeen, bool isPinned) =>
+        items
+            .where(
+              (resource) =>
+                  seen.contains(resource.id) == isSeen &&
+                  pinned.contains(resource.id) == isPinned,
+            )
+            .toList()
+          ..sort(compareResources);
 
     return [
       ...group(false, true),
@@ -365,9 +368,18 @@ Alyssa''',
     final localItems = widget.category == 'internship'
         ? allSorted.where(_isLocalOpportunity).toList()
         : const <Resource>[];
-    final journalItems = widget.category == 'research'
+    final journalAndFairItems = widget.category == 'research'
         ? allSorted.where(_isResearchJournal).toList()
         : const <Resource>[];
+    final journalItems = _journalFairFilter == 'journal'
+        ? journalAndFairItems
+              .where((resource) => resource.majorTags.contains('publication'))
+              .toList()
+        : _journalFairFilter == 'fair'
+        ? journalAndFairItems
+              .where((resource) => resource.majorTags.contains('research_fair'))
+              .toList()
+        : journalAndFairItems;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -461,11 +473,11 @@ Alyssa''',
                           onTap: () => setState(() => _tab = 2),
                         ),
                       if (widget.category == 'research' &&
-                          journalItems.isNotEmpty)
+                          journalAndFairItems.isNotEmpty)
                         _InlineTab(
                           icon: Icons.menu_book_outlined,
                           label: 'Journals & Fairs',
-                          count: journalItems.length,
+                          count: journalAndFairItems.length,
                           active: _tab == 2,
                           onTap: () => setState(() => _tab = 2),
                         ),
@@ -474,6 +486,36 @@ Alyssa''',
                 ],
               ),
               const SizedBox(height: 10),
+              if (widget.category == 'research' &&
+                  _tab == 2 &&
+                  journalAndFairItems.isNotEmpty) ...[
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: [
+                    _MajorChip(
+                      label: 'All journals & fairs',
+                      active: _journalFairFilter == 'all',
+                      color: kNavy,
+                      onTap: () => setState(() => _journalFairFilter = 'all'),
+                    ),
+                    _MajorChip(
+                      label: 'Journals',
+                      active: _journalFairFilter == 'journal',
+                      color: CategoryColors.textFor('research'),
+                      onTap: () =>
+                          setState(() => _journalFairFilter = 'journal'),
+                    ),
+                    _MajorChip(
+                      label: 'Fairs',
+                      active: _journalFairFilter == 'fair',
+                      color: const Color(0xFF1D9E75),
+                      onTap: () => setState(() => _journalFairFilter = 'fair'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+              ],
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -599,7 +641,8 @@ Alyssa''',
                   : _ListView(items: boardItems),
               // All
               _ListView(items: allSorted),
-              if (widget.category == 'research' && journalItems.isNotEmpty)
+              if (widget.category == 'research' &&
+                  journalAndFairItems.isNotEmpty)
                 _ListView(items: journalItems),
               if (widget.category == 'internship' && localItems.isNotEmpty)
                 _ListView(items: localItems),

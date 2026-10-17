@@ -1,11 +1,11 @@
 {
-    "name": "Junior Hub | Eastside Preparatory School",
+    "name": "Junior Hub",
     "short_name": "Junior Hub",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#073B6F",
-    "description": "Student resources for Eastside Preparatory School",
+    "description": "Academic resources for students",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

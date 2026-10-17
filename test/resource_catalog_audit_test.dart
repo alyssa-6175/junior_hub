@@ -37,6 +37,66 @@ void main() {
     }
   });
 
+  test('requested competition and research-fair collection is complete', () {
+    const requestedIds = {
+      'biogeneius',
+      'thermo_fisher_jic',
+      'conrad_challenge',
+      'davidson_fellows',
+      'genius_olympiad',
+      'isweeep',
+      'regeneron_isef',
+      'jshs',
+      'local_science_fair_finalist',
+      'regional_state_science_fair_finalist',
+      'stockholm_junior_water_prize',
+      'yau_science_awards',
+      'amc',
+      'usabo',
+      'usaco',
+      'fma_usapho',
+      'usnco',
+      'naclo',
+      'national_science_bowl',
+      'cac',
+      'hmmt',
+      'math_prize_for_girls',
+      'mit_blueprint',
+      'nasa_space_apps',
+      'national_science_bee',
+      'science_olympiad',
+    };
+    final catalogIds = allResources.map((resource) => resource.id).toSet();
+    expect(catalogIds, containsAll(requestedIds));
+  });
+
+  test('science fairs live in Research and identify as fairs', () {
+    const fairIds = {
+      'biogeneius',
+      'thermo_fisher_jic',
+      'genius_olympiad',
+      'isweeep',
+      'regeneron_isef',
+      'jshs',
+      'local_science_fair_finalist',
+      'regional_state_science_fair_finalist',
+      'stockholm_junior_water_prize',
+      'yau_science_awards',
+      'wssef_2027',
+    };
+    for (final resource in allResources.where(
+      (resource) => fairIds.contains(resource.id),
+    )) {
+      expect(resource.category, 'research', reason: resource.id);
+      expect(
+        resource.majorTags,
+        contains('research_fair'),
+        reason: resource.id,
+      );
+      expect(resource.categoryLabel, 'Research Fair', reason: resource.id);
+    }
+  });
+
   test('every displayed resource link resolves to a valid destination', () {
     for (final resource in allResources) {
       final labels = linksForResource(resource);
