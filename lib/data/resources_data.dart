@@ -688,6 +688,8 @@ Resource _competition({
   IconData icon = Icons.emoji_events,
   List<String> alsoFields = const [],
   bool researchFair = false,
+  String? cost,
+  String? costNote,
 }) => Resource(
   id: id,
   title: title,
@@ -709,6 +711,8 @@ Resource _competition({
       detailNote ??
       'Dates and eligibility can change between cycles, so confirm the current rules on the official site',
   alsoFields: alsoFields,
+  cost: cost,
+  costNote: costNote,
 );
 
 Resource _researchJournal({
@@ -725,6 +729,8 @@ Resource _researchJournal({
   String? deadlineIso,
   String timeCommitment = 'Rolling or issue-based review',
   List<String> alsoFields = const [],
+  String? cost,
+  String? costNote,
 }) => Resource(
   id: id,
   title: title,
@@ -744,6 +750,8 @@ Resource _researchJournal({
   links: ['Submission guidelines'],
   detailNote: detailNote,
   alsoFields: alsoFields,
+  cost: cost,
+  costNote: costNote,
 );
 
 /// Student research conferences and symposia. They appear in the Research
@@ -764,6 +772,8 @@ Resource _researchConference({
   String? deadlineIso,
   String timeCommitment = 'Abstract or paper submission, then a presentation',
   List<String> alsoFields = const [],
+  String? cost,
+  String? costNote,
 }) => Resource(
   id: id,
   title: title,
@@ -783,6 +793,8 @@ Resource _researchConference({
   links: [title],
   detailNote: detailNote,
   alsoFields: alsoFields,
+  cost: cost,
+  costNote: costNote,
 );
 
 final List<Resource> _catalogResources = [
@@ -809,6 +821,8 @@ final List<Resource> _catalogResources = [
     links: ['USACO', 'USACO Guide'],
     detailNote:
         'Prepare with the free USACO Guide: its Bronze-to-Platinum roadmap includes topic lessons, curated problems, and solutions. It is community-built, not an official USACO syllabus. The next official contest date was not posted when checked.',
+    cost: 'free',
+    costNote: 'Free and open to all',
   ),
   const Resource(
     id: 'usaaio',
@@ -825,7 +839,7 @@ final List<Resource> _catalogResources = [
         'K–12 students in the United States and Canada register individually and should review the current rules, required software, and proctoring requirements.',
     description:
         'Compete in artificial-intelligence problem solving through the U.S. and Canada selection pathway to international AI Olympiads.',
-    deadline: 'January 31, 2027 at 11:59 PM ET',
+    deadline: 'January 31, 2027 at 11:59 PM ET (registration closes)',
     deadlineIso: '2027-01-31T23:59:00-05:00',
     icon: Icons.psychology_alt_outlined,
     url: 'https://www.usaaio.org/',
@@ -848,8 +862,8 @@ final List<Resource> _catalogResources = [
         'Students register through an approved school or competition manager.',
     description:
         'Begin with AMC 10 or AMC 12, qualify for AIME, and combine those scores for possible invitation to USAJMO or USAMO',
-    deadline: 'October 15, 2026 at 11:59 PM ET (regular registration)',
-    deadlineIso: '2026-10-15T23:59:00-04:00',
+    deadline: 'November 5, 2026 (AMC 10A/12A; 10B/12B on Nov 13)',
+    deadlineIso: '2026-11-05',
     icon: Icons.emoji_events,
     url: 'https://maa.org/amcreg/',
     links: [
@@ -859,6 +873,8 @@ final List<Resource> _catalogResources = [
     ],
     detailNote:
         'Schools or competition managers register students. Late registration (returning managers only) closes October 28. AMC 10/12 A: November 5, 2026; AMC 10/12 B: November 13, 2026. AIME qualification thresholds are set after AMC scoring; the Mathematical Olympiad Program then invites top index scorers to USAJMO or USAMO. Prepare with MAA’s official materials and timed past problems in the AoPS archive',
+    cost: 'paid',
+    costNote: 'Per-student fee, registered through a school or host site',
   ),
   const Resource(
     id: 'cac',
@@ -874,13 +890,15 @@ final List<Resource> _catalogResources = [
         'Eligibility and deadlines are district-specific; use the official district finder.',
     description:
         'Create an original app, explain the problem it solves, and submit it to the competition run by your congressional district',
-    deadline: 'October 26, 2026 at 12:00 PM ET',
-    deadlineIso: '2026-10-26T12:00:00-04:00',
+    deadline: 'October 26, 2026 at 9:00 PM ET (app submission)',
+    deadlineIso: '2026-10-26T21:00:00-04:00',
     icon: Icons.emoji_events,
     url: 'https://www.congressionalappchallenge.us/',
     links: ['Congressional App Challenge'],
     detailNote:
         'Students may compete individually or in teams of up to four through a participating congressional district',
+    cost: 'free',
+    costNote: 'No entry fee',
   ),
   const Resource(
     id: 'cyberpatriot_afa',
@@ -900,8 +918,9 @@ final List<Resource> _catalogResources = [
     icon: Icons.security,
     url: 'https://www.uscyberpatriot.org/competition-overview/',
     links: ['CyberPatriot registration', 'CyberPatriot schedule'],
-    detailNote:
-        'Student rosters are due October 21. Round 1 runs October 22–25, 2026.',
+    detailNote: 'Team registration closed October 1, 2026. Registered teams pay fees by November 5 and compete in Round 1 later this fall. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$225 per Open Division team (fee waived for All Service Division)',
   ),
   const Resource(
     id: 'wharton_investment',
@@ -924,6 +943,8 @@ final List<Resource> _catalogResources = [
     links: ['Wharton registration'],
     detailNote:
         'Registration for the 2026–2027 season closed September 11, 2026. Registered teams submit their Trading Notes Analysis by October 23 and Investment Policy Statement by November 6; the next season’s registration normally opens in August',
+    cost: 'free',
+    costNote: 'Free to participate',
   ),
   const Resource(
     id: 'breakthrough_junior',
@@ -944,7 +965,9 @@ final List<Resource> _catalogResources = [
     icon: Icons.science,
     url: 'https://breakthroughjuniorchallenge.org/',
     links: ['Breakthrough Junior Challenge'],
-    detailNote: 'Peer review is required by September 30, 2026.',
+    detailNote: 'The 2026 challenge closed September 15. The next challenge usually opens in May. Confirm current rules on the official site.',
+    cost: 'free',
+    costNote: 'No entry fee',
   ),
   const Resource(
     id: 'stellarxplorers',
@@ -959,12 +982,14 @@ final List<Resource> _catalogResources = [
     applicationInfo: 'Teams of 2–6 students with an adult team director.',
     description:
         'Use aerospace software and teamwork to solve realistic orbit planning, satellite design, and launch operations scenarios',
-    deadline: 'October 14, 2026 (team registration)',
-    deadlineIso: '2026-10-14T23:59:00-04:00',
+    deadline: 'October 21, 2026 (competitor registration)',
+    deadlineIso: '2026-10-21T23:59:00-04:00',
     icon: Icons.rocket_launch,
     url: 'https://www.stellarxplorers.org/dates-fees.html',
     links: ['StellarXplorers dates and fees'],
-    detailNote: 'Competitors due October 21; payment due November 5, 2026.',
+    detailNote: 'Team registration closed October 14; payment is due November 5. Qualification Round 1 runs October 29–November 1, 2026. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$250 per high school team (\$125 for JROTC or Civil Air Patrol teams)',
   ),
   const Resource(
     id: 'studentcam',
@@ -980,11 +1005,13 @@ final List<Resource> _catalogResources = [
         'Open to U.S. students in grades 6–12, individually or in teams of up to 3.',
     description:
         'Tell a focused civic story in a short documentary that combines your own reporting with relevant C-SPAN footage',
-    deadline: 'January 20, 2027',
-    deadlineIso: '2027-01-20T23:59:00-05:00',
+    deadline: 'January 20, 2027 at 11:59 PM PT (documentary submission)',
+    deadlineIso: '2027-01-20T23:59:00-08:00',
     icon: Icons.videocam,
     url: 'https://www.studentcam.org/',
     links: ['C-SPAN StudentCam'],
+    cost: 'free',
+    costNote: 'No entry fee',
   ),
   const Resource(
     id: 'science_olympiad',
@@ -1007,6 +1034,8 @@ final List<Resource> _catalogResources = [
     links: ['Science Olympiad'],
     detailNote:
         'Registration and tournament dates vary by state, so no single deadline is shown.',
+    cost: 'paid',
+    costNote: 'Teams pay membership and tournament fees through their state Science Olympiad',
   ),
   const Resource(
     id: 'usabo',
@@ -1022,13 +1051,14 @@ final List<Resource> _catalogResources = [
         'A school and its students must register through the official portal.',
     description:
         'Test your depth in biology through a national exam series that ultimately selects the U.S. team for the International Biology Olympiad',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'October 23, 2026 (school registration fee due)',
+    deadlineIso: '2026-10-23T23:59:00-04:00',
     icon: Icons.biotech,
     url: 'https://www.usabo-trc.org/',
     links: ['USABO'],
-    detailNote:
-        'The 2026–27 registration deadline was not yet posted when checked.',
+    detailNote: 'Schools must register and pay by October 23, 2026. Homeschooled students can ask a participating school or center to host them. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$125 registration fee per school or center (no individual registration)',
   ),
   const Resource(
     id: 'national_econ_challenge',
@@ -1067,13 +1097,13 @@ final List<Resource> _catalogResources = [
         'Check eligibility through the relevant Federal Reserve Bank.',
     description:
         'Research a real economic question, make sense of monetary policy, and present your conclusions to economists in your Federal Reserve district',
-    deadline: 'TODO',
-    deadlineIso: '',
+    deadline: 'February 15, 2027 (team registration deadline)',
+    deadlineIso: '2027-02-15',
     icon: Icons.account_balance,
-    url:
-        'https://www.newyorkfed.org/outreach-and-education/high-school/fed-challenge',
+    url: 'https://www.newyorkfed.org/outreach-and-education/high-school/high-school-fed-challenge',
     links: ['High School Fed Challenge'],
-    detailNote: 'Regional programs differ, so no nationwide date is shown.',
+    detailNote: 'NY Fed paper submissions due Mar 15, 2027. Confirm current rules on the official site.',
+    cost: 'free',
   ),
   const Resource(
     id: 'conrad_challenge',
@@ -1089,14 +1119,15 @@ final List<Resource> _catalogResources = [
         'Teams develop and pitch an innovation; consult the current student guide.',
     description:
         'Innovation and entrepreneurship challenge for students ages 13–18.',
-    deadline: 'October 30, 2026 (Activation Stage submission)',
-    deadlineIso: '2026-10-30T23:59:00-05:00',
+    deadline: 'October 29, 2026 (end of Activation Stage)',
+    deadlineIso: '2026-10-29T23:59:00-05:00',
     icon: Icons.lightbulb,
     url: 'https://conrad.spacecenter.org/',
     links: ['Conrad Challenge'],
-    detailNote:
-        'The 2026–2027 Activation Stage closes October 30; the next stage runs October 30, 2026 to January 7, 2027',
+    detailNote: 'The Innovation Stage runs October 29, 2026 to January 7, 2027. Financial aid applications are open November 2–December 3. Confirm current rules on the official site.',
     alsoFields: ['business'],
+    cost: 'paid',
+    costNote: 'Free Activation Stage; the Innovation Stage costs \$499 per team (financial aid available)',
   ),
   const Resource(
     id: 'national_science_bowl',
@@ -1127,6 +1158,8 @@ final List<Resource> _catalogResources = [
     links: ['National Science Bowl'],
     detailNote:
         'Registration opens October 5 at noon Eastern. An approved school must submit Team 1 by November 23 to keep its reserved regional spot',
+    cost: 'free',
+    costNote: 'No registration fee',
   ),
   const Resource(
     id: 'naclo',
@@ -1152,6 +1185,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Student registration opens October 12, 2026. The Open Round is Thursday, January 28, 2027 and the Invitational Round is March 18, 2027. Last cycle, student registration closed a few days before the Open Round',
     alsoFields: ['humanities'],
+    cost: 'free',
+    costNote: 'Free to participate',
   ),
   const Resource(
     id: 'usnco',
@@ -1197,6 +1232,8 @@ final List<Resource> _catalogResources = [
     links: ['AAPT U.S. Physics Team', 'AAPT F=ma past exams and solutions'],
     detailNote:
         'The 2026 cycle has passed, and the next registration deadline is not yet published. Use AAPT’s released F=ma exams and solutions, including the 2025 materials, for timed practice.',
+    cost: 'paid',
+    costNote: 'Per-student exam fee paid through AAPT',
   ),
   _competition(
     id: 'usaaao',
@@ -1215,6 +1252,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The first round is approximately 30 multiple-choice questions. The 2027 registration schedule has not yet been published; the prior cycle registered during January',
     icon: Icons.nightlight_round,
+    cost: 'paid',
+    costNote: '\$30 per student (\$20 each when 5+ students from one school register); financial aid available',
   ),
   _competition(
     id: 'useso',
@@ -1237,9 +1276,10 @@ final List<Resource> _catalogResources = [
         'Study geology, meteorology, oceanography, astronomy, and environmental systems while competing for the U.S. team at the International Earth Science Olympiad',
     url: 'https://www.useso.org/',
     timeCommitment: 'Spring exam and a summer camp for qualifiers',
-    detailNote:
-        'Registration for the 2027 National Open Exam is expected around December 2026; the exam is normally held in March',
+    detailNote: 'Registration for the 2027 National Open Exam opens in January; sign up for the USESO newsletter for the date. Confirm current rules on the official site.',
     icon: Icons.public,
+    cost: 'paid',
+    costNote: 'Exam and camp fees apply (USESO has no large sponsor)',
   ),
   _competition(
     id: 'usaebo',
@@ -1258,6 +1298,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-02-27T23:59:00-05:00',
     timeCommitment: 'Two online rounds; first round March 13, 2027',
     icon: Icons.account_balance,
+    detailNote: 'Registration closes February 27, 2027 at 11:59 PM ET. Round 1 is March 13 and Round 2 is March 27, 2027 (8–10 PM ET), taken from anywhere. Confirm current rules on the official site.',
   ),
   _competition(
     id: 'us_geography_championships',
@@ -1284,6 +1325,8 @@ final List<Resource> _catalogResources = [
         'Qualifying dates depend on the participating IAC tournament and the international championship cycle',
     icon: Icons.public,
     alsoFields: ['science'],
+    cost: 'paid',
+    costNote: 'IAC regional tournaments charge per-event fees',
   ),
   _competition(
     id: 'usacyo',
@@ -1298,11 +1341,10 @@ final List<Resource> _catalogResources = [
     description:
         'Solve security challenges across two national rounds through the sole U.S. pathway to the International Cybersecurity Olympiad',
     url: 'https://www.usacyo.org/',
-    deadline: 'February 28, 2027 (first round)',
-    deadlineIso: '2027-02-28T00:00:00-05:00',
+    deadline: 'February 14, 2027 (Round 1 registration deadline)',
+    deadlineIso: '2027-02-14T23:59:00-05:00',
     timeCommitment: 'Two online rounds; second round March 28, 2027',
-    detailNote:
-        'Registration is open. The organizer has published competition dates but not a separate registration-closing date',
+    detailNote: 'Round 1 is Sunday, February 28, 2027 and Round 2 is Sunday, March 28, 2027. Registration opened August 17, 2026. Confirm current rules on the official site.',
     icon: Icons.security,
   ),
   _competition(
@@ -1322,6 +1364,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The next cycle has not yet been announced. The official site currently displays the completed August 2026 event',
     icon: Icons.medical_services_outlined,
+    cost: 'paid',
+    costNote: 'Registration fee paid through the official payment portal',
   ),
   _competition(
     id: 'american_philosophy_olympiad',
@@ -1341,6 +1385,8 @@ final List<Resource> _catalogResources = [
         'The 2027 registration details will be posted closer to the February or March competition window',
     icon: Icons.psychology_alt_outlined,
     alsoFields: ['essay_writing'],
+    cost: 'free',
+    costNote: 'No cost to apply',
   ),
 
   const Resource(
@@ -1364,6 +1410,8 @@ final List<Resource> _catalogResources = [
     links: ['FIRST Robotics Competition', '2027 season materials'],
     detailNote:
         'The 2027 game launches January 9, 2027, and individual team signup timing may vary',
+    cost: 'paid',
+    costNote: 'Team registration fee (FRC teams typically pay several thousand dollars per season; grants are available)',
   ),
   const Resource(
     id: 'national_history_day',
@@ -1385,6 +1433,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Local deadlines vary because students advance through affiliate contests before nationals',
     alsoFields: ['essay_writing', 'history'],
+    costNote: 'Registration fees vary by state/regional affiliate',
   ),
   const Resource(
     id: 'regeneron_isef',
@@ -1414,6 +1463,7 @@ final List<Resource> _catalogResources = [
     links: ['Regeneron ISEF', 'Find an affiliated fair', 'ISEF rules'],
     detailNote:
         'Affiliated-fair calendars differ, so begin with the fair serving your school or region',
+    costNote: 'Entry is through an affiliated local/state fair; fees depend on that fair',
   ),
   const Resource(
     id: 'regeneron_sts',
@@ -1430,12 +1480,14 @@ final List<Resource> _catalogResources = [
     description:
         'Present a substantial independent research project through a paper, essays, recommendations, and a holistic application',
     deadline: 'November 5, 2026 at 8:00 PM ET',
-    deadlineIso: '2026-11-05T20:00:00-05:00',
+    deadlineIso: '2026-11-05',
     icon: Icons.science,
     url: 'https://www.societyforscience.org/regeneron-sts/',
     links: ['Regeneron STS', '2027 application requirements'],
     detailNote:
         'The technical support deadline is November 4, so the program recommends submitting before the final day',
+    cost: 'free',
+    costNote: 'No application fee',
   ),
   const Resource(
     id: 'diamond_challenge',
@@ -1451,11 +1503,12 @@ final List<Resource> _catalogResources = [
         'Teams of two to four students ages 14 to 18 enter with an adult advisor and choose a business or social innovation track',
     description:
         'Turn a business or social-impact idea into a tested venture concept, written submission, and competition pitch',
-    deadline: 'January 14, 2027 at 5:00 PM ET',
-    deadlineIso: '2027-01-14T17:00:00-05:00',
+    deadline: 'January 14, 2027 at 5:00 PM ET (submission deadline)',
+    deadlineIso: '2027-01-14',
     icon: Icons.diamond_outlined,
     url: 'https://diamondchallenge.org/competition/',
     links: ['Diamond Challenge competition', '2027 timeline and rules'],
+    cost: 'free',
   ),
   const Resource(
     id: 'blue_ocean_competition',
@@ -1471,12 +1524,14 @@ final List<Resource> _catalogResources = [
         'High school students may register for the 2027 competition and compete from anywhere',
     description:
         'Design an original business idea around an unmet need and explain the strategy in a concise virtual pitch',
-    deadline: 'February 21, 2027 at 11:59 PM local time',
-    deadlineIso: '2027-02-21T23:59:00-08:00',
+    deadline: 'February 21, 2027 (pitch submission)',
+    deadlineIso: '2027-02-21',
     icon: Icons.waves_outlined,
     url: 'https://blueoceancompetition.org/compete/',
     links: ['Blue Ocean competition', '2027 competition timeline'],
     detailNote: 'The submission deadline follows the student’s local time zone',
+    cost: 'free',
+    costNote: 'No entry fee',
   ),
   const Resource(
     id: 'technovation_girls',
@@ -1498,6 +1553,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Student registration for the new season was not open when checked, so use the official notification form for updates',
     alsoFields: ['business'],
+    cost: 'free',
+    costNote: 'Competition and curriculum are free',
   ),
 
   // ORIGINAL COMMENTED-OUT SUMMER AND SEASONAL COMPETITIONS
@@ -1890,6 +1947,7 @@ final List<Resource> _catalogResources = [
     url: 'https://blueprint.hackmit.org/',
     timeCommitment: 'Weekend hackathon',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'hacktj',
@@ -1908,6 +1966,8 @@ final List<Resource> _catalogResources = [
     icon: Icons.code,
     deadline: 'March 6–7, 2027 (event at Cvent HQ, Tysons, VA)',
     deadlineIso: '2027-03-06T09:00:00-05:00',
+    cost: 'free',
+    costNote: 'Free to attend (student-run hackathon)',
   ),
   _competition(
     id: 'hack_club_hackathons',
@@ -1926,6 +1986,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The calendar is maintained by Hack Club; eligibility and registration dates belong to each event organizer',
     icon: Icons.code,
+    cost: 'free',
+    costNote: 'Listed hackathons are free for students',
   ),
   _competition(
     id: 'harker_programming_invitational',
@@ -1945,6 +2007,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'HPI is usually held each March. The organizer asks prospective teams to check its site for the next registration cycle.',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'girls_programming_league',
@@ -1966,6 +2029,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2026 challenge is September 26, 9:00 AM–1:00 PM Pacific Time. Confirm registration availability with the organizer.',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'lexington_informatics_tournament',
@@ -1984,6 +2048,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2026 standard-round window was July 31–August 4, with the CTF round August 1–3. Watch the official site for the next cycle.',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'andover_computing_open',
@@ -2021,7 +2086,8 @@ final List<Resource> _catalogResources = [
         'CALICO runs biannual contests. Join its official email list for registration announcements.',
     icon: Icons.code,
     deadline: 'November 8, 2026 (CALICO Fall ’26 contest)',
-    deadlineIso: '2026-11-08T12:00:00-08:00',
+    deadlineIso: '2026-11-08',
+    cost: 'free',
   ),
   _competition(
     id: 'stanford_proco',
@@ -2040,6 +2106,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Visit the organizer’s contest-information page for the current schedule, team rules, and registration details.',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'mit_informatics_tournament',
@@ -2055,11 +2122,12 @@ final List<Resource> _catalogResources = [
         'Take on a full day of collaborative, algorithmic programming with partial-credit problems for teams ranging from newcomers to experienced competitors.',
     url: 'https://mitit.org/',
     deadline: 'December 6, 2026 (Winter Tournament)',
-    deadlineIso: '2026-12-06T00:00:00-05:00',
+    deadlineIso: '2026-12-06',
     timeCommitment: 'Full-day hybrid tournament',
     detailNote:
         'The Winter 2026–27 tournament is scheduled for December 6, 2026; see the official logistics and registration pages for current details.',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'banana_hacks_2026',
@@ -2078,6 +2146,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-10-09T00:00:00-04:00',
     timeCommitment: 'Four-day online event',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'nasa_space_apps',
@@ -2096,6 +2165,8 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-11-14T00:00:00-05:00',
     timeCommitment: 'One weekend plus optional preparation',
     icon: Icons.rocket_launch,
+    cost: 'free',
+    costNote: 'Free to participate',
   ),
   _competition(
     id: 'picoctf',
@@ -2114,6 +2185,8 @@ final List<Resource> _catalogResources = [
     icon: Icons.security,
     detailNote:
         'picoCTF.org is now part of CMU’s CyLab Security Academy; existing picoCTF logins still work. The practice gym is always open, and the annual competition is usually held in spring',
+    cost: 'free',
+    costNote: 'Free (picoCTF is now part of CMU\'s CyLab Security Academy)',
   ),
   _competition(
     id: 'national_cyber_league',
@@ -2130,10 +2203,11 @@ final List<Resource> _catalogResources = [
     url: 'https://nationalcyberleague.org/',
     deadline: 'October 13, 2026 (late registration)',
     deadlineIso: '2026-10-13T23:59:00-04:00',
-    detailNote:
-        'Regular registration ends October 9. The individual game runs October 23–25 and the team game runs November 6–8, 2026',
+    detailNote: 'Fall registration closed Oct 13; Spring season registration opens in January. Confirm current rules on the official site.',
     timeCommitment: 'Season with practice, individual, and team games',
     icon: Icons.security,
+    cost: 'paid',
+    costNote: '\$45 per player (Fall 2026)',
   ),
   _competition(
     id: 'american_rocketry_challenge',
@@ -2148,10 +2222,13 @@ final List<Resource> _catalogResources = [
     description:
         'Design, build, and fly a model rocket toward a new altitude, duration, and payload target each season',
     url: 'https://www.rocketrychallenge.org/',
-    deadline: 'December 6, 2026 at 11:59 PM ET',
-    deadlineIso: '2026-12-06T23:59:00-05:00',
+    deadline: 'December 6, 2026 at 11:59 PM ET (team registration)',
+    deadlineIso: '2026-12-06',
     timeCommitment: 'Season-long build and flight challenge',
     icon: Icons.rocket_launch,
+    detailNote: 'National Finals May 15, 2027. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$195 per team',
   ),
   _competition(
     id: 'future_city_high_school',
@@ -2168,6 +2245,8 @@ final List<Resource> _catalogResources = [
     url: 'https://futurecity.org/',
     timeCommitment: 'Multi-month team design project',
     icon: Icons.engineering,
+    cost: 'paid',
+    costNote: '\$25 per organization (or \$300–\$450 per team for full competition)',
   ),
 
   _competition(
@@ -2186,7 +2265,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: '90-minute team contest',
     icon: Icons.calculate,
     deadline: 'April 6–15, 2027 (contest window)',
-    deadlineIso: '2027-04-06T00:00:00-04:00',
+    deadlineIso: '2027-04-06',
+    cost: 'free',
   ),
   _competition(
     id: 'hmmt',
@@ -2201,12 +2281,13 @@ final List<Resource> _catalogResources = [
     description:
         'Take on demanding individual, team, and guts-round problems at one of the largest student-run high school math tournaments',
     url: 'https://www.hmmt.org/',
-    deadline: 'November 7, 2026 (HMMT November at Harvard)',
-    deadlineIso: '2026-11-07T08:00:00-05:00',
+    deadline: 'January 9, 2027 (HMMT February general confirmation deadline)',
+    deadlineIso: '2027-01-09',
     timeCommitment: 'One-day tournament',
     icon: Icons.calculate,
-    detailNote:
-        'HMMT February 2027 is February 13, 2027 at MIT. Teams register through their school or coach; check the registration page for each tournament’s cutoff',
+    detailNote: 'HMMT November is Nov 7, 2026 at Harvard; HMMT February is Feb 13, 2027 at MIT. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$80 per team or \$10 per individual (financial aid available)',
   ),
   _competition(
     id: 'arml',
@@ -2222,6 +2303,8 @@ final List<Resource> _catalogResources = [
     url: 'https://www.arml.com/',
     timeCommitment: 'Annual team tournament',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Teams register through regional ARML coaches (fees apply)',
   ),
   _competition(
     id: 'm3_challenge',
@@ -2238,6 +2321,9 @@ final List<Resource> _catalogResources = [
     url: 'https://m3challenge.siam.org/',
     timeCommitment: '14-hour team challenge',
     icon: Icons.calculate,
+    detailNote: '2027 dates TBD on the site. Confirm current rules on the official site.',
+    cost: 'free',
+    costNote: 'No registration or participation fees',
   ),
   _competition(
     id: 'himcm',
@@ -2251,10 +2337,11 @@ final List<Resource> _catalogResources = [
     description:
         'Choose a real-world problem, build a mathematical model, and communicate your reasoning in a polished team paper',
     url: 'https://www.comap.com/contests/himcm-midmcm',
-    deadline: 'November 4, 2026 at 2:00 PM ET',
-    deadlineIso: '2026-11-04T14:00:00-05:00',
+    deadline: 'November 4, 2026 at 2:00 PM ET (contest opens; runs to Nov 17)',
+    deadlineIso: '2026-11-04',
     timeCommitment: 'Up to 14 days',
     icon: Icons.calculate,
+    cost: 'paid',
   ),
   _competition(
     id: 'mathcon',
@@ -2269,11 +2356,13 @@ final List<Resource> _catalogResources = [
     description:
         'Start with an accessible online math competition and earn a chance to solve deeper problems at the national finals',
     url: 'https://www.mathcon.org/',
-    deadline: 'March 17, 2027 (online round)',
-    deadlineIso: '2027-03-17T23:59:00-05:00',
+    deadline: 'March 17, 2027 (online round closes; opens Jan 13)',
+    deadlineIso: '2027-03-17',
     detailNote:
         'Registration is open, and coordinators may add students through the final day of the online testing window',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: '\$75 individual or \$345+ per school',
   ),
   _competition(
     id: 'math_league',
@@ -2289,6 +2378,8 @@ final List<Resource> _catalogResources = [
         'Build consistency through short local contests, then advance toward state, national, and international championship events',
     url: 'https://mathleague.org/hs.php',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'School registration fee',
   ),
   _competition(
     id: 'math_kangaroo',
@@ -2308,6 +2399,7 @@ final List<Resource> _catalogResources = [
     detailNote: 'Late registration remains available through February 1, 2027',
     timeCommitment: '75-minute individual contest',
     icon: Icons.calculate,
+    cost: 'paid',
   ),
   _competition(
     id: 'csmc',
@@ -2323,11 +2415,13 @@ final List<Resource> _catalogResources = [
         'Solve a mix of short-answer and full-solution problems where clear mathematical communication matters',
     url: 'https://cemc.uwaterloo.ca/contests/csimc',
     deadline: 'October 22, 2026 (school ordering deadline)',
-    deadlineIso: '2026-10-22T23:59:00-04:00',
+    deadlineIso: '2026-10-22',
     timeCommitment: 'Two-hour contest',
     icon: Icons.calculate,
     detailNote:
         'Contest date: Wednesday, November 18, 2026 in North and South America. A teacher or school contact orders the contest by October 22',
+    cost: 'paid',
+    costNote: '\$14 per participant (plus order fees)',
   ),
   _competition(
     id: 'stanford_math_tournament',
@@ -2343,6 +2437,9 @@ final List<Resource> _catalogResources = [
         'Choose subject tests, collaborate on team rounds, and meet a large community of students who genuinely enjoy hard math',
     url: 'https://www.stanfordmathtournament.org/',
     icon: Icons.calculate,
+    detailNote: '2027 application timeline not posted yet. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$30 per student (in person)',
   ),
   _competition(
     id: 'berkeley_math_tournament',
@@ -2358,10 +2455,11 @@ final List<Resource> _catalogResources = [
         'Work through individual and collaborative rounds written and run by UC Berkeley students',
     url: 'https://berkeley.mt/',
     icon: Icons.calculate,
-    deadline: 'November 14, 2026 (BMT 2026)',
-    deadlineIso: '2026-11-14T08:00:00-08:00',
-    detailNote:
-        'Berkeley Math Tournament moved to berkeley.mt. Sign up for the mailing list on the official site for registration cutoffs',
+    deadline: 'November 1, 2026 (late registration closes)',
+    deadlineIso: '2026-11-01',
+    detailNote: 'BMT 2026 is Nov 14 in person; BMT Online is Dec 5, 2026. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$15–\$25 per student in person; \$8 online',
   ),
   _competition(
     id: 'pumac',
@@ -2377,10 +2475,11 @@ final List<Resource> _catalogResources = [
         'Test advanced problem solving through individual subject rounds, team events, and a fast-paced power competition',
     url: 'https://pumac.princeton.edu/',
     icon: Icons.calculate,
-    deadline: 'October 11, 2026 (rolling registration closes)',
-    deadlineIso: '2026-10-11T23:59:00-04:00',
-    detailNote:
-        'PUMaC 2026 takes place Saturday, November 21, 2026 at Princeton. Registration is rolling until October 11',
+    deadline: 'November 21, 2026 (PUMaC 2026 competition day)',
+    deadlineIso: '2026-11-21',
+    detailNote: 'Registration is open; check the site for the cutoff. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '\$15 per student (\$120 per team); hardship waivers on request',
   ),
   _competition(
     id: 'caribou_math',
@@ -2396,6 +2495,8 @@ final List<Resource> _catalogResources = [
         'Solve interactive math and logic problems across several rounds during the school year',
     url: 'https://cariboutests.com/',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Paid contests (one free trial contest offered)',
   ),
 
   _competition(
@@ -2412,6 +2513,8 @@ final List<Resource> _catalogResources = [
         'Design a DNA experiment that could help solve a real challenge of living and working in space',
     url: 'https://www.genesinspace.org/us-contest/',
     icon: Icons.biotech,
+    detailNote: '2027 contest timeline not posted (2026 cycle opened Jan 5, closed Apr 10). Confirm current rules on the official site.',
+    cost: 'free',
   ),
   _competition(
     id: 'international_brain_bee',
@@ -2427,6 +2530,7 @@ final List<Resource> _catalogResources = [
         'Study the brain, neurological conditions, anatomy, and neuroscience research as you advance through quiz and practical rounds',
     url: 'https://www.thebrainbee.org/',
     icon: Icons.biotech,
+    costNote: 'Entry is through local chapter Bees; fees vary',
   ),
   _competition(
     id: 'envirothon',
@@ -2448,6 +2552,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-07-24T09:00:00-04:00',
     detailNote:
         'Teams advance through their state or provincial Envirothon in spring before the North American championship',
+    costNote: 'Entry is through state/provincial Envirothons; fees vary',
   ),
   _competition(
     id: 'stockholm_junior_water_prize',
@@ -2467,6 +2572,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'U.S. students who are at least 15 by August 1 enter through their state’s SJWP competition, usually in spring. The U.S. program is run by the Water Environment Federation',
     researchFair: true,
+    cost: 'free',
   ),
   _competition(
     id: 'physicsbowl',
@@ -2485,6 +2591,7 @@ final List<Resource> _catalogResources = [
     icon: Icons.science,
     detailNote:
         'Registration for PhysicsBowl 2027 opens in December 2026. Last year’s registration deadline was late February',
+    cost: 'paid',
   ),
   _competition(
     id: 'national_ocean_sciences_bowl',
@@ -2504,6 +2611,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-01-15T23:59:00-05:00',
     detailNote:
         'The Virtual Sponge Bowl is March 20–21, 2027 on Zoom. Regional NOSB bowls run in winter and spring; contact your regional coordinator',
+    costNote: 'Some regional bowls charge a registration fee',
   ),
   _competition(
     id: 'biogeneius',
@@ -2537,9 +2645,11 @@ final List<Resource> _catalogResources = [
         'Research an existing technology, project how it could evolve at least ten years into the future, and explain the breakthroughs and consequences',
     url: 'https://www.exploravision.org/',
     deadline: 'January 27, 2027 at 8:00 PM ET',
-    deadlineIso: '2027-01-27T20:00:00-05:00',
+    deadlineIso: '2027-01-27',
     timeCommitment: 'Multi-week team research and design project',
     icon: Icons.science,
+    cost: 'free',
+    costNote: 'No entry fee',
   ),
   _competition(
     id: 'sarc',
@@ -2561,10 +2671,11 @@ final List<Resource> _catalogResources = [
         'Develop a two-page proposal in a field of your choice, then pitch it by video if selected as a finalist',
     url: 'https://www.researchcomp.org/welcome-to-sarc',
     timeCommitment: 'Several weeks of guided research and a finalist pitch',
-    detailNote:
-        'The 2026 cycle is complete and the next registration dates have not been published; check the official timeline before applying',
+    detailNote: '2027 registration opens January 1. Confirm current rules on the official site.',
     icon: Icons.science,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: '\$15–\$20 per student',
   ),
   _competition(
     id: 'hs3mt',
@@ -2579,11 +2690,12 @@ final List<Resource> _catalogResources = [
     description:
         'Explain a substantial research project clearly and persuasively in three minutes for national recognition and prizes',
     url: 'https://www.hs3mt.org/',
-    deadline: 'Opens December 1, 2026',
-    deadlineIso: '2026-12-01T00:00:00-05:00',
+    deadline: 'January 30, 2027 (rolling submissions close)',
+    deadlineIso: '2027-01-30',
     timeCommitment: 'Research summary, single-slide design, and recorded pitch',
     icon: Icons.record_voice_over,
     alsoFields: ['humanities'],
+    detailNote: 'Finalists and winner announced Mar 6, 2027. Confirm current rules on the official site.',
   ),
 
   _competition(
@@ -2600,6 +2712,8 @@ final List<Resource> _catalogResources = [
         'Practice business through role-plays, case studies, prepared projects, and simulations in finance, marketing, hospitality, and entrepreneurship',
     url: 'https://www.deca.org/compete',
     icon: Icons.business_center,
+    cost: 'paid',
+    costNote: 'Requires DECA chapter membership dues',
   ),
   _competition(
     id: 'fbla_competitive_events',
@@ -2616,6 +2730,8 @@ final List<Resource> _catalogResources = [
         'Choose from dozens of tests, presentations, role-plays, and production events across business, finance, technology, and communication',
     url: 'https://www.fbla.org/high-school/competitive-events/',
     icon: Icons.business_center,
+    cost: 'paid',
+    costNote: 'Requires FBLA membership dues',
   ),
   _competition(
     id: 'bpa_competitions',
@@ -2632,6 +2748,8 @@ final List<Resource> _catalogResources = [
         'Show what you can do in business, finance, IT, marketing, leadership, and workplace skills through practical competitive events',
     url: 'https://bpa.org/competitions/',
     icon: Icons.business_center,
+    cost: 'paid',
+    costNote: 'Requires BPA membership dues',
   ),
   _competition(
     id: 'national_personal_finance_challenge',
@@ -2647,6 +2765,7 @@ final List<Resource> _catalogResources = [
         'Work with a team to make smart decisions about income, spending, saving, investing, credit, and financial risk',
     url: 'https://financechallenge.unl.edu/',
     icon: Icons.account_balance_wallet,
+    cost: 'free',
   ),
   _competition(
     id: 'nfte_wsi',
@@ -2664,6 +2783,7 @@ final List<Resource> _catalogResources = [
     icon: Icons.lightbulb,
     deadline: 'December 13, 2026 (entry submission)',
     deadlineIso: '2026-12-13T23:59:00-05:00',
+    cost: 'free',
   ),
   _competition(
     id: 'harvard_crimson_case',
@@ -2681,6 +2801,8 @@ final List<Resource> _catalogResources = [
     deadline: 'October 14, 2026 at 11:59 PM GMT',
     deadlineIso: '2026-10-14T23:59:00Z',
     icon: Icons.business_center,
+    cost: 'paid',
+    costNote: '\$10–\$15+ per student registration fee',
   ),
   _competition(
     id: 'global_youth_entrepreneurship_challenge',
@@ -2697,6 +2819,9 @@ final List<Resource> _catalogResources = [
     url: 'https://entreplanet.org/GYEC/',
     timeCommitment: '12-hour team challenge',
     icon: Icons.lightbulb,
+    detailNote: '2027 dates not posted (2026 applications closed Apr 20). Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: '10,000 yen per team registration fee',
   ),
   _competition(
     id: 'tie_young_entrepreneurs',
@@ -2712,6 +2837,7 @@ final List<Resource> _catalogResources = [
         'Learn the basics of launching a company, build a team plan, and pitch to experienced entrepreneurs and investors',
     url: 'https://tyeglobal.org/',
     icon: Icons.lightbulb,
+    costNote: 'Run by local TiE chapters; fees vary',
   ),
   _competition(
     id: 'ja_titan',
@@ -2727,6 +2853,7 @@ final List<Resource> _catalogResources = [
         'Run a simulated company, balance price, production, marketing, and research decisions, and compete on business performance',
     url: 'https://jausa.ja.org/programs/ja-titan',
     icon: Icons.business_center,
+    costNote: 'Offered through local JA chapters/schools',
   ),
   _competition(
     id: 'international_economics_olympiad',
@@ -2742,6 +2869,8 @@ final List<Resource> _catalogResources = [
         'Combine economics theory, financial literacy, and a business case as part of a national team',
     url: 'https://ieo-official.org/',
     icon: Icons.account_balance,
+    cost: 'free',
+    costNote: 'IEO participation is free of charge (national selection may differ)',
   ),
 
   _competition(
@@ -2763,6 +2892,8 @@ final List<Resource> _catalogResources = [
         'Regional programs set their own deadlines. The first close December 1, 2026, while some remain open through January 4, 2027. Use the official Region Locator to confirm your art deadline.',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: '\$15 per entry / \$40 per portfolio (fee waivers available)',
   ),
   _competition(
     id: 'bennington_young_writers',
@@ -2783,6 +2914,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-11-01T23:59:00-04:00',
     detailNote:
         'Submissions opened September 1 for poetry, fiction, and nonfiction',
+    cost: 'free',
   ),
   _competition(
     id: 'poetry_out_loud',
@@ -2798,6 +2930,7 @@ final List<Resource> _catalogResources = [
         'Choose a published poem, make it your own through careful recitation, and build confidence on stage',
     url: 'https://www.arts.gov/initiatives/poetry-out-loud',
     icon: Icons.record_voice_over,
+    cost: 'free',
   ),
   _competition(
     id: 'nsda_nationals',
@@ -2817,6 +2950,8 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-06-13T08:00:00-07:00',
     detailNote:
         'Students qualify through NSDA district tournaments during the school year; ask your coach for your district’s qualifier date',
+    cost: 'paid',
+    costNote: 'Requires NSDA membership and qualification',
   ),
   _competition(
     id: 'we_the_people',
@@ -2830,8 +2965,9 @@ final List<Resource> _catalogResources = [
         'Participate through a class or school team using the official state program',
     description:
         'Prepare thoughtful constitutional testimony as a class, then answer judges’ follow-up questions in simulated hearings',
-    url: 'https://civiced.org/we-the-people',
+    url: 'https://www.civiced.org/about-we-people',
     icon: Icons.account_balance,
+    costNote: 'Run through classrooms and state coordinators',
   ),
   _competition(
     id: 'npr_student_podcast',
@@ -2867,6 +3003,7 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2027-01-11T23:59:00-05:00',
     detailNote: 'The 2027 contest opened September 1, 2026',
     alsoFields: ['humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'foyle_young_poets_active',
@@ -2883,6 +3020,8 @@ final List<Resource> _catalogResources = [
     url:
         'https://poetrysociety.org.uk/competitions/foyle-young-poets-of-the-year-award/',
     icon: Icons.edit_note,
+    cost: 'free',
+    costNote: 'Free to enter',
   ),
   _competition(
     id: 'afsa_essay',
@@ -2899,6 +3038,8 @@ final List<Resource> _catalogResources = [
     url: 'https://afsa.org/essay-contest',
     icon: Icons.public,
     alsoFields: ['humanities'],
+    detailNote: 'ON HIATUS for the 2026–2027 school year (per AFSA). Confirm current rules on the official site.',
+    cost: 'free',
   ),
   _competition(
     id: 'national_high_school_ethics_bowl',
@@ -2916,6 +3057,8 @@ final List<Resource> _catalogResources = [
     icon: Icons.forum,
     detailNote:
         'The 2026–2027 season launched September 18, 2026. Teams compete in regional bowls during the winter before the national championship in April',
+    cost: 'paid',
+    costNote: 'About \$175 per school per season (more after Nov 1); hardship help available',
   ),
   _competition(
     id: 'youngarts',
@@ -2934,6 +3077,8 @@ final List<Resource> _catalogResources = [
     deadlineIso: '2026-10-06T20:00:00-04:00',
     icon: Icons.palette,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: '\$35 application fee (fee waivers available)',
   ),
   _competition(
     id: 'john_locke_essay',
@@ -2950,6 +3095,9 @@ final List<Resource> _catalogResources = [
     url: 'https://www.johnlockeinstitute.com/essay-competition',
     icon: Icons.edit_note,
     alsoFields: ['humanities', 'economics'],
+    detailNote: '2027 registration expected to open in early February. Confirm current rules on the official site.',
+    cost: 'free',
+    costNote: 'Entry is free',
   ),
   _competition(
     id: 'congressional_art_competition',
@@ -2966,6 +3114,8 @@ final List<Resource> _catalogResources = [
     url:
         'https://www.house.gov/educators-and-students/congressional-art-competition',
     icon: Icons.palette,
+    detailNote: 'Deadlines are set by each Representative\'s office (usually spring). Confirm current rules on the official site.',
+    cost: 'free',
   ),
   _competition(
     id: 'davidson_fellows',
@@ -2985,6 +3135,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The 2027 Davidson Fellows application opens in fall 2026. Students 18 or younger submit a significant piece of work in STEM, literature, music, philosophy, or Outside the Box',
     alsoFields: ['humanities', 'math', 'cs'],
+    cost: 'free',
+    costNote: 'No application fee',
   ),
   _competition(
     id: 'nasa_herc',
@@ -3002,10 +3154,11 @@ final List<Resource> _catalogResources = [
         'https://www.nasa.gov/learning-resources/nasa-human-exploration-rover-challenge/',
     deadline: 'September 17, 2026 at 8:00 AM CT',
     deadlineIso: '2026-09-17T08:00:00-05:00',
-    detailNote: 'The 2027 team proposal is due at 8:00 AM Central Time',
+    detailNote: '2027 proposal deadline (Sep 17, 2026) has passed. Confirm current rules on the official site.',
     timeCommitment:
         'Nine-month engineering challenge; finals April 21–24, 2027',
     icon: Icons.rocket_launch,
+    cost: 'free',
   ),
   _competition(
     id: 'mate_rov',
@@ -3022,6 +3175,9 @@ final List<Resource> _catalogResources = [
     url: 'https://materovcompetition.org/',
     timeCommitment: 'Season-long ROV build and regional competition',
     icon: Icons.water,
+    detailNote: '2027 season registration not open yet. Confirm current rules on the official site.',
+    cost: 'paid',
+    costNote: 'Team registration fees apply',
   ),
   _competition(
     id: 'mit_think',
@@ -3040,6 +3196,7 @@ final List<Resource> _catalogResources = [
     icon: Icons.science_outlined,
     detailNote:
         'The last cycle’s proposals were due January 1. Expect the 2027 application to close around January 1, 2027; check think.mit.edu for the official date',
+    cost: 'free',
   ),
   _competition(
     id: 'igem_high_school',
@@ -3056,6 +3213,8 @@ final List<Resource> _catalogResources = [
     url: 'https://competition.igem.org/registration/overview',
     timeCommitment: 'Multi-month research and engineering season',
     icon: Icons.biotech,
+    cost: 'paid',
+    costNote: 'Team program fee required',
   ),
   _competition(
     id: 'hosa_competitive_events',
@@ -3073,6 +3232,8 @@ final List<Resource> _catalogResources = [
     url: 'https://hosa.org/guidelines/',
     timeCommitment: 'Chapter preparation plus regional and state rounds',
     icon: Icons.medical_services_outlined,
+    cost: 'paid',
+    costNote: 'Requires HOSA chapter membership dues',
   ),
   _competition(
     id: 'harvard_crimson_essay',
@@ -3095,6 +3256,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Registration, optional workshops, and one polished essay',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: 'Registration fee per student (same organizer as HCGCC)',
   ),
   _competition(
     id: 'harvard_crimson_business',
@@ -3112,6 +3275,8 @@ final List<Resource> _catalogResources = [
     url: 'https://programs.thecrimson.com/hcbc-guidelines',
     timeCommitment: 'Multi-stage business plan and presentation',
     icon: Icons.business_center,
+    detailNote: 'Preliminary round deadline has passed for this cycle. Confirm current rules on the official site.',
+    costNote: 'Finalists pay \$300 each for the in-person Global Championship',
   ),
   _competition(
     id: 'codeforces_contests',
@@ -3128,6 +3293,7 @@ final List<Resource> _catalogResources = [
     url: 'https://codeforces.com/contests',
     timeCommitment: 'Frequent contests, usually two to three hours each',
     icon: Icons.code,
+    cost: 'free',
   ),
   _competition(
     id: 'technology_student_association',
@@ -3154,6 +3320,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The official 2027–2028 high school guide lists more than 40 events. State associations set qualifying and registration deadlines',
     icon: Icons.engineering,
+    cost: 'paid',
+    costNote: 'Requires TSA chapter membership dues',
   ),
   _competition(
     id: 'modeling_the_future_challenge',
@@ -3175,6 +3343,8 @@ final List<Resource> _catalogResources = [
         'The 2026–27 scenario response and project proposal are due December 7, 2026; semifinalist project reports are due March 1, 2027',
     icon: Icons.analytics_outlined,
     alsoFields: ['business'],
+    cost: 'free',
+    costNote: 'Free registration',
   ),
   _competition(
     id: 'the_earth_prize',
@@ -3199,8 +3369,10 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Registration is open until January 10, 2027, and Earth Prize Blueprint submissions are due January 31, 2027. Teens ages 13–19 may enter individually or in teams',
     icon: Icons.eco,
-    deadline: 'January 10, 2027 (registration for The Earth Prize 2027)',
-    deadlineIso: '2027-01-10T23:59:00+01:00',
+    deadline: 'January 10, 2027 (registration closes)',
+    deadlineIso: '2027-01-10',
+    cost: 'free',
+    costNote: 'Registration is free of charge',
   ),
   _competition(
     id: 'genius_olympiad',
@@ -3231,6 +3403,8 @@ final List<Resource> _catalogResources = [
     icon: Icons.science_outlined,
     alsoFields: ['humanities'],
     researchFair: true,
+    cost: 'paid',
+    costNote: 'Application/registration fee required',
   ),
   _competition(
     id: 'samsung_solve_for_tomorrow',
@@ -3250,6 +3424,7 @@ final List<Resource> _catalogResources = [
     detailNote:
         'Samsung announced that the 2026–27 cycle opens in August. The official page had not yet posted a verified closing date when this listing was reviewed',
     icon: Icons.lightbulb_outline,
+    cost: 'free',
   ),
   _competition(
     id: 'us_academic_decathlon',
@@ -3279,6 +3454,8 @@ final List<Resource> _catalogResources = [
         'The 2026–27 theme is Journeys of Transformation. State programs set their own entry and qualifying deadlines',
     icon: Icons.school_outlined,
     alsoFields: ['science', 'math'],
+    cost: 'paid',
+    costNote: 'School team fees through state AcDec',
   ),
   _competition(
     id: 'iac_history_bee_bowl',
@@ -3296,9 +3473,10 @@ final List<Resource> _catalogResources = [
     url: 'https://www.iacompetitions.com/',
     timeCommitment:
         'Regional tournament with optional national and international advancement',
-    detailNote:
-        'The 2026–27 season is active. Registration and competition dates vary by regional tournament',
+    detailNote: 'Fall regionals run Nov–Dec 2026; registration closes ~12 days before each. Confirm current rules on the official site.',
     icon: Icons.history_edu,
+    cost: 'paid',
+    costNote: '\$54 per bee subject at regional tournaments',
   ),
   _competition(
     id: 'national_science_bee',
@@ -3326,6 +3504,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'International Academic Competitions sets dates by tournament and division. Confirm that the selected regional event offers the Science Bee and review its national-qualification rules before registering',
     icon: Icons.science_outlined,
+    cost: 'paid',
+    costNote: '\$54 per bee subject at regional tournaments',
   ),
   _competition(
     id: 'bow_seat_ocean_awareness',
@@ -3354,6 +3534,7 @@ final List<Resource> _catalogResources = [
     deadline: 'June 7, 2027 (2027 Blue Planet Awareness Contest)',
     deadlineIso: '2027-06-07T23:59:00-04:00',
     alsoFields: ['essay_writing', 'humanities'],
+    cost: 'free',
   ),
 
   // ===========================================================================
@@ -3372,12 +3553,14 @@ final List<Resource> _catalogResources = [
     description:
         'Spend about a month on each round of proof-based problems and write full solutions, a great bridge from short-answer contests to olympiad-style writing',
     url: 'https://www.usamts.org/',
-    deadline: 'October 13, 2026 at 10:00 PM ET (Round 1 solutions)',
-    deadlineIso: '2026-10-13T22:00:00-04:00',
+    deadline: 'November 30, 2026 at 10:00 PM ET (Round 2 solutions)',
+    deadlineIso: '2026-11-30',
     detailNote:
         'Each round has one puzzle and four proof problems. Web submissions are due at 10 PM Eastern; graders return written feedback on every solution',
     timeCommitment: 'Three month-long rounds during the school year',
     icon: Icons.calculate,
+    cost: 'free',
+    costNote: 'No fee to participate',
   ),
   _competition(
     id: 'cemc_pcf',
@@ -3398,6 +3581,8 @@ final List<Resource> _catalogResources = [
         'Contest dates in North and South America: February 23 or 24, 2027. Schools in Canada may order until February 9',
     timeCommitment: '60-minute contest',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Per-student CEMC contest fee (ordered by schools)',
   ),
   _competition(
     id: 'cemc_euclid',
@@ -3418,6 +3603,8 @@ final List<Resource> _catalogResources = [
         'Contest date in North and South America: Tuesday, April 6, 2027',
     timeCommitment: '2.5-hour contest',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Per-student CEMC contest fee (ordered by schools)',
   ),
   _competition(
     id: 'cemc_fgh',
@@ -3438,6 +3625,8 @@ final List<Resource> _catalogResources = [
         'Contest date in North and South America: Wednesday, April 7, 2027',
     timeCommitment: '75-minute contest',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Per-student CEMC contest fee (ordered by schools)',
   ),
   _competition(
     id: 'cemc_ccc',
@@ -3458,6 +3647,8 @@ final List<Resource> _catalogResources = [
         'Contest date in North and South America: Wednesday, February 17, 2027',
     timeCommitment: 'Three-hour contest',
     icon: Icons.computer,
+    cost: 'paid',
+    costNote: 'Per-student CEMC contest fee (ordered by schools)',
   ),
   _competition(
     id: 'beaver_computing',
@@ -3478,6 +3669,8 @@ final List<Resource> _catalogResources = [
         'Contest window in North and South America: November 9–20, 2026',
     timeCommitment: '45-minute online contest',
     icon: Icons.computer,
+    cost: 'paid',
+    costNote: '\$3 per participant (plus order fee)',
   ),
   _competition(
     id: 'acsl',
@@ -3493,12 +3686,13 @@ final List<Resource> _catalogResources = [
     description:
         'Take four short contests across the year covering computer-science theory and a programming problem, with top scorers invited to the ACSL Finals',
     url: 'https://www.acsl.org/',
-    deadline: 'October 19, 2026 (Contest #1 opens)',
-    deadlineIso: '2026-10-19T08:00:00-04:00',
-    detailNote:
-        'Registration for 2026–27 is open now. Each contest has short written problems plus a take-home programming problem',
+    deadline: 'December 31, 2026 (season team registration deadline)',
+    deadlineIso: '2026-12-31',
+    detailNote: 'Contest #1 open Oct 19, 2026–Jan 10, 2027. Confirm current rules on the official site.',
     timeCommitment: 'Four contests from fall through spring',
     icon: Icons.computer,
+    cost: 'paid',
+    costNote: '\$175 per team (\$125 Elementary)',
   ),
   _competition(
     id: 'math_prize_for_girls',
@@ -3517,6 +3711,8 @@ final List<Resource> _catalogResources = [
         'Math Prize for Girls 2026 takes place on Sunday, October 11, 2026 at MIT. Applications for the next contest usually open in late spring using AMC scores',
     timeCommitment: 'One-day contest',
     icon: Icons.calculate,
+    cost: 'free',
+    costNote: 'No fee to apply or participate',
   ),
   _competition(
     id: 'cmimc',
@@ -3535,6 +3731,8 @@ final List<Resource> _catalogResources = [
         'The 2027 dates are not posted yet. In 2026, CMIMC Math was held March 28 in Pittsburgh and CMIMC Programming ran online April 18–20',
     timeCommitment: 'One-day tournament or weekend online contest',
     icon: Icons.calculate,
+    cost: 'paid',
+    costNote: 'Modest registration fee',
   ),
   _competition(
     id: 'naqt_hsnct',
@@ -3556,6 +3754,8 @@ final List<Resource> _catalogResources = [
     timeCommitment:
         'Season of weekend tournaments plus a three-day national championship',
     icon: Icons.lightbulb_outline,
+    cost: 'paid',
+    costNote: 'Team entry fee for HSNCT',
   ),
   _competition(
     id: 'national_latin_exam',
@@ -3576,6 +3776,8 @@ final List<Resource> _catalogResources = [
         'Online test registration closes February 20, 2027. The 2027 testing window is March 1–19',
     timeCommitment: '45-minute exam',
     icon: Icons.translate,
+    cost: 'paid',
+    costNote: 'Per-student exam fee (ordered by teachers)',
   ),
   _competition(
     id: 'national_spanish_exam',
@@ -3596,6 +3798,8 @@ final List<Resource> _catalogResources = [
         'Registration opens October 15, 2026 (early registration unlocks the built-in practice section). Late registration runs February 2–21; exams are given February 22–April 2, 2027',
     timeCommitment: 'Online exam during the spring window',
     icon: Icons.translate,
+    cost: 'paid',
+    costNote: 'Per-student exam fee (ordered by teachers)',
   ),
   _competition(
     id: 'le_grand_concours',
@@ -3616,6 +3820,8 @@ final List<Resource> _catalogResources = [
         'Ask your French teacher to register you before the window opens; make-up days are April 8 and 9, 2027',
     timeCommitment: 'Online exam during the spring window',
     icon: Icons.translate,
+    cost: 'paid',
+    costNote: 'Per-student exam fee (ordered by teachers)',
   ),
   _competition(
     id: 'vfw_voice_of_democracy',
@@ -3637,6 +3843,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One recorded essay',
     icon: Icons.mic_none_outlined,
     alsoFields: ['essay_writing'],
+    cost: 'free',
   ),
   _competition(
     id: 'american_legion_oratorical',
@@ -3657,6 +3864,7 @@ final List<Resource> _catalogResources = [
         'Local and state contests run in winter, and the national finals are held in May. Contact your state American Legion department for its entry date',
     timeCommitment: 'Prepared oration plus an assigned topic speech',
     icon: Icons.mic_none_outlined,
+    cost: 'free',
   ),
   _competition(
     id: 'princeton_prize_race_relations',
@@ -3675,6 +3883,7 @@ final List<Resource> _catalogResources = [
         'The online application usually closes in early January. Check the apply page for the current cycle’s deadline and regional eligibility',
     timeCommitment: 'Online application about your initiative',
     icon: Icons.volunteer_activism_outlined,
+    cost: 'free',
   ),
   _competition(
     id: 'aahsff',
@@ -3693,6 +3902,10 @@ final List<Resource> _catalogResources = [
         'Film submissions typically close in late spring or summer before the fall festival in New York City',
     timeCommitment: 'Short film submission',
     icon: Icons.movie_creation_outlined,
+    deadline: 'March 1, 2027 (free submission deadline; submissions open Nov 2, 2026)',
+    deadlineIso: '2027-03-01',
+    cost: 'free',
+    costNote: 'Free by Mar 1, 2027; later deadlines cost \$20–\$65',
   ),
   _competition(
     id: 'jshs',
@@ -3713,6 +3926,7 @@ final List<Resource> _catalogResources = [
     icon: Icons.science_outlined,
     alsoFields: ['humanities'],
     researchFair: true,
+    cost: 'free',
   ),
   _competition(
     id: 'first_tech_challenge',
@@ -3731,6 +3945,8 @@ final List<Resource> _catalogResources = [
         'The season game is released in September and qualifying events run through the winter. Use FIRST’s event finder for local dates',
     timeCommitment: 'Season-long team program',
     icon: Icons.precision_manufacturing_outlined,
+    cost: 'paid',
+    costNote: 'Team registration fee',
   ),
   _competition(
     id: 'vex_robotics_competition',
@@ -3749,6 +3965,8 @@ final List<Resource> _catalogResources = [
         'The game is revealed each spring; local events run from fall through early spring. Find events on RobotEvents',
     timeCommitment: 'Season-long team program',
     icon: Icons.precision_manufacturing_outlined,
+    cost: 'paid',
+    costNote: 'Team registration and event fees',
   ),
   _competition(
     id: 'national_mock_trial',
@@ -3770,6 +3988,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Season of practice and trials',
     icon: Icons.gavel,
     alsoFields: ['polisci'],
+    cost: 'paid',
+    costNote: 'Through state mock trial programs (fees vary)',
   ),
   _competition(
     id: 'world_scholars_cup',
@@ -3790,6 +4010,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Weekend regional round; optional global events',
     icon: Icons.groups_outlined,
     alsoFields: ['science', 'essay_writing'],
+    cost: 'paid',
+    costNote: 'Registration fees per round',
   ),
   _competition(
     id: 'nasa_techrise',
@@ -3812,6 +4034,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Proposal now; build period if selected',
     icon: Icons.rocket_launch_outlined,
     alsoFields: ['science'],
+    cost: 'free',
   ),
   _competition(
     id: 'world_series_paradigm',
@@ -3826,11 +4049,13 @@ final List<Resource> _catalogResources = [
     description:
         'Propose an original solution to the year’s challenge (currently improving personal health through wellness and healing) for prizes up to \$100,000',
     url: 'https://www.projectparadigm.org/',
-    detailNote:
-        'The entry deadline is posted on the official challenge page; recent cycles closed in early spring',
+    detailNote: 'Finalists announced by Jun 1, 2027. Confirm current rules on the official site.',
     timeCommitment: 'Self-paced project',
     icon: Icons.lightbulb_outline,
     alsoFields: ['engineering'],
+    deadline: 'May 1, 2027 at 11:59 PM PT (entry deadline)',
+    deadlineIso: '2027-05-01',
+    cost: 'free',
   ),
   _competition(
     id: 'peya',
@@ -3850,6 +4075,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Project you have already completed',
     icon: Icons.eco_outlined,
     alsoFields: ['science'],
+    cost: 'free',
   ),
   _competition(
     id: 'destination_imagination',
@@ -3869,6 +4095,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Season-long team project',
     icon: Icons.lightbulb_outline,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: 'Team registration fee',
   ),
   _competition(
     id: 'future_problem_solving',
@@ -3887,6 +4115,8 @@ final List<Resource> _catalogResources = [
         'Practice problems run during the fall and winter; qualifying problems lead to affiliate bowls in spring and the International Conference in June',
     timeCommitment: 'Season of practice and qualifying problems',
     icon: Icons.psychology_alt_outlined,
+    cost: 'paid',
+    costNote: 'Affiliate registration fees',
   ),
   _competition(
     id: 'sigma_xi_srs',
@@ -3906,6 +4136,8 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Online presentation over two weeks',
     icon: Icons.science_outlined,
     alsoFields: ['humanities'],
+    cost: 'paid',
+    costNote: '\$35 (members) / \$50 (non-members) registration',
   ),
   _competition(
     id: 'seaperch_challenge',
@@ -3922,10 +4154,11 @@ final List<Resource> _catalogResources = [
     url: 'https://seaperch.org/',
     deadline: 'June 5–6, 2027 (International SeaPerch Challenge)',
     deadlineIso: '2027-06-05T08:00:00-04:00',
-    detailNote:
-        'Teams must qualify at a regional SeaPerch competition during the spring',
+    detailNote: 'Regional competitions run Oct 1, 2026–Apr 4, 2027. Confirm current rules on the official site.',
     timeCommitment: 'Season-long team build',
     icon: Icons.waves,
+    cost: 'paid',
+    costNote: 'Registration fees per the Team Handbook',
   ),
   _competition(
     id: 'kenyon_grodd_prize',
@@ -3946,6 +4179,7 @@ final List<Resource> _catalogResources = [
         'Submissions are accepted only from November 1 through November 30 each year. Winners are announced in March',
     timeCommitment: 'One poem',
     icon: Icons.edit_note,
+    cost: 'free',
   ),
   _competition(
     id: 'adroit_prizes',
@@ -3964,6 +4198,8 @@ final List<Resource> _catalogResources = [
         'The 2026 window ran April 1 to May 12. Expect the 2027 window to open in early spring',
     timeCommitment: 'Up to five poems or 3,500 words of prose',
     icon: Icons.edit_note,
+    cost: 'paid',
+    costNote: '\$15 submission fee (financial-aid waivers available)',
   ),
   _competition(
     id: 'ayn_rand_essay_contests',
@@ -3978,11 +4214,11 @@ final List<Resource> _catalogResources = [
     description:
         'Write an essay responding to prompts on one of Ayn Rand’s novels for scholarship prizes of up to \$25,000',
     url: 'https://aynrand.org/students/essay-contests/',
-    detailNote:
-        'Each contest posts its own prompts and deadline on the official page; read the novel before choosing a prompt',
+    detailNote: 'Next deadline listed as TBD. Confirm current rules on the official site.',
     timeCommitment: 'One essay per contest',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'sejong_sijo_competition',
@@ -4001,6 +4237,9 @@ final List<Resource> _catalogResources = [
         'The 2026 deadline was February 28, 2026 at 11:59 PM CT. The essay category was discontinued in 2026; the sijo category continues',
     timeCommitment: 'One short poem',
     icon: Icons.edit_note,
+    deadline: 'February 28, 2027 at 11:59 PM CT',
+    deadlineIso: '2027-02-28',
+    cost: 'free',
   ),
   _competition(
     id: 'dna_day_essay',
@@ -4020,6 +4259,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One 750-word essay',
     icon: Icons.biotech_outlined,
     alsoFields: ['essay_writing'],
+    cost: 'free',
   ),
   _competition(
     id: 'young_composers_challenge',
@@ -4035,8 +4275,7 @@ final List<Resource> _catalogResources = [
     description:
         'Submit an original composition for orchestra or ensemble; winners hear their piece performed and recorded by professional musicians',
     url: 'https://www.youngcomposerschallenge.org/',
-    detailNote:
-        'Check the official site for this year’s submission window and instrumentation rules',
+    detailNote: '2026 submission deadline (Oct 1) has passed. Confirm current rules on the official site.',
     timeCommitment: 'One original composition',
     icon: Icons.music_note_outlined,
   ),
@@ -4059,6 +4298,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Self-paced research project',
     icon: Icons.history_edu_outlined,
     alsoFields: ['essay_writing', 'history'],
+    cost: 'free',
   ),
   _competition(
     id: 'solar_car_challenge',
@@ -4078,6 +4318,8 @@ final List<Resource> _catalogResources = [
         'The event is held each July; teams register and pass inspection requirements during the school year',
     timeCommitment: 'Multi-year team build',
     icon: Icons.solar_power_outlined,
+    cost: 'paid',
+    costNote: 'Race/team fees apply',
   ),
   _competition(
     id: 'invention_convention_worldwide',
@@ -4097,6 +4339,7 @@ final List<Resource> _catalogResources = [
         'Affiliate competitions run from winter through spring, and the national event is held in early summer. Find your affiliate on the official site',
     timeCommitment: 'Self-paced invention project',
     icon: Icons.lightbulb_outline,
+    costNote: 'Curriculum is free; affiliate programs may charge low fees',
   ),
   _competition(
     id: 'im2c',
@@ -4117,6 +4360,7 @@ final List<Resource> _catalogResources = [
         'Teams choose any five consecutive days in the contest window to complete their report. Top U.S. papers advance to the international round',
     timeCommitment: 'Five consecutive days',
     icon: Icons.functions,
+    costNote: 'In the U.S., teams enter through COMAP (fees may apply)',
   ),
   _competition(
     id: 'investwrite',
@@ -4136,6 +4380,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One essay',
     icon: Icons.trending_up,
     alsoFields: ['essay_writing'],
+    cost: 'free',
   ),
   _competition(
     id: 'nffty',
@@ -4156,6 +4401,8 @@ final List<Resource> _catalogResources = [
         'Final deadline: December 11, 2026 (higher fee). NFFTY’s 20th festival runs April 1–4, 2027 in Seattle',
     timeCommitment: 'Short film or screenplay submission',
     icon: Icons.movie_creation_outlined,
+    cost: 'paid',
+    costNote: '\$30–\$60 submission fee depending on deadline',
   ),
   _competition(
     id: 'codeday',
@@ -4174,6 +4421,7 @@ final List<Resource> _catalogResources = [
         'CodeDay was founded in Seattle and runs seasonal weekend events; check the site for the next event near you',
     timeCommitment: '24-hour weekend event',
     icon: Icons.computer,
+    cost: 'free',
   ),
   _competition(
     id: 'national_german_exam',
@@ -4192,6 +4440,8 @@ final List<Resource> _catalogResources = [
         'Teachers register students during the winter for a testing window that usually runs from December to January',
     timeCommitment: 'Online exam',
     icon: Icons.translate,
+    cost: 'paid',
+    costNote: 'Per-student exam fee (ordered by teachers)',
   ),
   _competition(
     id: 'optimist_essay_contest',
@@ -4211,6 +4461,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One essay',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'jasna_essay_contest',
@@ -4230,6 +4481,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One essay',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'ncwit_aic_award',
@@ -4251,6 +4503,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Online application',
     icon: Icons.computer,
     alsoFields: ['engineering'],
+    cost: 'free',
   ),
   _competition(
     id: 'cubes_in_space',
@@ -4266,12 +4519,14 @@ final List<Resource> _catalogResources = [
         'Design an experiment that fits in a 4 cm or 10 cm cube to launch on a NASA sounding rocket or scientific balloon',
     url: 'https://www.cubesinspace.com/',
     deadline: 'November 9, 2026 (registration and enrollment opens)',
-    deadlineIso: '2026-11-09T09:00:00-05:00',
+    deadlineIso: '2026-11-09',
     detailNote:
         'Selected experiments launch from NASA facilities in summer 2027 and are returned to students for analysis',
     timeCommitment: 'Design and proposal during the school year',
     icon: Icons.rocket_launch_outlined,
     alsoFields: ['science'],
+    cost: 'free',
+    costNote: 'Free to sign up and apply; \$75 flight fee only if your experiment is selected',
   ),
   _competition(
     id: 'skillsusa_championships',
@@ -4290,6 +4545,8 @@ final List<Resource> _catalogResources = [
         'Students advance from regional and state contests in spring to the national championships in June',
     timeCommitment: 'Season of local and state contests',
     icon: Icons.handyman_outlined,
+    cost: 'paid',
+    costNote: 'Requires SkillsUSA membership dues',
   ),
   _competition(
     id: 'swift_student_challenge',
@@ -4308,6 +4565,7 @@ final List<Resource> _catalogResources = [
         'The submission window is usually announced in the fall and closes in late February; check Apple’s page for the 2027 dates',
     timeCommitment: 'Self-paced app project',
     icon: Icons.phone_iphone,
+    cost: 'free',
   ),
   _competition(
     id: 'lockheed_codequest',
@@ -4327,6 +4585,7 @@ final List<Resource> _catalogResources = [
         'Events run in spring at multiple sites; registration opens on the official page',
     timeCommitment: 'One competition day',
     icon: Icons.computer,
+    cost: 'free',
   ),
   _competition(
     id: 'pulitzer_local_letters',
@@ -4349,6 +4608,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One letter',
     icon: Icons.edit_note,
     alsoFields: ['humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'hieec',
@@ -4392,6 +4652,7 @@ final List<Resource> _catalogResources = [
     detailNote: 'The 2027 prompt will be posted in April 2027',
     timeCommitment: 'One essay',
     icon: Icons.edit_note,
+    cost: 'free',
   ),
   _competition(
     id: 'princeton_legal_journal_essay',
@@ -4410,6 +4671,8 @@ final List<Resource> _catalogResources = [
         'The 2026 theme was religious liberty in American law, with essays due May 15, 2026. Expect the 2027 theme in spring',
     timeCommitment: 'One essay',
     icon: Icons.edit_note,
+    cost: 'paid',
+    costNote: '\$15 submission fee',
   ),
   _competition(
     id: 'columbia_political_review_essay',
@@ -4493,6 +4756,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One essay',
     icon: Icons.edit_note,
     alsoFields: ['essay_writing'],
+    cost: 'free',
   ),
   _competition(
     id: 'natgeo_slingshot',
@@ -4519,6 +4783,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Short video pitch',
     icon: Icons.eco_outlined,
     alsoFields: ['science'],
+    cost: 'free',
   ),
   _competition(
     id: 'science_without_borders',
@@ -4541,6 +4806,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'One original artwork',
     icon: Icons.palette_outlined,
     alsoFields: ['science', 'humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'world_of_8_billion',
@@ -4568,6 +4834,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: '60-second video',
     icon: Icons.movie_creation_outlined,
     alsoFields: ['science', 'humanities'],
+    cost: 'free',
   ),
   _competition(
     id: 'project_green_challenge',
@@ -4589,6 +4856,7 @@ final List<Resource> _catalogResources = [
     timeCommitment: 'Daily challenges for one month',
     icon: Icons.eco_outlined,
     alsoFields: ['science'],
+    cost: 'free',
   ),
 
   // ===========================================================================
@@ -7540,6 +7808,8 @@ final List<Resource> _catalogResources = [
     detailNote:
         'The fall 2026 symposium was held online September 26, 2026; applications for the next symposium open several months ahead',
     alsoFields: ['humanities', 'science'],
+    cost: 'free',
+    costNote: 'Free of charge (presenting spots are for Polygence students)',
   ),
   _researchConference(
     id: 'thermo_fisher_jic',
@@ -7560,6 +7830,7 @@ final List<Resource> _catalogResources = [
         'Affiliated U.S. science fairs; finalists attend Finals Week in Washington, D.C.',
     timeCommitment:
         'Independent fair project, nomination application, and finalist activities if selected',
+    cost: 'free',
   ),
   _researchConference(
     id: 'isweeep',
@@ -7577,9 +7848,8 @@ final List<Resource> _catalogResources = [
         'Historically, secondary-school students entered qualifying research in energy, engineering, or the environment through affiliated fairs or direct paper review',
     description:
         'Present an original sustainability-focused science or engineering project in the International Sustainable World Energy, Engineering, and Environment Project Olympiad',
-    url: 'https://isweeep.org/',
-    detailNote:
-        'No active U.S. competition cycle or current official deadline could be confirmed for 2026–27. Treat this as a legacy opportunity and verify that the organizer has reopened entries before preparing an application',
+    url: 'https://findafair.societyforscience.org/',
+    detailNote: 'The official I-SWEEEP website is no longer active (domain is parked); the fair appears discontinued. Confirm current rules on the official site.',
     format: 'in_person',
     locationNote: 'Historically held in Houston, Texas',
     timeCommitment:
@@ -7614,6 +7884,7 @@ final List<Resource> _catalogResources = [
     timeCommitment:
         'Full research paper plus regional and global oral defenses if selected',
     alsoFields: ['math', 'cs', 'business'],
+    cost: 'free',
   ),
   _researchConference(
     id: 'local_science_fair_finalist',
@@ -7632,6 +7903,7 @@ final List<Resource> _catalogResources = [
     locationNote: 'School, city, county, or municipal fair near the student',
     timeCommitment:
         'Independent project, required forms, display, and judging interview',
+    costNote: 'Fees depend on your local fair',
   ),
   _researchConference(
     id: 'regional_state_science_fair_finalist',
@@ -7650,6 +7922,7 @@ final List<Resource> _catalogResources = [
     locationNote: 'Society-affiliated regional or state fair',
     timeCommitment:
         'Independent project, compliance forms, display, and finalist judging',
+    costNote: 'Fees depend on your regional/state fair',
   ),
   const Resource(
     id: 'wssef_2027',
@@ -7687,6 +7960,8 @@ final List<Resource> _catalogResources = [
     ],
     detailNote:
         'WSSEF 2027 is April 2–3 in Bremerton (grades 9–12 compete April 3). Central Sound’s grades 9–12 regional fair is March 6, so check the regional route before registering directly.',
+    cost: 'paid',
+    costNote: 'Registration fee required',
   ),
   const Resource(
     id: 'rsi',

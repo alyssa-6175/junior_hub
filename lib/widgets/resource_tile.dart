@@ -100,12 +100,19 @@ class ResourceTile extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 1),
-                    Text(
-                      '${resource.categoryLabel} · ${resource.fieldLabel}',
-                      style: GoogleFonts.inter(
-                        fontSize: 11,
-                        color: kTextSecondary,
-                      ),
+                    Wrap(
+                      spacing: 6,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text(
+                          '${resource.categoryLabel} · ${resource.fieldLabel}',
+                          style: GoogleFonts.inter(
+                            fontSize: 11,
+                            color: kTextSecondary,
+                          ),
+                        ),
+                        if (resource.isFree) const _FreeBadge(),
+                      ],
                     ),
                     if (resource.hasDeadline) ...[
                       const SizedBox(height: 4),
@@ -181,6 +188,31 @@ class ResourceTile extends StatelessWidget {
       SnackBar(
         content: Text('Added "${resource.title}" to personal deadlines'),
         duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+}
+
+// ─── Free badge ───────────────────────────────────────────────────────────────
+
+class _FreeBadge extends StatelessWidget {
+  const _FreeBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE1F5EE),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: const Text(
+        'Free',
+        style: TextStyle(
+          fontSize: 9,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF0F6E56),
+        ),
       ),
     );
   }

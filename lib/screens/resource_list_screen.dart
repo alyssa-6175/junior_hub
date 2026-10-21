@@ -32,6 +32,9 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
   String? _collegeCourseTermFilter;
   String _journalFairFilter = 'all';
 
+  /// Competitions: show only entries that are free to sign up or register for.
+  bool _freeOnly = false;
+
   static const _collegeCourseTerms = [
     ('summer', 'Summer'),
     ('school_year', 'School Year'),
@@ -61,6 +64,7 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       _collegeCourseType = 'independent';
       _collegeCourseTermFilter = null;
       _journalFairFilter = 'all';
+      _freeOnly = false;
     }
   }
 
@@ -363,6 +367,12 @@ Alyssa''',
           .where((r) => _matchesMajorFilter(r, _majorFilter!))
           .toList();
     }
+    final freeCount = widget.category == 'competition'
+        ? items.where((r) => r.isFree).length
+        : 0;
+    if (_freeOnly && widget.category == 'competition') {
+      items = items.where((r) => r.isFree).toList();
+    }
     final allSorted = _sorted(items, pinned, seen);
     final boardItems = allSorted.where((r) => pinned.contains(r.id)).toList();
     final localItems = widget.category == 'internship'
@@ -511,6 +521,33 @@ Alyssa''',
                       active: _journalFairFilter == 'fair',
                       color: const Color(0xFF1D9E75),
                       onTap: () => setState(() => _journalFairFilter = 'fair'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+              ],
+              if (widget.category == 'competition') ...[
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    _MajorChip(
+                      label: 'All costs',
+                      active: !_freeOnly,
+                      color: kNavy,
+                      onTap: () => setState(() => _freeOnly = false),
+                    ),
+                    _MajorChip(
+                      label: _freeOnly
+                          ? 'Free to enter'
+                          : 'Free to enter ($freeCount)',
+                      active: _freeOnly,
+                      color: const Color(0xFF1D9E75),
+                      onTap: () => setState(() {
+                        _freeOnly = !_freeOnly;
+                        _tab = 1;
+                      }),
                     ),
                   ],
                 ),

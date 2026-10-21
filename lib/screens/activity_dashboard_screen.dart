@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../app_colors.dart';
+import '../models/resource_stats.dart';
 import '../providers/app_provider.dart';
 
 class ActivityDashboardScreen extends StatefulWidget {
@@ -16,6 +17,15 @@ class ActivityDashboardScreen extends StatefulWidget {
 
 class _ActivityDashboardScreenState extends State<ActivityDashboardScreen> {
   DateTime _selectedDay = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<AppProvider>().synchronizeResourceStatsCatalog();
+    });
+  }
 
   String get _dayKey {
     final month = _selectedDay.month.toString().padLeft(2, '0');
@@ -63,9 +73,205 @@ class _ActivityDashboardScreenState extends State<ActivityDashboardScreen> {
             const SizedBox(height: 24),
             _DailyActivityCard(dayKey: _dayKey, onChooseDay: _pickDay),
             const SizedBox(height: 22),
+            const _ResourceStatsCard(),
+            const SizedBox(height: 22),
             const _RecentActivityCard(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ResourceStatsCard extends StatefulWidget {
+  const _ResourceStatsCard();
+
+  @override
+  State<_ResourceStatsCard> createState() => _ResourceStatsCardState();
+}
+
+class _ResourceStatsCardState extends State<_ResourceStatsCard> {
+  String _query = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _DashboardCard(
+      child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: FirebaseFirestore.instance
+            .collection('resourceStats')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) return const _DataError();
+          if (!snapshot.hasData) return const _LoadingCard();
+
+          final allStats =
+              snapshot.data!.docs
+                  .map((doc) => ResourceStats.fromMap(doc.id, doc.data()))
+                  .toList()
+                ..sort((a, b) {
+                  final byViews = b.uniqueViewerCount.compareTo(
+                    a.uniqueViewerCount,
+                  );
+                  return byViews != 0
+                      ? byViews
+                      : a.title.toLowerCase().compareTo(b.title.toLowerCase());
+                });
+          final normalizedQuery = _query.trim().toLowerCase();
+          final stats = normalizedQuery.isEmpty
+              ? allStats
+              : allStats
+                    .where(
+                      (item) =>
+                          item.title.toLowerCase().contains(normalizedQuery) ||
+                          item.id.toLowerCase().contains(normalizedQuery) ||
+                          item.category.toLowerCase().contains(normalizedQuery),
+                    )
+                    .toList();
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.insights_outlined, color: kNavy),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Resource stats',
+                      style: GoogleFonts.inter(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: kNavy,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '${allStats.length} resources',
+                    style: const TextStyle(color: kTextSecondary),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Unique viewers and the accounts currently saving, pinning, or marking each resource as seen.',
+                style: TextStyle(color: kTextSecondary),
+              ),
+              const SizedBox(height: 14),
+              TextField(
+                onChanged: (value) => setState(() => _query = value),
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.search, size: 20),
+                  hintText: 'Find a resource or category',
+                  isDense: true,
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 12),
+              if (allStats.isEmpty)
+                const _EmptyState(
+                  'No resource stats are available yet. The catalog sync may still be running.',
+                )
+              else if (stats.isEmpty)
+                const _EmptyState('No resources match that search.')
+              else
+                Container(
+                  height: 560,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: kBorderLight),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListView.separated(
+                    itemCount: stats.length,
+                    separatorBuilder: (_, _) =>
+                        const Divider(height: 1, color: kBorderLight),
+                    itemBuilder: (context, index) =>
+                        _ResourceStatsRow(stats: stats[index]),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _ResourceStatsRow extends StatelessWidget {
+  final ResourceStats stats;
+
+  const _ResourceStatsRow({required this.stats});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      dense: true,
+      title: Text(
+        stats.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text('${stats.category} · ${stats.id}'),
+      trailing: Wrap(
+        spacing: 12,
+        children: [
+          _StatCount(label: 'Viewed', value: stats.uniqueViewerCount),
+          _StatCount(label: 'Saved', value: stats.savedCount),
+          _StatCount(label: 'Pinned', value: stats.pinnedCount),
+          _StatCount(label: 'Seen', value: stats.seenCount),
+        ],
+      ),
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Total opens: ${stats.totalViews}'),
+              const SizedBox(height: 8),
+              _UidList(label: 'Viewer user IDs', values: stats.viewerUids),
+              _UidList(label: 'Saved by user IDs', values: stats.savedUids),
+              _UidList(label: 'Pinned by user IDs', values: stats.pinnedUids),
+              _UidList(label: 'Seen by user IDs', values: stats.seenUids),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _StatCount extends StatelessWidget {
+  final String label;
+  final int value;
+
+  const _StatCount({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('$value', style: const TextStyle(fontWeight: FontWeight.w700)),
+        Text(label, style: const TextStyle(fontSize: 10, color: kTextTertiary)),
+      ],
+    );
+  }
+}
+
+class _UidList extends StatelessWidget {
+  final String label;
+  final List<String> values;
+
+  const _UidList({required this.label, required this.values});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: SelectableText(
+        '$label: ${values.isEmpty ? 'None' : values.join(', ')}',
+        style: const TextStyle(fontSize: 12, color: kTextSecondary),
       ),
     );
   }

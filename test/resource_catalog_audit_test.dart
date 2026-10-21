@@ -242,4 +242,18 @@ void main() {
     }
     expect(sorted, isNotEmpty);
   }, tags: 'external');
+
+  test('competition cost flags use supported values', () {
+    for (final resource in allResources) {
+      expect(
+        const {null, 'free', 'paid'},
+        contains(resource.cost),
+        reason: resource.id,
+      );
+    }
+    final freeCompetitions = allResources.where(
+      (resource) => resource.category == 'competition' && resource.isFree,
+    );
+    expect(freeCompetitions, isNotEmpty);
+  });
 }

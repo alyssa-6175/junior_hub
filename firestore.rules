@@ -3,25 +3,33 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // Data model:
-    // - users/{uid}: private study preferences with optional, Auth-verified
-    //   email and latest-activity fields.
-    // - users/{uid}/resourceActivity/{resourceId}: private resource-open data.
-    // - dailyActivity/{YYYY-MM-DD}-{uid}: an administrator-only, daily activity
-    //   summary. This is an engagement indicator, not an immutable audit log.
-    // Junior Hub is public to signed-in Google and Microsoft accounts.
-    function isSignedIn() {
+    // - users/{uid}: private preferences and activity summary.
+    // - users/{uid}/resourceActivity/{resourceId}: private open history.
+    // - dailyActivity/{YYYY-MM-DD}-{uid}: administrator-only daily summary.
+    // - resourceStats/{resourceId}: administrator-only aggregate analytics
+    //   with catalog metadata and bounded UID lists/counts for each action.
+    function isAuthenticated() {
       return request.auth != null;
     }
 
-    function isOwnUserDocument(userId) {
-      return isSignedIn() && request.auth.uid == userId;
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
     }
 
-    // This claim is issued only with the Firebase Admin SDK, never from the
-    // client app. The dashboard owner is bootstrapped with a verified identity;
-    // Firebase Console / IAM administrators already bypass rules.
+    function uidUnchanged() {
+      return !('uid' in request.resource.data)
+          || request.resource.data.uid == request.auth.uid;
+    }
+
+    function uidNotModified() {
+      return !('uid' in request.resource.data)
+          || request.resource.data.uid == resource.data.uid;
+    }
+
+    // The admin claim is issued only with the Admin SDK. The two verified
+    // owner identities are intentionally bootstrapped for this school app.
     function isEastsidePrepAdmin() {
-      return isSignedIn()
+      return isAuthenticated()
           && request.auth.token.email is string
           && request.auth.token.email_verified == true
           && (request.auth.token.email in [
@@ -104,7 +112,8 @@ service cloud.firestore {
               (request.resource.data.linkPinned is list && request.resource.data.linkPinned.size() <= 500))
           && (!('linkSeen' in request.resource.data) ||
               (request.resource.data.linkSeen is list && request.resource.data.linkSeen.size() <= 1000))
-          && (!('completedTests' in request.resource.data) || request.resource.data.completedTests is map)
+          && (!('completedTests' in request.resource.data) ||
+              (request.resource.data.completedTests is map && request.resource.data.completedTests.size() <= 100))
           && (!('personalDeadlines' in request.resource.data) ||
               (request.resource.data.personalDeadlines is list && request.resource.data.personalDeadlines.size() <= 100))
           && (!('checkedMajors' in request.resource.data) ||
@@ -117,36 +126,38 @@ service cloud.firestore {
           && hasValidActivityFields();
     }
 
-    // Students can access only their own study-preference document. No other
-    // collections, including historical resourceStats documents, are exposed.
     match /users/{userId} {
-      allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
-      allow create: if isOwnUserDocument(userId)
+      allow read: if isOwner(userId) || isEastsidePrepAdmin();
+      allow create: if isOwner(userId)
           && isValidStudyData()
           && hasCurrentActivityTimestamps();
-      allow update: if isOwnUserDocument(userId)
+      allow update: if isOwner(userId)
           && isValidStudyData()
           && hasUnchangedOrCurrentActivityTimestamps();
-      allow delete: if isOwnUserDocument(userId);
+      allow delete: if isOwner(userId);
+    }
+
+    function isValidResourceActivity(resourceId) {
+      return resourceId.size() <= 120
+          && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
+          && request.resource.data.keys().hasAll(['lastOpenedAt', 'openCount'])
+          && request.resource.data.lastOpenedAt is timestamp
+          && request.resource.data.lastOpenedAt == request.time
+          && request.resource.data.openCount is int
+          && request.resource.data.openCount >= 1
+          && request.resource.data.openCount <= 10000;
     }
 
     match /users/{userId}/resourceActivity/{resourceId} {
-      allow read: if isOwnUserDocument(userId) || isEastsidePrepAdmin();
-      allow create: if isOwnUserDocument(userId)
-          && resourceId.size() <= 120
-          && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
-          && request.resource.data.lastOpenedAt is timestamp
-          && request.resource.data.lastOpenedAt == request.time
-          && request.resource.data.openCount is int
+      allow read: if isOwner(userId) || isEastsidePrepAdmin();
+      allow create: if isOwner(userId)
+          && exists(/databases/$(database)/documents/users/$(userId))
+          && isValidResourceActivity(resourceId)
           && request.resource.data.openCount == 1;
-      allow update: if isOwnUserDocument(userId)
-          && resourceId.size() <= 120
-          && request.resource.data.keys().hasOnly(['lastOpenedAt', 'openCount'])
-          && request.resource.data.lastOpenedAt is timestamp
-          && request.resource.data.lastOpenedAt == request.time
-          && request.resource.data.openCount is int
-          && request.resource.data.openCount == resource.data.openCount + 1
-          && request.resource.data.openCount <= 10000;
+      allow update: if isOwner(userId)
+          && exists(/databases/$(database)/documents/users/$(userId))
+          && isValidResourceActivity(resourceId)
+          && request.resource.data.openCount == resource.data.openCount + 1;
     }
 
     function isValidDailyActivity(activityId) {
@@ -157,7 +168,8 @@ service cloud.firestore {
                'uid', 'email', 'day', 'lastAction', 'lastActionAt'
              ])
           && request.resource.data.uid is string
-          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.uid.size() <= 128
+          && uidUnchanged()
           && request.resource.data.email is string
           && request.resource.data.email == request.auth.token.email
           && request.resource.data.email.size() <= 254
@@ -175,8 +187,144 @@ service cloud.firestore {
 
     match /dailyActivity/{activityId} {
       allow read: if isEastsidePrepAdmin();
-      allow create, update: if isSignedIn()
+      allow create: if isAuthenticated() && isValidDailyActivity(activityId);
+      allow update: if isAuthenticated()
+          && uidNotModified()
           && isValidDailyActivity(activityId);
+    }
+
+    function isValidUidList(value) {
+      return value is list
+          && value.size() <= 1000
+          && value.size() == value.toSet().size();
+    }
+
+    function isValidResourceCategory(category) {
+      return category in [
+        'act', 'ap', 'competition', 'dual_credit', 'internship', 'research', 'sat'
+      ];
+    }
+
+    function isValidResourceStats(resourceId) {
+      return request.resource.data.keys().hasAll([
+               'resourceId', 'title', 'category', 'totalViews',
+               'uniqueViewerCount', 'viewerUids', 'savedCount', 'savedUids',
+               'pinnedCount', 'pinnedUids', 'seenCount', 'seenUids', 'updatedAt'
+             ])
+          && request.resource.data.keys().hasOnly([
+               'resourceId', 'title', 'category', 'totalViews',
+               'uniqueViewerCount', 'viewerUids', 'savedCount', 'savedUids',
+               'pinnedCount', 'pinnedUids', 'seenCount', 'seenUids',
+               'lastViewedAt', 'updatedAt'
+             ])
+          && request.resource.data.resourceId is string
+          && request.resource.data.resourceId == resourceId
+          && request.resource.data.resourceId.size() <= 120
+          && request.resource.data.title is string
+          && request.resource.data.title.size() > 0
+          && request.resource.data.title.size() <= 300
+          && request.resource.data.category is string
+          && isValidResourceCategory(request.resource.data.category)
+          && request.resource.data.totalViews is int
+          && request.resource.data.totalViews >= 0
+          && request.resource.data.totalViews <= 1000000000
+          && request.resource.data.uniqueViewerCount is int
+          && request.resource.data.savedCount is int
+          && request.resource.data.pinnedCount is int
+          && request.resource.data.seenCount is int
+          && isValidUidList(request.resource.data.viewerUids)
+          && isValidUidList(request.resource.data.savedUids)
+          && isValidUidList(request.resource.data.pinnedUids)
+          && isValidUidList(request.resource.data.seenUids)
+          && request.resource.data.uniqueViewerCount == request.resource.data.viewerUids.size()
+          && request.resource.data.savedCount == request.resource.data.savedUids.size()
+          && request.resource.data.pinnedCount == request.resource.data.pinnedUids.size()
+          && request.resource.data.seenCount == request.resource.data.seenUids.size()
+          && request.resource.data.totalViews >= request.resource.data.uniqueViewerCount
+          && request.resource.data.updatedAt is timestamp
+          && request.resource.data.updatedAt == request.time
+          && (!('lastViewedAt' in request.resource.data)
+              || (request.resource.data.lastViewedAt is timestamp
+                  && request.resource.data.lastViewedAt <= request.time));
+    }
+
+    function addsCurrentUid(before, after) {
+      return !before.toSet().hasAny([request.auth.uid])
+          && after.toSet().hasAny([request.auth.uid])
+          && after.size() == before.size() + 1
+          && after.toSet().hasAll(before);
+    }
+
+    function removesCurrentUid(before, after) {
+      return before.toSet().hasAny([request.auth.uid])
+          && !after.toSet().hasAny([request.auth.uid])
+          && after.size() == before.size() - 1
+          && before.toSet().hasAll(after);
+    }
+
+    function isValidViewStatsUpdate() {
+      let changed = request.resource.data.diff(resource.data).affectedKeys();
+      let alreadyViewed = resource.data.viewerUids.toSet().hasAny([request.auth.uid]);
+      return changed.hasOnly([
+               'totalViews', 'uniqueViewerCount', 'viewerUids',
+               'lastViewedAt', 'updatedAt'
+             ])
+          && request.resource.data.totalViews == resource.data.totalViews + 1
+          && request.resource.data.lastViewedAt == request.time
+          && request.resource.data.updatedAt == request.time
+          && ((alreadyViewed
+                  && request.resource.data.viewerUids == resource.data.viewerUids
+                  && request.resource.data.uniqueViewerCount == resource.data.uniqueViewerCount)
+              || (!alreadyViewed
+                  && addsCurrentUid(resource.data.viewerUids, request.resource.data.viewerUids)
+                  && request.resource.data.uniqueViewerCount == resource.data.uniqueViewerCount + 1));
+    }
+
+    function isValidSavedStatsUpdate() {
+      let changed = request.resource.data.diff(resource.data).affectedKeys();
+      return changed.hasOnly(['savedCount', 'savedUids', 'updatedAt'])
+          && request.resource.data.updatedAt == request.time
+          && ((addsCurrentUid(resource.data.savedUids, request.resource.data.savedUids)
+                  && request.resource.data.savedCount == resource.data.savedCount + 1)
+              || (removesCurrentUid(resource.data.savedUids, request.resource.data.savedUids)
+                  && request.resource.data.savedCount == resource.data.savedCount - 1));
+    }
+
+    function isValidPinnedStatsUpdate() {
+      let changed = request.resource.data.diff(resource.data).affectedKeys();
+      return changed.hasOnly(['pinnedCount', 'pinnedUids', 'updatedAt'])
+          && request.resource.data.updatedAt == request.time
+          && ((addsCurrentUid(resource.data.pinnedUids, request.resource.data.pinnedUids)
+                  && request.resource.data.pinnedCount == resource.data.pinnedCount + 1)
+              || (removesCurrentUid(resource.data.pinnedUids, request.resource.data.pinnedUids)
+                  && request.resource.data.pinnedCount == resource.data.pinnedCount - 1));
+    }
+
+    function isValidSeenStatsUpdate() {
+      let changed = request.resource.data.diff(resource.data).affectedKeys();
+      return changed.hasOnly(['seenCount', 'seenUids', 'updatedAt'])
+          && request.resource.data.updatedAt == request.time
+          && ((addsCurrentUid(resource.data.seenUids, request.resource.data.seenUids)
+                  && request.resource.data.seenCount == resource.data.seenCount + 1)
+              || (removesCurrentUid(resource.data.seenUids, request.resource.data.seenUids)
+                  && request.resource.data.seenCount == resource.data.seenCount - 1));
+    }
+
+    match /resourceStats/{resourceId} {
+      allow read: if isEastsidePrepAdmin();
+      allow create: if isEastsidePrepAdmin()
+          && isValidResourceStats(resourceId);
+      allow update: if isValidResourceStats(resourceId)
+          && (isEastsidePrepAdmin()
+              || (isAuthenticated()
+                  && request.resource.data.resourceId == resource.data.resourceId
+                  && request.resource.data.title == resource.data.title
+                  && request.resource.data.category == resource.data.category
+                  && (isValidViewStatsUpdate()
+                      || isValidSavedStatsUpdate()
+                      || isValidPinnedStatsUpdate()
+                      || isValidSeenStatsUpdate())));
+      allow delete: if isEastsidePrepAdmin();
     }
   }
 }

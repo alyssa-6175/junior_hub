@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,8 +12,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
 import '../models/personal_deadline.dart';
+import '../models/resource_stats.dart';
 
 import '../data/majors_data.dart';
+import '../data/resources_data.dart';
 
 const _googleDesktopClientId =
     '76869443049-g4kjalna8kbptr9aosb94caqv70grsg2.apps.googleusercontent.com';
@@ -162,6 +165,7 @@ class AppProvider extends ChangeNotifier {
       await _loadFromFirestore();
       await _removeLegacyFeedbackMetadata();
       await _recordActivity('Signed in');
+      if (_isAdmin) unawaited(synchronizeResourceStatsCatalog());
     }
 
     notifyListeners();
@@ -249,6 +253,7 @@ class AppProvider extends ChangeNotifier {
     await _loadFromFirestore();
     await _removeLegacyFeedbackMetadata();
     await _recordActivity('Signed in');
+    if (_isAdmin) unawaited(synchronizeResourceStatsCatalog());
 
     notifyListeners();
   }
@@ -466,19 +471,289 @@ class AppProvider extends ChangeNotifier {
     if (uid == null || !isLoggedIn) return;
 
     try {
-      await _db
+      final activityRef = _db
           .collection('users')
           .doc(uid)
           .collection('resourceActivity')
-          .doc(resourceId)
-          .set({
-            'lastOpenedAt': FieldValue.serverTimestamp(),
-            'openCount': FieldValue.increment(1),
-          }, SetOptions(merge: true));
+          .doc(resourceId);
+      final firstOpen = await _db.runTransaction<bool>((transaction) async {
+        final existing = await transaction.get(activityRef);
+        final currentCount = existing.data()?['openCount'];
+        final nextCount = currentCount is int ? currentCount + 1 : 1;
+        transaction.set(activityRef, {
+          'lastOpenedAt': FieldValue.serverTimestamp(),
+          'openCount': nextCount,
+        });
+        return !existing.exists;
+      });
+      await _updateResourceStats(
+        resourceId,
+        ResourceStatAction.view,
+        firstView: firstOpen,
+      );
       await _recordActivity('Opened a resource');
     } catch (e) {
       debugPrint('Resource activity tracking failed: $e');
     }
+  }
+
+  Future<void> _updateResourceStats(
+    String resourceId,
+    ResourceStatAction action, {
+    bool? enabled,
+    bool firstView = false,
+  }) async {
+    final uid = firebaseUser?.uid;
+    if (uid == null) return;
+
+    final update = <String, dynamic>{'updatedAt': FieldValue.serverTimestamp()};
+
+    switch (action) {
+      case ResourceStatAction.view:
+        update.addAll({
+          'totalViews': FieldValue.increment(1),
+          'viewerUids': FieldValue.arrayUnion([uid]),
+          'lastViewedAt': FieldValue.serverTimestamp(),
+          if (firstView) 'uniqueViewerCount': FieldValue.increment(1),
+        });
+      case ResourceStatAction.save:
+        update.addAll({
+          'savedCount': FieldValue.increment(enabled == true ? 1 : -1),
+          'savedUids': enabled == true
+              ? FieldValue.arrayUnion([uid])
+              : FieldValue.arrayRemove([uid]),
+        });
+      case ResourceStatAction.pin:
+        update.addAll({
+          'pinnedCount': FieldValue.increment(enabled == true ? 1 : -1),
+          'pinnedUids': enabled == true
+              ? FieldValue.arrayUnion([uid])
+              : FieldValue.arrayRemove([uid]),
+        });
+      case ResourceStatAction.seen:
+        update.addAll({
+          'seenCount': FieldValue.increment(enabled == true ? 1 : -1),
+          'seenUids': enabled == true
+              ? FieldValue.arrayUnion([uid])
+              : FieldValue.arrayRemove([uid]),
+        });
+    }
+
+    final statsRef = _db.collection('resourceStats').doc(resourceId);
+    try {
+      await statsRef.update(update);
+    } catch (e) {
+      // A legacy user can have private open history without appearing in the
+      // old aggregate document. Retry once with the opposite unique-viewer
+      // transition so the UID list and count can repair themselves.
+      if (action == ResourceStatAction.view) {
+        final retry = Map<String, dynamic>.from(update);
+        if (firstView) {
+          retry.remove('uniqueViewerCount');
+        } else {
+          retry['uniqueViewerCount'] = FieldValue.increment(1);
+        }
+        try {
+          await statsRef.update(retry);
+          return;
+        } catch (_) {
+          // Report the original failure below; analytics never blocks the UI.
+        }
+      }
+      debugPrint('Resource stats update failed for $resourceId: $e');
+    }
+  }
+
+  /// Ensures the administrator-only analytics collection has one row for
+  /// every resource in the local catalog and upgrades legacy view-only rows.
+  Future<void> synchronizeResourceStatsCatalog() async {
+    if (!_isAdmin) return;
+
+    try {
+      final snapshot = await _db.collection('resourceStats').get();
+      final existingById = {for (final doc in snapshot.docs) doc.id: doc};
+      final userSnapshot = await _db.collection('users').get();
+      final catalogIds = allResources.map((resource) => resource.id).toSet();
+      final savedByResource = <String, Set<String>>{};
+      final pinnedByResource = <String, Set<String>>{};
+      final seenByResource = <String, Set<String>>{};
+      final viewersByResource = <String, Set<String>>{};
+      final activityViewsByResource = <String, int>{};
+      final lastActivityViewByResource = <String, Timestamp>{};
+
+      void indexUserState(
+        String uid,
+        dynamic value,
+        Map<String, Set<String>> destination,
+      ) {
+        for (final resourceId in _validStringList(value)) {
+          if (catalogIds.contains(resourceId)) {
+            destination.putIfAbsent(resourceId, () => <String>{}).add(uid);
+          }
+        }
+      }
+
+      for (final user in userSnapshot.docs) {
+        final data = user.data();
+        indexUserState(user.id, data['saved'], savedByResource);
+        indexUserState(user.id, data['pinned'], pinnedByResource);
+        indexUserState(user.id, data['seen'], seenByResource);
+      }
+
+      final activitySnapshots = await Future.wait(
+        userSnapshot.docs.map(
+          (user) => user.reference.collection('resourceActivity').get(),
+        ),
+      );
+      for (var index = 0; index < userSnapshot.docs.length; index++) {
+        final uid = userSnapshot.docs[index].id;
+        for (final activity in activitySnapshots[index].docs) {
+          final resourceId = activity.id;
+          if (!catalogIds.contains(resourceId)) continue;
+          final data = activity.data();
+          viewersByResource.putIfAbsent(resourceId, () => <String>{}).add(uid);
+          final openCount = data['openCount'];
+          if (openCount is int && openCount > 0) {
+            activityViewsByResource.update(
+              resourceId,
+              (current) => current + openCount,
+              ifAbsent: () => openCount,
+            );
+          }
+          final lastOpenedAt = data['lastOpenedAt'];
+          if (lastOpenedAt is Timestamp) {
+            final current = lastActivityViewByResource[resourceId];
+            if (current == null ||
+                lastOpenedAt.toDate().isAfter(current.toDate())) {
+              lastActivityViewByResource[resourceId] = lastOpenedAt;
+            }
+          }
+        }
+      }
+
+      final writes =
+          <
+            MapEntry<
+              DocumentReference<Map<String, dynamic>>,
+              Map<String, dynamic>
+            >
+          >[];
+
+      for (final resource in allResources) {
+        final existing = existingById[resource.id];
+        final data = existing?.data() ?? const <String, dynamic>{};
+        final stats = ResourceStats.fromMap(resource.id, data);
+        final viewerUids = {
+          ...stats.viewerUids,
+          ...?viewersByResource[resource.id],
+        }.toList()..sort();
+        final savedUids =
+            (savedByResource[resource.id] ?? const <String>{}).toList()..sort();
+        final pinnedUids =
+            (pinnedByResource[resource.id] ?? const <String>{}).toList()
+              ..sort();
+        final seenUids =
+            (seenByResource[resource.id] ?? const <String>{}).toList()..sort();
+        final existingLastViewed = data['lastViewedAt'] ?? data['lastViewed'];
+        final activityLastViewed = lastActivityViewByResource[resource.id];
+        final lastViewedAt =
+            existingLastViewed is Timestamp &&
+                (activityLastViewed == null ||
+                    !activityLastViewed.toDate().isAfter(
+                      existingLastViewed.toDate(),
+                    ))
+            ? existingLastViewed
+            : activityLastViewed;
+        final activityViews = activityViewsByResource[resource.id] ?? 0;
+        final totalViews = [
+          stats.totalViews,
+          activityViews,
+          viewerUids.length,
+        ].reduce((a, b) => a > b ? a : b);
+
+        final normalized = <String, dynamic>{
+          'resourceId': resource.id,
+          'title': resource.title,
+          'category': resource.category,
+          'totalViews': totalViews,
+          'uniqueViewerCount': viewerUids.length,
+          'viewerUids': viewerUids,
+          'savedCount': savedUids.length,
+          'savedUids': savedUids,
+          'pinnedCount': pinnedUids.length,
+          'pinnedUids': pinnedUids,
+          'seenCount': seenUids.length,
+          'seenUids': seenUids,
+          if (lastViewedAt is Timestamp) 'lastViewedAt': lastViewedAt,
+          'updatedAt': FieldValue.serverTimestamp(),
+        };
+
+        if (existing == null || !_isCurrentResourceStats(data, normalized)) {
+          writes.add(
+            MapEntry(
+              _db.collection('resourceStats').doc(resource.id),
+              normalized,
+            ),
+          );
+        }
+      }
+
+      for (var offset = 0; offset < writes.length; offset += 400) {
+        final batch = _db.batch();
+        final end = (offset + 400).clamp(0, writes.length);
+        for (final write in writes.sublist(offset, end)) {
+          batch.set(write.key, write.value);
+        }
+        await batch.commit();
+      }
+    } catch (e) {
+      debugPrint('Resource stats catalog synchronization failed: $e');
+    }
+  }
+
+  List<String> _validStringList(dynamic value) {
+    if (value is! List) return const [];
+    return value.whereType<String>().toSet().toList()..sort();
+  }
+
+  bool _isCurrentResourceStats(
+    Map<String, dynamic> current,
+    Map<String, dynamic> normalized,
+  ) {
+    const requiredFields = {
+      'resourceId',
+      'title',
+      'category',
+      'totalViews',
+      'uniqueViewerCount',
+      'viewerUids',
+      'savedCount',
+      'savedUids',
+      'pinnedCount',
+      'pinnedUids',
+      'seenCount',
+      'seenUids',
+      'updatedAt',
+    };
+    if (!current.keys.toSet().containsAll(requiredFields) ||
+        current.containsKey('viewerEmails') ||
+        current.containsKey('lastViewed')) {
+      return false;
+    }
+
+    for (final field in requiredFields.where((field) => field != 'updatedAt')) {
+      final expected = normalized[field];
+      final actual = current[field];
+      if (expected is List && actual is List) {
+        if (expected.length != actual.length ||
+            !expected.toSet().containsAll(actual)) {
+          return false;
+        }
+      } else if (expected != actual) {
+        return false;
+      }
+    }
+    return true;
   }
 
   // ── Toggles & State Updates (Persisted to Firestore) ─────────────────────
@@ -519,6 +794,11 @@ class AppProvider extends ChangeNotifier {
     }
 
     await _save('saved', _saved.toList(), activity: 'Updated saved resources');
+    await _updateResourceStats(
+      id,
+      ResourceStatAction.save,
+      enabled: _saved.contains(id),
+    );
 
     notifyListeners();
   }
@@ -537,6 +817,11 @@ class AppProvider extends ChangeNotifier {
       _pinned.toList(),
       activity: 'Updated pinned resources',
     );
+    await _updateResourceStats(
+      id,
+      ResourceStatAction.pin,
+      enabled: _pinned.contains(id),
+    );
 
     notifyListeners();
   }
@@ -551,6 +836,11 @@ class AppProvider extends ChangeNotifier {
     }
 
     await _save('seen', _seen.toList(), activity: 'Marked a resource as seen');
+    await _updateResourceStats(
+      id,
+      ResourceStatAction.seen,
+      enabled: _seen.contains(id),
+    );
 
     notifyListeners();
   }
@@ -711,7 +1001,6 @@ class AppProvider extends ChangeNotifier {
         for (final sub in group.subcategories) {
           _checkedMajors.add(sub.id);
         }
-
       }
     } else {
       if (_checkedMajors.contains(id)) {
@@ -724,7 +1013,6 @@ class AppProvider extends ChangeNotifier {
         _checkedSubMajorOrder
           ..remove(id)
           ..insert(0, id);
-
       }
 
       final parentGroup = groupForSubMajor(id);

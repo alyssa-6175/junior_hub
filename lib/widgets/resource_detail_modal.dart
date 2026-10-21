@@ -158,6 +158,13 @@ class ResourceDetailModal extends StatelessWidget {
                             icon: Icons.schedule_outlined,
                             label: resource.timeCommitment!,
                           ),
+                        if (resource.costLabel != null)
+                          _InfoChip(
+                            icon: resource.isFree
+                                ? Icons.money_off_outlined
+                                : Icons.payments_outlined,
+                            label: resource.costLabel!,
+                          ),
                       ],
                     ),
                     const SizedBox(height: 16),

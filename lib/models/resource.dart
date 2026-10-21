@@ -35,6 +35,13 @@ class Resource {
   /// Extra AP sections (see [apSubCategory]) a course should also appear in.
   final List<String> alsoApSubCategories;
 
+  /// Whether it costs money to sign up or register: 'free', 'paid', or null
+  /// when the official site does not say.
+  final String? cost;
+
+  /// Short note on what the cost is (for example "$15 per entry").
+  final String? costNote;
+
   const Resource({
     required this.id,
     required this.title,
@@ -61,7 +68,19 @@ class Resource {
     this.courseTermTags = const [],
     this.alsoFields = const [],
     this.alsoApSubCategories = const [],
+    this.cost,
+    this.costNote,
   });
+
+  bool get isFree => cost == 'free';
+  bool get isPaid => cost == 'paid';
+
+  /// What to show about sign-up cost, or null when nothing is known.
+  String? get costLabel => isFree
+      ? (costNote ?? 'Free to enter')
+      : isPaid
+      ? (costNote ?? 'Entry or registration fee')
+      : costNote;
 
   bool inField(String value) => field == value || alsoFields.contains(value);
 
