@@ -367,30 +367,6 @@ class _PersonalizedMajorsScreenState extends State<PersonalizedMajorsScreen> {
             ],
           ),
         ),
-        if (checked.isNotEmpty) ...[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 5, 20, 8),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.touch_app_outlined,
-                  size: 13,
-                  color: kTextTertiary,
-                ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: Text(
-                    'Save, star, review, and add deadlines directly from each resource.',
-                    style: GoogleFonts.inter(
-                      fontSize: 11,
-                      color: kTextTertiary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
         const Divider(height: 1, color: kBorderLight),
         Expanded(
           child: checked.isEmpty

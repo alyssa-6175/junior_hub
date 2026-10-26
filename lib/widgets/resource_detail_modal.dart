@@ -439,11 +439,13 @@ class ResourceDetailModal extends StatelessWidget {
                     ),
                     if (resource.hasDeadline)
                       _FooterAction(
-                        icon: Icons.alarm_add_outlined,
+                        icon: deadlineAdded
+                            ? Icons.watch_later
+                            : Icons.watch_later_outlined,
                         label: deadlineAdded
                             ? 'Remove deadline'
                             : 'Add deadline',
-                        color: kTextSecondary,
+                        color: deadlineAdded ? kNavy : kTextSecondary,
                         onTap: () {
                           if (deadlineAdded) {
                             final deadline = provider.personalDeadlines

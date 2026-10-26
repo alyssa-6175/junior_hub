@@ -166,8 +166,10 @@ class ResourceTile extends StatelessWidget {
                 ),
                 if (resource.hasDeadline)
                   _ActionButton(
-                    icon: Icons.alarm_add_outlined,
-                    color: kTextTertiary,
+                    icon: deadlineAdded
+                        ? Icons.watch_later
+                        : Icons.watch_later_outlined,
+                    color: deadlineAdded ? kNavy : kTextTertiary,
                     tooltip: deadlineAdded
                         ? 'Remove from my deadlines'
                         : 'Add to my deadlines',
