@@ -166,17 +166,21 @@ class ResourceTile extends StatelessWidget {
                 ),
                 if (resource.hasDeadline)
                   _ActionButton(
-                    icon: deadlineAdded
-                        ? Icons.check_circle
-                        : Icons.alarm_add_outlined,
-                    color: deadlineAdded
-                        ? const Color(0xFF0F6E56)
-                        : kTextTertiary,
+                    icon: Icons.alarm_add_outlined,
+                    color: kTextTertiary,
                     tooltip: deadlineAdded
-                        ? 'Already in My Deadlines'
+                        ? 'Remove from my deadlines'
                         : 'Add to my deadlines',
                     onTap: deadlineAdded
-                        ? () {}
+                        ? () {
+                            final deadline = provider.personalDeadlines
+                                .firstWhere(
+                                  (deadline) =>
+                                      deadline.resourceId == resource.id &&
+                                      deadline.dateIso == resource.deadlineIso,
+                                );
+                            provider.removePersonalDeadline(deadline.id);
+                          }
                         : () => _addToPersonalDeadlines(context),
                   ),
               ],

@@ -439,17 +439,22 @@ class ResourceDetailModal extends StatelessWidget {
                     ),
                     if (resource.hasDeadline)
                       _FooterAction(
-                        icon: deadlineAdded
-                            ? Icons.check_circle
-                            : Icons.alarm_add_outlined,
+                        icon: Icons.alarm_add_outlined,
                         label: deadlineAdded
-                            ? 'Deadline added'
+                            ? 'Remove deadline'
                             : 'Add deadline',
-                        color: deadlineAdded
-                            ? const Color(0xFF0F6E56)
-                            : kTextSecondary,
+                        color: kTextSecondary,
                         onTap: () {
-                          if (deadlineAdded) return;
+                          if (deadlineAdded) {
+                            final deadline = provider.personalDeadlines
+                                .firstWhere(
+                                  (deadline) =>
+                                      deadline.resourceId == resource.id &&
+                                      deadline.dateIso == deadlineIso,
+                                );
+                            provider.removePersonalDeadline(deadline.id);
+                            return;
+                          }
                           context.read<AppProvider>().addPersonalDeadline(
                             PersonalDeadline(
                               id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',

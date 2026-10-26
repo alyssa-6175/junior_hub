@@ -260,27 +260,13 @@ class _PersonalizedMajorsScreenState extends State<PersonalizedMajorsScreen> {
                   const Icon(Icons.auto_awesome, color: kNavy, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'My Majors',
-                          style: GoogleFonts.inter(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: kTextPrimary,
-                          ),
-                        ),
-                        Text(
-                          checked.isEmpty
-                              ? 'Choose an interest to build your personalized feed'
-                              : '${resources.length} relevant resources in one workspace',
-                          style: GoogleFonts.inter(
-                            fontSize: 12,
-                            color: kTextSecondary,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      'My Majors',
+                      style: GoogleFonts.inter(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: kTextPrimary,
+                      ),
                     ),
                   ),
                   OutlinedButton.icon(
@@ -303,73 +289,85 @@ class _PersonalizedMajorsScreenState extends State<PersonalizedMajorsScreen> {
               if (selections.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 Wrap(
-                  spacing: 6,
+                  spacing: 16,
                   runSpacing: 6,
-                  children: selections
-                      .map(
-                        (selection) => InputChip(
-                          avatar: Icon(
-                            Icons.check_circle,
-                            size: 14,
-                            color: selection.color,
-                          ),
-                          label: Text(selection.label),
-                          onDeleted: () =>
-                              provider.toggleCheckedMajor(selection.id),
-                          deleteIcon: const Icon(Icons.close, size: 14),
-                          backgroundColor: selection.color.withValues(
-                            alpha: 0.08,
-                          ),
-                          side: BorderSide(
-                            color: selection.color.withValues(alpha: 0.24),
-                          ),
-                          labelStyle: GoogleFonts.inter(
-                            fontSize: 11,
-                            color: kTextPrimary,
-                          ),
-                          visualDensity: VisualDensity.compact,
-                        ),
-                      )
-                      .toList(),
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: selections
+                          .map(
+                            (selection) => InputChip(
+                              avatar: Icon(
+                                Icons.check_circle,
+                                size: 14,
+                                color: selection.color,
+                              ),
+                              label: Text(selection.label),
+                              onDeleted: () =>
+                                  provider.toggleCheckedMajor(selection.id),
+                              deleteIcon: const Icon(Icons.close, size: 14),
+                              backgroundColor: selection.color.withValues(
+                                alpha: 0.08,
+                              ),
+                              side: BorderSide(
+                                color: selection.color.withValues(alpha: 0.24),
+                              ),
+                              labelStyle: GoogleFonts.inter(
+                                fontSize: 11,
+                                color: kTextPrimary,
+                              ),
+                              visualDensity: VisualDensity.compact,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: _filters.map((filter) {
+                          final selected = _selectedFilter == filter.id;
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              right: filter == _filters.last ? 0 : 6,
+                            ),
+                            child: ChoiceChip(
+                              selected: selected,
+                              avatar: Icon(
+                                filter.icon,
+                                size: 14,
+                                color: selected ? Colors.white : kTextSecondary,
+                              ),
+                              label: Text(filter.label),
+                              onSelected: (_) =>
+                                  setState(() => _selectedFilter = filter.id),
+                              selectedColor: kNavy,
+                              backgroundColor: kSurface,
+                              side: BorderSide(
+                                color: selected ? kNavy : kBorderLight,
+                              ),
+                              labelStyle: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: selected ? Colors.white : kTextSecondary,
+                                fontWeight: selected
+                                    ? FontWeight.w500
+                                    : FontWeight.normal,
+                              ),
+                              visualDensity: VisualDensity.compact,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ],
           ),
         ),
         if (checked.isNotEmpty) ...[
-          SizedBox(
-            height: 42,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              scrollDirection: Axis.horizontal,
-              itemCount: _filters.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 6),
-              itemBuilder: (context, index) {
-                final filter = _filters[index];
-                final selected = _selectedFilter == filter.id;
-                return ChoiceChip(
-                  selected: selected,
-                  avatar: Icon(
-                    filter.icon,
-                    size: 14,
-                    color: selected ? Colors.white : kTextSecondary,
-                  ),
-                  label: Text(filter.label),
-                  onSelected: (_) =>
-                      setState(() => _selectedFilter = filter.id),
-                  selectedColor: kNavy,
-                  backgroundColor: kSurface,
-                  side: BorderSide(color: selected ? kNavy : kBorderLight),
-                  labelStyle: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: selected ? Colors.white : kTextSecondary,
-                    fontWeight: selected ? FontWeight.w500 : FontWeight.normal,
-                  ),
-                  visualDensity: VisualDensity.compact,
-                );
-              },
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 5, 20, 8),
             child: Row(
