@@ -20,7 +20,7 @@ class PersonalizedMajorsScreen extends StatefulWidget {
 
 class _PersonalizedMajorsScreenState extends State<PersonalizedMajorsScreen> {
   static const _filters = [
-    _CategoryFilter('all', 'For you', Icons.auto_awesome_outlined),
+    _CategoryFilter('all', 'For you', Icons.school_outlined),
     _CategoryFilter('courses', 'Courses', Icons.menu_book_outlined),
     _CategoryFilter('competition', 'Competitions', Icons.emoji_events_outlined),
     _CategoryFilter('research', 'Research', Icons.science_outlined),
@@ -257,7 +257,7 @@ class _PersonalizedMajorsScreenState extends State<PersonalizedMajorsScreen> {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.auto_awesome, color: kNavy, size: 18),
+                  const Icon(Icons.school_outlined, color: kNavy, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -438,7 +438,7 @@ class _EmptyMajorsState extends StatelessWidget {
                 color: kGoldLight,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: const Icon(Icons.auto_awesome_outlined, color: kGold),
+              child: const Icon(Icons.school_outlined, color: kGold),
             ),
             const SizedBox(height: 14),
             Text(
