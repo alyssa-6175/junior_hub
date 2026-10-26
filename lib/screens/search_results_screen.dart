@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/resource_tile.dart';
 import '../utils/url_helper.dart';
 
@@ -54,7 +55,16 @@ class SearchResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hits = buildSearchHits(query);
+    final provider = context.watch<AppProvider>();
+    final hits = sortStackItems(
+      buildSearchHits(query),
+      isStarred: (hit) => hit.matchedLink == null
+          ? provider.isPinned(hit.resource.id)
+          : provider.isLinkPinned(hit.resource.id, hit.matchedLink!),
+      isSeen: (hit) => hit.matchedLink == null
+          ? provider.isSeen(hit.resource.id)
+          : provider.isLinkSeen(hit.resource.id, hit.matchedLink!),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +149,7 @@ class _LinkHitTile extends StatelessWidget {
     final link = hit.matchedLink!;
     final url = resolveUrl(link, resource);
     final provider = context.watch<AppProvider>();
-    final isPinned = provider.isPinned(resource.id);
+    final isPinned = provider.isLinkPinned(resource.id, link);
     final isSeen = provider.isLinkSeen(resource.id, link);
 
     return AnimatedOpacity(

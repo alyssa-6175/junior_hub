@@ -6,6 +6,7 @@ import '../models/personal_deadline.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
+import '../utils/stack_sorting.dart';
 import '../data/resources_data.dart';
 import '../data/ap_videos_data.dart';
 
@@ -45,34 +46,29 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     super.dispose();
   }
 
-  List<String> _sortedLinks(List<String> links, AppProvider provider) {
+  List<String> _sortedLinks(
+    List<String> links,
+    AppProvider provider, {
+    Comparator<String>? compare,
+  }) {
     final id = widget.resource.id;
     const khanPhysicsCMechanics =
         'Course material · Khan Academy AP Physics C: Mechanics';
-    final preferred = id == 'ap_physics_c_mech'
-        ? links.where((label) => label == khanPhysicsCMechanics).toList()
-        : <String>[];
-    final remaining = links
-        .where((label) => label != khanPhysicsCMechanics)
-        .toList();
-    List<String> group(bool isSeen, bool isPinned) =>
-        links
-            .where(
-              (label) =>
-                  provider.isLinkSeen(id, label) == isSeen &&
-                  provider.isLinkPinned(id, label) == isPinned,
-            )
-            .where((label) => remaining.contains(label))
-            .toList()
-          ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    int defaultCompare(String a, String b) {
+      if (id == 'ap_physics_c_mech') {
+        final aPreferred = a == khanPhysicsCMechanics;
+        final bPreferred = b == khanPhysicsCMechanics;
+        if (aPreferred != bPreferred) return aPreferred ? -1 : 1;
+      }
+      return a.toLowerCase().compareTo(b.toLowerCase());
+    }
 
-    return [
-      ...preferred,
-      ...group(false, true),
-      ...group(false, false),
-      ...group(true, true),
-      ...group(true, false),
-    ];
+    return sortStackItems(
+      links,
+      isStarred: (label) => provider.isLinkPinned(id, label),
+      isSeen: (label) => provider.isLinkSeen(id, label),
+      compare: compare ?? defaultCompare,
+    );
   }
 
   List<String> _sortedPracticeTests(List<String> links, AppProvider provider) {
@@ -85,21 +81,21 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     }
 
     int compare(String a, String b) {
-      final aSeen = provider.isLinkSeen(widget.resource.id, a);
-      final bSeen = provider.isLinkSeen(widget.resource.id, b);
-      if (aSeen != bSeen) return aSeen ? 1 : -1;
       final byYear = year(b).compareTo(year(a));
       if (byYear != 0) return byYear;
       final aOfficial = a.toLowerCase().contains('official college board');
       final bOfficial = b.toLowerCase().contains('official college board');
       if (aOfficial != bOfficial) return aOfficial ? -1 : 1;
-      final aPinned = provider.isLinkPinned(widget.resource.id, a);
-      final bPinned = provider.isLinkPinned(widget.resource.id, b);
-      if (aPinned != bPinned) return aPinned ? -1 : 1;
       return a.toLowerCase().compareTo(b.toLowerCase());
     }
 
-    return [...links]..sort(compare);
+    return sortStackItems(
+      links,
+      isStarred: (label) =>
+          provider.isLinkPinned(widget.resource.id, label),
+      isSeen: (label) => provider.isLinkSeen(widget.resource.id, label),
+      compare: compare,
+    );
   }
 
   List<String> _sortedPracticeQuestions(
@@ -109,13 +105,20 @@ class _ApDetailScreenState extends State<ApDetailScreen>
     final links = _practiceQuestionsAndBanks(resource);
     final featured =
         apPracticeQuestionLinks[resource.id]?.keys ?? const <String>[];
-    return [
-      ...featured.where(links.contains),
-      ..._sortedLinks(
-        links.where((label) => !featured.contains(label)).toList(),
-        provider,
-      ),
-    ];
+    final featuredOrder = featured.toList();
+    return _sortedLinks(
+      links,
+      provider,
+      compare: (a, b) {
+        final aIndex = featuredOrder.indexOf(a);
+        final bIndex = featuredOrder.indexOf(b);
+        final aRank = aIndex < 0 ? featuredOrder.length : aIndex;
+        final bRank = bIndex < 0 ? featuredOrder.length : bIndex;
+        final rankComparison = aRank.compareTo(bRank);
+        if (rankComparison != 0) return rankComparison;
+        return a.toLowerCase().compareTo(b.toLowerCase());
+      },
+    );
   }
 
   bool _hasReferenceInformation(Resource resource) => const {
@@ -652,6 +655,13 @@ class _ArtPortfolioInfoTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<AppProvider>();
+    final sortedLinks = sortStackItems(
+      links,
+      isStarred: (label) => provider.isLinkPinned(resource.id, label),
+      isSeen: (label) => provider.isLinkSeen(resource.id, label),
+    );
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       children: [
@@ -705,7 +715,9 @@ class _ArtPortfolioInfoTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        ...links.map((label) => _LinkItem(label: label, resource: resource)),
+        ...sortedLinks.map(
+          (label) => _LinkItem(label: label, resource: resource),
+        ),
       ],
     );
   }
@@ -1287,6 +1299,13 @@ class _VideoChannelGroupState extends State<_VideoChannelGroup> {
     final seenCount = labels
         .where((label) => provider.isLinkSeen(widget.resource.id, label))
         .length;
+    final sortedPlaylistIndexes = sortStackItems(
+      List.generate(channel.playlists.length, (index) => index),
+      isStarred: (index) =>
+          provider.isLinkPinned(widget.resource.id, labels[index]),
+      isSeen: (index) =>
+          provider.isLinkSeen(widget.resource.id, labels[index]),
+    );
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -1371,7 +1390,7 @@ class _VideoChannelGroupState extends State<_VideoChannelGroup> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
                     child: Column(
                       children: [
-                        for (var i = 0; i < channel.playlists.length; i++)
+                        for (final i in sortedPlaylistIndexes)
                           _LinkItem(
                             label: labels[i],
                             resource: widget.resource,

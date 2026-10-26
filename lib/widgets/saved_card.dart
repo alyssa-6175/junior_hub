@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
 import '../utils/url_helper.dart';
+import '../utils/stack_sorting.dart';
 import '../data/resources_data.dart';
 
 class SavedCard extends StatelessWidget {
@@ -217,7 +218,12 @@ class SavedCard extends StatelessWidget {
               child: Wrap(
                 spacing: 5,
                 runSpacing: 4,
-                children: linksForResource(resource)
+                children: sortStackItems(
+                  linksForResource(resource),
+                  isStarred: (label) =>
+                      provider.isLinkPinned(resource.id, label),
+                  isSeen: (label) => provider.isLinkSeen(resource.id, label),
+                )
                     .take(2)
                     .map((l) => _LinkChip(label: l, resource: resource))
                     .toList(),

@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/resource_tile.dart';
 
 class TestDetailScreen extends StatefulWidget {
@@ -62,21 +63,12 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
     }
 
-    List<Resource> group(bool isSeen, bool isPinned) => items
-        .where(
-          (resource) =>
-              seen.contains(resource.id) == isSeen &&
-              pinned.contains(resource.id) == isPinned,
-        )
-        .toList()
-      ..sort(compare);
-
-    return [
-      ...group(false, true),
-      ...group(false, false),
-      ...group(true, true),
-      ...group(true, false),
-    ];
+    return sortStackItems(
+      items,
+      isStarred: (resource) => pinned.contains(resource.id),
+      isSeen: (resource) => seen.contains(resource.id),
+      compare: compare,
+    );
   }
 
   @override

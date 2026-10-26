@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/saved_card.dart';
 import '../widgets/tappable.dart';
 import '../widgets/resource_detail_modal.dart';
@@ -39,13 +40,11 @@ class _SavedScreenState extends State<SavedScreen> {
                   (r.category == 'sat' || r.category == 'act')),
         )
         .toList();
-    items.sort((a, b) {
-      final aSeen = provider.isSeen(a.id);
-      final bSeen = provider.isSeen(b.id);
-      if (aSeen != bSeen) return aSeen ? 1 : -1;
-      final aStarred = provider.isPinned(a.id);
-      final bStarred = provider.isPinned(b.id);
-      if (aStarred != bStarred) return aStarred ? -1 : 1;
+    items = sortStackItems(
+      items,
+      isStarred: (resource) => provider.isPinned(resource.id),
+      isSeen: (resource) => provider.isSeen(resource.id),
+      compare: (a, b) {
       int scopeRank(Resource resource) {
         final location = (resource.locationNote ?? '').toLowerCase();
         final isNearby = [
@@ -72,7 +71,8 @@ class _SavedScreenState extends State<SavedScreen> {
       final scopeCompare = scopeRank(a).compareTo(scopeRank(b));
       if (scopeCompare != 0) return scopeCompare;
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
-    });
+      },
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

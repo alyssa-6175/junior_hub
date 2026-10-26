@@ -11357,13 +11357,6 @@ List<Resource> apResources({String? subCategory}) {
   return filtered..sort((a, b) => a.title.compareTo(b.title));
 }
 
-/// Sort a list so seen items sink to the bottom.
-List<Resource> sortBySeen(List<Resource> resources, Set<String> seen) {
-  final notSeen = resources.where((r) => !seen.contains(r.id)).toList();
-  final seenItems = resources.where((r) => seen.contains(r.id)).toList();
-  return [...notSeen, ...seenItems];
-}
-
 /// Returns the best URL for a given link label + resource.
 /// Checks kLinkUrls first, falls back to resource.url.
 String? resolveUrl(String linkLabel, Resource resource) {

@@ -28,7 +28,7 @@ import '../data/majors_data.dart';
 
 import 'test_detail_screen.dart';
 
-import 'my_majors_screen.dart';
+import 'personalized_majors_screen.dart';
 
 import 'search_results_screen.dart';
 
@@ -223,7 +223,7 @@ class _ContentArea extends StatelessWidget {
         return const SavedScreen();
 
       case 'my_majors':
-        return const MyMajorsScreen();
+        return const PersonalizedMajorsScreen();
 
       case 'activity':
         return const ActivityDashboardScreen();

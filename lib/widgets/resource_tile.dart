@@ -28,6 +28,10 @@ class ResourceTile extends StatelessWidget {
     final isSaved = provider.isSaved(resource.id);
     final isPinned = provider.isPinned(resource.id);
     final isLoggedIn = provider.isLoggedIn;
+    final deadlineAdded =
+        resource.hasDeadline &&
+        resource.deadlineIso != null &&
+        provider.hasPersonalDeadline(resource.id, resource.deadlineIso!);
 
     return Tappable(
       onTap: () {
@@ -140,13 +144,6 @@ class ResourceTile extends StatelessWidget {
               if (isLoggedIn) ...[
                 const SizedBox(width: 6),
                 _ActionButton(
-                  icon: isSeen ? Icons.visibility : Icons.visibility_outlined,
-                  color: isSeen ? kNavy : kTextTertiary,
-                  tooltip: isSeen ? 'Mark as unread' : 'Mark as seen',
-                  onTap: () =>
-                      context.read<AppProvider>().toggleSeen(resource.id),
-                ),
-                _ActionButton(
                   icon: isSaved ? Icons.bookmark : Icons.bookmark_outlined,
                   color: isSaved ? const Color(0xFFD4537E) : kTextTertiary,
                   tooltip: isSaved ? 'Remove from home' : 'Save to home screen',
@@ -160,12 +157,27 @@ class ResourceTile extends StatelessWidget {
                   onTap: () =>
                       context.read<AppProvider>().togglePinned(resource.id),
                 ),
+                _ActionButton(
+                  icon: isSeen ? Icons.visibility : Icons.visibility_outlined,
+                  color: isSeen ? kNavy : kTextTertiary,
+                  tooltip: isSeen ? 'Mark as unread' : 'Mark as seen',
+                  onTap: () =>
+                      context.read<AppProvider>().toggleSeen(resource.id),
+                ),
                 if (resource.hasDeadline)
                   _ActionButton(
-                    icon: Icons.alarm_add_outlined,
-                    color: kTextTertiary,
-                    tooltip: 'Add to my deadlines',
-                    onTap: () => _addToPersonalDeadlines(context),
+                    icon: deadlineAdded
+                        ? Icons.check_circle
+                        : Icons.alarm_add_outlined,
+                    color: deadlineAdded
+                        ? const Color(0xFF0F6E56)
+                        : kTextTertiary,
+                    tooltip: deadlineAdded
+                        ? 'Already in My Deadlines'
+                        : 'Add to my deadlines',
+                    onTap: deadlineAdded
+                        ? () {}
+                        : () => _addToPersonalDeadlines(context),
                   ),
               ],
             ],

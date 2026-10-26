@@ -6,6 +6,7 @@ import '../data/majors_data.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/resource_tile.dart';
 
 class MyMajorsScreen extends StatefulWidget {
@@ -35,6 +36,7 @@ class _MyMajorsScreenState extends State<MyMajorsScreen>
   List<Resource> _resourcesForCategory(
     Set<String> checkedMajors,
     String category,
+    Set<String> pinned,
     Set<String> seen,
   ) {
     final items = resourcesByCategory(category)
@@ -44,13 +46,18 @@ class _MyMajorsScreenState extends State<MyMajorsScreen>
           ),
         )
         .toList();
-    return sortBySeen(items, seen);
+    return sortStackItems(
+      items,
+      isStarred: (resource) => pinned.contains(resource.id),
+      isSeen: (resource) => seen.contains(resource.id),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
     final checked = provider.checkedMajors;
+    final pinned = provider.pinned;
     final seen = provider.seen;
 
     if (checked.isEmpty) {
@@ -153,7 +160,7 @@ class _MyMajorsScreenState extends State<MyMajorsScreen>
           child: TabBarView(
             controller: _tabs,
             children: _categories.map((cat) {
-              final items = _resourcesForCategory(checked, cat, seen);
+              final items = _resourcesForCategory(checked, cat, pinned, seen);
               if (items.isEmpty) {
                 return Center(
                   child: Text(

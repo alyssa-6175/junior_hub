@@ -792,15 +792,12 @@ class AppProvider extends ChangeNotifier {
     } else {
       _saved.add(id);
     }
-
-    await _save('saved', _saved.toList(), activity: 'Updated saved resources');
-    await _updateResourceStats(
-      id,
-      ResourceStatAction.save,
-      enabled: _saved.contains(id),
-    );
+    final enabled = _saved.contains(id);
 
     notifyListeners();
+
+    await _save('saved', _saved.toList(), activity: 'Updated saved resources');
+    await _updateResourceStats(id, ResourceStatAction.save, enabled: enabled);
   }
 
   Future<void> togglePinned(String id) async {
@@ -811,19 +808,16 @@ class AppProvider extends ChangeNotifier {
     } else {
       _pinned.add(id);
     }
+    final enabled = _pinned.contains(id);
+
+    notifyListeners();
 
     await _save(
       'pinned',
       _pinned.toList(),
       activity: 'Updated pinned resources',
     );
-    await _updateResourceStats(
-      id,
-      ResourceStatAction.pin,
-      enabled: _pinned.contains(id),
-    );
-
-    notifyListeners();
+    await _updateResourceStats(id, ResourceStatAction.pin, enabled: enabled);
   }
 
   Future<void> toggleSeen(String id) async {
@@ -834,15 +828,12 @@ class AppProvider extends ChangeNotifier {
     } else {
       _seen.add(id);
     }
-
-    await _save('seen', _seen.toList(), activity: 'Marked a resource as seen');
-    await _updateResourceStats(
-      id,
-      ResourceStatAction.seen,
-      enabled: _seen.contains(id),
-    );
+    final enabled = _seen.contains(id);
 
     notifyListeners();
+
+    await _save('seen', _seen.toList(), activity: 'Marked a resource as seen');
+    await _updateResourceStats(id, ResourceStatAction.seen, enabled: enabled);
   }
 
   Future<void> toggleLinkPinned(String resourceId, String label) async {
@@ -856,13 +847,13 @@ class AppProvider extends ChangeNotifier {
       _linkPinned.add(key);
     }
 
+    notifyListeners();
+
     await _save(
       'linkPinned',
       _linkPinned.toList(),
       activity: 'Updated pinned links',
     );
-
-    notifyListeners();
   }
 
   Future<void> toggleLinkSeen(String resourceId, String label) async {
@@ -876,13 +867,13 @@ class AppProvider extends ChangeNotifier {
       _linkSeen.add(key);
     }
 
+    notifyListeners();
+
     await _save(
       'linkSeen',
       _linkSeen.toList(),
       activity: 'Marked a link as seen',
     );
-
-    notifyListeners();
   }
 
   Future<void> addPersonalDeadline(PersonalDeadline deadline) async {
@@ -899,14 +890,14 @@ class AppProvider extends ChangeNotifier {
     _personalDeadlines.add(deadline);
     _sortPersonalDeadlines();
 
+    notifyListeners();
+
     await _save(
       'personalDeadlines',
 
       _personalDeadlines.map((d) => d.toJson()).toList(),
       activity: 'Added a personal deadline',
     );
-
-    notifyListeners();
   }
 
   bool hasPersonalDeadline(String resourceId, String dateIso) =>
@@ -1037,6 +1028,8 @@ class AppProvider extends ChangeNotifier {
       }
     }
 
+    notifyListeners();
+
     await _save('checkedMajors', _checkedMajors.toList());
 
     await _save('checkedMajorOrder', _checkedMajorOrder);
@@ -1046,8 +1039,6 @@ class AppProvider extends ChangeNotifier {
       _checkedSubMajorOrder,
       activity: 'Updated selected majors',
     );
-
-    notifyListeners();
   }
 
   // ── Navigation & Search Actions ──────────────────────────────────────────

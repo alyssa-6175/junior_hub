@@ -30,6 +30,11 @@ class ResourceDetailModal extends StatelessWidget {
     final isSaved = provider.isSaved(resource.id);
     final isPinned = provider.isPinned(resource.id);
     final isSeen = provider.isSeen(resource.id);
+    final deadlineIso = resource.deadlineIso ?? '';
+    final deadlineAdded =
+        resource.hasDeadline &&
+        deadlineIso.isNotEmpty &&
+        provider.hasPersonalDeadline(resource.id, deadlineIso);
 
     return Dialog(
       backgroundColor: Colors.transparent,
@@ -405,10 +410,10 @@ class ResourceDetailModal extends StatelessWidget {
                   horizontal: 16,
                   vertical: 10,
                 ),
-                child: Row(
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
                   children: [
-                    // Save
-                    // Find the footer action buttons section and replace:
                     _FooterAction(
                       icon: isSaved ? Icons.bookmark : Icons.bookmark_outlined,
                       label: isSaved ? 'Saved' : 'Save',
@@ -416,7 +421,6 @@ class ResourceDetailModal extends StatelessWidget {
                       onTap: () =>
                           context.read<AppProvider>().toggleSaved(resource.id),
                     ),
-                    const SizedBox(width: 8),
                     _FooterAction(
                       icon: isPinned ? Icons.star : Icons.star_border,
                       label: isPinned ? 'Starred' : 'Star',
@@ -424,7 +428,6 @@ class ResourceDetailModal extends StatelessWidget {
                       onTap: () =>
                           context.read<AppProvider>().togglePinned(resource.id),
                     ),
-                    const SizedBox(width: 8),
                     _FooterAction(
                       icon: isSeen
                           ? Icons.visibility
@@ -434,35 +437,39 @@ class ResourceDetailModal extends StatelessWidget {
                       onTap: () =>
                           context.read<AppProvider>().toggleSeen(resource.id),
                     ),
-                    if (resource.hasDeadline) ...[
-                      const SizedBox(width: 8),
+                    if (resource.hasDeadline)
                       _FooterAction(
-                        icon: Icons.alarm_add_outlined,
-                        label: 'Add deadline',
-                        color: kTextSecondary,
+                        icon: deadlineAdded
+                            ? Icons.check_circle
+                            : Icons.alarm_add_outlined,
+                        label: deadlineAdded
+                            ? 'Deadline added'
+                            : 'Add deadline',
+                        color: deadlineAdded
+                            ? const Color(0xFF0F6E56)
+                            : kTextSecondary,
                         onTap: () {
+                          if (deadlineAdded) return;
                           context.read<AppProvider>().addPersonalDeadline(
                             PersonalDeadline(
                               id: '${resource.id}_${DateTime.now().millisecondsSinceEpoch}',
                               title: resource.title,
-                              dateIso:
-                                  resource.deadlineIso ??
-                                  DateTime.now()
-                                      .toIso8601String(), // note: if resource.deadline is a DateTime object instead of a String, use resource.deadline!.toIso8601String()
-                              resourceId: resource
-                                  .id, // optional, but good to include since it's in the new model
+                              dateIso: deadlineIso.isEmpty
+                                  ? DateTime.now().toIso8601String()
+                                  : deadlineIso,
+                              resourceId: resource.id,
                             ),
                           );
-                          Navigator.of(context).pop();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Added to personal deadlines'),
+                              content: Text(
+                                'Added to My Deadlines — keep reviewing or close when ready',
+                              ),
                               duration: Duration(seconds: 2),
                             ),
                           );
                         },
                       ),
-                    ],
                   ],
                 ),
               ),

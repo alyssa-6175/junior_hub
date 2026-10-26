@@ -5,6 +5,7 @@ import '../app_colors.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/saved_card.dart';
 
 class BoardScreen extends StatefulWidget {
@@ -29,10 +30,11 @@ class _BoardScreenState extends State<BoardScreen> {
         .where((r) => _filter == 'all' || r.category == _filter)
         .toList();
 
-    // Seen items sink to bottom
-    final notSeen = items.where((r) => !provider.isSeen(r.id)).toList();
-    final seenItems = items.where((r) => provider.isSeen(r.id)).toList();
-    items = [...notSeen, ...seenItems];
+    items = sortStackItems(
+      items,
+      isStarred: (resource) => provider.isPinned(resource.id),
+      isSeen: (resource) => provider.isSeen(resource.id),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

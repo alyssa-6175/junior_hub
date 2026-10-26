@@ -7,6 +7,7 @@ import '../data/majors_data.dart';
 import '../data/resources_data.dart';
 import '../models/resource.dart';
 import '../providers/app_provider.dart';
+import '../utils/stack_sorting.dart';
 import '../widgets/resource_tile.dart';
 
 class ResourceListScreen extends StatefulWidget {
@@ -161,22 +162,12 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
       return a.title.toLowerCase().compareTo(b.title.toLowerCase());
     }
 
-    List<Resource> group(bool isSeen, bool isPinned) =>
-        items
-            .where(
-              (resource) =>
-                  seen.contains(resource.id) == isSeen &&
-                  pinned.contains(resource.id) == isPinned,
-            )
-            .toList()
-          ..sort(compareResources);
-
-    return [
-      ...group(false, true),
-      ...group(false, false),
-      ...group(true, true),
-      ...group(true, false),
-    ];
+    return sortStackItems(
+      items,
+      isStarred: (resource) => pinned.contains(resource.id),
+      isSeen: (resource) => seen.contains(resource.id),
+      compare: compareResources,
+    );
   }
 
   int _scopeRank(Resource resource) {
@@ -473,6 +464,24 @@ Alyssa''',
                         active: _tab == 1,
                         onTap: () => setState(() => _tab = 1),
                       ),
+                      if (widget.category == 'competition') ...[
+                        const SizedBox(width: 6),
+                        _InlineTab(
+                          label: 'All costs',
+                          active: !_freeOnly,
+                          onTap: () => setState(() => _freeOnly = false),
+                        ),
+                        _InlineTab(
+                          icon: Icons.money_off_outlined,
+                          label: 'Free',
+                          count: freeCount,
+                          active: _freeOnly,
+                          onTap: () => setState(() {
+                            _freeOnly = !_freeOnly;
+                            _tab = 1;
+                          }),
+                        ),
+                      ],
                       if (widget.category == 'internship' &&
                           localItems.isNotEmpty)
                         _InlineTab(
@@ -521,33 +530,6 @@ Alyssa''',
                       active: _journalFairFilter == 'fair',
                       color: const Color(0xFF1D9E75),
                       onTap: () => setState(() => _journalFairFilter = 'fair'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-              ],
-              if (widget.category == 'competition') ...[
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 4,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    _MajorChip(
-                      label: 'All costs',
-                      active: !_freeOnly,
-                      color: kNavy,
-                      onTap: () => setState(() => _freeOnly = false),
-                    ),
-                    _MajorChip(
-                      label: _freeOnly
-                          ? 'Free to enter'
-                          : 'Free to enter ($freeCount)',
-                      active: _freeOnly,
-                      color: const Color(0xFF1D9E75),
-                      onTap: () => setState(() {
-                        _freeOnly = !_freeOnly;
-                        _tab = 1;
-                      }),
                     ),
                   ],
                 ),
